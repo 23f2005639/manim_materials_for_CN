@@ -1,32 +1,30 @@
-"""Check measured native motion and the shortened visual-edition scripts."""
+"""Verify focused animation boundaries without requiring artificial slow motion."""
 import json
 from pathlib import Path
-
-ROOT = Path(__file__).resolve().parents[1]
+import sys
+ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT))
+from build import episode_paths,read
 
 
 def main():
-    reports = []
-    for folder in sorted((ROOT / "episodes").iterdir()):
-        if not (folder / "storyboard.json").exists():
-            continue
-        data = json.loads((folder / "storyboard.json").read_text())
-        previous = json.loads((ROOT / "archive/first-edition" / folder.name / "storyboard.json").read_text())
-        current_words = sum(len(s["narration"].split()) for s in data["sections"])
-        old_words = sum(len(s["narration"].split()) for s in previous["sections"])
-        assert current_words <= old_words * .75
-        timing = json.loads((folder / "animation-timing.json").read_text())
-        measured = json.loads((folder / "motion-verification.json").read_text())
-        assert timing["edition"] == "visual" and len(timing["sections"]) == 24
-        assert measured["native_changing_frame_fraction"] >= .6
-        assert min(s["visual_fraction"] for s in timing["sections"]) >= .65
-        assert max(s["section_seconds"] - s["visual_seconds"] for s in timing["sections"]) < 2
-        reports.append({"episode": data["id"], "script_reduction_percent": round(100*(1-current_words/old_words),1),
-                        "native_changing_frame_fraction": measured["native_changing_frame_fraction"]})
-        print(data["id"], reports[-1], flush=True)
-    assert len(reports) == 8
-    (ROOT / "motion-series-verification.json").write_text(json.dumps(reports, indent=2) + "\n")
+    reports=[]
+    for path in episode_paths():
+        data=read(path);folder=path.parent
+        timing=json.loads((folder/'animation-timing.json').read_text())
+        deck=json.loads((folder/'sections.json').read_text())
+        measured=json.loads((folder/'motion-verification.json').read_text())
+        assert timing['edition']=='focused-v2'
+        assert len(timing['sections'])==len(deck['sections'])==len(data['sections'])
+        for i,(motion,section) in enumerate(zip(timing['sections'],deck['sections'])):
+            end=deck['sections'][i+1]['frame'] if i+1<len(deck['sections']) else deck['frames']
+            assert section['frame']<motion['animation_end_frame']<end
+            assert motion['visual_seconds']>0
+        reports.append({'topic':data['topic'],'phases':len(data['sections']),
+                        'native_changing_frame_fraction':measured['native_changing_frame_fraction'],
+                        'deliberate_holds':'Narration-paced; the player holds after useful motion.'})
+        print(data['topic'],'motion boundaries PASS')
+    (ROOT/'motion-series-verification.json').write_text(json.dumps(reports,indent=2)+'\n')
 
 
-if __name__ == "__main__":
-    main()
+if __name__=='__main__':main()

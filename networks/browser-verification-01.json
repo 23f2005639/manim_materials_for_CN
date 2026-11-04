@@ -1,6 +1,6 @@
 [
   {
-    "episode": "01-website",
+    "episode": "v2-01-dns",
     "transport": "http",
     "video_only": "passed",
     "keyboard_navigation": "passed",

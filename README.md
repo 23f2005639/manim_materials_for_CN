@@ -1,60 +1,50 @@
-# Computer Networks — self-paced animation series
+# Computer Networks — one question per video
 
-Open **[Networks Studio](networks/index.html)** for all eight interactive lessons.
-Each lesson includes a continuous video, 24 numbered clips, and a complete English
-recording script. See [production and recording instructions](networks/README.md).
+Eight original ManimGX explainers: DNS, bufferbloat, WDM, packet switching, Dijkstra,
+IPv4 subnetting, TCP slow start, and RSA. Each focuses on one story with visual intuition,
+mathematics, and a complete YouTube narration script for your own voice.
 
-## Topics and scripts
+See [TOPICS.md](TOPICS.md) for the full topic guide and scripts.
 
-See [TOPICS.md](TOPICS.md) for the subjects covered by each video, worked examples,
-runtimes, and links to individual scripts. Read [all eight narration scripts](networks/youtube-scripts.md)
-or press **Shift+P** inside a lesson to open its current script in a separate window.
+## Open the videos
 
-## Run locally
-
-From this project folder:
+From this folder:
 
 ```sh
 python3 networks/serve.py
 ```
 
 Open <http://127.0.0.1:8765/networks/>. Click the video or press **→** to start fullscreen.
-Use **→/←** for scenes, **↑/↓** for speed, **P** to pause, and **R** to replay.
-The custom server supports the video seeking required by scene navigation.
+Use **→/←** for phases, **↑/↓** for speed, **P** to pause, and **R** to replay.
+**Shift+P** opens the current script in a separate window. Only the animation appears
+in the audience window. Finished videos are included; playback needs Python and a browser.
 
-Finished videos are included, so playback needs only Python and a browser. Rendering
-requires the tools documented in [networks/README.md](networks/README.md).
+[All scripts](networks/youtube-scripts.md) · [Rendering and recording](networks/README.md) ·
+[Quality checks](networks/QA.md) · [Previous series](networks/legacy-index.html)
 
 ## Push to GitHub
 
-This folder is a Git repository on branch `main`. Create an empty repository on GitHub,
-then run these commands from this folder, replacing the URL with your repository's URL:
+The repository uses branch `main`. Create an empty GitHub repository, replace the URL,
+and run:
 
 ```sh
 git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
 git push -u origin main
 ```
 
-The initial commits are authored by Codex. Set your own author identity before making
-future commits (these commands apply only to this repository):
+Codex authored the local build commits. Set your identity before future commits:
 
 ```sh
 git config user.name "Your Name"
 git config user.email "YOUR_GITHUB_EMAIL"
-```
-
-For later changes:
-
-```sh
 git add .
 git commit -m "Describe your change"
 git push
 ```
 
-Caches, local environments, secret environment files, and render logs are ignored.
-The finished MP4s, clips, source, scripts, previews, and verification records are tracked.
-The `networks/archive/` folder preserves earlier scripts and the reference render used
-by the queue-cleanup regression check.
+Finished media, scripts, source, and verification records are tracked. Caches, local
+environments, secret environment files, and render logs are ignored. The old episode
+URLs and their existing assets remain available alongside the new active series.
 
 ## Earlier project: 3D solar system — ManimGX
 

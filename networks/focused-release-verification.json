@@ -1,0 +1,98 @@
+{
+  "edition": "focused-v2",
+  "episodes": [
+    {
+      "id": "01",
+      "topic": "dns",
+      "title": "Why Can Your Internet Work While Your Apps Don\u2019t?",
+      "duration_seconds": 547.833008,
+      "phases": 16,
+      "words": 1165,
+      "full_video": "passed",
+      "clips_verified": 16,
+      "phase_end_layout_samples": 16
+    },
+    {
+      "id": "02",
+      "topic": "bufferbloat",
+      "title": "Why Fast Internet Can Still Feel Slow",
+      "duration_seconds": 578.966016,
+      "phases": 16,
+      "words": 1235,
+      "full_video": "passed",
+      "clips_verified": 16,
+      "phase_end_layout_samples": 16
+    },
+    {
+      "id": "03",
+      "topic": "wdm",
+      "title": "How One Fiber Carries So Many Conversations",
+      "duration_seconds": 541.633008,
+      "phases": 16,
+      "words": 1151,
+      "full_video": "passed",
+      "clips_verified": 16,
+      "phase_end_layout_samples": 16
+    },
+    {
+      "id": "04",
+      "topic": "packet-switching",
+      "title": "Why the Internet Breaks Everything Into Pieces",
+      "duration_seconds": 584.666016,
+      "phases": 16,
+      "words": 1248,
+      "full_video": "passed",
+      "clips_verified": 16,
+      "phase_end_layout_samples": 16
+    },
+    {
+      "id": "05",
+      "topic": "dijkstra",
+      "title": "The Shortest Route Can Have More Steps",
+      "duration_seconds": 566.033008,
+      "phases": 16,
+      "words": 1206,
+      "full_video": "passed",
+      "clips_verified": 16,
+      "phase_end_layout_samples": 16
+    },
+    {
+      "id": "06",
+      "topic": "subnetting",
+      "title": "Move Two Bits, Create Four Networks",
+      "duration_seconds": 525.2,
+      "phases": 16,
+      "words": 1114,
+      "full_video": "passed",
+      "clips_verified": 16,
+      "phase_end_layout_samples": 16
+    },
+    {
+      "id": "07",
+      "topic": "tcp-slow-start",
+      "title": "How Does a Download Discover Its Speed?",
+      "duration_seconds": 585.133008,
+      "phases": 16,
+      "words": 1249,
+      "full_video": "passed",
+      "clips_verified": 16,
+      "phase_end_layout_samples": 16
+    },
+    {
+      "id": "08",
+      "topic": "rsa",
+      "title": "A Lock Anyone Can Close, but Only You Can Open",
+      "duration_seconds": 562.966016,
+      "phases": 16,
+      "words": 1199,
+      "full_video": "passed",
+      "clips_verified": 16,
+      "phase_end_layout_samples": 16
+    }
+  ],
+  "total_phases": 128,
+  "total_words": 9567,
+  "total_runtime_seconds": 4492.43,
+  "voiceover": "User records their own voice",
+  "review_limits": "Endpoint and representative mid-motion samples, decoded clip samples, numerical and HTTP browser checks; not every frame manually watched."
+}

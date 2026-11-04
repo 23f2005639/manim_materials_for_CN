@@ -1,12 +1,15 @@
 """Check real decoded images, independently of container frame-count metadata."""
 import io
 import json
+import sys
 import subprocess
 from pathlib import Path
 
 from PIL import Image, ImageChops, ImageStat
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT))
+from build import episode_paths
 
 
 def frame(path, seconds):
@@ -20,13 +23,14 @@ def frame(path, seconds):
 
 def main():
     results = []
-    for folder in sorted((ROOT / "episodes").iterdir()):
+    for storyboard in episode_paths():
+        folder = storyboard.parent
         if not (folder / "media-verification.json").exists():
             continue
         deck = json.loads((folder / "sections.json").read_text())
         clips = sorted((folder / "clips").glob("*.mp4"))
-        assert len(clips) == 24
-        for index in (0, 11, 23):
+        assert len(clips) == len(deck["sections"])
+        for index in (0, len(clips)//2, len(clips)-1):
             start = deck["sections"][index]["frame"] / 30
             original = frame(folder / "episode.mp4", start + 1)
             extracted = frame(clips[index], 1)

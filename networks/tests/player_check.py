@@ -4,10 +4,13 @@ uv run --with playwright python networks/tests/player_check.py [episode number]
 """
 import argparse
 import json
+import sys
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from build import episode_paths
 
 
 def main():
@@ -20,8 +23,10 @@ def main():
     with sync_playwright() as p:
         browser = p.chromium.launch(executable_path=str(executable), headless=True)
         page = browser.new_page(viewport={'width': 1440, 'height': 900})
-        for folder in sorted((ROOT / 'episodes').iterdir()):
-            if args.episode and not folder.name.startswith(args.episode + '-'):
+        for storyboard in episode_paths():
+            folder = storyboard.parent
+            episode = json.loads(storyboard.read_text())
+            if args.episode and episode['id'] != args.episode:
                 continue
             if not (folder / 'episode.mp4').exists():
                 continue
@@ -105,7 +110,7 @@ def main():
             page.evaluate("document.getElementById('film').currentTime=lessonState().end-.15")
             page.wait_for_function("lessonState().state==='held'", timeout=5000)
             page.keyboard.press('ArrowRight')
-            assert page.evaluate("lessonState().current===23 && lessonState().state==='held'")
+            assert page.evaluate("lessonState().current===lessonState().count-1 && lessonState().state==='held'")
             page.keyboard.press('Home')
             page.keyboard.press('ArrowLeft')
             assert page.evaluate('lessonState().current') == 0

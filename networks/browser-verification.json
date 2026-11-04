@@ -1,90 +1,90 @@
 [
   {
-    "episode": "01-website",
+    "episode": "v2-01-dns",
+    "transport": "http",
     "video_only": "passed",
     "keyboard_navigation": "passed",
     "keyboard_speed_0.25_to_4": "passed",
     "fullscreen": "passed",
     "pause_at_boundary": "passed",
     "presenter_notes": "passed",
-    "javascript_errors": [],
-    "transport": "http"
+    "javascript_errors": []
   },
   {
-    "episode": "02-multiplexing",
+    "episode": "v2-02-bufferbloat",
+    "transport": "http",
     "video_only": "passed",
     "keyboard_navigation": "passed",
     "keyboard_speed_0.25_to_4": "passed",
     "fullscreen": "passed",
     "pause_at_boundary": "passed",
     "presenter_notes": "passed",
-    "javascript_errors": [],
-    "transport": "http"
+    "javascript_errors": []
   },
   {
-    "episode": "03-reliable-delivery",
+    "episode": "v2-03-wdm",
+    "transport": "http",
     "video_only": "passed",
     "keyboard_navigation": "passed",
     "keyboard_speed_0.25_to_4": "passed",
     "fullscreen": "passed",
     "pause_at_boundary": "passed",
     "presenter_notes": "passed",
-    "javascript_errors": [],
-    "transport": "http"
+    "javascript_errors": []
   },
   {
-    "episode": "04-channel-access",
+    "episode": "v2-04-packet-switching",
+    "transport": "http",
     "video_only": "passed",
     "keyboard_navigation": "passed",
     "keyboard_speed_0.25_to_4": "passed",
     "fullscreen": "passed",
     "pause_at_boundary": "passed",
     "presenter_notes": "passed",
-    "javascript_errors": [],
-    "transport": "http"
+    "javascript_errors": []
   },
   {
-    "episode": "05-routing",
+    "episode": "v2-05-dijkstra",
+    "transport": "http",
     "video_only": "passed",
     "keyboard_navigation": "passed",
     "keyboard_speed_0.25_to_4": "passed",
     "fullscreen": "passed",
     "pause_at_boundary": "passed",
     "presenter_notes": "passed",
-    "javascript_errors": [],
-    "transport": "http"
+    "javascript_errors": []
   },
   {
-    "episode": "06-subnetting",
+    "episode": "v2-06-subnetting",
+    "transport": "http",
     "video_only": "passed",
     "keyboard_navigation": "passed",
     "keyboard_speed_0.25_to_4": "passed",
     "fullscreen": "passed",
     "pause_at_boundary": "passed",
     "presenter_notes": "passed",
-    "javascript_errors": [],
-    "transport": "http"
+    "javascript_errors": []
   },
   {
-    "episode": "07-tcp-udp",
+    "episode": "v2-07-tcp-slow-start",
+    "transport": "http",
     "video_only": "passed",
     "keyboard_navigation": "passed",
     "keyboard_speed_0.25_to_4": "passed",
     "fullscreen": "passed",
     "pause_at_boundary": "passed",
     "presenter_notes": "passed",
-    "javascript_errors": [],
-    "transport": "http"
+    "javascript_errors": []
   },
   {
-    "episode": "08-cryptography",
+    "episode": "v2-08-rsa",
+    "transport": "http",
     "video_only": "passed",
     "keyboard_navigation": "passed",
     "keyboard_speed_0.25_to_4": "passed",
     "fullscreen": "passed",
     "pause_at_boundary": "passed",
     "presenter_notes": "passed",
-    "javascript_errors": [],
-    "transport": "http"
+    "javascript_errors": []
   }
 ]

@@ -28,7 +28,22 @@ def check(next_kind):
     assert (base in present) == (next_kind == 'network')
 
 
+def check_focused():
+    from networks.motion.topics.common import VisualDirector
+    scene=m.Scene();title=m.Text('Keep the heading');scene.add(title)
+    director=VisualDirector(scene)
+    queue=director.own(m.VGroup(*(packet(str(i)) for i in range(5))))
+    scene.add(queue)
+    remaining=set(queue[3].get_family()+queue[4].get_family())
+    for item in list(queue.submobjects[:3]):scene.remove(item)
+    director.reset()
+    present=set(scene.get_mobject_family_members())
+    assert not remaining.intersection(present)
+    assert title in present
+
+
 if __name__ == '__main__':
     for kind in ('network', 'unpack'):
         check(kind)
-    print('PASS: split queue children cleared; intended persistent objects and title preserved.')
+    check_focused()
+    print('PASS: legacy and focused directors clear detached children while preserving headings.')

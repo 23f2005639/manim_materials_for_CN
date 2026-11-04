@@ -15,6 +15,7 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from serve import VideoHandler
+from build import episode_paths
 
 
 class QuietHandler(VideoHandler):
@@ -27,9 +28,11 @@ def main():
     thread = Thread(target=server.serve_forever, daemon=True)
     thread.start()
     base = f'http://127.0.0.1:{server.server_port}/networks'
-    source = ROOT / 'episodes/01-website/episode.mp4'
+    folder = episode_paths()[0].parent
+    relative = folder.relative_to(ROOT).as_posix()
+    source = folder / 'episode.mp4'
     data = source.read_bytes()
-    media = base + '/episodes/01-website/episode.mp4'
+    media = base + '/' + relative + '/episode.mp4'
     try:
         for value, start, end in [('bytes=1000-1999', 1000, 1999), ('bytes=-128', len(data)-128, len(data)-1),
                                   (f'bytes={len(data)-2}-', len(data)-2, len(data)-1),
@@ -57,7 +60,7 @@ def main():
             executable = next((Path.home() / '.cache/ms-playwright').glob('chromium-*/chrome-linux64/chrome'))
             browser = p.chromium.launch(executable_path=str(executable), headless=True)
             page = browser.new_page()
-            page.goto(base + '/episodes/01-website/presentation.html')
+            page.goto(base + '/' + relative + '/presentation.html')
             page.wait_for_function('window.lessonState && lessonState().loaded')
             page.wait_for_function('!document.getElementById("film").seeking')
             assert page.evaluate('Math.abs(lessonState().time-lessonState().end)') < .05
@@ -75,7 +78,7 @@ def main():
                 page.wait_for_function('!document.getElementById("film").seeking && lessonState().time>lessonState().start+.5')
                 before = page.evaluate('lessonState().time')
                 page.wait_for_function('before => lessonState().time>before+1', arg=before, timeout=6000)
-                page.wait_for_function("lessonState().state==='held'", timeout=30000)
+                page.wait_for_function("lessonState().state==='held'", timeout=60000)
                 page.wait_for_function('!document.getElementById("film").seeking')
                 state = page.evaluate('lessonState()')
                 assert state['current'] == index
