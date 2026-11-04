@@ -1,0 +1,453 @@
+1
+00:00:00,000 --> 00:00:05,483
+Several devices share a medium, but none can
+instantly know what
+
+2
+00:00:05,483 --> 00:00:10,967
+every other device is doing. When may one
+transmit? This local
+
+3
+00:00:10,967 --> 00:00:16,450
+coordination problem lies behind access
+protocols, and the answer begins with
+
+4
+00:00:16,450 --> 00:00:21,933
+a collision.
+
+5
+00:00:21,933 --> 00:00:27,742
+A and C start before either hears the other.
+Their signals
+
+6
+00:00:27,742 --> 00:00:33,550
+overlap, making these transmissions fail.
+Watch the red disturbance spread. The
+
+7
+00:00:33,550 --> 00:00:39,358
+useful question is how each station learns
+enough to decide what
+
+8
+00:00:39,358 --> 00:00:45,167
+happens next.
+
+9
+00:00:45,167 --> 00:00:50,867
+Begin with almost no coordination. Pure ALOHA
+lets a station send
+
+10
+00:00:50,867 --> 00:00:56,567
+whenever data is ready. Simplicity comes at a
+cost: another transmission
+
+11
+00:00:56,567 --> 00:01:02,267
+can overlap at many different starting times,
+forcing failed attempts to
+
+12
+00:01:02,267 --> 00:01:07,967
+be repeated.
+
+13
+00:01:07,967 --> 00:01:13,558
+Let a frame last T. Another frame can
+interfere if it
+
+14
+00:01:13,558 --> 00:01:19,150
+starts within T before our start, or T
+afterward. Slide those
+
+15
+00:01:19,150 --> 00:01:24,742
+possibilities together: the vulnerable
+interval spans two T, twice the frame's
+
+16
+00:01:24,742 --> 00:01:30,333
+duration.
+
+17
+00:01:30,333 --> 00:01:35,925
+If colliding stations wait exactly the same
+time, they can collide
+
+18
+00:01:35,925 --> 00:01:41,517
+again on the retry. Random waits break that
+symmetry. They're no
+
+19
+00:01:41,517 --> 00:01:47,108
+guarantee for an individual attempt, but
+reduce the chance of repeating
+
+20
+00:01:47,108 --> 00:01:52,700
+the same overlap.
+
+21
+00:01:52,700 --> 00:01:58,400
+Now mark shared starting boundaries. Slotted
+ALOHA permits transmission only at
+
+22
+00:01:58,400 --> 00:02:04,100
+those boundaries, with frames fitting the
+slots. Stations can still choose
+
+23
+00:02:04,100 --> 00:02:09,800
+the same slot, but arbitrary partial overlaps
+no longer create additional
+
+24
+00:02:09,800 --> 00:02:15,500
+collision opportunities.
+
+25
+00:02:15,500 --> 00:02:23,100
+Watch the vulnerable interval shrink. Only
+another attempt in the same
+
+26
+00:02:23,100 --> 00:02:30,700
+slot conflicts with this frame. Coordinating
+the starts reduces the interval
+
+27
+00:02:30,700 --> 00:02:38,300
+from two T to T, without changing the physical
+transmission rate.
+
+28
+00:02:38,300 --> 00:02:43,783
+In the ideal model, pure ALOHA peaks near
+eighteen point four
+
+29
+00:02:43,783 --> 00:02:49,267
+percent throughput; slotted ALOHA near thirty-
+six point eight. Push attempts past
+
+30
+00:02:49,267 --> 00:02:54,750
+the peak and collisions dominate. More
+activity can actually produce less
+
+31
+00:02:54,750 --> 00:03:00,233
+useful delivery.
+
+32
+00:03:00,233 --> 00:03:05,933
+There are two broad ways to organize access:
+assign turns, or
+
+33
+00:03:05,933 --> 00:03:11,633
+let stations compete under shared rules. A
+schedule needs coordination; contention
+
+34
+00:03:11,633 --> 00:03:17,333
+needs a way to handle conflicting attempts.
+Both must divide finite
+
+35
+00:03:17,333 --> 00:03:23,033
+capacity.
+
+36
+00:03:23,033 --> 00:03:28,733
+What if we listen first? Carrier sensing lets
+a station check
+
+37
+00:03:28,733 --> 00:03:34,433
+whether the medium appears busy before
+transmitting. That information avoids some
+
+38
+00:03:34,433 --> 00:03:40,133
+blind collisions, but a quiet local
+observation isn't perfect knowledge of
+
+39
+00:03:40,133 --> 00:03:45,833
+the whole network.
+
+40
+00:03:45,833 --> 00:03:51,750
+Here is the remaining problem: signals take
+time to travel. A
+
+41
+00:03:51,750 --> 00:03:57,667
+distant station can start while the first
+signal is still approaching
+
+42
+00:03:57,667 --> 00:04:03,583
+it. Both hear silence, both transmit, and
+neither has broken the
+
+43
+00:04:03,583 --> 00:04:09,500
+listening rule.
+
+44
+00:04:09,500 --> 00:04:15,200
+One-persistent CSMA listens continuously and
+transmits as soon as the channel
+
+45
+00:04:15,200 --> 00:04:20,900
+becomes idle. That eagerness limits waiting,
+but several waiting stations can
+
+46
+00:04:20,900 --> 00:04:26,600
+react to the same silence together, producing
+another collision at the
+
+47
+00:04:26,600 --> 00:04:32,300
+restart.
+
+48
+00:04:32,300 --> 00:04:37,892
+Nonpersistent CSMA waits a random interval
+after finding the channel busy,
+
+49
+00:04:37,892 --> 00:04:43,483
+then checks again. Restart attempts become
+less synchronized. The trade-off is
+
+50
+00:04:43,483 --> 00:04:49,075
+visible in the empty gap: everyone might still
+be waiting after
+
+51
+00:04:49,075 --> 00:04:54,667
+the medium becomes free.
+
+52
+00:04:54,667 --> 00:05:00,258
+In a suitable slotted setting, p-persistent
+CSMA makes sending probabilistic. On
+
+53
+00:05:00,258 --> 00:05:05,850
+an idle slot, transmit with probability p or
+defer. Adjusting that
+
+54
+00:05:05,850 --> 00:05:11,442
+chance spreads competing attempts, balancing
+prompt use against the risk of
+
+55
+00:05:11,442 --> 00:05:17,033
+simultaneous starts.
+
+56
+00:05:17,033 --> 00:05:22,517
+For the next mechanism, keep one historical
+setting in mind: shared,
+
+57
+00:05:22,517 --> 00:05:28,000
+half-duplex Ethernet. CSMA/CD senses before
+sending and detects collisions during
+transmission.
+
+58
+00:05:28,000 --> 00:05:33,483
+These rules describe that shared medium,
+rather than every Ethernet or
+
+59
+00:05:33,483 --> 00:05:38,967
+wireless connection.
+
+60
+00:05:38,967 --> 00:05:44,875
+After detecting a collision, stop the frame,
+signal the collision with
+
+61
+00:05:44,875 --> 00:05:50,783
+a jam, and back off. An unsuccessful
+transmission ends before wasting
+
+62
+00:05:50,783 --> 00:05:56,692
+a whole frame. The stations then use different
+retry delays to
+
+63
+00:05:56,692 --> 00:06:02,600
+separate their next attempts.
+
+64
+00:06:02,600 --> 00:06:08,408
+A far-end collision needs time to become
+visible at the sender.
+
+65
+00:06:08,408 --> 00:06:14,217
+The sender must still be transmitting when
+that indication returns. That's
+
+66
+00:06:14,217 --> 00:06:20,025
+why minimum frame duration and the network's
+round-trip propagation delay are
+
+67
+00:06:20,025 --> 00:06:25,833
+connected.
+
+68
+00:06:25,833 --> 00:06:31,533
+After repeated collisions, widen the random
+range: two choices, then four,
+
+69
+00:06:31,533 --> 00:06:37,233
+then eight. Binary exponential backoff gives
+competing attempts more room to
+
+70
+00:06:37,233 --> 00:06:42,933
+spread. It changes the distribution of waits,
+rather than guaranteeing a
+
+71
+00:06:42,933 --> 00:06:48,633
+dedicated turn.
+
+72
+00:06:48,633 --> 00:06:54,442
+After the first collision, choose zero or one
+slot; after the
+
+73
+00:06:54,442 --> 00:07:00,250
+second, zero through three. Follow the two
+choices in the picture.
+
+74
+00:07:00,250 --> 00:07:06,058
+Different selections create different retry
+times, reducing the chance of another
+
+75
+00:07:06,058 --> 00:07:11,867
+synchronized failure.
+
+76
+00:07:11,867 --> 00:07:17,675
+A completed backoff doesn't reserve the
+medium. Another station may already
+
+77
+00:07:17,675 --> 00:07:23,483
+be transmitting when the wait ends. The sender
+still follows the
+
+78
+00:07:23,483 --> 00:07:29,292
+channel rules. A timer tells it when to try,
+not that
+
+79
+00:07:29,292 --> 00:07:35,100
+success is guaranteed.
+
+80
+00:07:35,100 --> 00:07:40,908
+Now replace the shared wire with switched
+full-duplex links. Separate sending
+
+81
+00:07:40,908 --> 00:07:46,717
+and receiving paths allow opposite flows
+together. The old shared-medium collision
+
+82
+00:07:46,717 --> 00:07:52,525
+mechanism no longer applies on these links,
+and CSMA/CD isn't used
+
+83
+00:07:52,525 --> 00:07:58,333
+there.
+
+84
+00:07:58,333 --> 00:08:03,925
+Wi-Fi faces different observation limits. A
+station doesn't simply detect collisions
+
+85
+00:08:03,925 --> 00:08:09,517
+during transmission in Ethernet's way.
+Contention, avoidance rules, and
+acknowledgments help
+
+86
+00:08:09,517 --> 00:08:15,108
+coordinate access when different stations may
+hear different parts of the
+
+87
+00:08:15,108 --> 00:08:20,700
+wireless network.
+
+88
+00:08:20,700 --> 00:08:26,292
+Compare what each station knows. ALOHA sends;
+CSMA first senses; CSMA/CD
+
+89
+00:08:26,292 --> 00:08:31,883
+also detects collisions in its shared-wire
+setting. Adding information changes the
+
+90
+00:08:31,883 --> 00:08:37,475
+rules, while propagation delay still limits
+how quickly that information can
+
+91
+00:08:37,475 --> 00:08:43,067
+arrive.
+
+92
+00:08:43,067 --> 00:08:48,550
+Return to the collision. Ask what each sender
+could hear, when
+
+93
+00:08:48,550 --> 00:08:54,033
+it could start, and how it chooses a retry.
+Those three
+
+94
+00:08:54,033 --> 00:08:59,517
+questions turn a list of protocol names into
+understandable responses to
+
+95
+00:08:59,517 --> 00:09:05,000
+one shared-medium problem.

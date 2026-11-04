@@ -1,0 +1,175 @@
+{
+  "fps": 30.0,
+  "sections": [
+    {
+      "name": "Which route should this packet take?",
+      "animation_end_frame": 620,
+      "section_seconds": 21.6,
+      "visual_seconds": 20.2,
+      "visual_fraction": 0.935
+    },
+    {
+      "name": "Turn the network into a graph",
+      "animation_end_frame": 1243,
+      "section_seconds": 20.767,
+      "visual_seconds": 19.417,
+      "visual_fraction": 0.935
+    },
+    {
+      "name": "Add costs, not just hops",
+      "animation_end_frame": 1877,
+      "section_seconds": 21.167,
+      "visual_seconds": 19.817,
+      "visual_fraction": 0.936
+    },
+    {
+      "name": "Routing versus forwarding",
+      "animation_end_frame": 2512,
+      "section_seconds": 21.167,
+      "visual_seconds": 19.817,
+      "visual_fraction": 0.936
+    },
+    {
+      "name": "Start Dijkstra at A",
+      "animation_end_frame": 3136,
+      "section_seconds": 20.767,
+      "visual_seconds": 19.383,
+      "visual_fraction": 0.933
+    },
+    {
+      "name": "Settle A and inspect its neighbors",
+      "animation_end_frame": 3758,
+      "section_seconds": 20.733,
+      "visual_seconds": 19.383,
+      "visual_fraction": 0.935
+    },
+    {
+      "name": "Settle C and improve B",
+      "animation_end_frame": 4393,
+      "section_seconds": 21.167,
+      "visual_seconds": 19.817,
+      "visual_fraction": 0.936
+    },
+    {
+      "name": "Settle B and improve D",
+      "animation_end_frame": 5015,
+      "section_seconds": 20.767,
+      "visual_seconds": 19.417,
+      "visual_fraction": 0.935
+    },
+    {
+      "name": "Settle D and reach toward F",
+      "animation_end_frame": 5651,
+      "section_seconds": 21.167,
+      "visual_seconds": 19.817,
+      "visual_fraction": 0.936
+    },
+    {
+      "name": "Settle E and improve F",
+      "animation_end_frame": 6286,
+      "section_seconds": 21.167,
+      "visual_seconds": 19.817,
+      "visual_fraction": 0.936
+    },
+    {
+      "name": "Finalize F: thirteen is optimal",
+      "animation_end_frame": 6921,
+      "section_seconds": 21.2,
+      "visual_seconds": 19.85,
+      "visual_fraction": 0.936
+    },
+    {
+      "name": "Follow the predecessors backward",
+      "animation_end_frame": 7557,
+      "section_seconds": 21.167,
+      "visual_seconds": 19.817,
+      "visual_fraction": 0.936
+    },
+    {
+      "name": "Install the next hop",
+      "animation_end_frame": 8204,
+      "section_seconds": 21.6,
+      "visual_seconds": 20.25,
+      "visual_fraction": 0.938
+    },
+    {
+      "name": "Distance vector: ask the neighbors",
+      "animation_end_frame": 8828,
+      "section_seconds": 20.767,
+      "visual_seconds": 19.417,
+      "visual_fraction": 0.935
+    },
+    {
+      "name": "A numerical distance-vector update",
+      "animation_end_frame": 9436,
+      "section_seconds": 20.3,
+      "visual_seconds": 18.95,
+      "visual_fraction": 0.933
+    },
+    {
+      "name": "Link state: distribute the map",
+      "animation_end_frame": 10098,
+      "section_seconds": 22.067,
+      "visual_seconds": 20.717,
+      "visual_fraction": 0.939
+    },
+    {
+      "name": "Same goal, different information",
+      "animation_end_frame": 10760,
+      "section_seconds": 22.033,
+      "visual_seconds": 20.683,
+      "visual_fraction": 0.939
+    },
+    {
+      "name": "Break the D-to-E link",
+      "animation_end_frame": 11394,
+      "section_seconds": 21.167,
+      "visual_seconds": 19.817,
+      "visual_fraction": 0.936
+    },
+    {
+      "name": "Convergence takes time",
+      "animation_end_frame": 12029,
+      "section_seconds": 21.167,
+      "visual_seconds": 19.817,
+      "visual_fraction": 0.936
+    },
+    {
+      "name": "Why bad news can travel slowly",
+      "animation_end_frame": 12678,
+      "section_seconds": 21.633,
+      "visual_seconds": 20.283,
+      "visual_fraction": 0.938
+    },
+    {
+      "name": "Reduce loops, but know the limits",
+      "animation_end_frame": 13340,
+      "section_seconds": 22.033,
+      "visual_seconds": 20.683,
+      "visual_fraction": 0.939
+    },
+    {
+      "name": "A shortest path is not every policy",
+      "animation_end_frame": 13974,
+      "section_seconds": 21.167,
+      "visual_seconds": 19.817,
+      "visual_fraction": 0.936
+    },
+    {
+      "name": "Scale through hierarchy",
+      "animation_end_frame": 14623,
+      "section_seconds": 21.633,
+      "visual_seconds": 20.283,
+      "visual_fraction": 0.938
+    },
+    {
+      "name": "Solve the opening puzzle",
+      "animation_end_frame": 15272,
+      "section_seconds": 21.6,
+      "visual_seconds": 20.25,
+      "visual_fraction": 0.937
+    }
+  ],
+  "duration": 510.0,
+  "edition": "visual"
+}

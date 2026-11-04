@@ -1,0 +1,175 @@
+{
+  "fps": 30.0,
+  "sections": [
+    {
+      "name": "Three senders, one cable",
+      "animation_end_frame": 634,
+      "section_seconds": 21.9,
+      "visual_seconds": 20.7,
+      "visual_fraction": 0.945
+    },
+    {
+      "name": "A medium is not a channel",
+      "animation_end_frame": 1278,
+      "section_seconds": 21.467,
+      "visual_seconds": 20.317,
+      "visual_fraction": 0.946
+    },
+    {
+      "name": "Combine, carry, separate",
+      "animation_end_frame": 1948,
+      "section_seconds": 22.3,
+      "visual_seconds": 21.15,
+      "visual_fraction": 0.948
+    },
+    {
+      "name": "Read a frequency picture",
+      "animation_end_frame": 2579,
+      "section_seconds": 21.033,
+      "visual_seconds": 19.883,
+      "visual_fraction": 0.945
+    },
+    {
+      "name": "Give every stream a band",
+      "animation_end_frame": 3236,
+      "section_seconds": 21.9,
+      "visual_seconds": 20.75,
+      "visual_fraction": 0.947
+    },
+    {
+      "name": "Leave room between neighbors",
+      "animation_end_frame": 3880,
+      "section_seconds": 21.467,
+      "visual_seconds": 20.317,
+      "visual_fraction": 0.946
+    },
+    {
+      "name": "Filter at the receiver",
+      "animation_end_frame": 4536,
+      "section_seconds": 21.9,
+      "visual_seconds": 20.75,
+      "visual_fraction": 0.947
+    },
+    {
+      "name": "Work an FDM allocation",
+      "animation_end_frame": 5193,
+      "section_seconds": 21.9,
+      "visual_seconds": 20.75,
+      "visual_fraction": 0.947
+    },
+    {
+      "name": "What happens when one is idle?",
+      "animation_end_frame": 5850,
+      "section_seconds": 21.867,
+      "visual_seconds": 20.717,
+      "visual_fraction": 0.947
+    },
+    {
+      "name": "Now divide the time axis",
+      "animation_end_frame": 6494,
+      "section_seconds": 21.467,
+      "visual_seconds": 20.317,
+      "visual_fraction": 0.946
+    },
+    {
+      "name": "Assign repeating time slots",
+      "animation_end_frame": 7138,
+      "section_seconds": 21.467,
+      "visual_seconds": 20.317,
+      "visual_fraction": 0.946
+    },
+    {
+      "name": "Understand a TDM frame",
+      "animation_end_frame": 7808,
+      "section_seconds": 22.333,
+      "visual_seconds": 21.183,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Keep the schedule aligned",
+      "animation_end_frame": 8464,
+      "section_seconds": 21.9,
+      "visual_seconds": 20.75,
+      "visual_fraction": 0.947
+    },
+    {
+      "name": "Work a TDM rate example",
+      "animation_end_frame": 9134,
+      "section_seconds": 22.3,
+      "visual_seconds": 21.15,
+      "visual_fraction": 0.948
+    },
+    {
+      "name": "The empty-slot problem",
+      "animation_end_frame": 9790,
+      "section_seconds": 21.9,
+      "visual_seconds": 20.75,
+      "visual_fraction": 0.947
+    },
+    {
+      "name": "Allocate turns on demand",
+      "animation_end_frame": 10448,
+      "section_seconds": 21.9,
+      "visual_seconds": 20.75,
+      "visual_fraction": 0.947
+    },
+    {
+      "name": "Move from copper to fiber",
+      "animation_end_frame": 11118,
+      "section_seconds": 22.333,
+      "visual_seconds": 21.183,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Combine different wavelengths",
+      "animation_end_frame": 11762,
+      "section_seconds": 21.467,
+      "visual_seconds": 20.317,
+      "visual_fraction": 0.946
+    },
+    {
+      "name": "Separate the light again",
+      "animation_end_frame": 12418,
+      "section_seconds": 21.867,
+      "visual_seconds": 20.717,
+      "visual_fraction": 0.947
+    },
+    {
+      "name": "Work a WDM capacity example",
+      "animation_end_frame": 13100,
+      "section_seconds": 22.767,
+      "visual_seconds": 21.617,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Sharing has physical limits",
+      "animation_end_frame": 13744,
+      "section_seconds": 21.467,
+      "visual_seconds": 20.317,
+      "visual_fraction": 0.946
+    },
+    {
+      "name": "Compare the three schemes",
+      "animation_end_frame": 14402,
+      "section_seconds": 21.9,
+      "visual_seconds": 20.75,
+      "visual_fraction": 0.947
+    },
+    {
+      "name": "Choose with the traffic in mind",
+      "animation_end_frame": 15058,
+      "section_seconds": 21.867,
+      "visual_seconds": 20.717,
+      "visual_fraction": 0.947
+    },
+    {
+      "name": "Retell the separation rule",
+      "animation_end_frame": 15728,
+      "section_seconds": 22.333,
+      "visual_seconds": 21.183,
+      "visual_fraction": 0.949
+    }
+  ],
+  "duration": 525.0,
+  "edition": "visual"
+}

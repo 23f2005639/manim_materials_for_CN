@@ -1,0 +1,36 @@
+{
+  "byte_range_cases": "passed",
+  "lesson_1": [
+    {
+      "scene": 1,
+      "speed": 4,
+      "natural_playback": "passed",
+      "correct_hold_frame": "passed"
+    },
+    {
+      "scene": 2,
+      "speed": 4,
+      "natural_playback": "passed",
+      "correct_hold_frame": "passed"
+    },
+    {
+      "scene": 3,
+      "speed": 4,
+      "natural_playback": "passed",
+      "correct_hold_frame": "passed"
+    },
+    {
+      "scene": 4,
+      "speed": 1,
+      "natural_playback": "passed",
+      "correct_hold_frame": "passed"
+    },
+    {
+      "scene": 5,
+      "speed": 4,
+      "natural_playback": "passed",
+      "correct_hold_frame": "passed"
+    }
+  ],
+  "backward_replay": "passed"
+}

@@ -1,0 +1,67 @@
+{
+  "revision_date": "2026-11-04",
+  "revision": "youtube-visual-explainer",
+  "protected_video_files": 201,
+  "all_video_sha256_checks": "lesson 1 regenerated for queue cleanup; other videos unchanged",
+  "episodes": [
+    {
+      "episode": "01",
+      "sections": 24,
+      "words": 833,
+      "notes_match_script": true,
+      "scene_data_unchanged": true
+    },
+    {
+      "episode": "02",
+      "sections": 24,
+      "words": 817,
+      "notes_match_script": true,
+      "scene_data_unchanged": true
+    },
+    {
+      "episode": "03",
+      "sections": 24,
+      "words": 839,
+      "notes_match_script": true,
+      "scene_data_unchanged": true
+    },
+    {
+      "episode": "04",
+      "sections": 24,
+      "words": 840,
+      "notes_match_script": true,
+      "scene_data_unchanged": true
+    },
+    {
+      "episode": "05",
+      "sections": 24,
+      "words": 858,
+      "notes_match_script": true,
+      "scene_data_unchanged": true
+    },
+    {
+      "episode": "06",
+      "sections": 24,
+      "words": 844,
+      "notes_match_script": true,
+      "scene_data_unchanged": true
+    },
+    {
+      "episode": "07",
+      "sections": 24,
+      "words": 867,
+      "notes_match_script": true,
+      "scene_data_unchanged": true
+    },
+    {
+      "episode": "08",
+      "sections": 24,
+      "words": 871,
+      "notes_match_script": true,
+      "scene_data_unchanged": true
+    }
+  ],
+  "regenerated_video_files": 25,
+  "changed_video_files": 7,
+  "unmodified_video_files": 194
+}

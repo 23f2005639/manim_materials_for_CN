@@ -1,0 +1,19 @@
+{
+  "episode": "05",
+  "review_type": "Independent source, storyboard, and animation-code review",
+  "status": "passed after corrections",
+  "narration_words": 1180,
+  "sections": 24,
+  "sources_checked": 2,
+  "checks": [
+    "Positive-cost graph and full Dijkstra table checked independently with a priority-queue implementation.",
+    "The original A-to-F shortest cost is 13; removing D-E changes it to 14.",
+    "Distance-vector candidates are 14 via B and 13 via C.",
+    "Poisoned-reverse dependency and reverse advertisement agree after the QA correction.",
+    "RIP-specific infinity 16 is distinguished from universal routing behavior.",
+    "Link-state advertisements and convergence are distinguished from forwarding."
+  ],
+  "limitations": "This report verifies concepts and source alignment. Separate media and browser reports cover rendered files and controls.",
+  "integrated_layout_inspection": "Passed after corrections: no problems in all 24 sampled sections",
+  "visual_review": "Independently reviewed corrected storyboard sheet 3 for labels, route states, and encryption diagrams."
+}

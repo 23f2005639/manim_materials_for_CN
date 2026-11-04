@@ -1,0 +1,527 @@
+{
+  "id": "08",
+  "slug": "cryptography",
+  "title": "Sending Secrets Without Sharing a Secret First",
+  "duration": 530,
+  "sources": [
+    {
+      "title": "RFC 9180 — Hybrid Public Key Encryption",
+      "url": "https://www.rfc-editor.org/rfc/rfc9180",
+      "notes": "Introduces hybrid asymmetric/symmetric designs and KEM/KDF/AEAD composition. Episode distinguishes its conceptual wrapped-key teaching model from exact HPKE.",
+      "checked": "2026-11-03"
+    },
+    {
+      "title": "RFC 5116 — An Interface and Algorithms for Authenticated Encryption",
+      "url": "https://www.rfc-editor.org/rfc/rfc5116",
+      "notes": "AEAD confidentiality/integrity interface, authentication failure, and scheme-specific nonce requirements.",
+      "checked": "2026-11-03"
+    },
+    {
+      "title": "RFC 8446 — TLS 1.3",
+      "url": "https://www.rfc-editor.org/rfc/rfc8446",
+      "notes": "TLS1.3 uses authenticated key establishment and AEAD; static RSA key transport removed. Used to distinguish the simplified diagram from modern TLS.",
+      "checked": "2026-11-03"
+    }
+  ],
+  "sections": [
+    {
+      "id": "08-01",
+      "title": "A secret on a public network",
+      "chapter": "The secrecy puzzle",
+      "duration": 22.366666666666667,
+      "narration": "Alice wants to send Bob a private message. Eve is the nosy person watching the network. If Alice sends the secret key openly too, Eve gets the answer sheet. Let's see how we can do better.",
+      "bullets": [
+        "Alice sends; Bob receives",
+        "Eve can observe the channel"
+      ],
+      "takeaway": "A public network needs more than a promise that nobody is listening.",
+      "visual": {
+        "mode": "symmetric",
+        "sender": "Alice",
+        "recipient": "Bob",
+        "observer": "Eve",
+        "plaintext": "MEET AT NINE",
+        "intercept": true
+      },
+      "short_title": "Someone is listening"
+    },
+    {
+      "id": "08-02",
+      "title": "Plaintext becomes ciphertext",
+      "chapter": "Encryption foundations",
+      "duration": 21.9,
+      "narration": "Encryption uses a key to turn a readable message, called plaintext, into ciphertext. The right key helps recover it. These moving letter blocks show the idea. They're an illustration, not a secret encryption method invented for this video.",
+      "bullets": [
+        "Plaintext + key → ciphertext",
+        "Illustrated symbols are not real crypto"
+      ],
+      "takeaway": "Encryption conceals content through a keyed transformation.",
+      "visual": {
+        "mode": "symmetric",
+        "sender": "Alice",
+        "recipient": "Bob",
+        "observer": "Eve",
+        "plaintext": "MEET AT NINE",
+        "ciphertext": "8F 31 A9 7C"
+      },
+      "short_title": "Transform the message"
+    },
+    {
+      "id": "08-03",
+      "title": "The algorithm can be public",
+      "chapter": "Encryption foundations",
+      "duration": 22.8,
+      "narration": "Here's a surprise: the algorithm doesn't need to be secret. A good design can let people study how it works while keeping the key secret. Hiding the instructions isn't the same as having a strong lock.",
+      "bullets": [
+        "Public algorithm, protected secret key",
+        "Secrecy of design is not a foundation"
+      ],
+      "takeaway": "Protect the key rather than relying on an unknown algorithm.",
+      "visual": {
+        "mode": "symmetric",
+        "sender": "Alice",
+        "recipient": "Bob",
+        "observer": "Eve",
+        "algorithm_public": true
+      },
+      "short_title": "Publish the algorithm"
+    },
+    {
+      "id": "08-04",
+      "title": "Symmetric encryption uses a shared secret",
+      "chapter": "Encryption foundations",
+      "duration": 22.333333333333332,
+      "narration": "With symmetric encryption, Alice and Bob share secret key material. They both need the correct key. Eve can know the method and see the ciphertext without knowing that secret. The key is doing an important job here.",
+      "bullets": [
+        "Both endpoints share secret K",
+        "Efficient for substantial data"
+      ],
+      "takeaway": "A symmetric key must remain secret from unauthorized parties.",
+      "visual": {
+        "mode": "symmetric",
+        "sender": "Alice",
+        "recipient": "Bob",
+        "observer": "Eve",
+        "key": "K",
+        "shared": true
+      },
+      "short_title": "Share the secret key"
+    },
+    {
+      "id": "08-05",
+      "title": "A key is not simply a memorable password",
+      "chapter": "Encryption foundations",
+      "duration": 22.8,
+      "narration": "A key like 'password123' wouldn't make us feel relaxed. Proper cryptographic keys need suitable length and unpredictability. Passwords need special processing too. Our little key drawings stand for properly generated keys, not short words we guessed over lunch.",
+      "bullets": [
+        "Keys need suitable unpredictability",
+        "Passwords need dedicated derivation"
+      ],
+      "takeaway": "Use appropriate key generation rather than a memorable homemade key.",
+      "visual": {
+        "mode": "symmetric",
+        "sender": "Alice",
+        "recipient": "Bob",
+        "observer": "Eve",
+        "random_key": true
+      },
+      "short_title": "Guessable versus unpredictable"
+    },
+    {
+      "id": "08-06",
+      "title": "The key-distribution problem",
+      "chapter": "Encryption foundations",
+      "duration": 21.9,
+      "narration": "Watch what happens when the shared key leaks. Eve can copy it and recover the message. The encryption hasn't suddenly forgotten its job. We've given away the secret it depended on, like leaving the key beside the lock.",
+      "bullets": [
+        "Sending K openly reveals the secret",
+        "Encryption assumes secure key handling"
+      ],
+      "takeaway": "Secure encryption still needs a sound way to establish or distribute keys.",
+      "visual": {
+        "mode": "symmetric",
+        "sender": "Alice",
+        "recipient": "Bob",
+        "observer": "Eve",
+        "key": "K",
+        "leaked": true
+      },
+      "short_title": "A leaked key unlocks everything"
+    },
+    {
+      "id": "08-07",
+      "title": "Give Bob a pair of keys",
+      "chapter": "Public-key foundations",
+      "duration": 24.066666666666666,
+      "narration": "Public-key encryption gives Bob two related keys. The public one can be shared; the private one stays with Bob. In a suitable scheme, data protected using his public key can be recovered with his private key.",
+      "bullets": [
+        "Public key may be distributed",
+        "Private key stays with Bob"
+      ],
+      "takeaway": "A public/private key pair assigns different capabilities to each key.",
+      "visual": {
+        "mode": "publickey",
+        "sender": "Alice",
+        "recipient": "Bob",
+        "observer": "Eve",
+        "public_key": "PK_B",
+        "private_key": "SK_B"
+      },
+      "short_title": "Give Bob two capabilities"
+    },
+    {
+      "id": "08-08",
+      "title": "Publish the encryption key",
+      "chapter": "Public-key foundations",
+      "duration": 21.5,
+      "narration": "Eve can get Bob's public key too. That alone doesn't give her his private key. But Alice must check whose public key she's using. A key saying 'Bob' on it isn't automatically proof that it belongs to him.",
+      "bullets": [
+        "Public does not mean secret",
+        "Public also does not mean trusted"
+      ],
+      "takeaway": "Public-key distribution and public-key authentication are different problems.",
+      "visual": {
+        "mode": "publickey",
+        "sender": "Alice",
+        "recipient": "Bob",
+        "observer": "Eve",
+        "public_key": "PK_B",
+        "publish": true
+      },
+      "short_title": "Public does not mean trusted"
+    },
+    {
+      "id": "08-09",
+      "title": "Encrypt to Bob’s public key",
+      "chapter": "Public-key foundations",
+      "duration": 22.8,
+      "narration": "Alice uses Bob's authenticated public key to protect the message. Eve may see that key and the ciphertext, but lacks Bob's private decryption ability, assuming the scheme is sound. Seeing the package isn't the same as opening it.",
+      "bullets": [
+        "Encrypt using authenticated PK_B",
+        "Observing PK_B does not reveal SK_B"
+      ],
+      "takeaway": "Use a suitable scheme and the intended recipient’s authenticated public key.",
+      "visual": {
+        "mode": "publickey",
+        "sender": "Alice",
+        "recipient": "Bob",
+        "observer": "Eve",
+        "encrypt": true,
+        "public_key": "PK_B"
+      },
+      "short_title": "Encrypt for the intended recipient"
+    },
+    {
+      "id": "08-10",
+      "title": "Decrypt with the private key",
+      "chapter": "Public-key foundations",
+      "duration": 21.9,
+      "narration": "Bob uses his private key to recover the protected information. That private key stays private; it doesn't travel inside the message. If it gets stolen, the damage depends on how the protocol uses its keys.",
+      "bullets": [
+        "Only Bob keeps SK_B",
+        "The private key is not transmitted"
+      ],
+      "takeaway": "Protecting private keys is part of protecting the communication.",
+      "visual": {
+        "mode": "publickey",
+        "sender": "Alice",
+        "recipient": "Bob",
+        "observer": "Eve",
+        "decrypt": true,
+        "private_key": "SK_B"
+      },
+      "short_title": "Keep the private key private"
+    },
+    {
+      "id": "08-11",
+      "title": "Why not encrypt every file this way?",
+      "chapter": "Combine the techniques",
+      "duration": 20.633333333333333,
+      "narration": "Why not use public-key operations for every bit of a huge file? They have practical costs and limits. Hybrid designs combine the strengths: public-key tools help with keys, while symmetric encryption handles the bulk of the data efficiently.",
+      "bullets": [
+        "Public-key work has practical costs",
+        "Symmetric encryption handles bulk data"
+      ],
+      "takeaway": "Hybrid designs combine complementary capabilities.",
+      "visual": {
+        "mode": "hybrid",
+        "sender": "Alice",
+        "recipient": "Bob",
+        "observer": "Eve",
+        "compare_cost": true
+      },
+      "short_title": "Combine complementary techniques"
+    },
+    {
+      "id": "08-12",
+      "title": "Generate a fresh session key",
+      "chapter": "Combine the techniques",
+      "duration": 22.8,
+      "narration": "Alice generates a fresh random session key, K. It's a key for this exchange, rather than one we casually reuse everywhere. Fresh keys help, but we still need the right checks and careful handling around them.",
+      "bullets": [
+        "Generate fresh random session key K",
+        "Follow the chosen scheme’s rules"
+      ],
+      "takeaway": "A hybrid example begins with appropriate session key material.",
+      "visual": {
+        "mode": "hybrid",
+        "sender": "Alice",
+        "recipient": "Bob",
+        "observer": "Eve",
+        "step": 1,
+        "key": "K"
+      },
+      "short_title": "Generate a fresh session key"
+    },
+    {
+      "id": "08-13",
+      "title": "Protect the data with the session key",
+      "chapter": "Combine the techniques",
+      "duration": 21.066666666666666,
+      "narration": "Now K helps protect the message and create an authentication tag. Think of the tag as a check tied to the secret key, not a decoration. The scheme also specifies any nonce and other information the receiver needs.",
+      "bullets": [
+        "K protects the message data",
+        "Ciphertext includes authentication data"
+      ],
+      "takeaway": "Authenticated symmetric encryption protects the bulk message.",
+      "visual": {
+        "mode": "hybrid",
+        "sender": "Alice",
+        "recipient": "Bob",
+        "observer": "Eve",
+        "step": 2,
+        "key": "K",
+        "data": "ciphertext + tag"
+      },
+      "short_title": "Protect the message and tag"
+    },
+    {
+      "id": "08-14",
+      "title": "Protect the session key for Bob",
+      "chapter": "Combine the techniques",
+      "duration": 22.333333333333332,
+      "narration": "In our simplified model, Alice protects K using Bob's authenticated public key. This is a way to explain protected key transport. Modern systems may establish keys differently, so don't treat our wrapped-key picture as an exact TLS handshake.",
+      "bullets": [
+        "PK_B protects the small session key",
+        "This is a simplified key-transport model"
+      ],
+      "takeaway": "Protect the session key separately from the bulk ciphertext.",
+      "visual": {
+        "mode": "hybrid",
+        "sender": "Alice",
+        "recipient": "Bob",
+        "observer": "Eve",
+        "step": 3,
+        "key": "K",
+        "public_key": "PK_B"
+      },
+      "short_title": "Protect the small key"
+    },
+    {
+      "id": "08-15",
+      "title": "Send the two protected pieces",
+      "chapter": "Combine the techniques",
+      "duration": 21.5,
+      "narration": "Two protected pieces travel: the key material and the authenticated ciphertext. Eve can see the packages without learning the message under the scheme's assumptions. But things like message size, timing, and the endpoints may still be visible.",
+      "bullets": [
+        "Send protected key material and data",
+        "Traffic metadata can remain visible"
+      ],
+      "takeaway": "Ciphertext can conceal content while revealing other communication patterns.",
+      "visual": {
+        "mode": "hybrid",
+        "sender": "Alice",
+        "recipient": "Bob",
+        "observer": "Eve",
+        "step": 4,
+        "intercept": true
+      },
+      "short_title": "Send two protected pieces"
+    },
+    {
+      "id": "08-16",
+      "title": "Bob recovers the key, then the message",
+      "chapter": "Combine the techniques",
+      "duration": 21.933333333333334,
+      "narration": "Bob recovers K, then verifies and decrypts the protected data. If verification fails, reject it. A message that looks readable isn't enough reason to trust it. Checking the protection is part of the process, not an optional extra.",
+      "bullets": [
+        "SK_B recovers K",
+        "K authenticates and decrypts the data"
+      ],
+      "takeaway": "A hybrid receiver verifies the protected data before accepting its contents.",
+      "visual": {
+        "mode": "hybrid",
+        "sender": "Alice",
+        "recipient": "Bob",
+        "observer": "Eve",
+        "step": 5,
+        "decrypt": true
+      },
+      "short_title": "Unlock, verify, then accept"
+    },
+    {
+      "id": "08-17",
+      "title": "Secrecy alone does not detect tampering",
+      "chapter": "Authentication and integrity",
+      "duration": 21.466666666666665,
+      "narration": "Keeping a message secret and spotting changes are different jobs. Encryption alone doesn't automatically make tampering detectable. A suitable authenticated scheme supplies both confidentiality and integrity: hide the content, and detect unauthorized changes to the protected data.",
+      "bullets": [
+        "Confidentiality conceals content",
+        "Integrity detects unauthorized changes"
+      ],
+      "takeaway": "Encryption and integrity are related but distinct security goals.",
+      "visual": {
+        "mode": "authentication",
+        "sender": "Alice",
+        "recipient": "Bob",
+        "observer": "Eve",
+        "tamper": true
+      },
+      "short_title": "Secrecy does not detect changes"
+    },
+    {
+      "id": "08-18",
+      "title": "An authentication tag checks the package",
+      "chapter": "Authentication and integrity",
+      "duration": 21.933333333333334,
+      "narration": "Let's change part of the protected message. The receiver's tag check should fail. This isn't an ordinary checksum that Eve can simply recalculate after editing the data. The authentication check depends on the key and the protected inputs.",
+      "bullets": [
+        "Verify the tag; reject failures",
+        "A checksum is not a keyed authenticator"
+      ],
+      "takeaway": "Authenticated encryption detects invalid protected packages.",
+      "visual": {
+        "mode": "authentication",
+        "sender": "Alice",
+        "recipient": "Bob",
+        "observer": "Eve",
+        "tag": "verify",
+        "tamper": true
+      },
+      "short_title": "A changed bit breaks verification"
+    },
+    {
+      "id": "08-19",
+      "title": "Do not reuse nonces carelessly",
+      "chapter": "Authentication and integrity",
+      "duration": 21.5,
+      "narration": "A nonce is another important input, but it isn't another secret key. Many schemes need a unique nonce each time a key is used. Repeating the wrong key-and-nonce pair can break protection, so follow that scheme's rules carefully.",
+      "bullets": [
+        "A nonce is separate from the key",
+        "Follow scheme-specific uniqueness rules"
+      ],
+      "takeaway": "Correct nonce handling is essential to secure authenticated encryption.",
+      "visual": {
+        "mode": "authentication",
+        "sender": "Alice",
+        "recipient": "Bob",
+        "observer": "Eve",
+        "nonce": true
+      },
+      "short_title": "Never repeat the wrong pair"
+    },
+    {
+      "id": "08-20",
+      "title": "A substituted public key changes everything",
+      "chapter": "Authentication and integrity",
+      "duration": 21.5,
+      "narration": "Here's an attack: Eve replaces Bob's public key with her own. Alice's encryption may work perfectly, but now it's protecting the message for Eve. That's why checking who owns a public key matters as much as using it.",
+      "bullets": [
+        "Eve substitutes a public key",
+        "Alice must authenticate Bob’s key"
+      ],
+      "takeaway": "A public key is useful only with an appropriate trust decision.",
+      "visual": {
+        "mode": "authentication",
+        "sender": "Alice",
+        "recipient": "Bob",
+        "observer": "Eve",
+        "key_substitution": true
+      },
+      "short_title": "The wrong public key"
+    },
+    {
+      "id": "08-21",
+      "title": "Confidentiality is not a sender’s signature",
+      "chapter": "Authentication and integrity",
+      "duration": 22.766666666666666,
+      "narration": "If anyone gets Bob's public encryption key, anyone can encrypt something for him. Bob successfully decrypting it doesn't prove Alice sent it. Digital signatures provide a separate way to check a claimed sender using signing and verification schemes.",
+      "bullets": [
+        "Encrypting for Bob does not identify Alice",
+        "Signatures are a different mechanism"
+      ],
+      "takeaway": "Recipient confidentiality does not automatically authenticate the sender.",
+      "visual": {
+        "mode": "authentication",
+        "sender": "Alice",
+        "recipient": "Bob",
+        "observer": "Eve",
+        "signature": true
+      },
+      "short_title": "Decryption does not identify Alice"
+    },
+    {
+      "id": "08-22",
+      "title": "How this differs from modern TLS",
+      "chapter": "Connect the lesson to networks",
+      "duration": 22.366666666666667,
+      "narration": "Modern TLS one point three commonly uses authenticated temporary key exchange to derive traffic keys, then authenticated encryption. It removed static RSA key transport. Our wrapped-key drawing is a teaching model, not an exact TLS walkthrough.",
+      "bullets": [
+        "Teaching model is not TLS 1.3",
+        "TLS uses authenticated key establishment"
+      ],
+      "takeaway": "Use the hybrid idea to understand protocols without confusing their mechanisms.",
+      "visual": {
+        "mode": "hybrid",
+        "sender": "Alice",
+        "recipient": "Bob",
+        "observer": "Eve",
+        "tls_caveat": true
+      },
+      "short_title": "Modern TLS establishes keys differently"
+    },
+    {
+      "id": "08-23",
+      "title": "Use established cryptographic protocols",
+      "chapter": "Connect the lesson to networks",
+      "duration": 21.466666666666665,
+      "narration": "For real applications, use established protocols and maintained libraries, with proper identity checks and randomness. A neat lock animation can't prove a system is secure. The code, keys, and protocol rules all have to work together too.",
+      "bullets": [
+        "Use established libraries and protocols",
+        "A visual analogy is not a security proof"
+      ],
+      "takeaway": "A sound implementation must preserve the whole protocol’s security assumptions.",
+      "visual": {
+        "mode": "authentication",
+        "sender": "Alice",
+        "recipient": "Bob",
+        "observer": "Eve",
+        "established_protocol": true
+      },
+      "short_title": "Use a complete trusted protocol"
+    },
+    {
+      "id": "08-24",
+      "title": "Solve the secrecy puzzle",
+      "chapter": "Recap",
+      "duration": 22.366666666666667,
+      "narration": "Here's our final picture: symmetric protection handles the data, public-key tools help establish keys, and authentication checks the right identities and protected message. Secure communication is a team effort. One impressive-looking lock doesn't do every job by itself.",
+      "bullets": [
+        "Combine key setup and data protection",
+        "Authenticate identities and protected data"
+      ],
+      "takeaway": "Secure communication combines confidentiality, integrity, and sound key handling.",
+      "visual": {
+        "mode": "hybrid",
+        "sender": "Alice",
+        "recipient": "Bob",
+        "observer": "Eve",
+        "step": 5,
+        "recap": true
+      },
+      "short_title": "Put the capabilities together"
+    }
+  ],
+  "original_target_seconds": 450,
+  "timing_note": "Retimed for approximately140spoken words perminute;browser pauses are unlimited."
+}

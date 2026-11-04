@@ -1,0 +1,175 @@
+{
+  "fps": 30.0,
+  "sections": [
+    {
+      "name": "One medium, several speakers",
+      "animation_end_frame": 636,
+      "section_seconds": 21.933,
+      "visual_seconds": 20.733,
+      "visual_fraction": 0.945
+    },
+    {
+      "name": "Make overlap visible",
+      "animation_end_frame": 1332,
+      "section_seconds": 23.233,
+      "visual_seconds": 22.083,
+      "visual_fraction": 0.951
+    },
+    {
+      "name": "Pure ALOHA: send when ready",
+      "animation_end_frame": 2016,
+      "section_seconds": 22.8,
+      "visual_seconds": 21.65,
+      "visual_fraction": 0.95
+    },
+    {
+      "name": "A vulnerable interval of 2T",
+      "animation_end_frame": 2688,
+      "section_seconds": 22.367,
+      "visual_seconds": 21.217,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Why retry randomly?",
+      "animation_end_frame": 3358,
+      "section_seconds": 22.367,
+      "visual_seconds": 21.217,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Slotted ALOHA adds boundaries",
+      "animation_end_frame": 4042,
+      "section_seconds": 22.8,
+      "visual_seconds": 21.65,
+      "visual_fraction": 0.95
+    },
+    {
+      "name": "The vulnerable interval becomes T",
+      "animation_end_frame": 4726,
+      "section_seconds": 22.8,
+      "visual_seconds": 21.65,
+      "visual_fraction": 0.95
+    },
+    {
+      "name": "Interpret the ideal efficiency result",
+      "animation_end_frame": 5384,
+      "section_seconds": 21.933,
+      "visual_seconds": 20.783,
+      "visual_fraction": 0.948
+    },
+    {
+      "name": "Scheduling or contention?",
+      "animation_end_frame": 6068,
+      "section_seconds": 22.8,
+      "visual_seconds": 21.65,
+      "visual_fraction": 0.95
+    },
+    {
+      "name": "Listen before transmitting",
+      "animation_end_frame": 6752,
+      "section_seconds": 22.8,
+      "visual_seconds": 21.65,
+      "visual_fraction": 0.95
+    },
+    {
+      "name": "A distant sender can still start",
+      "animation_end_frame": 7463,
+      "section_seconds": 23.667,
+      "visual_seconds": 22.517,
+      "visual_fraction": 0.951
+    },
+    {
+      "name": "One-persistent CSMA",
+      "animation_end_frame": 8146,
+      "section_seconds": 22.8,
+      "visual_seconds": 21.65,
+      "visual_fraction": 0.95
+    },
+    {
+      "name": "Nonpersistent CSMA",
+      "animation_end_frame": 8818,
+      "section_seconds": 22.367,
+      "visual_seconds": 21.217,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "P-persistent CSMA",
+      "animation_end_frame": 9488,
+      "section_seconds": 22.367,
+      "visual_seconds": 21.217,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Add detection on historical Ethernet",
+      "animation_end_frame": 10146,
+      "section_seconds": 21.933,
+      "visual_seconds": 20.783,
+      "visual_fraction": 0.948
+    },
+    {
+      "name": "Detect, abort, and signal",
+      "animation_end_frame": 10856,
+      "section_seconds": 23.633,
+      "visual_seconds": 22.483,
+      "visual_fraction": 0.951
+    },
+    {
+      "name": "Why propagation affects frame length",
+      "animation_end_frame": 11552,
+      "section_seconds": 23.233,
+      "visual_seconds": 22.083,
+      "visual_fraction": 0.951
+    },
+    {
+      "name": "Widen the random retry range",
+      "animation_end_frame": 12236,
+      "section_seconds": 22.8,
+      "visual_seconds": 21.65,
+      "visual_fraction": 0.95
+    },
+    {
+      "name": "Work two retry choices",
+      "animation_end_frame": 12933,
+      "section_seconds": 23.233,
+      "visual_seconds": 22.083,
+      "visual_fraction": 0.951
+    },
+    {
+      "name": "Backoff does not reserve the cable",
+      "animation_end_frame": 13630,
+      "section_seconds": 23.233,
+      "visual_seconds": 22.083,
+      "visual_fraction": 0.951
+    },
+    {
+      "name": "Modern switched full duplex",
+      "animation_end_frame": 14328,
+      "section_seconds": 23.233,
+      "visual_seconds": 22.083,
+      "visual_fraction": 0.951
+    },
+    {
+      "name": "Wi-Fi needs different feedback",
+      "animation_end_frame": 14998,
+      "section_seconds": 22.367,
+      "visual_seconds": 21.217,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Compare the added knowledge",
+      "animation_end_frame": 15670,
+      "section_seconds": 22.367,
+      "visual_seconds": 21.217,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Explain the next collision",
+      "animation_end_frame": 16328,
+      "section_seconds": 21.933,
+      "visual_seconds": 20.783,
+      "visual_fraction": 0.948
+    }
+  ],
+  "duration": 545.0,
+  "edition": "visual"
+}

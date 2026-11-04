@@ -1,0 +1,457 @@
+1
+00:00:00,000 --> 00:00:05,583
+Lose one piece of data, and two transport
+services can react
+
+2
+00:00:05,583 --> 00:00:11,167
+very differently. One may hold later bytes
+until the gap is
+
+3
+00:00:11,167 --> 00:00:16,750
+repaired; the other may let later messages
+through. Which behavior does
+
+4
+00:00:16,750 --> 00:00:22,333
+your application actually need?
+
+5
+00:00:22,333 --> 00:00:27,483
+Start with the destination. IP reaches a
+network endpoint; a port
+
+6
+00:00:27,483 --> 00:00:32,633
+helps identify the application endpoint there.
+Both TCP and UDP use
+
+7
+00:00:32,633 --> 00:00:37,783
+port numbers, allowing different conversations
+and applications to share the same
+
+8
+00:00:37,783 --> 00:00:42,933
+networked machine.
+
+9
+00:00:42,933 --> 00:00:48,525
+UDP carries separate datagrams. When a
+datagram arrives intact, its boundary
+
+10
+00:00:48,525 --> 00:00:54,117
+remains visible to the application. UDP itself
+doesn't guarantee arrival, order,
+
+11
+00:00:54,117 --> 00:00:59,708
+or freedom from duplicates. A message boundary
+and reliable delivery are
+
+12
+00:00:59,708 --> 00:01:05,300
+independent properties.
+
+13
+00:01:05,300 --> 00:01:10,883
+TCP presents an ordered byte stream instead.
+HEL, LO, and an
+
+14
+00:01:10,883 --> 00:01:16,467
+exclamation mark form continuous bytes,
+without preserving the original write
+boundaries.
+
+15
+00:01:16,467 --> 00:01:22,050
+The application must define how to recognize
+complete messages within that
+
+16
+00:01:22,050 --> 00:01:27,633
+stream.
+
+17
+00:01:27,633 --> 00:01:33,000
+To begin our TCP example, each endpoint needs
+starting sequence information
+
+18
+00:01:33,000 --> 00:01:38,367
+and connection state. Three handshake messages
+establish that shared state. The
+
+19
+00:01:38,367 --> 00:01:43,733
+result is a logical connection between
+endpoints, rather than a reserved
+
+20
+00:01:43,733 --> 00:01:49,100
+route through the network.
+
+21
+00:01:49,100 --> 00:01:54,575
+The client sends SYN with sequence number one
+hundred. SYN occupies
+
+22
+00:01:54,575 --> 00:02:00,050
+one sequence position, so this side's first
+data byte starts at
+
+23
+00:02:00,050 --> 00:02:05,525
+one hundred and one. That detail will make the
+following acknowledgment
+
+24
+00:02:05,525 --> 00:02:11,000
+numbers fit together.
+
+25
+00:02:11,000 --> 00:02:16,367
+The server answers with SYN at five hundred
+and ACK one
+
+26
+00:02:16,367 --> 00:02:21,733
+hundred and one. Two number spaces now appear:
+the server's own
+
+27
+00:02:21,733 --> 00:02:27,100
+sequence, and its acknowledgment of the
+client. Each direction tracks a
+
+28
+00:02:27,100 --> 00:02:32,467
+separate flow.
+
+29
+00:02:32,467 --> 00:02:38,267
+The client acknowledges five hundred and one.
+Both sides now have
+
+30
+00:02:38,267 --> 00:02:44,067
+the starting state for this exchange. The
+client's first data still
+
+31
+00:02:44,067 --> 00:02:49,867
+begins at one hundred and one; the handshake
+has established how
+
+32
+00:02:49,867 --> 00:02:55,667
+the counters line up.
+
+33
+00:02:55,667 --> 00:03:01,575
+Now send one hundred bytes starting at one
+hundred and one.
+
+34
+00:03:01,575 --> 00:03:07,483
+They occupy positions through two hundred. TCP
+numbers bytes, not whole
+
+35
+00:03:07,483 --> 00:03:13,392
+packets, so those positions retain their
+meaning even when data is
+
+36
+00:03:13,392 --> 00:03:19,300
+divided into different segment sizes.
+
+37
+00:03:19,300 --> 00:03:24,883
+ACK two hundred and one says the earlier bytes
+have arrived
+
+38
+00:03:24,883 --> 00:03:30,467
+in order, and names the next expected
+position. This cumulative boundary
+
+39
+00:03:30,467 --> 00:03:36,050
+reports the received prefix of the stream,
+rather than counting how
+
+40
+00:03:36,050 --> 00:03:41,633
+many packets crossed the screen.
+
+41
+00:03:41,633 --> 00:03:47,108
+Later bytes arrive while the middle is
+missing. The receiver can
+
+42
+00:03:47,108 --> 00:03:52,583
+buffer positions three hundred and one through
+four hundred, but still
+
+43
+00:03:52,583 --> 00:03:58,058
+expects two hundred and one. Arriving later
+isn't enough to advance
+
+44
+00:03:58,058 --> 00:04:03,533
+the ordered boundary.
+
+45
+00:04:03,533 --> 00:04:09,225
+Retransmit the missing middle. Once it
+arrives, the stored later bytes
+
+46
+00:04:09,225 --> 00:04:14,917
+connect to the earlier run, and ACK four
+hundred and one
+
+47
+00:04:14,917 --> 00:04:20,608
+can advance. Repairing one gap makes an entire
+waiting stretch available
+
+48
+00:04:20,608 --> 00:04:26,300
+in order.
+
+49
+00:04:26,300 --> 00:04:31,992
+What if an acknowledgment disappears after
+successful delivery? The sender may
+
+50
+00:04:31,992 --> 00:04:37,683
+repeat those bytes. Sequence information lets
+the receiver recognize them and
+
+51
+00:04:37,683 --> 00:04:43,375
+avoid delivering them twice. Lost feedback
+creates uncertainty, rather than necessarily
+
+52
+00:04:43,375 --> 00:04:49,067
+indicating lost data.
+
+53
+00:04:49,067 --> 00:04:54,433
+The recovered order comes with a cost. Later
+bytes may be
+
+54
+00:04:54,433 --> 00:04:59,800
+physically present while the application waits
+for an earlier gap. Buffers
+
+55
+00:04:59,800 --> 00:05:05,167
+hold them, and recovery takes time. This delay
+follows from the
+
+56
+00:05:05,167 --> 00:05:10,533
+service TCP has promised.
+
+57
+00:05:10,533 --> 00:05:16,225
+Flow control protects the receiver's limited
+storage. In a three-hundred-byte buffer,
+
+58
+00:05:16,225 --> 00:05:21,917
+two hundred occupied bytes leave one hundred
+available. Advertising that remaining
+
+59
+00:05:21,917 --> 00:05:27,608
+room tells the sender how much more it can
+accept before
+
+60
+00:05:27,608 --> 00:05:33,300
+the application consumes data.
+
+61
+00:05:33,300 --> 00:05:38,558
+Fill the remaining space and the receive
+window reaches zero. Then
+
+62
+00:05:38,558 --> 00:05:43,817
+the application reads two hundred bytes,
+making space again. A new
+
+63
+00:05:43,817 --> 00:05:49,075
+advertised window permits more sending.
+Receiver capacity changes as the application
+
+64
+00:05:49,075 --> 00:05:54,333
+processes the stream.
+
+65
+00:05:54,333 --> 00:06:00,133
+But a receiver with free space can still sit
+beyond an
+
+66
+00:06:00,133 --> 00:06:05,933
+overloaded router. Congestion control
+addresses pressure on the path; flow control
+
+67
+00:06:05,933 --> 00:06:11,733
+addresses receiver space. The sender must
+respect both constraints, because they
+
+68
+00:06:11,733 --> 00:06:17,533
+protect different resources.
+
+69
+00:06:17,533 --> 00:06:22,900
+Now lose a UDP datagram. UDP itself doesn't
+retry it or
+
+70
+00:06:22,900 --> 00:06:28,267
+hold later datagrams behind it. The
+application sees whatever arrives and
+
+71
+00:06:28,267 --> 00:06:33,633
+decides whether that missing information
+should be recovered, replaced, or simply
+
+72
+00:06:33,633 --> 00:06:39,000
+left behind.
+
+73
+00:06:39,000 --> 00:06:44,583
+Applications can build retries,
+acknowledgments, protection, and congestion
+control above UDP.
+
+74
+00:06:44,583 --> 00:06:50,167
+Those capabilities belong to the protocol
+using UDP. Choosing a datagram
+
+75
+00:06:50,167 --> 00:06:55,750
+service leaves room to define behavior, but
+doesn't provide those mechanisms
+
+76
+00:06:55,750 --> 00:07:01,333
+automatically.
+
+77
+00:07:01,333 --> 00:07:06,383
+This is why calling UDP universally faster
+misses the interesting question.
+
+78
+00:07:06,383 --> 00:07:11,433
+Delay depends on the application, path, and
+recovery rules. Compare what
+
+79
+00:07:11,433 --> 00:07:16,483
+information must arrive, and when it remains
+useful, before comparing the
+
+80
+00:07:16,483 --> 00:07:21,533
+speed of two protocols.
+
+81
+00:07:21,533 --> 00:07:27,225
+For a complete file, a missing range leaves
+the result incomplete.
+
+82
+00:07:27,225 --> 00:07:32,917
+TCP's reliable ordered stream fits that
+requirement. The application still handles
+
+83
+00:07:32,917 --> 00:07:38,608
+its own message framing and connection
+failures; a transport service doesn't
+
+84
+00:07:38,608 --> 00:07:44,300
+remove every possible failure.
+
+85
+00:07:44,300 --> 00:07:49,883
+For some live updates, a newer position makes
+an older missing
+
+86
+00:07:49,883 --> 00:07:55,467
+position less useful. Waiting to recover
+history may hurt the experience.
+
+87
+00:07:55,467 --> 00:08:01,050
+That's an application-specific choice, not a
+blanket guarantee that UDP delivers
+
+88
+00:08:01,050 --> 00:08:06,633
+fresher information.
+
+89
+00:08:06,633 --> 00:08:12,108
+A TCP connection also closes through
+coordinated state changes. Each direction
+
+90
+00:08:12,108 --> 00:08:17,583
+can end separately, and FIN occupies a
+sequence position. Acknowledgments confirm
+
+91
+00:08:17,583 --> 00:08:23,058
+the close. The diagram shows one path through
+that process, rather
+
+92
+00:08:23,058 --> 00:08:28,533
+than every possible timing.
+
+93
+00:08:28,533 --> 00:08:33,900
+Return to the lost piece. Is completeness
+essential, is order required,
+
+94
+00:08:33,900 --> 00:08:39,267
+or can newer information replace it? TCP and
+UDP offer different
+
+95
+00:08:39,267 --> 00:08:44,633
+starting services. The useful choice follows
+from what the application needs
+
+96
+00:08:44,633 --> 00:08:50,000
+its receiver to know.

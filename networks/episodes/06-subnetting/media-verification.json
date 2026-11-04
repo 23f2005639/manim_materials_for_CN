@@ -1,0 +1,20 @@
+{
+  "episode": "06",
+  "title": "Subnetting You Can Actually See",
+  "duration_seconds": 500.033008,
+  "resolution": "1920x1080",
+  "fps": 30,
+  "codec": "h264",
+  "sections": 24,
+  "section_clips_verified": 24,
+  "narration_words": 844,
+  "automated_media_checks": "passed",
+  "edition": "visual",
+  "voiceover": "User records their own voice",
+  "motion": {
+    "native_changing_frame_fraction": 0.902,
+    "minimum_section_visual_fraction": 0.927,
+    "longest_final_hold_seconds": 0.9999999999999986
+  },
+  "script_revision": "youtube-visual-explainer"
+}

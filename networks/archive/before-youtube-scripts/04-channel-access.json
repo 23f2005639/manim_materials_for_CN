@@ -1,0 +1,417 @@
+{
+  "id": "04",
+  "slug": "channel-access",
+  "title": "When Computers Talk at Once",
+  "duration": 545,
+  "sources": [
+    {
+      "title": "UCSB CS176C: The Shared-Medium Problem",
+      "url": "https://sites.cs.ucsb.edu/~arpitgupta/cs176c/spring26/assets/slides/week03_lecture05_medium_access.html",
+      "notes": "Checked ALOHA vulnerable periods, idealized throughput assumptions, carrier sensing and wired/wireless distinctions."
+    },
+    {
+      "title": "University of Washington CSE461: From Aloha to Ethernet",
+      "url": "https://courses.cs.washington.edu/courses/cse461/04wi/lectures/lec14.pdf",
+      "notes": "Checked historical shared Ethernet CSMA/CD, persistence, propagation and randomized backoff."
+    },
+    {
+      "title": "CMU 15-744: Wireless Introduction",
+      "url": "https://www.cs.cmu.edu/~prs/15-744-F11/lectures/08-wireless.pdf",
+      "notes": "Checked why shared wired collision-detection behavior should not be presented as Wi-Fi behavior."
+    },
+    {
+      "title": "Purdue Networking and Internetworking Lecture Notes",
+      "url": "https://netbook.cs.purdue.edu/Lecture_Notes.pdf",
+      "notes": "Checked Ethernet switching and medium-access terminology; worked slot choices are original toy examples."
+    }
+  ],
+  "sections": [
+    {
+      "id": "04-01",
+      "title": "One medium, several speakers",
+      "chapter": "The puzzle",
+      "duration": 21.933333333333334,
+      "narration": "Picture a group discussion where everyone shares one microphone. Who gets to speak now? Networks have the same kind of problem. Medium access control sets the rules for using a shared connection, not for choosing an Internet route.",
+      "bullets": [
+        "Many senders share a resource",
+        "Who may transmit now?"
+      ],
+      "takeaway": "Medium access control decides how stations share a communication resource.",
+      "visual": {
+        "mode": "channel_intro"
+      },
+      "short_title": "Who may transmit now?"
+    },
+    {
+      "id": "04-02",
+      "title": "Make overlap visible",
+      "chapter": "The puzzle",
+      "duration": 23.233333333333334,
+      "narration": "A and C both start before either hears the other. Their signals meet, and the transmissions fail in this shared-link example. The red disturbance spreads back. Talking louder won't fix this group discussion; we need better rules.",
+      "bullets": [
+        "Overlapping transmissions interfere",
+        "A receiver may lose both frames"
+      ],
+      "takeaway": "A collision concerns overlapping signals at a receiver.",
+      "visual": {
+        "mode": "collision"
+      },
+      "short_title": "Signals meet and collide"
+    },
+    {
+      "id": "04-03",
+      "title": "Pure ALOHA: send when ready",
+      "chapter": "ALOHA",
+      "duration": 22.8,
+      "narration": "Pure ALOHA has a very simple rule: if you have data, send it. No common starting slots. That freedom comes with a catch: transmissions can overlap, and a failed attempt may need to be tried again later.",
+      "bullets": [
+        "No slot boundaries",
+        "Retry after missing feedback"
+      ],
+      "takeaway": "Pure ALOHA allows a station to begin transmitting whenever data is ready.",
+      "visual": {
+        "mode": "aloha"
+      },
+      "short_title": "Pure ALOHA starts immediately"
+    },
+    {
+      "id": "04-04",
+      "title": "A vulnerable interval of 2T",
+      "chapter": "ALOHA",
+      "duration": 22.366666666666667,
+      "narration": "Suppose one frame lasts T. Another frame can cause trouble by starting within T before it or T after it starts. Put those two risky intervals together, and the total window is two T.",
+      "bullets": [
+        "Equal frame duration T",
+        "Conflicts can start before or after"
+      ],
+      "takeaway": "For equal-length pure ALOHA frames, the vulnerable interval spans 2T.",
+      "visual": {
+        "mode": "aloha_vulnerable"
+      },
+      "short_title": "Why the vulnerable interval doubles"
+    },
+    {
+      "id": "04-05",
+      "title": "Why retry randomly?",
+      "chapter": "ALOHA",
+      "duration": 22.366666666666667,
+      "narration": "If both stations retry after exactly the same wait, they may crash into each other again. Choosing different random waits helps separate the attempts. It improves our chances, but it isn't a promise of success next time.",
+      "bullets": [
+        "Identical waits can repeat a clash",
+        "Random choices break synchronization"
+      ],
+      "takeaway": "Independent retry timing reduces the chance of repeated collisions.",
+      "visual": {
+        "mode": "aloha_retry"
+      },
+      "short_title": "Avoid repeating the same collision"
+    },
+    {
+      "id": "04-06",
+      "title": "Slotted ALOHA adds boundaries",
+      "chapter": "ALOHA",
+      "duration": 22.8,
+      "narration": "Slotted ALOHA adds a shared clock: start only at slot boundaries. Two stations can still choose the same slot and collide. But now slightly different start times can't create quite the same messy overlap as before.",
+      "bullets": [
+        "Shared slots of duration T",
+        "Begin only at slot boundaries"
+      ],
+      "takeaway": "Slotted ALOHA restricts transmission starts to common slot boundaries.",
+      "visual": {
+        "mode": "slotted_aloha"
+      },
+      "short_title": "Only start at slot boundaries"
+    },
+    {
+      "id": "04-07",
+      "title": "The vulnerable interval becomes T",
+      "chapter": "ALOHA",
+      "duration": 22.8,
+      "narration": "With equal-size frames fitting the slots, only attempts in the same slot conflict. Our risky interval drops from two T to T. A little timing agreement makes a big difference to the possible clashes.",
+      "bullets": [
+        "Only same-slot starts collide",
+        "Neighboring slots do not overlap"
+      ],
+      "takeaway": "Under the ideal slot model, the vulnerable interval is one slot.",
+      "visual": {
+        "mode": "slotted_vulnerable"
+      },
+      "short_title": "One slot remains vulnerable"
+    },
+    {
+      "id": "04-08",
+      "title": "Interpret the ideal efficiency result",
+      "chapter": "ALOHA",
+      "duration": 21.933333333333334,
+      "narration": "Watch more stations try sending. In the ideal model, pure ALOHA peaks around eighteen point four percent; slotted reaches thirty-six point eight. Beyond that, extra attempts create extra collisions. More effort can mean less useful work.",
+      "bullets": [
+        "Pure maximum: about 18.4%",
+        "Slotted maximum: about 36.8%"
+      ],
+      "takeaway": "The familiar ALOHA maxima depend on a specific ideal traffic model.",
+      "visual": {
+        "mode": "aloha_efficiency"
+      },
+      "short_title": "Load changes useful throughput"
+    },
+    {
+      "id": "04-09",
+      "title": "Scheduling or contention?",
+      "chapter": "ALOHA",
+      "duration": 22.8,
+      "narration": "There are two broad plans: reserve turns with a schedule, or let stations compete for a chance. Either way, the connection has limited capacity. We still need rules so everyone isn't trying to use the same space together.",
+      "bullets": [
+        "Reserved turns avoid this conflict",
+        "Contention shares opportunities"
+      ],
+      "takeaway": "Collision reduction comes with assumptions or coordination costs.",
+      "visual": {
+        "mode": "access_compare"
+      },
+      "short_title": "Scheduling versus contention"
+    },
+    {
+      "id": "04-10",
+      "title": "Listen before transmitting",
+      "chapter": "Carrier sensing",
+      "duration": 22.8,
+      "narration": "Before speaking, listen. That's the basic idea of carrier sensing. If the channel sounds busy, wait according to your rules. It's an improvement over sending blindly, though we'll soon see why listening doesn't solve every collision.",
+      "bullets": [
+        "Sense busy versus idle",
+        "Defer when the channel is busy"
+      ],
+      "takeaway": "Carrier sensing can avoid transmissions that obviously conflict locally.",
+      "visual": {
+        "mode": "csma"
+      },
+      "short_title": "Listen before transmitting"
+    },
+    {
+      "id": "04-11",
+      "title": "A distant sender can still start",
+      "chapter": "Carrier sensing",
+      "duration": 23.666666666666668,
+      "narration": "Here's the catch: signals need time to travel. A distant station may hear silence just after another has started. Both can honestly think the channel is free. The problem is delay, not that someone forgot to listen.",
+      "bullets": [
+        "Signals need time to travel",
+        "Both ends may initially sense idle"
+      ],
+      "takeaway": "Propagation delay allows collisions even with carrier sensing.",
+      "visual": {
+        "mode": "csma_propagation"
+      },
+      "short_title": "Distance creates a collision window"
+    },
+    {
+      "id": "04-12",
+      "title": "One-persistent CSMA",
+      "chapter": "Carrier sensing",
+      "duration": 22.8,
+      "narration": "One-persistent CSMA keeps listening and sends as soon as the channel becomes idle. Nice and eager. But if several stations have been waiting, they may all jump in at once, like a class answering the same question.",
+      "bullets": [
+        "Keep sensing while busy",
+        "Transmit when the medium becomes idle"
+      ],
+      "takeaway": "One-persistent stations transmit as soon as their sensed channel becomes idle.",
+      "visual": {
+        "mode": "csma_persistent"
+      },
+      "short_title": "Transmit as soon as idle"
+    },
+    {
+      "id": "04-13",
+      "title": "Nonpersistent CSMA",
+      "chapter": "Carrier sensing",
+      "duration": 22.366666666666667,
+      "narration": "Nonpersistent CSMA takes a short random break after finding the channel busy, then checks again. That can prevent everyone restarting together. The trade-off? Sometimes the channel sits empty while stations are still taking their little breaks.",
+      "bullets": [
+        "Busy? Wait a random interval",
+        "Then sense again"
+      ],
+      "takeaway": "Nonpersistent waiting reduces synchronized attempts but can add idle delay.",
+      "visual": {
+        "mode": "csma_nonpersistent"
+      },
+      "short_title": "Wait before sensing again"
+    },
+    {
+      "id": "04-14",
+      "title": "P-persistent CSMA",
+      "chapter": "Carrier sensing",
+      "duration": 22.366666666666667,
+      "narration": "With p-persistent CSMA, an idle slot becomes a probability choice. Send with probability p; otherwise, wait for another chance. This assumes a suitable slot-based setup. The goal is to spread out attempts instead of having everyone rush in.",
+      "bullets": [
+        "Idle slot: transmit with p",
+        "Otherwise defer to another slot"
+      ],
+      "takeaway": "P-persistent CSMA makes a probabilistic choice at an idle slot.",
+      "visual": {
+        "mode": "csma_probability"
+      },
+      "short_title": "Transmit with probability p"
+    },
+    {
+      "id": "04-15",
+      "title": "Add detection on historical Ethernet",
+      "chapter": "Collision detection",
+      "duration": 21.933333333333334,
+      "narration": "Now we're looking at older shared, half-duplex Ethernet. CSMA/CD listens before sending and checks for collisions while sending. Keep that setting in mind: this isn't how every modern Ethernet link works, and it isn't Wi-Fi's rulebook.",
+      "bullets": [
+        "Shared, half-duplex Ethernet",
+        "Monitor while transmitting"
+      ],
+      "takeaway": "CSMA/CD belongs to shared half-duplex Ethernet, not all modern Ethernet links.",
+      "visual": {
+        "mode": "csma_cd"
+      },
+      "short_title": "Historical shared Ethernet"
+    },
+    {
+      "id": "04-16",
+      "title": "Detect, abort, and signal",
+      "chapter": "Collision detection",
+      "duration": 23.633333333333333,
+      "narration": "A collision is detected, so stop that unsuccessful frame, send the jam signal, and back off. The spreading red signal helps make the failure known. Then the stations can wait before trying again with fresh timing.",
+      "bullets": [
+        "Stop the unsuccessful transmission",
+        "A jam signal reinforces detection"
+      ],
+      "takeaway": "Collision detection limits time wasted on an already failed transmission.",
+      "visual": {
+        "mode": "collision_jam"
+      },
+      "short_title": "Detect, abort, then back off"
+    },
+    {
+      "id": "04-17",
+      "title": "Why propagation affects frame length",
+      "chapter": "Collision detection",
+      "duration": 23.233333333333334,
+      "narration": "A far-end collision can't be reported instantly. The signal travels out, then the information travels back. The sender must still be transmitting to detect it. That's why frame time and network size are linked in shared Ethernet.",
+      "bullets": [
+        "A far-end clash must return in time",
+        "Keep transmitting during detection"
+      ],
+      "takeaway": "Collision detection constrains the relation between frame time and network extent.",
+      "visual": {
+        "mode": "collision_minframe"
+      },
+      "short_title": "The collision must return in time"
+    },
+    {
+      "id": "04-18",
+      "title": "Widen the random retry range",
+      "chapter": "Backoff",
+      "duration": 22.8,
+      "narration": "Repeated collisions? Widen the choice of random waits: two options, then four, then eight. That's binary exponential backoff. We're giving attempts more room to spread out, not handing every station a permanent turn on the line.",
+      "bullets": [
+        "Repeated clashes widen choices",
+        "Choose independently after a collision"
+      ],
+      "takeaway": "Binary exponential backoff expands the retry-choice range after collisions.",
+      "visual": {
+        "mode": "backoff"
+      },
+      "short_title": "Grow the retry-choice range"
+    },
+    {
+      "id": "04-19",
+      "title": "Work two retry choices",
+      "chapter": "Worked example",
+      "duration": 23.233333333333334,
+      "narration": "After the first collision, choose zero or one slot. After the second, choose zero through three. Different choices create different waits. Like leaving the classroom at slightly different times, that makes another pile-up less likely.",
+      "bullets": [
+        "First collision: choose 0 or 1",
+        "Second collision: choose 0 through 3"
+      ],
+      "takeaway": "After two collisions, this example draws independently from four slot choices.",
+      "visual": {
+        "mode": "backoff_numbers"
+      },
+      "short_title": "Count down different retry choices"
+    },
+    {
+      "id": "04-20",
+      "title": "Backoff does not reserve the cable",
+      "chapter": "Backoff",
+      "duration": 23.233333333333334,
+      "narration": "Finishing your wait doesn't mean the channel now belongs to you. Someone else may already be sending. You still need to follow the sensing rules. A backoff timer is a waiting plan, not a reservation slip.",
+      "bullets": [
+        "Other stations may also transmit",
+        "Carrier sensing still matters"
+      ],
+      "takeaway": "Finishing a backoff does not guarantee exclusive access.",
+      "visual": {
+        "mode": "backoff_resense"
+      },
+      "short_title": "Backoff does not reserve a turn"
+    },
+    {
+      "id": "04-21",
+      "title": "Modern switched full duplex",
+      "chapter": "Modern distinctions",
+      "duration": 23.233333333333334,
+      "narration": "Now the setup changes. Switched full-duplex links have separate sending and receiving paths, so opposite flows can travel together. The old shared-wire collision problem is gone on these links, and they don't use CSMA/CD.",
+      "bullets": [
+        "Separate transmit and receive paths",
+        "No CSMA/CD on full-duplex links"
+      ],
+      "takeaway": "Full-duplex switched Ethernet removes the shared-wire collision scenario.",
+      "visual": {
+        "mode": "ethernet_switch"
+      },
+      "short_title": "Independent full-duplex flows"
+    },
+    {
+      "id": "04-22",
+      "title": "Wi-Fi needs different feedback",
+      "chapter": "Modern distinctions",
+      "duration": 22.366666666666667,
+      "narration": "Wi-Fi has its own complications. A station doesn't simply do Ethernet-style collision detection while transmitting. Here, the access point receives data and sends feedback. Avoiding clashes and receiving acknowledgments matter, especially when stations can't hear the same things.",
+      "bullets": [
+        "Wireless sensing is location-dependent",
+        "Avoidance and ACKs help manage access"
+      ],
+      "takeaway": "Wi-Fi uses collision-avoidance mechanisms rather than Ethernet-style CSMA/CD.",
+      "visual": {
+        "mode": "wifi_ca"
+      },
+      "short_title": "Wireless needs different feedback"
+    },
+    {
+      "id": "04-23",
+      "title": "Compare the added knowledge",
+      "chapter": "Comparison",
+      "duration": 22.366666666666667,
+      "narration": "Look at how the rules build up. ALOHA sends; CSMA listens first; CSMA/CD also detects collisions in its shared-wire setting. Each method gets more information, but none makes signals travel instantly or gives unlimited space to everyone.",
+      "bullets": [
+        "ALOHA: no sensing",
+        "CSMA: sense",
+        "CSMA/CD: detect"
+      ],
+      "takeaway": "Each improvement adds information while retaining physical limitations.",
+      "visual": {
+        "mode": "mac_compare"
+      },
+      "short_title": "Each method adds information"
+    },
+    {
+      "id": "04-24",
+      "title": "Explain the next collision",
+      "chapter": "Recap",
+      "duration": 21.933333333333334,
+      "narration": "When you see the next transmission, ask three questions: what can this station hear, when is it allowed to start, and how does it retry? Answer those, and the long protocol names become much easier to explain.",
+      "bullets": [
+        "Timing, sensing and randomization",
+        "Always identify the medium"
+      ],
+      "takeaway": "Medium-access behavior depends on both protocol rules and physical context.",
+      "visual": {
+        "mode": "mac_recap"
+      },
+      "short_title": "Explain the next attempt"
+    }
+  ],
+  "original_target_seconds": 450,
+  "timing_note": "Retimed for approximately140spoken words perminute;browser pauses are unlimited."
+}

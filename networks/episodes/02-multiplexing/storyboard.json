@@ -1,0 +1,417 @@
+{
+  "id": "02",
+  "slug": "multiplexing",
+  "title": "Thousands of Messages, One Cable",
+  "duration": 525,
+  "sources": [
+    {
+      "title": "Douglas Comer, Purdue: Networking and Internetworking Lecture Notes",
+      "url": "https://netbook.cs.purdue.edu/Lecture_Notes.pdf",
+      "notes": "Checked teaching definitions of multiplexing, FDM, TDM and optical WDM; numerical scenarios here are original simplified examples."
+    },
+    {
+      "title": "University of Washington CSE461: From Aloha to Ethernet",
+      "url": "https://courses.cs.washington.edu/courses/cse461/04wi/lectures/lec14.pdf",
+      "notes": "Checked fixed frequency/time allocation versus statistical sharing."
+    },
+    {
+      "title": "NPTEL: WDM Components I",
+      "url": "https://archive.nptel.ac.in/content/storage2/courses/117101054/Mod-20/Slides/6.html",
+      "notes": "Checked optical mux/demux combining and separating wavelength channels."
+    },
+    {
+      "title": "UCSB ECE228B: Overview of Optical Networks",
+      "url": "https://courses.ece.ucsb.edu/ECE228/228B_S09Blumenthal/Lecture1_228B_S09_Final.pdf",
+      "notes": "Checked parallel wavelength channels and aggregate optical channel capacity."
+    }
+  ],
+  "sections": [
+    {
+      "id": "02-01",
+      "title": "Three senders, one cable",
+      "chapter": "The puzzle",
+      "duration": 21.9,
+      "narration": "Three cameras, three streams, one cable. If the signals share the same path, why don't they become one unreadable mess? The answer depends on a rule that makes combining them reversible.",
+      "bullets": [
+        "Several independent streams",
+        "One shared physical link"
+      ],
+      "takeaway": "Multiplexing lets independent channels share a physical resource.",
+      "visual": {
+        "mode": "multiplex_intro"
+      },
+      "short_title": "One cable, three signals"
+    },
+    {
+      "id": "02-02",
+      "title": "A medium is not a channel",
+      "chapter": "The puzzle",
+      "duration": 21.466666666666665,
+      "narration": "First separate two ideas. The medium is the physical path; a channel is a way of using that path. One cable can support several channels when the equipment gives their signals distinguishable places or turns.",
+      "bullets": [
+        "Physical path versus logical channel",
+        "Sharing needs a separation rule"
+      ],
+      "takeaway": "One physical medium can carry multiple logical channels.",
+      "visual": {
+        "mode": "channels"
+      },
+      "short_title": "Medium versus channel"
+    },
+    {
+      "id": "02-03",
+      "title": "Combine, carry, separate",
+      "chapter": "The model",
+      "duration": 22.3,
+      "narration": "At one end, the multiplexer combines the inputs. At the other, the demultiplexer separates them. The important ingredient sits between those names: both ends must agree on exactly how the sharing works.",
+      "bullets": [
+        "MUX combines inputs",
+        "DEMUX recovers outputs"
+      ],
+      "takeaway": "Sharing works only if the receiving end can separate the streams.",
+      "visual": {
+        "mode": "mux_demux"
+      },
+      "short_title": "Combine, then recover"
+    },
+    {
+      "id": "02-04",
+      "title": "Read a frequency picture",
+      "chapter": "Frequency division",
+      "duration": 21.033333333333335,
+      "narration": "A wave changes over time. Frequency counts its cycles each second; bandwidth describes a range of frequencies. Shift your attention to the frequency view: it shows where each signal occupies part of that range.",
+      "bullets": [
+        "Frequency measures cycles per second",
+        "Bandwidth spans frequencies"
+      ],
+      "takeaway": "A frequency plot shows where signal energy is allocated.",
+      "visual": {
+        "mode": "frequency"
+      },
+      "short_title": "Time and frequency"
+    },
+    {
+      "id": "02-05",
+      "title": "Give every stream a band",
+      "chapter": "Frequency division",
+      "duration": 21.9,
+      "narration": "Place each stream in a different frequency band. Now all three can travel at once because their assigned bands differ. Frequency division makes simultaneous sharing possible by separating signals along the frequency axis.",
+      "bullets": [
+        "Channels occupy different bands",
+        "They can transmit simultaneously"
+      ],
+      "takeaway": "FDM separates simultaneously active channels in frequency.",
+      "visual": {
+        "mode": "fdm"
+      },
+      "short_title": "Different bands, same time"
+    },
+    {
+      "id": "02-06",
+      "title": "Leave room between neighbors",
+      "chapter": "Frequency division",
+      "duration": 21.466666666666665,
+      "narration": "Why leave gaps between the bands? Real filters have gradual edges, so neighboring signals could interfere. Guard bands provide space between them. The price of cleaner separation is spectrum that carries no channel here.",
+      "bullets": [
+        "Real filters have imperfect edges",
+        "Guard bands reduce interference"
+      ],
+      "takeaway": "Guard bands trade usable spectrum for easier channel separation.",
+      "visual": {
+        "mode": "fdm_guard"
+      },
+      "short_title": "Leave a guard band"
+    },
+    {
+      "id": "02-07",
+      "title": "Filter at the receiver",
+      "chapter": "Frequency division",
+      "duration": 21.9,
+      "narration": "At the receiver, select the green band. A bandpass filter passes that range and reduces others. The green stream doesn't wait for the rest to finish; the receiver separates it by frequency while they coexist.",
+      "bullets": [
+        "Select the desired band",
+        "Reject neighboring energy"
+      ],
+      "takeaway": "A receiver can extract one frequency allocation with suitable filtering.",
+      "visual": {
+        "mode": "fdm_filter"
+      },
+      "short_title": "Recover the middle signal"
+    },
+    {
+      "id": "02-08",
+      "title": "Work an FDM allocation",
+      "chapter": "Worked example",
+      "duration": 21.9,
+      "narration": "Three bands need twenty kilohertz each. Two gaps need five each. Add the occupied widths: twenty, five, twenty, five, twenty. Seventy kilohertz covers this arrangement, before any extra margins at the outer edges.",
+      "bullets": [
+        "3 × 20 kHz channels",
+        "2 × 5 kHz internal guards"
+      ],
+      "takeaway": "Three 20 kHz channels plus two 5 kHz gaps need 70 kHz.",
+      "visual": {
+        "mode": "fdm_allocation"
+      },
+      "short_title": "Calculate the required spectrum"
+    },
+    {
+      "id": "02-09",
+      "title": "What happens when one is idle?",
+      "chapter": "Frequency division",
+      "duration": 21.866666666666667,
+      "narration": "Now one camera goes quiet. Its reserved band stays empty while the others keep their allocations. The same clear separation that makes this scheme simple can leave capacity unused when traffic becomes uneven.",
+      "bullets": [
+        "Fixed bands remain allocated",
+        "Idle capacity may go unused"
+      ],
+      "takeaway": "A fixed allocation can waste capacity when its owner has nothing to send.",
+      "visual": {
+        "mode": "fdm_idle"
+      },
+      "short_title": "When one source goes silent"
+    },
+    {
+      "id": "02-10",
+      "title": "Now divide the time axis",
+      "chapter": "Time division",
+      "duration": 21.466666666666665,
+      "narration": "Instead of separating streams by frequency, separate them by time. Let each source use the shared path during an assigned turn. The receiver identifies the source by when its data appears in the schedule.",
+      "bullets": [
+        "One shared frequency allocation",
+        "Different turns in time"
+      ],
+      "takeaway": "TDM distinguishes channels by when they transmit.",
+      "visual": {
+        "mode": "time_axis"
+      },
+      "short_title": "Now divide time"
+    },
+    {
+      "id": "02-11",
+      "title": "Assign repeating time slots",
+      "chapter": "Time division",
+      "duration": 21.466666666666665,
+      "narration": "Follow the order: A, B, C, then repeat. The combined stream alternates between sources, and the receiver reconstructs three outputs from those positions. What looks mixed in transit becomes separate again by following the schedule.",
+      "bullets": [
+        "A, then B, then C",
+        "The pattern repeats"
+      ],
+      "takeaway": "Synchronous TDM gives channels scheduled opportunities to transmit.",
+      "visual": {
+        "mode": "tdm_slots"
+      },
+      "short_title": "Give each source a turn"
+    },
+    {
+      "id": "02-12",
+      "title": "Understand a TDM frame",
+      "chapter": "Time division",
+      "duration": 22.333333333333332,
+      "narration": "One complete round of slots forms a TDM frame in this example. Here, frame means a repeating timing group. The same word appears elsewhere in networking with other meanings, so keep this particular structure in view.",
+      "bullets": [
+        "A frame contains one slot cycle",
+        "Frame here means a TDM cycle"
+      ],
+      "takeaway": "A TDM frame groups the slots in one repeated schedule.",
+      "visual": {
+        "mode": "tdm_frame"
+      },
+      "short_title": "One cycle is a frame"
+    },
+    {
+      "id": "02-13",
+      "title": "Keep the schedule aligned",
+      "chapter": "Time division",
+      "duration": 21.9,
+      "narration": "The schedule only works if both ends agree on its boundaries. Shift the receiver's timing and it assigns data to the wrong source. Synchronization is part of the sharing mechanism, not an optional finishing touch.",
+      "bullets": [
+        "Sender and receiver agree on slots",
+        "Framing supports correct alignment"
+      ],
+      "takeaway": "Slot timing must be understood at both ends.",
+      "visual": {
+        "mode": "tdm_sync"
+      },
+      "short_title": "Keep the clocks aligned"
+    },
+    {
+      "id": "02-14",
+      "title": "Work a TDM rate example",
+      "chapter": "Worked example",
+      "duration": 22.3,
+      "narration": "Each camera produces two megabits per second. Together they require six megabits per second of useful shared capacity. A practical link needs room for synchronization and other overhead too; useful data isn't the whole transmitted stream.",
+      "bullets": [
+        "3 inputs × 2 Mb/s",
+        "At least 6 Mb/s before overhead"
+      ],
+      "takeaway": "Three continuous 2 Mb/s streams require 6 Mb/s of useful link capacity.",
+      "visual": {
+        "mode": "tdm_rate"
+      },
+      "short_title": "Add the input rates"
+    },
+    {
+      "id": "02-15",
+      "title": "The empty-slot problem",
+      "chapter": "Time division",
+      "duration": 21.9,
+      "narration": "When B has no data, its assigned turn still arrives. That empty slot reveals the weakness of a fixed schedule: capacity can go unused even while other sources have work waiting to be sent.",
+      "bullets": [
+        "Scheduled turn may be empty",
+        "Other streams may still wait"
+      ],
+      "takeaway": "Fixed TDM can leave a slot idle even when another input has data.",
+      "visual": {
+        "mode": "tdm_idle"
+      },
+      "short_title": "An empty reserved turn"
+    },
+    {
+      "id": "02-16",
+      "title": "Allocate turns on demand",
+      "chapter": "Time division",
+      "duration": 21.9,
+      "narration": "Give turns only to sources with data, and those empty positions can disappear. That's statistical TDM. The receiver now needs identifiers or equivalent shared information, since a fixed repeating order no longer tells the whole story.",
+      "bullets": [
+        "Busy inputs get service",
+        "Labels or state identify the source"
+      ],
+      "takeaway": "Statistical sharing adapts to demand but needs coordination.",
+      "visual": {
+        "mode": "statistical_tdm"
+      },
+      "short_title": "Serve the active sources"
+    },
+    {
+      "id": "02-17",
+      "title": "Move from copper to fiber",
+      "chapter": "Wavelength division",
+      "duration": 22.333333333333332,
+      "narration": "Change the medium to fiber. Several optical channels can share a strand, represented here by different colors. The drawing tracks their identities; real systems select particular optical wavelengths rather than relying on our display colors.",
+      "bullets": [
+        "Light carries encoded information",
+        "Fiber guides optical signals"
+      ],
+      "takeaway": "Optical fiber supports channels carried on distinct wavelengths.",
+      "visual": {
+        "mode": "optical"
+      },
+      "short_title": "Carry the signals with light"
+    },
+    {
+      "id": "02-18",
+      "title": "Combine different wavelengths",
+      "chapter": "Wavelength division",
+      "duration": 21.466666666666665,
+      "narration": "Wavelength division carries those optical channels together using different wavelengths. They travel simultaneously through the same fiber. The sharing resembles frequency separation, now implemented with light and the optical equipment needed to handle it.",
+      "bullets": [
+        "Independent optical carriers",
+        "One shared fiber"
+      ],
+      "takeaway": "WDM combines distinct wavelength channels on a fiber.",
+      "visual": {
+        "mode": "wdm"
+      },
+      "short_title": "Separate by wavelength"
+    },
+    {
+      "id": "02-19",
+      "title": "Separate the light again",
+      "chapter": "Wavelength division",
+      "duration": 21.866666666666667,
+      "narration": "At the far end, optical components separate the combined wavelengths into their outputs. Without that final separation, combining channels wouldn't help. The receiver completes the rule that made sharing one strand useful.",
+      "bullets": [
+        "Wavelength-selective separation",
+        "Each output receives its channel"
+      ],
+      "takeaway": "An optical demultiplexer separates wavelength channels at the destination.",
+      "visual": {
+        "mode": "wdm_demux"
+      },
+      "short_title": "Split the combined light"
+    },
+    {
+      "id": "02-20",
+      "title": "Work a WDM capacity example",
+      "chapter": "Worked example",
+      "duration": 22.766666666666666,
+      "narration": "Four channels at ten gigabits per second each produce forty gigabits per second of raw combined rate. The multiplication is simple; interpreting it matters. Application throughput can be lower after the system's overhead is included.",
+      "bullets": [
+        "4 channels × 10 Gb/s",
+        "40 Gb/s aggregate raw rate"
+      ],
+      "takeaway": "Four independent 10 Gb/s channels total 40 Gb/s before overhead.",
+      "visual": {
+        "mode": "wdm_capacity"
+      },
+      "short_title": "Add four wavelength rates"
+    },
+    {
+      "id": "02-21",
+      "title": "Sharing has physical limits",
+      "chapter": "Limits",
+      "duration": 21.466666666666665,
+      "narration": "More channels don't remove the limits of the medium. Light can weaken, pulses can spread, and noise can disrupt recovery. Multiplexing organizes available resources; it doesn't create an unlimited, perfectly clean connection.",
+      "bullets": [
+        "Noise and filtering still matter",
+        "Capacity is not unlimited"
+      ],
+      "takeaway": "Multiplexing organizes existing resources; it does not remove physical constraints.",
+      "visual": {
+        "mode": "multiplex_limits"
+      },
+      "short_title": "Real links have limits"
+    },
+    {
+      "id": "02-22",
+      "title": "Compare the three schemes",
+      "chapter": "Comparison",
+      "duration": 21.9,
+      "narration": "Compare the pictures. FDM separates frequency bands; TDM separates time slots; WDM separates optical wavelengths. Each gives the receiver a different clue for reconstructing the original inputs after they shared a path.",
+      "bullets": [
+        "FDM: frequency",
+        "TDM: time",
+        "WDM: optical wavelength"
+      ],
+      "takeaway": "Ask which dimension separates the channels.",
+      "visual": {
+        "mode": "multiplex_compare"
+      },
+      "short_title": "Three ways to share"
+    },
+    {
+      "id": "02-23",
+      "title": "Choose with the traffic in mind",
+      "chapter": "Comparison",
+      "duration": 21.866666666666667,
+      "narration": "The right arrangement depends on the traffic. Steady streams may fit fixed allocations, while bursts benefit from serving active sources. Equipment and physical constraints matter too. There isn't one sharing rule that wins in every setting.",
+      "bullets": [
+        "Predictable streams versus bursts",
+        "Medium and equipment constrain choices"
+      ],
+      "takeaway": "The useful choice depends on the medium, traffic, and coordination costs.",
+      "visual": {
+        "mode": "multiplex_choose"
+      },
+      "short_title": "Choose for the traffic"
+    },
+    {
+      "id": "02-24",
+      "title": "Retell the separation rule",
+      "chapter": "Recap",
+      "duration": 22.333333333333332,
+      "narration": "The three cameras never needed three separate cables. They needed a separation rule both ends understood. Remember the bands, turns, and wavelengths: sharing works when the receiver can still tell which information belongs to whom.",
+      "bullets": [
+        "Combine → transmit → separate",
+        "Identify the sharing dimension"
+      ],
+      "takeaway": "One cable can support several streams when their channels remain distinguishable.",
+      "visual": {
+        "mode": "multiplex_recap"
+      },
+      "short_title": "Recover what you combined"
+    }
+  ],
+  "original_target_seconds": 390,
+  "timing_note": "Retimed for approximately140spoken words perminute;browser pauses are unlimited."
+}

@@ -1,0 +1,448 @@
+1
+00:00:00,000 --> 00:00:05,267
+A page appears after one click. But the server
+could be
+
+2
+00:00:05,267 --> 00:00:10,533
+across an ocean, and your computer started
+with only a name.
+
+3
+00:00:10,533 --> 00:00:15,800
+How does that tiny action become a complete
+journey? Follow this
+
+4
+00:00:15,800 --> 00:00:21,067
+request.
+
+5
+00:00:21,067 --> 00:00:26,433
+We'll slow down a first visit using HTTP
+version one point
+
+6
+00:00:26,433 --> 00:00:31,800
+one over TCP. Browsers often reuse earlier
+work. Leaving those shortcuts
+
+7
+00:00:31,800 --> 00:00:37,167
+aside lets us see the separate decisions
+hidden inside an ordinary
+
+8
+00:00:37,167 --> 00:00:42,533
+page load.
+
+9
+00:00:42,533 --> 00:00:47,800
+Our request first crosses a local network,
+then enters a chain
+
+10
+00:00:47,800 --> 00:00:53,067
+of other networks. The Internet is this
+interconnection. No single cable
+
+11
+00:00:53,067 --> 00:00:58,333
+stretches from every browser to every website;
+routers join the pieces
+
+12
+00:00:58,333 --> 00:01:03,600
+together.
+
+13
+00:01:03,600 --> 00:01:09,075
+Notice how many different jobs are already
+appearing. Layers separate those
+
+14
+00:01:09,075 --> 00:01:14,550
+jobs. OSI describes seven; this TCP/IP picture
+groups them into four.
+
+15
+00:01:14,550 --> 00:01:20,025
+They're different ways to organize
+responsibilities, rather than physical floors
+inside
+
+16
+00:01:20,025 --> 00:01:25,500
+the computer.
+
+17
+00:01:25,500 --> 00:01:30,867
+The browser has a name, but packets need an
+address. DNS
+
+18
+00:01:30,867 --> 00:01:36,233
+supplies that missing link. We ask a resolver
+to find the
+
+19
+00:01:36,233 --> 00:01:41,600
+address associated with the name, turning
+something readable into something the
+
+20
+00:01:41,600 --> 00:01:46,967
+network can use.
+
+21
+00:01:46,967 --> 00:01:52,342
+Without a cached answer, the resolver follows
+referrals: root, top-level domain,
+
+22
+00:01:52,342 --> 00:01:57,717
+then the authoritative server. Each reply
+narrows the search. No single
+
+23
+00:01:57,717 --> 00:02:03,092
+directory needs to store the complete answer
+for every name on
+
+24
+00:02:03,092 --> 00:02:08,467
+the Internet.
+
+25
+00:02:08,467 --> 00:02:13,833
+Now repeat the lookup. The saved answer avoids
+the earlier search,
+
+26
+00:02:13,833 --> 00:02:19,200
+so the path gets shorter. A cache makes
+previous work useful
+
+27
+00:02:19,200 --> 00:02:24,567
+again, but only within its allowed lifetime.
+Old directions can eventually
+
+28
+00:02:24,567 --> 00:02:29,933
+become wrong.
+
+29
+00:02:29,933 --> 00:02:35,517
+Reaching the right computer is only part of
+delivery. Which application
+
+30
+00:02:35,517 --> 00:02:41,100
+should receive the data? Ports distinguish
+endpoints there. Our client uses
+
+31
+00:02:41,100 --> 00:02:46,683
+49152; the server uses 80. The address and
+port answer different
+
+32
+00:02:46,683 --> 00:02:52,267
+questions.
+
+33
+00:02:52,267 --> 00:02:57,642
+Before the request, three TCP messages cross
+the link: SYN, SYN
+
+34
+00:02:57,642 --> 00:03:03,017
+with ACK, then ACK. Each side establishes
+connection state. The connection
+
+35
+00:03:03,017 --> 00:03:08,392
+is shared agreement between endpoints; the
+network hasn't reserved a private
+
+36
+00:03:08,392 --> 00:03:13,767
+physical path.
+
+37
+00:03:13,767 --> 00:03:21,067
+Now the browser can ask for the resource. GET
+supplies the
+
+38
+00:03:21,067 --> 00:03:28,367
+HTTP meaning; TCP carries the bytes. Notice
+the separation: transporting a
+
+39
+00:03:28,367 --> 00:03:35,667
+request successfully doesn't tell us whether
+the requested page exists.
+
+40
+00:03:35,667 --> 00:03:41,142
+Watch the blue message stay inside as new
+information appears around
+
+41
+00:03:41,142 --> 00:03:46,617
+it. This is encapsulation: each layer adds
+what its own job
+
+42
+00:03:46,617 --> 00:03:52,092
+needs. A larger message can also be divided
+across several transport
+
+43
+00:03:52,092 --> 00:03:57,567
+segments.
+
+44
+00:03:57,567 --> 00:04:03,050
+TCP adds ports and sequence information,
+identifying the conversation and locating
+
+45
+00:04:03,050 --> 00:04:08,533
+bytes within it. The application data remains
+inside. A boundary between
+
+46
+00:04:08,533 --> 00:04:14,017
+application writes doesn't necessarily become
+a boundary between segments on the
+
+47
+00:04:14,017 --> 00:04:19,500
+wire.
+
+48
+00:04:19,500 --> 00:04:24,975
+Next come the IP source and destination.
+Routers can use the
+
+49
+00:04:24,975 --> 00:04:30,450
+destination to choose where the packet goes
+next. The server remains
+
+50
+00:04:30,450 --> 00:04:35,925
+our goal here, though mechanisms such as
+address translation can alter
+
+51
+00:04:35,925 --> 00:04:41,400
+addresses.
+
+52
+00:04:41,400 --> 00:04:47,092
+The outer frame answers a more immediate
+question: who receives this
+
+53
+00:04:47,092 --> 00:04:52,783
+on the local link? For a distant server, that
+may be
+
+54
+00:04:52,783 --> 00:04:58,475
+the gateway. The next local destination and
+the final IP destination
+
+55
+00:04:58,475 --> 00:05:04,167
+serve different purposes.
+
+56
+00:05:04,167 --> 00:05:11,478
+All those headers and bytes must now become a
+physical signal.
+
+57
+00:05:11,478 --> 00:05:18,789
+Copper, fiber, and radio do this differently.
+The travelling marks represent
+
+58
+00:05:18,789 --> 00:05:26,100
+changing signals, not tiny printed digits
+being pushed through a cable.
+
+59
+00:05:26,100 --> 00:05:31,683
+At the switch, the frame takes a local turn
+based on
+
+60
+00:05:31,683 --> 00:05:37,267
+MAC forwarding information. Watch the selected
+output. This decision moves data
+
+61
+00:05:37,267 --> 00:05:42,850
+within the local network; it doesn't calculate
+the entire route to
+
+62
+00:05:42,850 --> 00:05:48,433
+the website.
+
+63
+00:05:48,433 --> 00:05:53,908
+The router removes the incoming frame and
+examines the IP destination.
+
+64
+00:05:53,908 --> 00:05:59,383
+It chooses a next hop without needing to
+interpret GET. A
+
+65
+00:05:59,383 --> 00:06:04,858
+useful network can move many kinds of
+application data using the
+
+66
+00:06:04,858 --> 00:06:10,333
+same forwarding machinery.
+
+67
+00:06:10,333 --> 00:06:15,808
+Here is the detail to watch: the local frame
+changes, while
+
+68
+00:06:15,808 --> 00:06:21,283
+our request continues toward the server. Each
+routed hop gets its
+
+69
+00:06:21,283 --> 00:06:26,758
+own link information. One journey is being
+carried through several separate
+
+70
+00:06:26,758 --> 00:06:32,233
+local deliveries.
+
+71
+00:06:32,233 --> 00:06:37,717
+A shared outgoing link creates a bottleneck.
+Packets arrive faster than
+
+72
+00:06:37,717 --> 00:06:43,200
+it can send them, so a queue grows. When the
+buffer
+
+73
+00:06:43,200 --> 00:06:48,683
+fills, packets may be dropped. Connectivity
+alone doesn't promise immediate or
+
+74
+00:06:48,683 --> 00:06:54,167
+successful delivery.
+
+75
+00:06:54,167 --> 00:06:59,642
+At the server, the wrapping comes off in
+stages: link, IP,
+
+76
+00:06:59,642 --> 00:07:05,117
+TCP, then HTTP. Each layer handles its own
+information and passes
+
+77
+00:07:05,117 --> 00:07:10,592
+the useful contents upward. The application
+finally receives the request we
+
+78
+00:07:10,592 --> 00:07:16,067
+started with.
+
+79
+00:07:16,067 --> 00:07:21,867
+The server returns status information and
+content. Those bytes need the
+
+80
+00:07:21,867 --> 00:07:27,667
+same layered delivery in reverse. But reverse
+doesn't require an identical
+
+81
+00:07:27,667 --> 00:07:33,467
+route: the response can cross a different
+sequence of networks on
+
+82
+00:07:33,467 --> 00:07:39,267
+its way back.
+
+83
+00:07:39,267 --> 00:07:44,742
+That response may contain instructions to
+fetch images, styles, and other
+
+84
+00:07:44,742 --> 00:07:50,217
+resources. So one apparent page load becomes
+several conversations, sometimes involving
+
+85
+00:07:50,217 --> 00:07:55,692
+other servers or caches. The first arrival
+starts another round of
+
+86
+00:07:55,692 --> 00:08:01,167
+work.
+
+87
+00:08:01,167 --> 00:08:06,650
+Our example used HTTP over TCP. HTTPS adds TLS
+protection, while
+
+88
+00:08:06,650 --> 00:08:12,133
+HTTP version three uses QUIC over UDP.
+Different protocols can fill
+
+89
+00:08:12,133 --> 00:08:17,617
+these roles, but the underlying questions
+about names, endpoints, and delivery
+
+90
+00:08:17,617 --> 00:08:23,100
+still remain.
+
+91
+00:08:23,100 --> 00:08:28,575
+Return to the opening click. A name became an
+address, bytes
+
+92
+00:08:28,575 --> 00:08:34,050
+gained headers, and routers connected local
+steps into one journey. The
+
+93
+00:08:34,050 --> 00:08:39,525
+remarkable part is how many small agreements
+cooperate to produce something
+
+94
+00:08:39,525 --> 00:08:45,000
+that feels immediate.

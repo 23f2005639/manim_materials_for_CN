@@ -1,0 +1,175 @@
+{
+  "fps": 30.0,
+  "sections": [
+    {
+      "name": "One network, four smaller networks",
+      "animation_end_frame": 621,
+      "section_seconds": 21.633,
+      "visual_seconds": 20.233,
+      "visual_fraction": 0.935
+    },
+    {
+      "name": "IPv4 addresses contain thirty-two bits",
+      "animation_end_frame": 1230,
+      "section_seconds": 20.333,
+      "visual_seconds": 18.983,
+      "visual_fraction": 0.934
+    },
+    {
+      "name": "A prefix marks the shared beginning",
+      "animation_end_frame": 1878,
+      "section_seconds": 21.6,
+      "visual_seconds": 20.25,
+      "visual_fraction": 0.937
+    },
+    {
+      "name": "The mask expresses the boundary",
+      "animation_end_frame": 2476,
+      "section_seconds": 19.9,
+      "visual_seconds": 18.55,
+      "visual_fraction": 0.932
+    },
+    {
+      "name": "Find the network with bitwise AND",
+      "animation_end_frame": 3124,
+      "section_seconds": 21.633,
+      "visual_seconds": 20.283,
+      "visual_fraction": 0.938
+    },
+    {
+      "name": "Count the parent block",
+      "animation_end_frame": 3708,
+      "section_seconds": 19.467,
+      "visual_seconds": 18.117,
+      "visual_fraction": 0.931
+    },
+    {
+      "name": "Borrow two bits for four subnets",
+      "animation_end_frame": 4306,
+      "section_seconds": 19.9,
+      "visual_seconds": 18.55,
+      "visual_fraction": 0.932
+    },
+    {
+      "name": "Build the slash-twenty-six mask",
+      "animation_end_frame": 4916,
+      "section_seconds": 20.333,
+      "visual_seconds": 18.983,
+      "visual_fraction": 0.934
+    },
+    {
+      "name": "Six host bits make sixty-four addresses",
+      "animation_end_frame": 5526,
+      "section_seconds": 20.333,
+      "visual_seconds": 18.983,
+      "visual_fraction": 0.934
+    },
+    {
+      "name": "The four binary prefixes",
+      "animation_end_frame": 6161,
+      "section_seconds": 21.167,
+      "visual_seconds": 19.817,
+      "visual_fraction": 0.936
+    },
+    {
+      "name": "Subnet one: zero through sixty-three",
+      "animation_end_frame": 6758,
+      "section_seconds": 19.9,
+      "visual_seconds": 18.55,
+      "visual_fraction": 0.932
+    },
+    {
+      "name": "Subnet two: sixty-four through 127",
+      "animation_end_frame": 7407,
+      "section_seconds": 21.633,
+      "visual_seconds": 20.283,
+      "visual_fraction": 0.938
+    },
+    {
+      "name": "Subnet three: 128 through 191",
+      "animation_end_frame": 8030,
+      "section_seconds": 20.767,
+      "visual_seconds": 19.417,
+      "visual_fraction": 0.935
+    },
+    {
+      "name": "Subnet four: 192 through 255",
+      "animation_end_frame": 8640,
+      "section_seconds": 20.333,
+      "visual_seconds": 18.983,
+      "visual_fraction": 0.934
+    },
+    {
+      "name": "Locate the host ending in seventy",
+      "animation_end_frame": 9198,
+      "section_seconds": 18.6,
+      "visual_seconds": 17.25,
+      "visual_fraction": 0.927
+    },
+    {
+      "name": "Same prefix or a different subnet?",
+      "animation_end_frame": 9820,
+      "section_seconds": 20.767,
+      "visual_seconds": 19.417,
+      "visual_fraction": 0.935
+    },
+    {
+      "name": "Remote destinations use a router",
+      "animation_end_frame": 10468,
+      "section_seconds": 21.6,
+      "visual_seconds": 20.25,
+      "visual_fraction": 0.938
+    },
+    {
+      "name": "Choose a prefix for fifty hosts",
+      "animation_end_frame": 11105,
+      "section_seconds": 21.2,
+      "visual_seconds": 19.85,
+      "visual_fraction": 0.936
+    },
+    {
+      "name": "More prefix bits, fewer addresses",
+      "animation_end_frame": 11754,
+      "section_seconds": 21.633,
+      "visual_seconds": 20.283,
+      "visual_fraction": 0.938
+    },
+    {
+      "name": "The subtract-two rule has exceptions",
+      "animation_end_frame": 12376,
+      "section_seconds": 20.767,
+      "visual_seconds": 19.417,
+      "visual_fraction": 0.935
+    },
+    {
+      "name": "A subnet is not a security policy",
+      "animation_end_frame": 13038,
+      "section_seconds": 22.067,
+      "visual_seconds": 20.717,
+      "visual_fraction": 0.939
+    },
+    {
+      "name": "CIDR replaces the classful shortcut",
+      "animation_end_frame": 13700,
+      "section_seconds": 22.033,
+      "visual_seconds": 20.683,
+      "visual_fraction": 0.939
+    },
+    {
+      "name": "Check all four answers",
+      "animation_end_frame": 14296,
+      "section_seconds": 19.9,
+      "visual_seconds": 18.55,
+      "visual_fraction": 0.932
+    },
+    {
+      "name": "Move the boundary, solve the puzzle",
+      "animation_end_frame": 14972,
+      "section_seconds": 22.5,
+      "visual_seconds": 21.15,
+      "visual_fraction": 0.94
+    }
+  ],
+  "duration": 500.0,
+  "edition": "visual"
+}

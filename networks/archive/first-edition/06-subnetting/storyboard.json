@@ -1,0 +1,827 @@
+{
+  "id": "06",
+  "slug": "subnetting",
+  "title": "Subnetting You Can Actually See",
+  "duration": 500,
+  "sources": [
+    {
+      "title": "RFC 4632 — Classless Inter-domain Routing",
+      "url": "https://www.rfc-editor.org/rfc/rfc4632",
+      "notes": "Section3.1: IPv4 prefix notation and address-block sizes including /24 and /26.",
+      "checked": "2026-11-03"
+    },
+    {
+      "title": "RFC 3021 — 31-Bit Prefixes on IPv4 Point-to-Point Links",
+      "url": "https://www.rfc-editor.org/rfc/rfc3021",
+      "notes": "Section2.1: both addresses are interpreted as host addresses on /31 point-to-point links.",
+      "checked": "2026-11-03"
+    },
+    {
+      "title": "RFC 1918 — Address Allocation for Private Internets",
+      "url": "https://www.rfc-editor.org/rfc/rfc1918",
+      "notes": "Private address range192.168.0.0/16; illustrative addresses are not global Internet destinations.",
+      "checked": "2026-11-03"
+    }
+  ],
+  "sections": [
+    {
+      "id": "06-01",
+      "title": "One network, four smaller networks",
+      "chapter": "The subnetting puzzle",
+      "duration": 21.633333333333333,
+      "narration": "Imagine four departments sharing one IPv4 address block. You need four separate, equally sized subnets without inventing new addresses. The puzzle is to divide 192.168.1.0 slash twenty-four correctly. We will solve it with moving bit boundaries, then verify the resulting network, host, and broadcast addresses rather than memorizing a shortcut.",
+      "bullets": [
+        "Start with 192.168.1.0/24",
+        "Create four equal subnets"
+      ],
+      "takeaway": "Subnetting divides an existing address block into smaller prefix blocks.",
+      "visual": {
+        "mode": "subnets",
+        "address": "192.168.1.0",
+        "parent_prefix": 24,
+        "prefix": 26,
+        "bases": [
+          0,
+          64,
+          128,
+          192
+        ],
+        "broadcasts": [
+          63,
+          127,
+          191,
+          255
+        ]
+      }
+    },
+    {
+      "id": "06-02",
+      "title": "IPv4 addresses contain thirty-two bits",
+      "chapter": "The binary model",
+      "duration": 20.333333333333332,
+      "narration": "An IPv4 address contains thirty-two bits, usually written as four decimal octets. Each octet represents eight bits and therefore ranges from zero to 255. The dots are a writing convention, not additional bits. Every subnet calculation ultimately describes a boundary or pattern within these thirty-two binary positions.",
+      "bullets": [
+        "4 octets × 8 bits = 32",
+        "Each octet ranges from 0 to 255"
+      ],
+      "takeaway": "Dotted decimal is a readable way to write the underlying bits.",
+      "visual": {
+        "mode": "bits",
+        "address": "192.168.1.0",
+        "parent_prefix": 24,
+        "prefix": 26,
+        "bases": [
+          0,
+          64,
+          128,
+          192
+        ],
+        "broadcasts": [
+          63,
+          127,
+          191,
+          255
+        ],
+        "binary": [
+          "11000000",
+          "10101000",
+          "00000001",
+          "00000000"
+        ]
+      }
+    },
+    {
+      "id": "06-03",
+      "title": "A prefix marks the shared beginning",
+      "chapter": "The binary model",
+      "duration": 21.6,
+      "narration": "The slash number tells us how many leading bits form the network prefix. In slash twenty-four, the first twenty-four bits are fixed for the block. The final eight vary across its addresses. A prefix is a bit count, so it need not stop neatly at one of the decimal dots.",
+      "bullets": [
+        "/24 fixes the first 24 bits",
+        "The final 8 bits can vary"
+      ],
+      "takeaway": "The prefix length counts leading network bits, not decimal digits.",
+      "visual": {
+        "mode": "bits",
+        "address": "192.168.1.0",
+        "parent_prefix": 24,
+        "prefix": 24,
+        "bases": [
+          0,
+          64,
+          128,
+          192
+        ],
+        "broadcasts": [
+          63,
+          127,
+          191,
+          255
+        ],
+        "host_bits": 8
+      }
+    },
+    {
+      "id": "06-04",
+      "title": "The mask expresses the boundary",
+      "chapter": "The binary model",
+      "duration": 19.9,
+      "narration": "A subnet mask writes ones in network positions and zeros in host positions. For slash twenty-four, that is three octets of ones followed by eight zeros: 255 dot 255 dot 255 dot zero. The mask and prefix notation express the same boundary in two different forms.",
+      "bullets": [
+        "Network bits use mask value 1",
+        "/24 mask: 255.255.255.0"
+      ],
+      "takeaway": "A contiguous subnet mask and its prefix length describe the same boundary.",
+      "visual": {
+        "mode": "mask",
+        "address": "192.168.1.0",
+        "parent_prefix": 24,
+        "prefix": 24,
+        "bases": [
+          0,
+          64,
+          128,
+          192
+        ],
+        "broadcasts": [
+          63,
+          127,
+          191,
+          255
+        ],
+        "mask": "255.255.255.0"
+      }
+    },
+    {
+      "id": "06-05",
+      "title": "Find the network with bitwise AND",
+      "chapter": "The binary model",
+      "duration": 21.633333333333333,
+      "narration": "Bitwise AND keeps a bit only when both input bits are one. Applying the subnet mask preserves the prefix and clears the host positions. For 192.168.1.42 with a slash twenty-four mask, clearing its last eight bits gives 192.168.1.0. This is the block’s network address, not a host chosen at random.",
+      "bullets": [
+        "Address AND mask = network",
+        "192.168.1.42/24 → 192.168.1.0"
+      ],
+      "takeaway": "Masking an address identifies the prefix block that contains it.",
+      "visual": {
+        "mode": "mask",
+        "address": "192.168.1.42",
+        "parent_prefix": 24,
+        "prefix": 24,
+        "bases": [
+          0,
+          64,
+          128,
+          192
+        ],
+        "broadcasts": [
+          63,
+          127,
+          191,
+          255
+        ],
+        "mask": "255.255.255.0",
+        "result": "192.168.1.0"
+      }
+    },
+    {
+      "id": "06-06",
+      "title": "Count the parent block",
+      "chapter": "The binary model",
+      "duration": 19.466666666666665,
+      "narration": "Thirty-two minus twenty-four leaves eight variable bits. Eight bits have two to the power eight combinations, so this block contains 256 addresses, from last octet zero through 255. That is a total-address count. Usable host counts require a separate decision about network and broadcast conventions.",
+      "bullets": [
+        "32 − 24 = 8 variable bits",
+        "2^8 = 256 total addresses"
+      ],
+      "takeaway": "Count all addresses before applying ordinary LAN host reservations.",
+      "visual": {
+        "mode": "subnets",
+        "address": "192.168.1.0",
+        "parent_prefix": 24,
+        "prefix": 24,
+        "bases": [
+          0,
+          64,
+          128,
+          192
+        ],
+        "broadcasts": [
+          63,
+          127,
+          191,
+          255
+        ],
+        "total_addresses": 256
+      }
+    },
+    {
+      "id": "06-07",
+      "title": "Borrow two bits for four subnets",
+      "chapter": "Divide the block",
+      "duration": 19.9,
+      "narration": "We want four equal blocks, and two additional prefix bits have four combinations: zero-zero, zero-one, one-zero, and one-one. Extend the prefix from twenty-four to twenty-six. Those two positions now distinguish subnets, leaving six positions to distinguish addresses within each subnet. No new addresses have been created.",
+      "bullets": [
+        "2 borrowed bits give 4 subnets",
+        "New prefix: /26"
+      ],
+      "takeaway": "Extending a prefix creates smaller blocks within the original block.",
+      "visual": {
+        "mode": "bits",
+        "address": "192.168.1.0",
+        "parent_prefix": 24,
+        "prefix": 26,
+        "bases": [
+          0,
+          64,
+          128,
+          192
+        ],
+        "broadcasts": [
+          63,
+          127,
+          191,
+          255
+        ],
+        "borrowed_bits": 2,
+        "host_bits": 6
+      }
+    },
+    {
+      "id": "06-08",
+      "title": "Build the slash-twenty-six mask",
+      "chapter": "Divide the block",
+      "duration": 20.333333333333332,
+      "narration": "The final mask octet now starts with two ones and ends with six zeros. In binary it is 11000000, whose decimal value is 128 plus 64, or 192. Our new mask is 255 dot 255 dot 255 dot 192. The subnet boundary falls inside the last octet.",
+      "bullets": [
+        "Last mask octet: 11000000",
+        "/26 mask: 255.255.255.192"
+      ],
+      "takeaway": "Two leading ones in the last octet make the /26 boundary.",
+      "visual": {
+        "mode": "mask",
+        "address": "192.168.1.0",
+        "parent_prefix": 24,
+        "prefix": 26,
+        "bases": [
+          0,
+          64,
+          128,
+          192
+        ],
+        "broadcasts": [
+          63,
+          127,
+          191,
+          255
+        ],
+        "mask": "255.255.255.192",
+        "last_octet": "11000000"
+      }
+    },
+    {
+      "id": "06-09",
+      "title": "Six host bits make sixty-four addresses",
+      "chapter": "Divide the block",
+      "duration": 20.333333333333332,
+      "narration": "Each new subnet has six variable address bits. Two to the power six equals sixty-four total addresses per block. Four blocks times sixty-four returns the parent’s 256 addresses. This conservation check is useful: a correct equal subdivision should neither overlap blocks nor leave gaps inside its parent.",
+      "bullets": [
+        "2^6 = 64 addresses per subnet",
+        "4 × 64 = 256 addresses"
+      ],
+      "takeaway": "The four /26 blocks exactly cover the original /24.",
+      "visual": {
+        "mode": "subnets",
+        "address": "192.168.1.0",
+        "parent_prefix": 24,
+        "prefix": 26,
+        "bases": [
+          0,
+          64,
+          128,
+          192
+        ],
+        "broadcasts": [
+          63,
+          127,
+          191,
+          255
+        ],
+        "block_size": 64,
+        "equation": "4 × 64 = 256"
+      }
+    },
+    {
+      "id": "06-10",
+      "title": "The four binary prefixes",
+      "chapter": "Divide the block",
+      "duration": 21.166666666666668,
+      "narration": "Hold the first twenty-four bits steady and cycle the next two bits through their four combinations. With the remaining six bits all zero, the final octets become zero, sixty-four, 128, and 192. These are aligned network boundaries. Arbitrary numbers such as fifty or ninety are not slash-twenty-six network starts.",
+      "bullets": [
+        "00 → 0; 01 → 64",
+        "10 → 128; 11 → 192"
+      ],
+      "takeaway": "Aligned /26 network starts are separated by 64 addresses.",
+      "visual": {
+        "mode": "bits",
+        "address": "192.168.1.0",
+        "parent_prefix": 24,
+        "prefix": 26,
+        "bases": [
+          0,
+          64,
+          128,
+          192
+        ],
+        "broadcasts": [
+          63,
+          127,
+          191,
+          255
+        ],
+        "prefix_patterns": [
+          "00",
+          "01",
+          "10",
+          "11"
+        ]
+      }
+    },
+    {
+      "id": "06-11",
+      "title": "Subnet one: zero through sixty-three",
+      "chapter": "Read each subnet",
+      "duration": 19.9,
+      "narration": "The first block is 192.168.1.0 slash twenty-six. Its six host bits range from all zero to all one, giving last-octet values zero through sixty-three. Under ordinary IPv4 LAN conventions, zero identifies this network and sixty-three is its directed broadcast address. Host addresses are one through sixty-two.",
+      "bullets": [
+        "Network .0; broadcast .63",
+        "Hosts .1–.62"
+      ],
+      "takeaway": "Subnet one contains 64 total addresses and 62 ordinary host addresses.",
+      "visual": {
+        "mode": "hosts",
+        "address": "192.168.1.0",
+        "parent_prefix": 24,
+        "prefix": 26,
+        "bases": [
+          0,
+          64,
+          128,
+          192
+        ],
+        "broadcasts": [
+          63,
+          127,
+          191,
+          255
+        ],
+        "selected": 0,
+        "network": "192.168.1.0",
+        "broadcast": "192.168.1.63",
+        "first_host": "192.168.1.1",
+        "last_host": "192.168.1.62"
+      }
+    },
+    {
+      "id": "06-12",
+      "title": "Subnet two: sixty-four through 127",
+      "chapter": "Read each subnet",
+      "duration": 21.633333333333333,
+      "narration": "The second block is 192.168.1.64 slash twenty-six. The prefix’s borrowed bits are zero-one, while its six host positions vary. Its network address ends in sixty-four and broadcast ends in 127. Ordinary host addresses run from sixty-five through 126. Notice that a broadcast address does not have to end in 255.",
+      "bullets": [
+        "Network .64; broadcast .127",
+        "Hosts .65–.126"
+      ],
+      "takeaway": "Network and broadcast roles depend on the prefix, not just the last octet.",
+      "visual": {
+        "mode": "hosts",
+        "address": "192.168.1.0",
+        "parent_prefix": 24,
+        "prefix": 26,
+        "bases": [
+          0,
+          64,
+          128,
+          192
+        ],
+        "broadcasts": [
+          63,
+          127,
+          191,
+          255
+        ],
+        "selected": 1,
+        "network": "192.168.1.64",
+        "broadcast": "192.168.1.127",
+        "first_host": "192.168.1.65",
+        "last_host": "192.168.1.126"
+      }
+    },
+    {
+      "id": "06-13",
+      "title": "Subnet three: 128 through 191",
+      "chapter": "Read each subnet",
+      "duration": 20.766666666666666,
+      "narration": "The third block begins at 192.168.1.128 slash twenty-six. Its network and broadcast addresses end in 128 and 191. Usable host values are 129 through 190 under our ordinary LAN assumptions. The network address clears only the six host bits; the borrowed subnet bits remain part of the prefix.",
+      "bullets": [
+        "Network .128; broadcast .191",
+        "Hosts .129–.190"
+      ],
+      "takeaway": "Clear host bits while preserving the complete 26-bit network prefix.",
+      "visual": {
+        "mode": "hosts",
+        "address": "192.168.1.0",
+        "parent_prefix": 24,
+        "prefix": 26,
+        "bases": [
+          0,
+          64,
+          128,
+          192
+        ],
+        "broadcasts": [
+          63,
+          127,
+          191,
+          255
+        ],
+        "selected": 2,
+        "network": "192.168.1.128",
+        "broadcast": "192.168.1.191",
+        "first_host": "192.168.1.129",
+        "last_host": "192.168.1.190"
+      }
+    },
+    {
+      "id": "06-14",
+      "title": "Subnet four: 192 through 255",
+      "chapter": "Read each subnet",
+      "duration": 20.333333333333332,
+      "narration": "The final block is 192.168.1.192 slash twenty-six. Its network address ends in 192, its broadcast ends in 255, and ordinary hosts run from 193 through 254. Together, the four ranges cover zero through 255 exactly once. Adjacent blocks touch at consecutive addresses, never at the same address.",
+      "bullets": [
+        "Network .192; broadcast .255",
+        "Hosts .193–.254"
+      ],
+      "takeaway": "Nonoverlapping contiguous ranges verify the subdivision.",
+      "visual": {
+        "mode": "hosts",
+        "address": "192.168.1.0",
+        "parent_prefix": 24,
+        "prefix": 26,
+        "bases": [
+          0,
+          64,
+          128,
+          192
+        ],
+        "broadcasts": [
+          63,
+          127,
+          191,
+          255
+        ],
+        "selected": 3,
+        "network": "192.168.1.192",
+        "broadcast": "192.168.1.255",
+        "first_host": "192.168.1.193",
+        "last_host": "192.168.1.254"
+      }
+    },
+    {
+      "id": "06-15",
+      "title": "Locate the host ending in seventy",
+      "chapter": "Apply the calculation",
+      "duration": 18.6,
+      "narration": "Where does 192.168.1.70 slash twenty-six belong? Seventy falls in the sixty-four-through-127 interval, so its network is 192.168.1.64. Binary AND confirms it: 01000110 AND 11000000 gives 01000000, or sixty-four. Its broadcast is 127, so seventy is an ordinary host address within the second subnet.",
+      "bullets": [
+        "70 lies inside .64–.127",
+        "01000110 AND 11000000 = 01000000"
+      ],
+      "takeaway": "A range check and a mask operation should identify the same subnet.",
+      "visual": {
+        "mode": "mask",
+        "address": "192.168.1.70",
+        "parent_prefix": 24,
+        "prefix": 26,
+        "bases": [
+          0,
+          64,
+          128,
+          192
+        ],
+        "broadcasts": [
+          63,
+          127,
+          191,
+          255
+        ],
+        "mask": "255.255.255.192",
+        "result": "192.168.1.64",
+        "selected": 1
+      }
+    },
+    {
+      "id": "06-16",
+      "title": "Same prefix or a different subnet?",
+      "chapter": "Apply the calculation",
+      "duration": 20.766666666666666,
+      "narration": "Compare hosts ending in seventy and one hundred, both using slash twenty-six. Their masked network addresses are both sixty-four, so their addresses belong to the same subnet. A host ending in 130 instead masks to 128. Prefix comparison determines the local-versus-remote decision; the decimal appearance alone does not.",
+      "bullets": [
+        ".70 and .100 share .64/26",
+        ".130 belongs to .128/26"
+      ],
+      "takeaway": "Compare masked network prefixes, using the relevant mask.",
+      "visual": {
+        "mode": "hosts",
+        "address": "192.168.1.0",
+        "parent_prefix": 24,
+        "prefix": 26,
+        "bases": [
+          0,
+          64,
+          128,
+          192
+        ],
+        "broadcasts": [
+          63,
+          127,
+          191,
+          255
+        ],
+        "addresses": [
+          "192.168.1.70",
+          "192.168.1.100",
+          "192.168.1.130"
+        ],
+        "networks": [
+          64,
+          64,
+          128
+        ]
+      }
+    },
+    {
+      "id": "06-17",
+      "title": "Remote destinations use a router",
+      "chapter": "Apply the calculation",
+      "duration": 21.6,
+      "narration": "In a typical IPv4 LAN, a host treats a destination in its own subnet as locally reachable and resolves the destination’s link-layer address. For a remote subnet it normally sends toward an appropriate router, often its default gateway. Subnetting changes that forwarding decision; it does not physically move the computers.",
+      "bullets": [
+        "Local subnet: reach the destination",
+        "Remote subnet: use a next-hop router"
+      ],
+      "takeaway": "A gateway connects networks that have different prefixes.",
+      "visual": {
+        "mode": "subnets",
+        "address": "192.168.1.0",
+        "parent_prefix": 24,
+        "prefix": 26,
+        "bases": [
+          0,
+          64,
+          128,
+          192
+        ],
+        "broadcasts": [
+          63,
+          127,
+          191,
+          255
+        ],
+        "routing": true,
+        "source": "192.168.1.70",
+        "destination": "192.168.1.130"
+      }
+    },
+    {
+      "id": "06-18",
+      "title": "Choose a prefix for fifty hosts",
+      "chapter": "Apply the calculation",
+      "duration": 21.2,
+      "narration": "Suppose each department needs fifty ordinary IPv4 LAN host addresses. Five host bits give thirty-two total addresses and usually thirty usable hosts, which is insufficient. Six host bits give sixty-four total and sixty-two usable, enough for fifty. Therefore slash twenty-six is the smallest equal-sized block meeting this specific requirement.",
+      "bullets": [
+        "/27 usually gives 30 hosts",
+        "/26 usually gives 62 hosts"
+      ],
+      "takeaway": "Choose enough host bits for the requirement and reserved addresses.",
+      "visual": {
+        "mode": "hosts",
+        "address": "192.168.1.0",
+        "parent_prefix": 24,
+        "prefix": 26,
+        "bases": [
+          0,
+          64,
+          128,
+          192
+        ],
+        "broadcasts": [
+          63,
+          127,
+          191,
+          255
+        ],
+        "required_hosts": 50,
+        "candidates": {
+          "/27": 30,
+          "/26": 62
+        }
+      }
+    },
+    {
+      "id": "06-19",
+      "title": "More prefix bits, fewer addresses",
+      "chapter": "Reason about the boundary",
+      "duration": 21.633333333333333,
+      "narration": "Increase the prefix by one bit and the address block halves. Decrease it by one bit and the block doubles, provided alignment and the available parent block permit it. Slash twenty-five holds 128 addresses, slash twenty-six sixty-four, and slash twenty-seven thirty-two. The direction becomes intuitive when you count variable bits.",
+      "bullets": [
+        "Longer prefix → smaller block",
+        "/25:128; /26:64; /27:32"
+      ],
+      "takeaway": "Every additional fixed bit halves the number of address combinations.",
+      "visual": {
+        "mode": "bits",
+        "address": "192.168.1.0",
+        "parent_prefix": 24,
+        "prefix": 26,
+        "bases": [
+          0,
+          64,
+          128,
+          192
+        ],
+        "broadcasts": [
+          63,
+          127,
+          191,
+          255
+        ],
+        "prefix_sizes": {
+          "25": 128,
+          "26": 64,
+          "27": 32
+        }
+      }
+    },
+    {
+      "id": "06-20",
+      "title": "The subtract-two rule has exceptions",
+      "chapter": "Reason about the boundary",
+      "duration": 20.766666666666666,
+      "narration": "Our sixty-two-host count follows ordinary IPv4 LAN conventions. Do not apply two to the host-bit count minus two blindly to every prefix. On appropriately configured point-to-point links, slash thirty-one uses both addresses as endpoints. Slash thirty-two denotes one address, commonly a host route. Context determines the correct interpretation.",
+      "bullets": [
+        "Ordinary LAN rules have exceptions",
+        "/31 point-to-point; /32 one address"
+      ],
+      "takeaway": "The total-address formula is general; host usability depends on context.",
+      "visual": {
+        "mode": "hosts",
+        "address": "192.168.1.0",
+        "parent_prefix": 24,
+        "prefix": 26,
+        "bases": [
+          0,
+          64,
+          128,
+          192
+        ],
+        "broadcasts": [
+          63,
+          127,
+          191,
+          255
+        ],
+        "exceptions": {
+          "/31": "2 point-to-point endpoints",
+          "/32": "1 address"
+        }
+      }
+    },
+    {
+      "id": "06-21",
+      "title": "A subnet is not a security policy",
+      "chapter": "Common misconceptions",
+      "duration": 22.066666666666666,
+      "narration": "Dividing an address block organizes addressing and routing. It does not automatically encrypt traffic, prevent unauthorized access, or guarantee isolation between departments. Those outcomes require appropriate routing, firewall, switch, and security configuration. A subnet can support a design, but the mathematical prefix calculation is only one part of implementing that design.",
+      "bullets": [
+        "Address planning is not encryption",
+        "Isolation needs actual configuration"
+      ],
+      "takeaway": "A prefix boundary does not replace a security policy.",
+      "visual": {
+        "mode": "subnets",
+        "address": "192.168.1.0",
+        "parent_prefix": 24,
+        "prefix": 26,
+        "bases": [
+          0,
+          64,
+          128,
+          192
+        ],
+        "broadcasts": [
+          63,
+          127,
+          191,
+          255
+        ],
+        "security": false
+      }
+    },
+    {
+      "id": "06-22",
+      "title": "CIDR replaces the classful shortcut",
+      "chapter": "Common misconceptions",
+      "duration": 22.033333333333335,
+      "narration": "Older lessons classify address ranges as class A, B, or C. Modern classless addressing uses the explicit prefix length, so an address’s first octet alone does not establish its subnet boundary. Our 192.168.1 block is private address space; using it here does not make those addresses publicly routable on the Internet.",
+      "bullets": [
+        "Use the explicit prefix length",
+        "192.168.0.0/16 is private space"
+      ],
+      "takeaway": "Read the actual prefix instead of guessing an old default class.",
+      "visual": {
+        "mode": "bits",
+        "address": "192.168.1.0",
+        "parent_prefix": 24,
+        "prefix": 26,
+        "bases": [
+          0,
+          64,
+          128,
+          192
+        ],
+        "broadcasts": [
+          63,
+          127,
+          191,
+          255
+        ],
+        "private": true
+      }
+    },
+    {
+      "id": "06-23",
+      "title": "Check all four answers",
+      "chapter": "Worked-example verification",
+      "duration": 19.9,
+      "narration": "Read the completed table aloud: networks zero, sixty-four, 128, and 192; broadcasts sixty-three, 127, 191, and 255. Each block contains sixty-four total addresses. Each ordinary host range excludes its own first and last address. The sizes add to 256, and none of the four ranges overlap.",
+      "bullets": [
+        "Four blocks of 64 addresses",
+        "Each ordinary LAN has 62 host slots"
+      ],
+      "takeaway": "Verify alignment, size, boundaries, and coverage before assigning addresses.",
+      "visual": {
+        "mode": "subnets",
+        "address": "192.168.1.0",
+        "parent_prefix": 24,
+        "prefix": 26,
+        "bases": [
+          0,
+          64,
+          128,
+          192
+        ],
+        "broadcasts": [
+          63,
+          127,
+          191,
+          255
+        ],
+        "show_table": true
+      }
+    },
+    {
+      "id": "06-24",
+      "title": "Move the boundary, solve the puzzle",
+      "chapter": "Recap",
+      "duration": 22.5,
+      "narration": "We turned one slash-twenty-four block into four slash-twenty-six subnets by fixing two additional bits. Six variable bits remain, yielding sixty-four addresses per block. Binary AND locates a host’s network, and host usability depends on the link’s conventions. Subnetting is now a boundary you can reason about, rather than a list to memorize.",
+      "bullets": [
+        "Borrow 2 bits; retain 6 host bits",
+        "Networks: .0, .64, .128, .192"
+      ],
+      "takeaway": "Subnetting follows directly from fixed prefixes and variable address bits.",
+      "visual": {
+        "mode": "subnets",
+        "address": "192.168.1.0",
+        "parent_prefix": 24,
+        "prefix": 26,
+        "bases": [
+          0,
+          64,
+          128,
+          192
+        ],
+        "broadcasts": [
+          63,
+          127,
+          191,
+          255
+        ],
+        "show_table": true
+      }
+    }
+  ],
+  "original_target_seconds": 480,
+  "timing_note": "Retimed for approximately140spoken words perminute;browser pauses are unlimited."
+}

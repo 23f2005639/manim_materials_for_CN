@@ -1,0 +1,9 @@
+00:00 The subnetting puzzle
+00:21 The binary model
+02:04 Divide the block
+03:26 Read each subnet
+04:48 Apply the calculation
+06:11 Reason about the boundary
+06:53 Common misconceptions
+07:37 Worked-example verification
+07:57 Recap

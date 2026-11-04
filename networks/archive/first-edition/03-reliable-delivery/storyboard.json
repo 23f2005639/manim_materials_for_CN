@@ -1,0 +1,396 @@
+{
+  "id": "03",
+  "slug": "reliable-delivery",
+  "title": "Delivering Data When Packets Get Lost",
+  "duration": 545,
+  "sources": [
+    {
+      "title": "MIT 16.36 Lecture 18: ARQ Protocols",
+      "url": "https://live.ocw.mit.edu/courses/16-36-communication-systems-engineering-spring-2009/9b06e175ee2b383dc35490581a45267a_MIT16_36s09_lec18.pdf",
+      "notes": "Checked Go-Back-N receive-next acknowledgment convention, ordered acceptance, sender window and retransmission examples."
+    },
+    {
+      "title": "Loyola University: Abstract Sliding Windows",
+      "url": "https://intronetworks.cs.luc.edu/current/uhtml/slidingwindows.html",
+      "notes": "Checked retransmit-on-timeout and stop-and-wait/sliding-window concepts. This script explicitly uses next-expected ACK numbering instead of the text’s last-received convention."
+    },
+    {
+      "title": "IIT Kanpur CS425 Lecture 09",
+      "url": "https://cse.iitk.ac.in/users/dheeraj/cs425/lec09.html",
+      "notes": "Checked cumulative acknowledgment, sender windows and Go-Back-N receiver discard behavior."
+    },
+    {
+      "title": "RFC 9293: TCP",
+      "url": "https://www.rfc-editor.org/rfc/rfc9293",
+      "notes": "Checked caveat distinguishing this frame-numbered teaching ARQ model from TCP byte sequence numbers and modern behavior."
+    }
+  ],
+  "sections": [
+    {
+      "id": "03-01",
+      "title": "A packet vanishes",
+      "chapter": "The puzzle",
+      "duration": 22.733333333333334,
+      "narration": "Imagine sending four pieces of a file across a link. The second piece disappears. The receiver cannot rebuild the file correctly, and the sender cannot see the missing piece from its end. We will construct a reliable delivery method step by step, beginning with one packet and adding only what each failure demands.",
+      "bullets": [
+        "A sender cannot see delivery",
+        "How can it know what arrived?"
+      ],
+      "takeaway": "Reliability requires feedback and carefully tracked state.",
+      "visual": {
+        "mode": "stopwait_intro"
+      }
+    },
+    {
+      "id": "03-02",
+      "title": "Read the timeline",
+      "chapter": "The model",
+      "duration": 22.333333333333332,
+      "narration": "Our diagram places the sender on the left and receiver on the right, with time moving downward. A sloping arrow represents a packet taking time to cross the link. A return arrow represents feedback. We use packet numbers for this teaching model; they are not TCP byte sequence numbers in this episode.",
+      "bullets": [
+        "Left: sender",
+        "Right: receiver",
+        "Time moves downward"
+      ],
+      "takeaway": "A timeline separates transmission, arrival, and acknowledgment events.",
+      "visual": {
+        "mode": "stopwait_timeline"
+      }
+    },
+    {
+      "id": "03-03",
+      "title": "Send one, then wait",
+      "chapter": "Stop-and-wait",
+      "duration": 22.733333333333334,
+      "narration": "The simplest sender transmits packet zero, then waits. It keeps a copy because delivery has not yet been confirmed. When the receiver accepts that packet, it can return an acknowledgment. Only after suitable confirmation does the sender proceed. This discipline is easy to understand, but it leaves the link unused while feedback travels.",
+      "bullets": [
+        "One outstanding packet",
+        "Wait before sending another"
+      ],
+      "takeaway": "Stop-and-wait permits one unacknowledged packet at a time.",
+      "visual": {
+        "mode": "stopwait_data"
+      }
+    },
+    {
+      "id": "03-04",
+      "title": "Choose an ACK convention",
+      "chapter": "Stop-and-wait",
+      "duration": 22.733333333333334,
+      "narration": "We must define our numbers before continuing. In this video, acknowledgment one means the receiver next expects packet one, so packet zero has arrived. Acknowledgment four confirms packets zero through three. Some textbooks number acknowledgments by the last received packet instead. Both conventions can work, but mixing them would make this animation wrong.",
+      "bullets": [
+        "ACK n means next expected n",
+        "ACK 1 confirms packet 0"
+      ],
+      "takeaway": "Every ACK number here identifies the next packet expected.",
+      "visual": {
+        "mode": "stopwait_ack"
+      }
+    },
+    {
+      "id": "03-05",
+      "title": "Notice the idle gap",
+      "chapter": "Stop-and-wait",
+      "duration": 22.333333333333332,
+      "narration": "After packet zero finishes leaving the sender, its bits still need to reach the receiver, and an acknowledgment must travel back. The sender waits during that interval despite having more data ready. Watch the long empty portion of its timeline. Increasing the link's bit rate alone does not eliminate this round-trip delay.",
+      "bullets": [
+        "Data crosses",
+        "Feedback returns",
+        "The sender waits"
+      ],
+      "takeaway": "Long feedback delay can leave a fast link mostly idle.",
+      "visual": {
+        "mode": "stopwait_idle"
+      }
+    },
+    {
+      "id": "03-06",
+      "title": "Separate two kinds of time",
+      "chapter": "Stop-and-wait",
+      "duration": 23.166666666666668,
+      "narration": "Transmission time is packet length divided by link rate: how long the sender takes to place the packet onto the link. Propagation delay is how long a signal takes to cross the distance. They are different quantities. A short packet on a fast, distant link can finish transmission long before its first acknowledgment returns.",
+      "bullets": [
+        "Transmission: L divided by R",
+        "Propagation: distance and signal speed"
+      ],
+      "takeaway": "Transmission time and propagation delay measure different things.",
+      "visual": {
+        "mode": "stopwait_delay"
+      }
+    },
+    {
+      "id": "03-07",
+      "title": "Calculate stop-and-wait use",
+      "chapter": "Worked example",
+      "duration": 22.733333333333334,
+      "narration": "For a clean example, one packet takes one millisecond to transmit, while round-trip propagation takes twenty milliseconds. Ignore acknowledgment transmission, processing, and errors. One successful stop-and-wait cycle lasts twenty-one milliseconds. The sender transmits useful data for one of those milliseconds: approximately four point eight percent utilization. These numbers describe our assumed link only.",
+      "bullets": [
+        "1 ms transmission",
+        "20 ms propagation round trip"
+      ],
+      "takeaway": "With negligible ACK cost, utilization is 1 divided by 21, about 4.8 percent.",
+      "visual": {
+        "mode": "stopwait_utilization"
+      }
+    },
+    {
+      "id": "03-08",
+      "title": "Lose the data packet",
+      "chapter": "Failure and recovery",
+      "duration": 22.766666666666666,
+      "narration": "Now lose packet zero before it reaches the receiver. No acknowledgment confirming that packet returns. The sender still has its saved copy, but waiting forever would prevent progress. Notice what the sender actually knows: it lacks confirmation. It cannot directly tell whether the packet, the acknowledgment, or something else was delayed or lost.",
+      "bullets": [
+        "Data never arrives",
+        "No new ACK can confirm it"
+      ],
+      "takeaway": "A missing acknowledgment leaves the sender uncertain.",
+      "visual": {
+        "mode": "stopwait_dataloss"
+      }
+    },
+    {
+      "id": "03-09",
+      "title": "Expire a timer",
+      "chapter": "Failure and recovery",
+      "duration": 22.733333333333334,
+      "narration": "The sender starts a retransmission timer. If the required acknowledgment has not arrived before expiry, it attempts recovery. A timeout does not prove the data was destroyed: the network might simply be slow. The distinction matters because recovery can create duplicate arrivals. We therefore need identifiers as well as clocks in our protocol.",
+      "bullets": [
+        "Start timer when sending",
+        "Expiry triggers a recovery attempt"
+      ],
+      "takeaway": "A timeout detects missing confirmation, not certain packet loss.",
+      "visual": {
+        "mode": "timeout"
+      }
+    },
+    {
+      "id": "03-10",
+      "title": "Retransmit the saved copy",
+      "chapter": "Failure and recovery",
+      "duration": 22.3,
+      "narration": "When the timer expires, the sender transmits its saved copy of packet zero. Its number stays zero because this is another attempt to deliver the same logical data. If it arrives correctly, the receiver returns acknowledgment one. The sender can then discard the saved copy and continue with the next new packet.",
+      "bullets": [
+        "Reuse the original sequence number",
+        "Keep data until confirmed"
+      ],
+      "takeaway": "Retransmission retries the same logical packet.",
+      "visual": {
+        "mode": "retransmit"
+      }
+    },
+    {
+      "id": "03-11",
+      "title": "Lose the acknowledgment instead",
+      "chapter": "Failure and recovery",
+      "duration": 21.9,
+      "narration": "Change the failure. Packet zero arrives and is delivered, but acknowledgment one disappears. From the sender's perspective, confirmation is still missing, just as before. Its timer eventually expires, and packet zero is retransmitted. Without extra receiver state, the application might receive the same data twice, despite the original transmission having succeeded.",
+      "bullets": [
+        "Data arrives successfully",
+        "Its ACK disappears"
+      ],
+      "takeaway": "The sender may retry data that the receiver already has.",
+      "visual": {
+        "mode": "ackloss"
+      }
+    },
+    {
+      "id": "03-12",
+      "title": "Recognize the duplicate",
+      "chapter": "Failure and recovery",
+      "duration": 22.733333333333334,
+      "narration": "The receiver remembers that it now expects packet one. When another packet zero arrives, it identifies the duplicate, avoids delivering its payload again, and sends acknowledgment one again. This time the acknowledgment reaches the sender. Watch delivery count and arrival count separately: two physical arrivals can still represent one accepted application data item.",
+      "bullets": [
+        "Receiver already expects packet 1",
+        "Repeat ACK 1",
+        "Do not deliver data twice"
+      ],
+      "takeaway": "Sequence state distinguishes a duplicate from new data.",
+      "visual": {
+        "mode": "duplicate_seq"
+      }
+    },
+    {
+      "id": "03-13",
+      "title": "Why alternating bits can work",
+      "chapter": "Failure and recovery",
+      "duration": 23.2,
+      "narration": "For a basic stop-and-wait design, sequence labels can alternate between zero and one, since only one logical packet is outstanding. Correctness still depends on initialization and assumptions that prevent sufficiently old duplicates being mistaken for new packets after wraparound. We keep increasing labels in the remaining diagrams to make the flow easier to follow.",
+      "bullets": [
+        "Stop-and-wait can alternate 0 and 1",
+        "Assumptions prevent old ambiguity"
+      ],
+      "takeaway": "A small sequence space requires careful assumptions about delayed duplicates.",
+      "visual": {
+        "mode": "alternating_bit"
+      }
+    },
+    {
+      "id": "03-14",
+      "title": "Choose a sensible timeout",
+      "chapter": "Failure and recovery",
+      "duration": 23.166666666666668,
+      "narration": "Set the timer too short, and an ordinary delayed acknowledgment can trigger an unnecessary retry. Set it too long, and actual loss stalls communication for longer than needed. Our visual timer is fixed for clarity. Practical protocols often estimate delay and adjust recovery behavior, rather than choosing one universally correct timeout for every network.",
+      "bullets": [
+        "Too short: needless repeats",
+        "Too long: slow loss recovery"
+      ],
+      "takeaway": "A timer trades quick recovery against unnecessary retransmission.",
+      "visual": {
+        "mode": "timeout_tradeoff"
+      }
+    },
+    {
+      "id": "03-15",
+      "title": "Allow four packets in flight",
+      "chapter": "Sliding windows",
+      "duration": 23.166666666666668,
+      "narration": "To reduce idle time, allow several packets to be outstanding. Our sender window has size four, initially covering packets zero, one, two, and three. The sender may transmit them without waiting after each packet. It still retains copies until confirmation. The window bounds what can be outstanding; it is not four separate physical links.",
+      "bullets": [
+        "Window size W = 4",
+        "Bound outstanding unconfirmed data"
+      ],
+      "takeaway": "A sender window permits several packets before confirmation.",
+      "visual": {
+        "mode": "window_intro"
+      }
+    },
+    {
+      "id": "03-16",
+      "title": "Fill the pipeline",
+      "chapter": "Sliding windows",
+      "duration": 22.733333333333334,
+      "narration": "Send zero, then one, then two, then three. While earlier packets travel and acknowledgments return, later packets use the link. This overlap is pipelining. A large enough window can improve use of a long-delay link, but errors, receiver capacity, and other limits still matter. A window cannot create capacity beyond the link rate.",
+      "bullets": [
+        "Send 0, 1, 2, 3",
+        "ACKs travel while data continues"
+      ],
+      "takeaway": "Pipelining overlaps useful transmission with feedback travel.",
+      "visual": {
+        "mode": "window_pipeline"
+      }
+    },
+    {
+      "id": "03-17",
+      "title": "Use cumulative acknowledgments",
+      "chapter": "Sliding windows",
+      "duration": 21.9,
+      "narration": "Suppose packets zero, one, and two arrive in order. The receiver sends acknowledgment three, meaning three is now the next expected number. That single acknowledgment confirms the entire contiguous prefix through packet two. If an earlier acknowledgment was lost, this newer one can still confirm its data, avoiding some needless retransmission.",
+      "bullets": [
+        "ACK 3 confirms 0, 1 and 2",
+        "An earlier missing ACK may be covered"
+      ],
+      "takeaway": "Cumulative ACKs confirm a contiguous prefix of received data.",
+      "visual": {
+        "mode": "window_cumulative"
+      }
+    },
+    {
+      "id": "03-18",
+      "title": "Slide the sending window",
+      "chapter": "Sliding windows",
+      "duration": 22.733333333333334,
+      "narration": "Receiving acknowledgment two moves the sender's base from zero to two. Packets zero and one leave the unconfirmed region, and new sequence positions become available at the right. The sender can transmit new packets as permitted. Receiving the same acknowledgment again does not repeatedly advance the window or create unlimited new sending permission.",
+      "bullets": [
+        "ACK 2 moves base to 2",
+        "New slots become available"
+      ],
+      "takeaway": "Acknowledgments advance the window and permit new transmissions.",
+      "visual": {
+        "mode": "window_advance"
+      }
+    },
+    {
+      "id": "03-19",
+      "title": "Go-Back-N: lose packet 1",
+      "chapter": "Go-Back-N example",
+      "duration": 23.166666666666668,
+      "narration": "Now use a Go-Back-N sender with window four. It sends packets zero through three, but packet one is lost. The receiver accepts zero and returns acknowledgment one. It then waits for one. We freeze further new transmissions for this worked example so the outstanding set remains one, two, and three while we demonstrate recovery.",
+      "bullets": [
+        "Send 0, 1, 2, 3",
+        "Packet 1 is lost"
+      ],
+      "takeaway": "A gap prevents contiguous in-order acceptance in this Go-Back-N model.",
+      "visual": {
+        "mode": "goback_loss"
+      }
+    },
+    {
+      "id": "03-20",
+      "title": "Discard later arrivals",
+      "chapter": "Go-Back-N example",
+      "duration": 21.9,
+      "narration": "Packets two and three arrive, but this basic Go-Back-N receiver only accepts its next expected packet. It discards those later arrivals and repeats acknowledgment one. The receiver is not claiming that packets two and three never touched the interface; it is saying the contiguous accepted sequence still ends at packet zero.",
+      "bullets": [
+        "Receiver expects 1",
+        "Discard 2 and 3",
+        "Repeat ACK 1"
+      ],
+      "takeaway": "A basic Go-Back-N receiver discards out-of-order packets.",
+      "visual": {
+        "mode": "goback_discard"
+      }
+    },
+    {
+      "id": "03-21",
+      "title": "Retransmit from the gap",
+      "chapter": "Go-Back-N example",
+      "duration": 23.6,
+      "narration": "The timer for the oldest unconfirmed packet expires. Our sender retransmits packets one, two, and three: all the outstanding packets in this example, beginning at the gap. It does not resend confirmed packet zero. This can repeat data that previously reached the receiver but was discarded, which is the cost of this simple recovery strategy.",
+      "bullets": [
+        "Oldest unconfirmed packet times out",
+        "Resend 1, 2 and 3"
+      ],
+      "takeaway": "Go-Back-N retransmits outstanding packets starting at the oldest unconfirmed one.",
+      "visual": {
+        "mode": "goback_timeout"
+      }
+    },
+    {
+      "id": "03-22",
+      "title": "Accept the repaired sequence",
+      "chapter": "Go-Back-N example",
+      "duration": 22.733333333333334,
+      "narration": "This time packet one arrives correctly, followed by two and three. The receiver accepts each in sequence and eventually returns acknowledgment four. The sender advances its base to four and releases the confirmed copies. Trace the numbers aloud: the final acknowledgment indicates the next expected packet, not the last packet that was accepted.",
+      "bullets": [
+        "Receive 1, then 2, then 3",
+        "ACK 4 permits progress"
+      ],
+      "takeaway": "Once the gap is repaired, in-order acceptance and window movement resume.",
+      "visual": {
+        "mode": "goback_recovery"
+      }
+    },
+    {
+      "id": "03-23",
+      "title": "Compare the mechanisms carefully",
+      "chapter": "Comparison",
+      "duration": 22.333333333333332,
+      "narration": "Stop-and-wait emphasizes simple state but can waste a long-delay link. Sliding windows allow pipelining; Go-Back-N adds one particular receiver and retransmission policy. Selective-repeat designs can retain out-of-order arrivals instead. Modern TCP uses byte sequencing and additional mechanisms, so do not copy every rule from our frame-numbered teaching protocol into a TCP explanation.",
+      "bullets": [
+        "Stop-and-wait: one outstanding",
+        "Go-Back-N: a bounded pipeline"
+      ],
+      "takeaway": "Modern TCP is related to ARQ ideas but is not this exact frame protocol.",
+      "visual": {
+        "mode": "arq_compare"
+      }
+    },
+    {
+      "id": "03-24",
+      "title": "Reconstruct reliability yourself",
+      "chapter": "Recap",
+      "duration": 23.166666666666668,
+      "narration": "We solved missing confirmation with acknowledgments and timers, then solved duplicate ambiguity with sequence state. Finally, windows overlapped data and feedback, while Go-Back-N supplied a clear recovery rule. Replay either loss case and predict the next acknowledgment before it appears. Recovery assumes communication eventually succeeds; no protocol can deliver through a permanently broken link.",
+      "bullets": [
+        "Feedback + timer + sequence state",
+        "Windows improve overlap"
+      ],
+      "takeaway": "Recovery needs feedback and state; permanent link failure can still stop delivery.",
+      "visual": {
+        "mode": "arq_recap"
+      }
+    }
+  ],
+  "original_target_seconds": 510,
+  "timing_note": "Retimed for approximately140spoken words perminute;browser pauses are unlimited."
+}

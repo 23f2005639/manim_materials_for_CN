@@ -1,0 +1,175 @@
+{
+  "fps": 30.0,
+  "sections": [
+    {
+      "name": "A secret on a public network",
+      "animation_end_frame": 643,
+      "section_seconds": 22.367,
+      "visual_seconds": 20.967,
+      "visual_fraction": 0.937
+    },
+    {
+      "name": "Plaintext becomes ciphertext",
+      "animation_end_frame": 1300,
+      "section_seconds": 21.9,
+      "visual_seconds": 20.55,
+      "visual_fraction": 0.938
+    },
+    {
+      "name": "The algorithm can be public",
+      "animation_end_frame": 1983,
+      "section_seconds": 22.8,
+      "visual_seconds": 21.45,
+      "visual_fraction": 0.941
+    },
+    {
+      "name": "Symmetric encryption uses a shared secret",
+      "animation_end_frame": 2654,
+      "section_seconds": 22.333,
+      "visual_seconds": 20.983,
+      "visual_fraction": 0.94
+    },
+    {
+      "name": "A key is not simply a memorable password",
+      "animation_end_frame": 3338,
+      "section_seconds": 22.8,
+      "visual_seconds": 21.45,
+      "visual_fraction": 0.941
+    },
+    {
+      "name": "The key-distribution problem",
+      "animation_end_frame": 3994,
+      "section_seconds": 21.9,
+      "visual_seconds": 20.55,
+      "visual_fraction": 0.938
+    },
+    {
+      "name": "Give Bob a pair of keys",
+      "animation_end_frame": 4716,
+      "section_seconds": 24.067,
+      "visual_seconds": 22.717,
+      "visual_fraction": 0.944
+    },
+    {
+      "name": "Publish the encryption key",
+      "animation_end_frame": 5362,
+      "section_seconds": 21.5,
+      "visual_seconds": 20.15,
+      "visual_fraction": 0.937
+    },
+    {
+      "name": "Encrypt to Bob\u2019s public key",
+      "animation_end_frame": 6046,
+      "section_seconds": 22.8,
+      "visual_seconds": 21.45,
+      "visual_fraction": 0.941
+    },
+    {
+      "name": "Decrypt with the private key",
+      "animation_end_frame": 6702,
+      "section_seconds": 21.9,
+      "visual_seconds": 20.55,
+      "visual_fraction": 0.938
+    },
+    {
+      "name": "Why not encrypt every file this way?",
+      "animation_end_frame": 7321,
+      "section_seconds": 20.633,
+      "visual_seconds": 19.283,
+      "visual_fraction": 0.935
+    },
+    {
+      "name": "Generate a fresh session key",
+      "animation_end_frame": 8006,
+      "section_seconds": 22.8,
+      "visual_seconds": 21.45,
+      "visual_fraction": 0.941
+    },
+    {
+      "name": "Protect the data with the session key",
+      "animation_end_frame": 8638,
+      "section_seconds": 21.067,
+      "visual_seconds": 19.717,
+      "visual_fraction": 0.936
+    },
+    {
+      "name": "Protect the session key for Bob",
+      "animation_end_frame": 9308,
+      "section_seconds": 22.333,
+      "visual_seconds": 20.983,
+      "visual_fraction": 0.94
+    },
+    {
+      "name": "Send the two protected pieces",
+      "animation_end_frame": 9952,
+      "section_seconds": 21.5,
+      "visual_seconds": 20.15,
+      "visual_fraction": 0.937
+    },
+    {
+      "name": "Bob recovers the key, then the message",
+      "animation_end_frame": 10610,
+      "section_seconds": 21.933,
+      "visual_seconds": 20.583,
+      "visual_fraction": 0.938
+    },
+    {
+      "name": "Secrecy alone does not detect tampering",
+      "animation_end_frame": 11254,
+      "section_seconds": 21.467,
+      "visual_seconds": 20.117,
+      "visual_fraction": 0.937
+    },
+    {
+      "name": "An authentication tag checks the package",
+      "animation_end_frame": 11913,
+      "section_seconds": 21.933,
+      "visual_seconds": 20.583,
+      "visual_fraction": 0.938
+    },
+    {
+      "name": "Do not reuse nonces carelessly",
+      "animation_end_frame": 12558,
+      "section_seconds": 21.5,
+      "visual_seconds": 20.15,
+      "visual_fraction": 0.937
+    },
+    {
+      "name": "A substituted public key changes everything",
+      "animation_end_frame": 13203,
+      "section_seconds": 21.5,
+      "visual_seconds": 20.15,
+      "visual_fraction": 0.937
+    },
+    {
+      "name": "Confidentiality is not a sender\u2019s signature",
+      "animation_end_frame": 13886,
+      "section_seconds": 22.767,
+      "visual_seconds": 21.417,
+      "visual_fraction": 0.941
+    },
+    {
+      "name": "How this differs from modern TLS",
+      "animation_end_frame": 14556,
+      "section_seconds": 22.367,
+      "visual_seconds": 21.017,
+      "visual_fraction": 0.94
+    },
+    {
+      "name": "Use established cryptographic protocols",
+      "animation_end_frame": 15200,
+      "section_seconds": 21.467,
+      "visual_seconds": 20.117,
+      "visual_fraction": 0.937
+    },
+    {
+      "name": "Solve the secrecy puzzle",
+      "animation_end_frame": 15871,
+      "section_seconds": 22.367,
+      "visual_seconds": 21.017,
+      "visual_fraction": 0.94
+    }
+  ],
+  "duration": 530.0,
+  "edition": "visual"
+}

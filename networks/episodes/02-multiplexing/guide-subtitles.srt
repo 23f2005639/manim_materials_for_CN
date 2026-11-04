@@ -1,0 +1,424 @@
+1
+00:00:00,000 --> 00:00:07,300
+Three cameras, three streams, one cable. If
+the signals share the
+
+2
+00:00:07,300 --> 00:00:14,600
+same path, why don't they become one
+unreadable mess? The answer
+
+3
+00:00:14,600 --> 00:00:21,900
+depends on a rule that makes combining them
+reversible.
+
+4
+00:00:21,900 --> 00:00:27,267
+First separate two ideas. The medium is the
+physical path; a
+
+5
+00:00:27,267 --> 00:00:32,633
+channel is a way of using that path. One cable
+can
+
+6
+00:00:32,633 --> 00:00:38,000
+support several channels when the equipment
+gives their signals distinguishable places
+
+7
+00:00:38,000 --> 00:00:43,367
+or turns.
+
+8
+00:00:43,367 --> 00:00:50,800
+At one end, the multiplexer combines the
+inputs. At the other,
+
+9
+00:00:50,800 --> 00:00:58,233
+the demultiplexer separates them. The
+important ingredient sits between those names:
+
+10
+00:00:58,233 --> 00:01:05,667
+both ends must agree on exactly how the
+sharing works.
+
+11
+00:01:05,667 --> 00:01:10,925
+A wave changes over time. Frequency counts its
+cycles each second;
+
+12
+00:01:10,925 --> 00:01:16,183
+bandwidth describes a range of frequencies.
+Shift your attention to the
+
+13
+00:01:16,183 --> 00:01:21,442
+frequency view: it shows where each signal
+occupies part of that
+
+14
+00:01:21,442 --> 00:01:26,700
+range.
+
+15
+00:01:26,700 --> 00:01:34,000
+Place each stream in a different frequency
+band. Now all three
+
+16
+00:01:34,000 --> 00:01:41,300
+can travel at once because their assigned
+bands differ. Frequency division
+
+17
+00:01:41,300 --> 00:01:48,600
+makes simultaneous sharing possible by
+separating signals along the frequency axis.
+
+18
+00:01:48,600 --> 00:01:53,967
+Why leave gaps between the bands? Real filters
+have gradual edges,
+
+19
+00:01:53,967 --> 00:01:59,333
+so neighboring signals could interfere. Guard
+bands provide space between them.
+
+20
+00:01:59,333 --> 00:02:04,700
+The price of cleaner separation is spectrum
+that carries no channel
+
+21
+00:02:04,700 --> 00:02:10,067
+here.
+
+22
+00:02:10,067 --> 00:02:15,542
+At the receiver, select the green band. A
+bandpass filter passes
+
+23
+00:02:15,542 --> 00:02:21,017
+that range and reduces others. The green
+stream doesn't wait for
+
+24
+00:02:21,017 --> 00:02:26,492
+the rest to finish; the receiver separates it
+by frequency while
+
+25
+00:02:26,492 --> 00:02:31,967
+they coexist.
+
+26
+00:02:31,967 --> 00:02:39,267
+Three bands need twenty kilohertz each. Two
+gaps need five each.
+
+27
+00:02:39,267 --> 00:02:46,567
+Add the occupied widths: twenty, five, twenty,
+five, twenty. Seventy kilohertz
+
+28
+00:02:46,567 --> 00:02:53,867
+covers this arrangement, before any extra
+margins at the outer edges.
+
+29
+00:02:53,867 --> 00:03:01,156
+Now one camera goes quiet. Its reserved band
+stays empty while
+
+30
+00:03:01,156 --> 00:03:08,444
+the others keep their allocations. The same
+clear separation that makes
+
+31
+00:03:08,444 --> 00:03:15,733
+this scheme simple can leave capacity unused
+when traffic becomes uneven.
+
+32
+00:03:15,733 --> 00:03:21,100
+Instead of separating streams by frequency,
+separate them by time. Let
+
+33
+00:03:21,100 --> 00:03:26,467
+each source use the shared path during an
+assigned turn. The
+
+34
+00:03:26,467 --> 00:03:31,833
+receiver identifies the source by when its
+data appears in the
+
+35
+00:03:31,833 --> 00:03:37,200
+schedule.
+
+36
+00:03:37,200 --> 00:03:42,567
+Follow the order: A, B, C, then repeat. The
+combined stream
+
+37
+00:03:42,567 --> 00:03:47,933
+alternates between sources, and the receiver
+reconstructs three outputs from those
+
+38
+00:03:47,933 --> 00:03:53,300
+positions. What looks mixed in transit becomes
+separate again by following
+
+39
+00:03:53,300 --> 00:03:58,667
+the schedule.
+
+40
+00:03:58,667 --> 00:04:04,250
+One complete round of slots forms a TDM frame
+in this
+
+41
+00:04:04,250 --> 00:04:09,833
+example. Here, frame means a repeating timing
+group. The same word
+
+42
+00:04:09,833 --> 00:04:15,417
+appears elsewhere in networking with other
+meanings, so keep this particular
+
+43
+00:04:15,417 --> 00:04:21,000
+structure in view.
+
+44
+00:04:21,000 --> 00:04:26,475
+The schedule only works if both ends agree on
+its boundaries.
+
+45
+00:04:26,475 --> 00:04:31,950
+Shift the receiver's timing and it assigns
+data to the wrong
+
+46
+00:04:31,950 --> 00:04:37,425
+source. Synchronization is part of the sharing
+mechanism, not an optional
+
+47
+00:04:37,425 --> 00:04:42,900
+finishing touch.
+
+48
+00:04:42,900 --> 00:04:48,475
+Each camera produces two megabits per second.
+Together they require six
+
+49
+00:04:48,475 --> 00:04:54,050
+megabits per second of useful shared capacity.
+A practical link needs
+
+50
+00:04:54,050 --> 00:04:59,625
+room for synchronization and other overhead
+too; useful data isn't the
+
+51
+00:04:59,625 --> 00:05:05,200
+whole transmitted stream.
+
+52
+00:05:05,200 --> 00:05:10,675
+When B has no data, its assigned turn still
+arrives. That
+
+53
+00:05:10,675 --> 00:05:16,150
+empty slot reveals the weakness of a fixed
+schedule: capacity can
+
+54
+00:05:16,150 --> 00:05:21,625
+go unused even while other sources have work
+waiting to be
+
+55
+00:05:21,625 --> 00:05:27,100
+sent.
+
+56
+00:05:27,100 --> 00:05:32,575
+Give turns only to sources with data, and
+those empty positions
+
+57
+00:05:32,575 --> 00:05:38,050
+can disappear. That's statistical TDM. The
+receiver now needs identifiers or
+
+58
+00:05:38,050 --> 00:05:43,525
+equivalent shared information, since a fixed
+repeating order no longer tells
+
+59
+00:05:43,525 --> 00:05:49,000
+the whole story.
+
+60
+00:05:49,000 --> 00:05:54,583
+Change the medium to fiber. Several optical
+channels can share a
+
+61
+00:05:54,583 --> 00:06:00,167
+strand, represented here by different colors.
+The drawing tracks their identities;
+
+62
+00:06:00,167 --> 00:06:05,750
+real systems select particular optical
+wavelengths rather than relying on our
+
+63
+00:06:05,750 --> 00:06:11,333
+display colors.
+
+64
+00:06:11,333 --> 00:06:16,700
+Wavelength division carries those optical
+channels together using different wavelengths.
+They
+
+65
+00:06:16,700 --> 00:06:22,067
+travel simultaneously through the same fiber.
+The sharing resembles frequency separation,
+
+66
+00:06:22,067 --> 00:06:27,433
+now implemented with light and the optical
+equipment needed to handle
+
+67
+00:06:27,433 --> 00:06:32,800
+it.
+
+68
+00:06:32,800 --> 00:06:40,089
+At the far end, optical components separate
+the combined wavelengths into
+
+69
+00:06:40,089 --> 00:06:47,378
+their outputs. Without that final separation,
+combining channels wouldn't help. The
+
+70
+00:06:47,378 --> 00:06:54,667
+receiver completes the rule that made sharing
+one strand useful.
+
+71
+00:06:54,667 --> 00:07:00,358
+Four channels at ten gigabits per second each
+produce forty gigabits
+
+72
+00:07:00,358 --> 00:07:06,050
+per second of raw combined rate. The
+multiplication is simple; interpreting
+
+73
+00:07:06,050 --> 00:07:11,742
+it matters. Application throughput can be
+lower after the system's overhead
+
+74
+00:07:11,742 --> 00:07:17,433
+is included.
+
+75
+00:07:17,433 --> 00:07:24,589
+More channels don't remove the limits of the
+medium. Light can
+
+76
+00:07:24,589 --> 00:07:31,744
+weaken, pulses can spread, and noise can
+disrupt recovery. Multiplexing organizes
+
+77
+00:07:31,744 --> 00:07:38,900
+available resources; it doesn't create an
+unlimited, perfectly clean connection.
+
+78
+00:07:38,900 --> 00:07:46,200
+Compare the pictures. FDM separates frequency
+bands; TDM separates time slots;
+
+79
+00:07:46,200 --> 00:07:53,500
+WDM separates optical wavelengths. Each gives
+the receiver a different clue
+
+80
+00:07:53,500 --> 00:08:00,800
+for reconstructing the original inputs after
+they shared a path.
+
+81
+00:08:00,800 --> 00:08:06,267
+The right arrangement depends on the traffic.
+Steady streams may fit
+
+82
+00:08:06,267 --> 00:08:11,733
+fixed allocations, while bursts benefit from
+serving active sources. Equipment and
+
+83
+00:08:11,733 --> 00:08:17,200
+physical constraints matter too. There isn't
+one sharing rule that wins
+
+84
+00:08:17,200 --> 00:08:22,667
+in every setting.
+
+85
+00:08:22,667 --> 00:08:28,250
+The three cameras never needed three separate
+cables. They needed a
+
+86
+00:08:28,250 --> 00:08:33,833
+separation rule both ends understood. Remember
+the bands, turns, and wavelengths:
+
+87
+00:08:33,833 --> 00:08:39,417
+sharing works when the receiver can still tell
+which information belongs
+
+88
+00:08:39,417 --> 00:08:45,000
+to whom.

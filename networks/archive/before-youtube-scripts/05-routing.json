@@ -1,0 +1,1957 @@
+{
+  "id": "05",
+  "slug": "routing",
+  "title": "How Routers Find the Best Path",
+  "duration": 510,
+  "sources": [
+    {
+      "title": "RFC 2328 — OSPF Version 2",
+      "url": "https://www.rfc-editor.org/rfc/rfc2328",
+      "notes": "Sections 2 and 16: link-state databases and shortest-path trees using Dijkstra. The teaching graph uses positive arbitrary link costs.",
+      "checked": "2026-11-03"
+    },
+    {
+      "title": "RFC 2453 — RIP Version 2",
+      "url": "https://www.rfc-editor.org/rfc/rfc2453",
+      "notes": "Sections 3.4.1–3.4.3: distance-vector updates, count-to-infinity, metric16, split horizon and poisoned reverse.",
+      "checked": "2026-11-03"
+    }
+  ],
+  "sections": [
+    {
+      "id": "05-01",
+      "title": "Which route should this packet take?",
+      "chapter": "The routing puzzle",
+      "duration": 21.6,
+      "narration": "The shortest-looking campus shortcut isn't always the quickest. Networks face a similar puzzle: several paths can reach the destination, but which has the lowest total cost? Let's help this packet choose without relying on vibes.",
+      "bullets": [
+        "One destination, several paths",
+        "Best depends on the metric"
+      ],
+      "takeaway": "A route is best only relative to its chosen metric.",
+      "visual": {
+        "mode": "graph",
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ],
+        "source": "A",
+        "destination": "F",
+        "highlight_path": [
+          "A",
+          "B",
+          "D",
+          "F"
+        ]
+      },
+      "short_title": "Which path wins?"
+    },
+    {
+      "id": "05-02",
+      "title": "Turn the network into a graph",
+      "chapter": "The routing puzzle",
+      "duration": 20.766666666666666,
+      "narration": "We'll turn devices into points and connections into lines. Each line gets a cost. These are made-up positive costs, not automatically seconds. Think of them as the price of taking each step on our little network map.",
+      "bullets": [
+        "Routers become vertices",
+        "Links carry positive costs"
+      ],
+      "takeaway": "A graph makes route choices visible and calculable.",
+      "visual": {
+        "mode": "graph",
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ],
+        "source": "A",
+        "destination": "F"
+      },
+      "short_title": "Build the graph"
+    },
+    {
+      "id": "05-03",
+      "title": "Add costs, not just hops",
+      "chapter": "The routing puzzle",
+      "duration": 21.166666666666668,
+      "narration": "The route A-B-D-F adds up to fifteen. A-C-B-D-E-F has more steps, but costs thirteen. Surprise: fewer links doesn't always mean a better route. Add the costs before declaring that shortcut a winner.",
+      "bullets": [
+        "A-B-D-F costs 15",
+        "Hop count is only one metric"
+      ],
+      "takeaway": "Path cost is the sum of the costs along that path.",
+      "visual": {
+        "mode": "graph",
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ],
+        "source": "A",
+        "destination": "F",
+        "highlight_path": [
+          "A",
+          "B",
+          "D",
+          "F"
+        ],
+        "equation": "4 + 5 + 6 = 15"
+      },
+      "short_title": "Add the costs"
+    },
+    {
+      "id": "05-04",
+      "title": "Routing versus forwarding",
+      "chapter": "The routing puzzle",
+      "duration": 21.166666666666668,
+      "narration": "Routing works out the useful choices. Forwarding uses those choices to move actual packets, one hop at a time. Think planning your trip first, then following the directions. We need both parts to reach the destination.",
+      "bullets": [
+        "Routing builds the choices",
+        "Forwarding uses those choices"
+      ],
+      "takeaway": "Compute routes in the control plane; forward packets using the result.",
+      "visual": {
+        "mode": "graph",
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ],
+        "source": "A",
+        "destination": "F",
+        "highlight_path": [
+          "A",
+          "C",
+          "B",
+          "D",
+          "E",
+          "F"
+        ]
+      },
+      "short_title": "Routing then forwarding"
+    },
+    {
+      "id": "05-05",
+      "title": "Start Dijkstra at A",
+      "chapter": "Dijkstra worked example",
+      "duration": 20.766666666666666,
+      "narration": "At A, our starting cost is zero. Everywhere else begins at infinity, meaning 'no route found yet.' Dijkstra's rule is to settle the smallest current candidate, then check whether its connections improve our other guesses.",
+      "bullets": [
+        "Distance at A starts at 0",
+        "Unknown distances start at infinity"
+      ],
+      "takeaway": "Dijkstra grows a tree of shortest paths from the source.",
+      "visual": {
+        "mode": "dijkstra",
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ],
+        "source": "A",
+        "destination": "F",
+        "settled": [],
+        "distances": {
+          "A": 0,
+          "B": "∞",
+          "C": "∞",
+          "D": "∞",
+          "E": "∞",
+          "F": "∞"
+        }
+      },
+      "short_title": "Start at zero"
+    },
+    {
+      "id": "05-06",
+      "title": "Settle A and inspect its neighbors",
+      "chapter": "Dijkstra worked example",
+      "duration": 20.733333333333334,
+      "narration": "From A, we find B at cost four and C at cost two. Write those down in pencil, not permanent marker. They're our best costs so far, and another route might still beat them.",
+      "bullets": [
+        "B becomes 4 via A",
+        "C becomes 2 via A"
+      ],
+      "takeaway": "Relaxing a link means testing whether it improves a tentative route.",
+      "visual": {
+        "mode": "dijkstra",
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ],
+        "source": "A",
+        "destination": "F",
+        "settled": [
+          "A"
+        ],
+        "distances": {
+          "A": 0,
+          "B": 4,
+          "C": 2,
+          "D": "∞",
+          "E": "∞",
+          "F": "∞"
+        },
+        "current": "A"
+      },
+      "short_title": "Expand A"
+    },
+    {
+      "id": "05-07",
+      "title": "Settle C and improve B",
+      "chapter": "Dijkstra worked example",
+      "duration": 21.166666666666668,
+      "narration": "C has the smallest current cost, so explore it next. Reaching B through C costs two plus one: three. That's better than four. D becomes ten, and E becomes twelve. Our map is getting smarter.",
+      "bullets": [
+        "B improves: 2 + 1 = 3",
+        "D is 10; E is 12"
+      ],
+      "takeaway": "A newly discovered detour can improve an earlier direct route.",
+      "visual": {
+        "mode": "dijkstra",
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ],
+        "source": "A",
+        "destination": "F",
+        "settled": [
+          "A",
+          "C"
+        ],
+        "distances": {
+          "A": 0,
+          "B": 3,
+          "C": 2,
+          "D": 10,
+          "E": 12,
+          "F": "∞"
+        },
+        "current": "C"
+      },
+      "short_title": "Expand C"
+    },
+    {
+      "id": "05-08",
+      "title": "Settle B and improve D",
+      "chapter": "Dijkstra worked example",
+      "duration": 20.766666666666666,
+      "narration": "Now settle B at three. Add the five-cost link to D, and we get eight instead of ten. Update D's cost and remember B as the previous stop. A cheaper route means we change our notes.",
+      "bullets": [
+        "D improves: 3 + 5 = 8",
+        "Predecessor of D becomes B"
+      ],
+      "takeaway": "Always expand the smallest unvisited tentative distance.",
+      "visual": {
+        "mode": "dijkstra",
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ],
+        "source": "A",
+        "destination": "F",
+        "settled": [
+          "A",
+          "C",
+          "B"
+        ],
+        "distances": {
+          "A": 0,
+          "B": 3,
+          "C": 2,
+          "D": 8,
+          "E": 12,
+          "F": "∞"
+        },
+        "current": "B"
+      },
+      "short_title": "Expand B"
+    },
+    {
+      "id": "05-09",
+      "title": "Settle D and reach toward F",
+      "chapter": "Dijkstra worked example",
+      "duration": 21.166666666666668,
+      "narration": "D is next, at eight. Through D, E improves to ten and F is found at fourteen. Found doesn't mean finished, though. Someone else on our map may still offer F a better deal.",
+      "bullets": [
+        "E improves to 10",
+        "F is discovered at 14"
+      ],
+      "takeaway": "Discovery is not finalization: a cheaper route may still appear.",
+      "visual": {
+        "mode": "dijkstra",
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ],
+        "source": "A",
+        "destination": "F",
+        "settled": [
+          "A",
+          "C",
+          "B",
+          "D"
+        ],
+        "distances": {
+          "A": 0,
+          "B": 3,
+          "C": 2,
+          "D": 8,
+          "E": 10,
+          "F": 14
+        },
+        "current": "D"
+      },
+      "short_title": "Expand D"
+    },
+    {
+      "id": "05-10",
+      "title": "Settle E and improve F",
+      "chapter": "Dijkstra worked example",
+      "duration": 21.166666666666668,
+      "narration": "And here's that better deal. E is ten, and its link to F costs three. Total: thirteen. That beats fourteen, so replace the old cost and remember E as F's previous stop.",
+      "bullets": [
+        "F improves: 10 + 3 = 13",
+        "Predecessor of F becomes E"
+      ],
+      "takeaway": "Compare complete candidate costs, not just the last link.",
+      "visual": {
+        "mode": "dijkstra",
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ],
+        "source": "A",
+        "destination": "F",
+        "settled": [
+          "A",
+          "C",
+          "B",
+          "D",
+          "E"
+        ],
+        "distances": {
+          "A": 0,
+          "B": 3,
+          "C": 2,
+          "D": 8,
+          "E": 10,
+          "F": 13
+        },
+        "current": "E"
+      },
+      "short_title": "Expand E"
+    },
+    {
+      "id": "05-11",
+      "title": "Finalize F: thirteen is optimal",
+      "chapter": "Dijkstra worked example",
+      "duration": 21.2,
+      "narration": "F's thirteen is now the smallest unfinished distance, so we can settle it. From A through F, the final costs are zero, three, two, eight, ten, and thirteen. Our pencil notes have become confirmed results.",
+      "bullets": [
+        "Final distance to F is 13",
+        "Unreachable would remain infinity"
+      ],
+      "takeaway": "Final distances summarize the shortest-path tree rooted at A.",
+      "visual": {
+        "mode": "distances",
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ],
+        "source": "A",
+        "destination": "F",
+        "settled": [
+          "A",
+          "C",
+          "B",
+          "D",
+          "E",
+          "F"
+        ],
+        "distances": {
+          "A": 0,
+          "B": 3,
+          "C": 2,
+          "D": 8,
+          "E": 10,
+          "F": 13
+        },
+        "current": "F"
+      },
+      "short_title": "Finalize F"
+    },
+    {
+      "id": "05-12",
+      "title": "Follow the predecessors backward",
+      "chapter": "Dijkstra worked example",
+      "duration": 21.166666666666668,
+      "narration": "We know the cost, but what route produced it? Start at F and follow the saved previous stops: E, D, B, C, A. Read that backward, and we recover the actual forward journey.",
+      "bullets": [
+        "A-C-B-D-E-F",
+        "2 + 1 + 5 + 2 + 3 = 13"
+      ],
+      "takeaway": "Predecessor links reconstruct the actual route, not merely its cost.",
+      "visual": {
+        "mode": "graph",
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ],
+        "source": "A",
+        "destination": "F",
+        "highlight_path": [
+          "A",
+          "C",
+          "B",
+          "D",
+          "E",
+          "F"
+        ],
+        "equation": "2 + 1 + 5 + 2 + 3 = 13"
+      },
+      "short_title": "Trace the predecessors"
+    },
+    {
+      "id": "05-13",
+      "title": "Install the next hop",
+      "chapter": "From algorithm to routers",
+      "duration": 21.6,
+      "narration": "From A, the next step toward F is C. A doesn't need to carry the packet through the whole route. Each router handles its next decision. Real routing tables usually describe address blocks, rather than single drawn points.",
+      "bullets": [
+        "Destination F: next hop C",
+        "Real routes usually identify prefixes"
+      ],
+      "takeaway": "A forwarding decision chooses the next hop toward a destination.",
+      "visual": {
+        "mode": "graph",
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ],
+        "source": "A",
+        "destination": "F",
+        "highlight_path": [
+          "A",
+          "C"
+        ],
+        "next_hop": "C"
+      },
+      "short_title": "Choose the next hop"
+    },
+    {
+      "id": "05-14",
+      "title": "Distance vector: ask the neighbors",
+      "chapter": "From algorithm to routers",
+      "duration": 20.766666666666666,
+      "narration": "Distance-vector routing takes a neighbor-based approach. Ask a neighbor what its route costs, then add the cost of reaching that neighbor. It's like comparing directions from friends, but keeping the travel cost to each friend in the total.",
+      "bullets": [
+        "Neighbor cost + advertised distance",
+        "Choose the least-cost candidate"
+      ],
+      "takeaway": "Distance vectors exchange destination estimates with neighbors.",
+      "visual": {
+        "mode": "distancevector",
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ],
+        "source": "A",
+        "destination": "F"
+      },
+      "short_title": "Ask the neighbors"
+    },
+    {
+      "id": "05-15",
+      "title": "A numerical distance-vector update",
+      "chapter": "From algorithm to routers",
+      "duration": 20.3,
+      "narration": "B reports a cost of ten to F. Reaching B costs four, so that option is fourteen. Through C, two plus eleven gives thirteen. Choose C. Helpful advice still needs a little addition before we follow it.",
+      "bullets": [
+        "Via B: 4 + 10 = 14",
+        "Via C: 2 + 11 = 13"
+      ],
+      "takeaway": "The Bellman-Ford update combines a local link cost with a neighbor estimate.",
+      "visual": {
+        "mode": "distancevector",
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ],
+        "source": "A",
+        "destination": "F",
+        "candidates": {
+          "B": 14,
+          "C": 13
+        },
+        "equation": "min(4 + 10, 2 + 11) = 13"
+      },
+      "short_title": "Compare two estimates"
+    },
+    {
+      "id": "05-16",
+      "title": "Link state: distribute the map",
+      "chapter": "From algorithm to routers",
+      "duration": 22.066666666666666,
+      "narration": "Link-state routing shares a different kind of information: which local links exist and what they cost. Routers build a network map from those facts, then calculate paths themselves. They're sharing map pieces, not just destination estimates.",
+      "bullets": [
+        "Advertise local links",
+        "Calculate from a topology database"
+      ],
+      "takeaway": "Link-state protocols distribute topology, then compute routes locally.",
+      "visual": {
+        "mode": "linkstate",
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ],
+        "source": "A",
+        "destination": "F",
+        "flood_from": "D"
+      },
+      "short_title": "Distribute link facts"
+    },
+    {
+      "id": "05-17",
+      "title": "Same goal, different information",
+      "chapter": "From algorithm to routers",
+      "duration": 22.033333333333335,
+      "narration": "So the key difference is what gets shared. Distance vector shares estimates to destinations; link state shares link facts. Both need time to learn changes. News doesn't teleport across a network, even when it's important.",
+      "bullets": [
+        "Distance vector: destination estimates",
+        "Link state: local link descriptions"
+      ],
+      "takeaway": "Do not confuse the information exchanged with the forwarding action.",
+      "visual": {
+        "mode": "linkstate",
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ],
+        "source": "A",
+        "destination": "F",
+        "compare": true
+      },
+      "short_title": "Different information, same goal"
+    },
+    {
+      "id": "05-18",
+      "title": "Break the D-to-E link",
+      "chapter": "When the network changes",
+      "duration": 21.166666666666668,
+      "narration": "Uh-oh, the D-to-E link fails. Our thirteen-cost route is gone. The new best route is A-C-B-D-F, costing fourteen. A-C-E-F costs fifteen. We have to check the remaining options instead of following yesterday's answer.",
+      "bullets": [
+        "D-E is unavailable",
+        "New best route costs 14"
+      ],
+      "takeaway": "A shortest path is valid only for the topology used to calculate it.",
+      "visual": {
+        "mode": "failure",
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ],
+        "source": "A",
+        "destination": "F",
+        "failed_edge": [
+          "D",
+          "E"
+        ],
+        "highlight_path": [
+          "A",
+          "C",
+          "B",
+          "D",
+          "F"
+        ],
+        "equation": "2 + 1 + 5 + 6 = 14"
+      },
+      "short_title": "Break one link"
+    },
+    {
+      "id": "05-19",
+      "title": "Convergence takes time",
+      "chapter": "When the network changes",
+      "duration": 21.166666666666668,
+      "narration": "Routers need time to notice a failure, spread the update, and recalculate. During that change, they can disagree. This settling period is called convergence. Think of everyone updating their map, rather than getting one instant announcement.",
+      "bullets": [
+        "Detection, distribution, calculation",
+        "Temporary disagreement is possible"
+      ],
+      "takeaway": "Convergence is a process, not an instantaneous global switch.",
+      "visual": {
+        "mode": "failure",
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ],
+        "source": "A",
+        "destination": "F",
+        "failed_edge": [
+          "D",
+          "E"
+        ],
+        "converging": true
+      },
+      "short_title": "Wait for convergence"
+    },
+    {
+      "id": "05-20",
+      "title": "Why bad news can travel slowly",
+      "chapter": "When the network changes",
+      "duration": 21.633333333333333,
+      "narration": "Here's a nasty misunderstanding: each neighbor thinks the other still has a route. The costs keep rising as they repeat the claim. That's counting to infinity. In RIP, sixteen means unreachable; other protocols use different rules.",
+      "bullets": [
+        "Stale estimates can form loops",
+        "RIP treats metric 16 as unreachable"
+      ],
+      "takeaway": "Count-to-infinity is a distance-vector convergence failure mode.",
+      "visual": {
+        "mode": "distancevector",
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ],
+        "source": "A",
+        "destination": "F",
+        "count_to_infinity": [
+          3,
+          4,
+          5,
+          6,
+          16
+        ]
+      },
+      "short_title": "Count toward infinity"
+    },
+    {
+      "id": "05-21",
+      "title": "Reduce loops, but know the limits",
+      "chapter": "When the network changes",
+      "duration": 22.033333333333335,
+      "narration": "Poisoned reverse helps stop one kind of circular advice. If A reaches a destination through C, A tells C that destination is unreachable through A. Basically: 'Don't send it back to me; I'm relying on you.'",
+      "bullets": [
+        "Split horizon and poisoned reverse",
+        "Triggered updates spread changes"
+      ],
+      "takeaway": "Convergence safeguards reduce specific problems; they are not magic.",
+      "visual": {
+        "mode": "distancevector",
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ],
+        "source": "A",
+        "destination": "F",
+        "safeguard": "poisoned reverse"
+      },
+      "short_title": "Poison the reverse route"
+    },
+    {
+      "id": "05-22",
+      "title": "A shortest path is not every policy",
+      "chapter": "Beyond the teaching graph",
+      "duration": 21.166666666666668,
+      "narration": "Change a link's cost, and a different route may become the best choice. That's why 'shortest' needs a definition. The network might care about configured costs and policy, rather than the number of kilometers on a map.",
+      "bullets": [
+        "Metric and policy shape route choice",
+        "Shortest does not mean geographic"
+      ],
+      "takeaway": "The algorithm solves the cost model you actually give it.",
+      "visual": {
+        "mode": "graph",
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ],
+        "source": "A",
+        "destination": "F",
+        "highlight_path": [
+          "A",
+          "C",
+          "B",
+          "D",
+          "E",
+          "F"
+        ]
+      },
+      "short_title": "Change the metric"
+    },
+    {
+      "id": "05-23",
+      "title": "Scale through hierarchy",
+      "chapter": "Beyond the teaching graph",
+      "duration": 21.633333333333333,
+      "narration": "A huge network map gets difficult to share everywhere. Hierarchy groups details into regions and address blocks. Like using a campus map first and a building map later, we keep the amount of information manageable.",
+      "bullets": [
+        "Group destinations and topology",
+        "Reduce routing state and updates"
+      ],
+      "takeaway": "Hierarchy makes routing information manageable at larger scales.",
+      "visual": {
+        "mode": "graph",
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ],
+        "source": "A",
+        "destination": "F",
+        "hierarchy": true
+      },
+      "short_title": "Group into regions"
+    },
+    {
+      "id": "05-24",
+      "title": "Solve the opening puzzle",
+      "chapter": "Recap",
+      "duration": 21.6,
+      "narration": "Our best route cost thirteen, then fourteen after a link failed. The useful lesson is the process: learn the facts, compare complete costs, and choose a valid next hop. When the facts change, update the answer.",
+      "bullets": [
+        "Original cost 13; after failure 14",
+        "Learn routes, then forward locally"
+      ],
+      "takeaway": "Best paths depend on costs, topology, and sufficiently current information.",
+      "visual": {
+        "mode": "graph",
+        "nodes": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F"
+        ],
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ],
+        "source": "A",
+        "destination": "F",
+        "highlight_path": [
+          "A",
+          "C",
+          "B",
+          "D",
+          "E",
+          "F"
+        ],
+        "equation": "Original: 13   |   D-E failed: 14"
+      },
+      "short_title": "Recompute when facts change"
+    }
+  ],
+  "original_target_seconds": 510,
+  "timing_note": "Retimed for approximately140spoken words perminute;browser pauses are unlimited."
+}

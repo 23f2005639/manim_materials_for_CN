@@ -1,0 +1,10 @@
+00:00 The puzzle
+00:45 ALOHA
+03:23 Carrier sensing
+05:17 Collision detection
+06:25 Backoff
+06:48 Worked example
+07:11 Backoff
+07:35 Modern distinctions
+08:20 Comparison
+08:43 Recap

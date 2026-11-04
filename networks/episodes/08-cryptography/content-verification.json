@@ -1,0 +1,19 @@
+{
+  "episode": "08",
+  "review_type": "Independent source, storyboard, and animation-code review",
+  "status": "passed after corrections",
+  "narration_words": 1233,
+  "sections": 24,
+  "sources_checked": 3,
+  "checks": [
+    "Visual dispatch follows the exact symmetric, public-key, hybrid, and authentication storyboard modes.",
+    "Nonce uniqueness, key substitution, and tamper detection have dedicated diagrams.",
+    "Illustrative ciphertext is explicitly distinguished from a working secure cipher.",
+    "Authenticated encryption is distinguished from sender identity.",
+    "The wrapped-session-key teaching example is explicitly distinguished from TLS 1.3.",
+    "Public-key authentication and private-key protection are explained."
+  ],
+  "limitations": "This report verifies concepts and source alignment. Separate media and browser reports cover rendered files and controls.",
+  "integrated_layout_inspection": "Passed after corrections: no problems in all 24 sampled sections",
+  "visual_review": "Independently reviewed corrected storyboard sheet 3 for labels, route states, and encryption diagrams."
+}

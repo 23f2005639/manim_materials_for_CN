@@ -1,0 +1,416 @@
+{
+  "id": "01",
+  "slug": "website",
+  "title": "What Happens When You Open a Website?",
+  "duration": 525,
+  "sources": [
+    {
+      "title": "RFC 1034: Domain Names — Concepts and Facilities",
+      "url": "https://www.rfc-editor.org/rfc/rfc1034",
+      "notes": "Checked resolver, hierarchy and cache behavior; narrative uses a deliberately simplified uncached lookup."
+    },
+    {
+      "title": "RFC 9112: HTTP/1.1",
+      "url": "https://www.rfc-editor.org/rfc/rfc9112",
+      "notes": "Checked request/response framing and connection management; this episode uses a teaching example of HTTP/1.1 over TCP."
+    },
+    {
+      "title": "RFC 9293: Transmission Control Protocol",
+      "url": "https://www.rfc-editor.org/rfc/rfc9293",
+      "notes": "Checked ports, sequence numbers and connection establishment."
+    },
+    {
+      "title": "RFC 9114: HTTP/3",
+      "url": "https://www.rfc-editor.org/rfc/rfc9114",
+      "notes": "Checked HTTP/3 maps HTTP semantics onto QUIC rather than TCP."
+    }
+  ],
+  "sections": [
+    {
+      "id": "01-01",
+      "title": "One click, many conversations",
+      "chapter": "The puzzle",
+      "duration": 21.066666666666666,
+      "narration": "You click a website, and the loading circle starts its little workout. What is everyone waiting for? Let's follow one request and see the team effort hiding behind that single click.",
+      "bullets": [
+        "Browser to server",
+        "Many protocols cooperate"
+      ],
+      "takeaway": "Opening a website is a sequence of coordinated network tasks.",
+      "visual": {
+        "mode": "website"
+      },
+      "short_title": "One click, many journeys"
+    },
+    {
+      "id": "01-02",
+      "title": "Choose a clear teaching model",
+      "chapter": "The puzzle",
+      "duration": 21.466666666666665,
+      "narration": "We'll use a simple example: HTTP version one point one over TCP. Real browsers have shortcuts, like saved answers and reused connections. For now, we're taking the scenic route so we can see each step.",
+      "bullets": [
+        "HTTP/1.1 over TCP",
+        "A simplified first visit"
+      ],
+      "takeaway": "This example explains one path, not every modern browser connection.",
+      "visual": {
+        "mode": "website_model"
+      },
+      "short_title": "Choose a simple example"
+    },
+    {
+      "id": "01-03",
+      "title": "From LAN to WAN",
+      "chapter": "The route",
+      "duration": 21.066666666666666,
+      "narration": "First, our request leaves the local network. Routers help it reach other networks. Think of campus buildings connected by roads: the Internet joins lots of separate networks, rather than being one giant room.",
+      "bullets": [
+        "Local network first",
+        "Routers join networks"
+      ],
+      "takeaway": "The Internet connects many separate networks.",
+      "visual": {
+        "mode": "packet_path"
+      },
+      "short_title": "Connect separate networks"
+    },
+    {
+      "id": "01-04",
+      "title": "Layers divide the work",
+      "chapter": "The route",
+      "duration": 21.9,
+      "narration": "These layers are a way to split the jobs. OSI lists seven; this TCP/IP model groups them into four. Same general responsibilities, different grouping. It's a team chart, not seven physical boxes inside your laptop.",
+      "bullets": [
+        "OSI: seven conceptual layers",
+        "TCP/IP: four-layer teaching model"
+      ],
+      "takeaway": "OSI and TCP/IP group related communication responsibilities differently.",
+      "visual": {
+        "mode": "osi_tcpip_mapping"
+      },
+      "short_title": "Match responsibilities, not boxes"
+    },
+    {
+      "id": "01-05",
+      "title": "Ask for an address",
+      "chapter": "Finding the server",
+      "duration": 21.466666666666665,
+      "narration": "We know the website's name, but where does it live? DNS helps us find its address. Our browser asks a helper called a resolver. Basically: 'I know the name. Can you find the place?'",
+      "bullets": [
+        "Name: example.test",
+        "DNS answers with records"
+      ],
+      "takeaway": "DNS helps translate a useful name into addressing information.",
+      "visual": {
+        "mode": "dns_query"
+      },
+      "short_title": "Find the server address"
+    },
+    {
+      "id": "01-06",
+      "title": "Follow the DNS hierarchy",
+      "chapter": "Finding the server",
+      "duration": 21.5,
+      "narration": "If the resolver has no saved answer, it follows directions: root, top-level domain, then the server responsible for that name. Like asking around campus, each reply gets us closer. The resolver does the running around.",
+      "bullets": [
+        "Root to domain authorities",
+        "Resolver follows referrals"
+      ],
+      "takeaway": "An uncached DNS lookup may follow several referrals.",
+      "visual": {
+        "mode": "dns_hierarchy"
+      },
+      "short_title": "Follow the DNS referrals"
+    },
+    {
+      "id": "01-07",
+      "title": "Reuse a cached answer",
+      "chapter": "Finding the server",
+      "duration": 21.466666666666665,
+      "narration": "Good news: we don't always repeat that whole search. The resolver can save an answer in its cache. But saved answers have an expiry time. Even a helpful shortcut needs a freshness check.",
+      "bullets": [
+        "Cache avoids repeated lookups",
+        "TTL limits reuse"
+      ],
+      "takeaway": "A cached DNS answer can shorten the next visit.",
+      "visual": {
+        "mode": "dns_cache"
+      },
+      "short_title": "Reuse an answer temporarily"
+    },
+    {
+      "id": "01-08",
+      "title": "Choose the receiving process",
+      "chapter": "Transport setup",
+      "duration": 22.333333333333332,
+      "narration": "An IP address gets us to the host. A port helps find the right application there. Here, client port 49152 talks to server port 80. Think building address first, then the right room.",
+      "bullets": [
+        "IP identifies a host interface",
+        "Ports identify transport endpoints"
+      ],
+      "takeaway": "An IP address alone does not select the receiving application.",
+      "visual": {
+        "mode": "ports"
+      },
+      "short_title": "Select an application endpoint"
+    },
+    {
+      "id": "01-09",
+      "title": "Establish a TCP connection",
+      "chapter": "Transport setup",
+      "duration": 21.5,
+      "narration": "Before sending our request, TCP does a quick three-message introduction: SYN, SYN with ACK, then ACK. Both sides set up their connection state. They haven't booked a private cable across the Internet, though.",
+      "bullets": [
+        "SYN → SYN-ACK → ACK",
+        "Synchronize sequence spaces"
+      ],
+      "takeaway": "The TCP handshake establishes connection state at both ends.",
+      "visual": {
+        "mode": "handshake"
+      },
+      "short_title": "Synchronize the TCP connection"
+    },
+    {
+      "id": "01-10",
+      "title": "Build the HTTP request",
+      "chapter": "Create the request",
+      "duration": 21.9,
+      "narration": "Now comes GET: 'Please send me this resource.' HTTP gives that request its meaning. TCP carries the bytes underneath. It's like a delivery service that moves your assignment without checking whether your answers are correct.",
+      "bullets": [
+        "GET identifies a resource",
+        "Headers describe the request"
+      ],
+      "takeaway": "HTTP describes what the application wants.",
+      "visual": {
+        "mode": "http_get"
+      },
+      "short_title": "Ask for the resource"
+    },
+    {
+      "id": "01-11",
+      "title": "Wrap the application bytes",
+      "chapter": "Create the request",
+      "duration": 21.9,
+      "narration": "Keep your eye on the blue message. We're adding information around it, like putting a letter inside labelled envelopes. That's encapsulation. And a big message may need several transport segments to make the trip.",
+      "bullets": [
+        "Headers carry layer information",
+        "Payload remains inside"
+      ],
+      "takeaway": "Encapsulation packages one layer's data for the next layer.",
+      "visual": {
+        "mode": "encapsulation_stack"
+      },
+      "short_title": "Keep the message inside"
+    },
+    {
+      "id": "01-12",
+      "title": "Transport adds its information",
+      "chapter": "Create the request",
+      "duration": 21.933333333333334,
+      "narration": "The TCP information includes ports and sequence numbers. That helps identify the endpoints and track the bytes. Our HTTP message stays inside. One application's write doesn't have to fit neatly inside one TCP segment.",
+      "bullets": [
+        "Ports and sequence information",
+        "A stream can span segments"
+      ],
+      "takeaway": "TCP organizes a byte stream into segments for transmission.",
+      "visual": {
+        "mode": "tcp_segment"
+      },
+      "short_title": "Add the TCP information"
+    },
+    {
+      "id": "01-13",
+      "title": "Address the IP packet",
+      "chapter": "Create the request",
+      "duration": 21.9,
+      "narration": "Now we add the IP information: where the data is coming from and where it's going. Routers use it to pick the next hop. Our server stays the goal, although address translation can change addresses.",
+      "bullets": [
+        "Source and destination IP",
+        "Forwarding happens hop by hop"
+      ],
+      "takeaway": "IP addressing supports delivery across interconnected networks.",
+      "visual": {
+        "mode": "ip_packet"
+      },
+      "short_title": "Add the Internet envelope"
+    },
+    {
+      "id": "01-14",
+      "title": "Prepare the local frame",
+      "chapter": "Create the request",
+      "duration": 22.766666666666666,
+      "narration": "The outermost envelope handles the next local step. For a distant server, that step might be our gateway. The server's IP is the final destination; the local MAC address helps us reach the next stop.",
+      "bullets": [
+        "Link addresses for this hop",
+        "Frame carries the IP packet"
+      ],
+      "takeaway": "A link-layer frame serves one local link.",
+      "visual": {
+        "mode": "ethernet_frame"
+      },
+      "short_title": "Address the next local hop"
+    },
+    {
+      "id": "01-15",
+      "title": "Turn bits into signals",
+      "chapter": "Cross the network",
+      "duration": 21.933333333333334,
+      "narration": "Tiny written zeros and ones aren't actually running through the cable. Those bits become changing signals. A wire, a fiber, and a radio link carry them differently. The picture is showing the idea, not miniature travelling digits.",
+      "bullets": [
+        "Electrical, radio or optical",
+        "Encoding represents bits"
+      ],
+      "takeaway": "Physical transmission carries encoded information over a medium.",
+      "visual": {
+        "mode": "physical_signal"
+      },
+      "short_title": "Turn bits into signals"
+    },
+    {
+      "id": "01-16",
+      "title": "The switch forwards a frame",
+      "chapter": "Cross the network",
+      "duration": 22.333333333333332,
+      "narration": "Here's the switch. It uses MAC forwarding information to choose a local outgoing port. Its job is more like directing traffic inside one area. Choosing a route between different networks is a different job.",
+      "bullets": [
+        "Local MAC-based forwarding",
+        "Learning associates ports and MACs"
+      ],
+      "takeaway": "A switch forwards within its link-layer domain.",
+      "visual": {
+        "mode": "switch_forward"
+      },
+      "short_title": "Cross the local switch"
+    },
+    {
+      "id": "01-17",
+      "title": "The router chooses a next hop",
+      "chapter": "Cross the network",
+      "duration": 21.9,
+      "narration": "The router opens the local envelope, checks the IP destination, and picks the next hop. It doesn't need to read our HTTP request. You don't need to read a parcel's contents to follow its address.",
+      "bullets": [
+        "Remove the incoming frame",
+        "Consult the IP forwarding table"
+      ],
+      "takeaway": "Routers connect networks by forwarding IP packets.",
+      "visual": {
+        "mode": "router_forward"
+      },
+      "short_title": "Choose the next network hop"
+    },
+    {
+      "id": "01-18",
+      "title": "New frame, continuing packet",
+      "chapter": "Cross the network",
+      "duration": 21.9,
+      "narration": "Notice that the local envelope changes at each routed hop. The request is still heading toward our server. Like changing buses on a journey, each local step has its own connection details.",
+      "bullets": [
+        "Link headers change by hop",
+        "IP forwarding continues"
+      ],
+      "takeaway": "Link-layer envelopes are replaced as a packet crosses routers.",
+      "visual": {
+        "mode": "hop_frames"
+      },
+      "short_title": "Replace the local envelope"
+    },
+    {
+      "id": "01-19",
+      "title": "Shared links can queue or lose",
+      "chapter": "Cross the network",
+      "duration": 21.933333333333334,
+      "narration": "Our packet has company. Other traffic needs that outgoing link too, so packets can form a queue. When the queue fills, new arrivals may get dropped. The Internet also has its version of a canteen rush.",
+      "bullets": [
+        "Queues introduce delay",
+        "Congestion can cause drops"
+      ],
+      "takeaway": "Packets share limited resources along the path.",
+      "visual": {
+        "mode": "queue_loss"
+      },
+      "short_title": "Wait behind other traffic"
+    },
+    {
+      "id": "01-20",
+      "title": "Unwrap at the server",
+      "chapter": "At the destination",
+      "duration": 21.9,
+      "narration": "We've reached the server. Now the unpacking goes upward: handle the local frame, then IP, then TCP, and finally pass the HTTP bytes to the application. Every layer deals with its own part of the delivery.",
+      "bullets": [
+        "Frame → IP → TCP → HTTP",
+        "Deliver bytes to the application"
+      ],
+      "takeaway": "Decapsulation lets each receiving layer perform its own job.",
+      "visual": {
+        "mode": "decapsulation_stack"
+      },
+      "short_title": "Unwrap at the destination"
+    },
+    {
+      "id": "01-21",
+      "title": "Send an HTTP response",
+      "chapter": "At the destination",
+      "duration": 23.2,
+      "narration": "The server sends a response back, including status information and content. The return journey uses the layers too. It doesn't have to follow exactly the same route. Getting home can involve a different set of roads.",
+      "bullets": [
+        "Status, headers and content",
+        "The response takes a return path"
+      ],
+      "takeaway": "The server sends a new application message back.",
+      "visual": {
+        "mode": "http_response"
+      },
+      "short_title": "Bring the response home"
+    },
+    {
+      "id": "01-22",
+      "title": "A page can trigger more requests",
+      "chapter": "At the destination",
+      "duration": 21.9,
+      "narration": "Plot twist: that first response may only be the start. The HTML can ask for styles and images, so more requests follow. Some resources may come from caches or other servers. One page, quite a group project.",
+      "bullets": [
+        "HTML references other resources",
+        "Rendering and networking overlap"
+      ],
+      "takeaway": "One visible page can require many resource transfers.",
+      "visual": {
+        "mode": "page_assets"
+      },
+      "short_title": "Fetch the rest of the page"
+    },
+    {
+      "id": "01-23",
+      "title": "Add the modern distinctions",
+      "chapter": "Reality check",
+      "duration": 21.933333333333334,
+      "narration": "One final update: HTTPS adds TLS protection, and HTTP version three uses QUIC over UDP. So our TCP journey is one example, not every browser connection. The basic jobs of addressing and moving data still remain.",
+      "bullets": [
+        "HTTPS adds TLS protection",
+        "HTTP/3 uses QUIC over UDP"
+      ],
+      "takeaway": "The web uses several protocol combinations, not only HTTP over TCP.",
+      "visual": {
+        "mode": "https_http3"
+      },
+      "short_title": "Keep modern protocols distinct"
+    },
+    {
+      "id": "01-24",
+      "title": "Retell the whole journey",
+      "chapter": "Recap",
+      "duration": 21.9,
+      "narration": "So that one click needed a name lookup, connection setup, a request, several network steps, and some unpacking. Try spotting the difference between a website name, an IP address, a port, and the next local address.",
+      "bullets": [
+        "Find → connect → request → return",
+        "Layers cooperate across the path"
+      ],
+      "takeaway": "A page load succeeds because multiple protocols perform distinct jobs.",
+      "visual": {
+        "mode": "website_recap"
+      },
+      "short_title": "Retell the moving story"
+    }
+  ],
+  "original_target_seconds": 450,
+  "timing_note": "Retimed for approximately140spoken words perminute;browser pauses are unlimited."
+}

@@ -1,0 +1,6 @@
+00:00 The routing puzzle
+01:24 Dijkstra worked example
+04:12 From algorithm to routers
+05:59 When the network changes
+07:25 Beyond the teaching graph
+08:08 Recap

@@ -1,0 +1,20 @@
+{
+  "episode": "07",
+  "title": "TCP vs UDP: The Cost of Reliability",
+  "duration_seconds": 530.033008,
+  "resolution": "1920x1080",
+  "fps": 30,
+  "codec": "h264",
+  "sections": 24,
+  "section_clips_verified": 24,
+  "narration_words": 867,
+  "automated_media_checks": "passed",
+  "edition": "visual",
+  "voiceover": "User records their own voice",
+  "motion": {
+    "native_changing_frame_fraction": 0.9682,
+    "minimum_section_visual_fraction": 0.943,
+    "longest_final_hold_seconds": 0.7999999999999993
+  },
+  "script_revision": "youtube-visual-explainer"
+}

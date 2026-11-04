@@ -1,0 +1,175 @@
+{
+  "fps": 30.0,
+  "sections": [
+    {
+      "name": "One click, many conversations",
+      "animation_end_frame": 610,
+      "section_seconds": 21.067,
+      "visual_seconds": 19.867,
+      "visual_fraction": 0.943
+    },
+    {
+      "name": "Choose a clear teaching model",
+      "animation_end_frame": 1254,
+      "section_seconds": 21.467,
+      "visual_seconds": 20.317,
+      "visual_fraction": 0.946
+    },
+    {
+      "name": "From LAN to WAN",
+      "animation_end_frame": 1886,
+      "section_seconds": 21.067,
+      "visual_seconds": 19.917,
+      "visual_fraction": 0.945
+    },
+    {
+      "name": "Layers divide the work",
+      "animation_end_frame": 2542,
+      "section_seconds": 21.9,
+      "visual_seconds": 20.75,
+      "visual_fraction": 0.947
+    },
+    {
+      "name": "Ask for an address",
+      "animation_end_frame": 3186,
+      "section_seconds": 21.467,
+      "visual_seconds": 20.317,
+      "visual_fraction": 0.946
+    },
+    {
+      "name": "Follow the DNS hierarchy",
+      "animation_end_frame": 3832,
+      "section_seconds": 21.5,
+      "visual_seconds": 20.317,
+      "visual_fraction": 0.945
+    },
+    {
+      "name": "Reuse a cached answer",
+      "animation_end_frame": 4476,
+      "section_seconds": 21.467,
+      "visual_seconds": 20.317,
+      "visual_fraction": 0.946
+    },
+    {
+      "name": "Choose the receiving process",
+      "animation_end_frame": 5146,
+      "section_seconds": 22.333,
+      "visual_seconds": 21.183,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Establish a TCP connection",
+      "animation_end_frame": 5790,
+      "section_seconds": 21.5,
+      "visual_seconds": 20.35,
+      "visual_fraction": 0.947
+    },
+    {
+      "name": "Build the HTTP request",
+      "animation_end_frame": 6448,
+      "section_seconds": 21.9,
+      "visual_seconds": 20.75,
+      "visual_fraction": 0.947
+    },
+    {
+      "name": "Wrap the application bytes",
+      "animation_end_frame": 7104,
+      "section_seconds": 21.9,
+      "visual_seconds": 20.75,
+      "visual_fraction": 0.947
+    },
+    {
+      "name": "Transport adds its information",
+      "animation_end_frame": 7762,
+      "section_seconds": 21.933,
+      "visual_seconds": 20.783,
+      "visual_fraction": 0.948
+    },
+    {
+      "name": "Address the IP packet",
+      "animation_end_frame": 8420,
+      "section_seconds": 21.9,
+      "visual_seconds": 20.75,
+      "visual_fraction": 0.947
+    },
+    {
+      "name": "Prepare the local frame",
+      "animation_end_frame": 9102,
+      "section_seconds": 22.767,
+      "visual_seconds": 21.617,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Turn bits into signals",
+      "animation_end_frame": 9760,
+      "section_seconds": 21.933,
+      "visual_seconds": 20.783,
+      "visual_fraction": 0.948
+    },
+    {
+      "name": "The switch forwards a frame",
+      "animation_end_frame": 10430,
+      "section_seconds": 22.333,
+      "visual_seconds": 21.183,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "The router chooses a next hop",
+      "animation_end_frame": 11088,
+      "section_seconds": 21.9,
+      "visual_seconds": 20.75,
+      "visual_fraction": 0.947
+    },
+    {
+      "name": "New frame, continuing packet",
+      "animation_end_frame": 11744,
+      "section_seconds": 21.9,
+      "visual_seconds": 20.75,
+      "visual_fraction": 0.947
+    },
+    {
+      "name": "Shared links can queue or lose",
+      "animation_end_frame": 12402,
+      "section_seconds": 21.933,
+      "visual_seconds": 20.783,
+      "visual_fraction": 0.948
+    },
+    {
+      "name": "Unwrap at the server",
+      "animation_end_frame": 13060,
+      "section_seconds": 21.9,
+      "visual_seconds": 20.75,
+      "visual_fraction": 0.947
+    },
+    {
+      "name": "Send an HTTP response",
+      "animation_end_frame": 13756,
+      "section_seconds": 23.2,
+      "visual_seconds": 22.05,
+      "visual_fraction": 0.95
+    },
+    {
+      "name": "A page can trigger more requests",
+      "animation_end_frame": 14412,
+      "section_seconds": 21.9,
+      "visual_seconds": 20.75,
+      "visual_fraction": 0.947
+    },
+    {
+      "name": "Add the modern distinctions",
+      "animation_end_frame": 15070,
+      "section_seconds": 21.933,
+      "visual_seconds": 20.783,
+      "visual_fraction": 0.948
+    },
+    {
+      "name": "Retell the whole journey",
+      "animation_end_frame": 15728,
+      "section_seconds": 21.9,
+      "visual_seconds": 20.75,
+      "visual_fraction": 0.947
+    }
+  ],
+  "duration": 525.0,
+  "edition": "visual"
+}

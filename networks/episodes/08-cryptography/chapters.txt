@@ -1,0 +1,7 @@
+00:00 The secrecy puzzle
+00:22 Encryption foundations
+02:14 Public-key foundations
+03:44 Combine the techniques
+05:54 Authentication and integrity
+07:43 Connect the lesson to networks
+08:27 Recap

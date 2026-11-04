@@ -1,0 +1,571 @@
+{
+  "id": "07",
+  "slug": "tcp-udp",
+  "title": "TCP vs UDP: The Cost of Reliability",
+  "duration": 530,
+  "sources": [
+    {
+      "title": "RFC 9293 — Transmission Control Protocol",
+      "url": "https://www.rfc-editor.org/rfc/rfc9293",
+      "notes": "Byte-stream service, sequence numbers, SYN/FIN sequence space, three-way handshake, cumulative acknowledgments and receive windows.",
+      "checked": "2026-11-03"
+    },
+    {
+      "title": "RFC 768 — User Datagram Protocol",
+      "url": "https://www.rfc-editor.org/rfc/rfc768",
+      "notes": "UDP datagram service does not guarantee delivery or duplicate protection.",
+      "checked": "2026-11-03"
+    },
+    {
+      "title": "RFC 5681 — TCP Congestion Control",
+      "url": "https://www.rfc-editor.org/rfc/rfc5681",
+      "notes": "Congestion window and receiver window are distinct constraints on sending.",
+      "checked": "2026-11-03"
+    },
+    {
+      "title": "RFC 9000 — QUIC: A UDP-Based Multiplexed and Secure Transport",
+      "url": "https://www.rfc-editor.org/rfc/rfc9000",
+      "notes": "QUIC demonstrates reliable transport capabilities layered over UDP datagrams.",
+      "checked": "2026-11-03"
+    }
+  ],
+  "sections": [
+    {
+      "id": "07-01",
+      "title": "Two transports, one unreliable network",
+      "chapter": "The transport puzzle",
+      "duration": 22.333333333333332,
+      "narration": "Both transports cross a network that can lose or reorder traffic. Watch different responses to failure. The useful choice concerns application behavior, not a universal fast-versus-slow label.",
+      "bullets": [
+        "IP can lose or reorder packets",
+        "Transport defines the application service"
+      ],
+      "takeaway": "Choose a transport by the behavior the application needs.",
+      "visual": {
+        "mode": "udp",
+        "client_isn": 100,
+        "server_isn": 500,
+        "compare": true
+      },
+      "short_title": "Choose the service you need"
+    },
+    {
+      "id": "07-02",
+      "title": "Ports identify application endpoints",
+      "chapter": "The transport puzzle",
+      "duration": 20.6,
+      "narration": "An IP address identifies a network endpoint. Ports distinguish transport endpoints there. Follow a destination-port field toward the matching application, rather than treating ports as physical sockets.",
+      "bullets": [
+        "IP address + transport port",
+        "Demultiplex to the application"
+      ],
+      "takeaway": "Ports help a host deliver incoming transport data to the right endpoint.",
+      "visual": {
+        "mode": "udp",
+        "client_isn": 100,
+        "server_isn": 500,
+        "ports": {
+          "client": 49152,
+          "server": 80
+        }
+      },
+      "short_title": "Reach the correct application"
+    },
+    {
+      "id": "07-03",
+      "title": "UDP preserves datagram boundaries",
+      "chapter": "Understand the services",
+      "duration": 22.366666666666667,
+      "narration": "UDP sends distinct datagrams. If one arrives intact, its boundary remains meaningful to the receiving application. UDP itself does not promise delivery, ordering, or suppression of duplicate datagrams.",
+      "bullets": [
+        "Individual datagrams",
+        "No built-in delivery or order guarantee"
+      ],
+      "takeaway": "UDP exposes datagrams without TCP’s reliable ordered byte-stream service.",
+      "visual": {
+        "mode": "udp",
+        "client_isn": 100,
+        "server_isn": 500,
+        "datagrams": [
+          "ONE",
+          "TWO",
+          "THREE"
+        ]
+      },
+      "short_title": "Keep datagrams as datagrams"
+    },
+    {
+      "id": "07-04",
+      "title": "TCP exposes a byte stream",
+      "chapter": "Understand the services",
+      "duration": 22.333333333333332,
+      "narration": "TCP presents ordered bytes rather than the original application write boundaries. Watch HEL, LO, and an exclamation mark become one stream. Applications must supply their own message framing.",
+      "bullets": [
+        "Reliable ordered bytes",
+        "Write boundaries are not messages"
+      ],
+      "takeaway": "TCP preserves byte order, not the application’s original write boundaries.",
+      "visual": {
+        "mode": "bytestream",
+        "client_isn": 100,
+        "server_isn": 500,
+        "writes": [
+          "HEL",
+          "LO",
+          "!"
+        ],
+        "reads": [
+          "HELLO!"
+        ]
+      },
+      "short_title": "Join an ordered byte stream"
+    },
+    {
+      "id": "07-05",
+      "title": "First establish a connection",
+      "chapter": "The TCP handshake",
+      "duration": 21.466666666666665,
+      "narration": "Before this TCP exchange, the endpoints synchronize sequence information through a three-way handshake. Follow the state changes as the control messages travel, rather than imagining a reserved physical circuit.",
+      "bullets": [
+        "Client starts at sequence 100",
+        "Server starts at sequence 500"
+      ],
+      "takeaway": "The handshake synchronizes both directions of sequence space.",
+      "visual": {
+        "mode": "handshake",
+        "client_isn": 100,
+        "server_isn": 500,
+        "step": 0
+      },
+      "short_title": "Establish shared connection state"
+    },
+    {
+      "id": "07-06",
+      "title": "Step one: the client sends SYN",
+      "chapter": "The TCP handshake",
+      "duration": 21.9,
+      "narration": "Our client starts with sequence number one hundred. Its SYN consumes one sequence position, so its first data byte will be numbered one hundred and one in this example.",
+      "bullets": [
+        "SYN: sequence 100",
+        "First client data will start at 101"
+      ],
+      "takeaway": "SYN consumes one sequence number.",
+      "visual": {
+        "mode": "handshake",
+        "client_isn": 100,
+        "server_isn": 500,
+        "step": 1,
+        "label": "SYN seq=100"
+      },
+      "short_title": "The client sends SYN"
+    },
+    {
+      "id": "07-07",
+      "title": "Step two: SYN plus acknowledgment",
+      "chapter": "The TCP handshake",
+      "duration": 21.466666666666665,
+      "narration": "The server chooses initial sequence five hundred and acknowledges one hundred and one. The acknowledgment refers to the client's sequence space; the server's SYN starts its own independent space.",
+      "bullets": [
+        "SYN-ACK: seq 500, ack 101",
+        "Each direction has its own numbering"
+      ],
+      "takeaway": "An acknowledgment names the next sequence position expected.",
+      "visual": {
+        "mode": "handshake",
+        "client_isn": 100,
+        "server_isn": 500,
+        "step": 2,
+        "label": "SYN-ACK seq=500 ack=101"
+      },
+      "short_title": "The server answers with both"
+    },
+    {
+      "id": "07-08",
+      "title": "Step three: acknowledge the server",
+      "chapter": "The TCP handshake",
+      "duration": 23.2,
+      "narration": "The client acknowledges five hundred and one and can use sequence one hundred and one for its next data. Both directions now have synchronized state for this established connection.",
+      "bullets": [
+        "ACK: seq 101, ack 501",
+        "ACK alone consumes no sequence number"
+      ],
+      "takeaway": "Both endpoints now know the peer’s starting sequence space.",
+      "visual": {
+        "mode": "handshake",
+        "client_isn": 100,
+        "server_isn": 500,
+        "step": 3,
+        "label": "ACK seq=101 ack=501"
+      },
+      "short_title": "Complete the handshake"
+    },
+    {
+      "id": "07-09",
+      "title": "Number bytes, not whole packets",
+      "chapter": "Reliable delivery",
+      "duration": 23.633333333333333,
+      "narration": "Send one hundred bytes beginning at sequence one hundred and one. Their numbers run through two hundred. TCP sequence numbers count stream positions, not the number of visible packets.",
+      "bullets": [
+        "100 bytes: positions 101–200",
+        "Next expected byte: 201"
+      ],
+      "takeaway": "A segment’s sequence number identifies its first data byte.",
+      "visual": {
+        "mode": "bytestream",
+        "client_isn": 100,
+        "server_isn": 500,
+        "seq": 101,
+        "length": 100,
+        "ack": 201
+      },
+      "short_title": "Count bytes, not packets"
+    },
+    {
+      "id": "07-10",
+      "title": "Cumulative acknowledgment",
+      "chapter": "Reliable delivery",
+      "duration": 22.333333333333332,
+      "narration": "ACK two hundred and one confirms all preceding data in this example. It names the next byte expected. The acknowledged prefix matters more than how those bytes were packetized.",
+      "bullets": [
+        "ACK 201 confirms through byte 200",
+        "Acknowledgments can cover many bytes"
+      ],
+      "takeaway": "TCP’s acknowledgment number identifies the next expected byte.",
+      "visual": {
+        "mode": "bytestream",
+        "client_isn": 100,
+        "server_isn": 500,
+        "seq": 101,
+        "length": 100,
+        "ack": 201,
+        "cumulative": true
+      },
+      "short_title": "Acknowledge the next missing byte"
+    },
+    {
+      "id": "07-11",
+      "title": "Packets arrive out of order",
+      "chapter": "Reliable delivery",
+      "duration": 21.9,
+      "narration": "Bytes three hundred and one through four hundred arrive while two hundred and one through three hundred are missing. They can wait in reassembly storage; the cumulative acknowledgment stays two hundred and one.",
+      "bullets": [
+        "Bytes 201–300 are missing",
+        "Later bytes can wait in a buffer"
+      ],
+      "takeaway": "Receiving later data does not remove an earlier gap in an ordered stream.",
+      "visual": {
+        "mode": "reorder",
+        "client_isn": 100,
+        "server_isn": 500,
+        "received": [
+          [
+            101,
+            200
+          ],
+          [
+            301,
+            400
+          ]
+        ],
+        "missing": [
+          201,
+          300
+        ],
+        "ack": 201
+      },
+      "short_title": "Let later bytes arrive first"
+    },
+    {
+      "id": "07-12",
+      "title": "Recover the missing byte range",
+      "chapter": "Reliable delivery",
+      "duration": 22.766666666666666,
+      "narration": "Retransmit the missing middle range. Once it arrives, the contiguous prefix reaches four hundred, and ACK four hundred and one can advance. Ordered application delivery can now continue.",
+      "bullets": [
+        "Retransmit bytes 201–300",
+        "Contiguous receipt advances ACK to 401"
+      ],
+      "takeaway": "Reliability comes from detecting gaps and retransmitting missing data.",
+      "visual": {
+        "mode": "reorder",
+        "client_isn": 100,
+        "server_isn": 500,
+        "retransmit": [
+          201,
+          300
+        ],
+        "received": [
+          [
+            101,
+            400
+          ]
+        ],
+        "ack": 401
+      },
+      "short_title": "Fill the missing range"
+    },
+    {
+      "id": "07-13",
+      "title": "A lost acknowledgment is not lost data",
+      "chapter": "Reliable delivery",
+      "duration": 22.766666666666666,
+      "narration": "The receiver got bytes one hundred and one through two hundred, but its ACK disappears. A repeated segment must not become duplicate stream delivery. The receiver can acknowledge the confirmed prefix again.",
+      "bullets": [
+        "ACK loss can cause retransmission",
+        "Duplicate bytes are not delivered twice"
+      ],
+      "takeaway": "Sequence space supports duplicate detection as well as ordering.",
+      "visual": {
+        "mode": "reorder",
+        "client_isn": 100,
+        "server_isn": 500,
+        "duplicate": [
+          101,
+          200
+        ],
+        "lost_ack": 201
+      },
+      "short_title": "Lose an acknowledgment"
+    },
+    {
+      "id": "07-14",
+      "title": "Reliability adds state and delay",
+      "chapter": "Reliable delivery",
+      "duration": 21.466666666666665,
+      "narration": "Later bytes may be buffered while a missing range blocks ordered stream delivery. Reliability therefore requires storage and recovery time. Watch the gap hold up data the application cannot yet consume.",
+      "bullets": [
+        "Timers, buffers, connection state",
+        "An early gap can delay later bytes"
+      ],
+      "takeaway": "Reliability is a useful service with resource and timing costs.",
+      "visual": {
+        "mode": "reorder",
+        "client_isn": 100,
+        "server_isn": 500,
+        "missing": [
+          201,
+          300
+        ],
+        "buffered": [
+          301,
+          400
+        ],
+        "head_of_line": true
+      },
+      "short_title": "See ordered delivery wait"
+    },
+    {
+      "id": "07-15",
+      "title": "Protect the receiver with flow control",
+      "chapter": "Control the amount in flight",
+      "duration": 22.766666666666666,
+      "narration": "The receiver advertises available receive space. Two hundred arriving bytes occupy part of our three-hundred-byte buffer, leaving one hundred. Flow control prevents overwhelming this receiving endpoint's available storage.",
+      "bullets": [
+        "Receive window reflects receiver space",
+        "Avoid overrunning the receiver"
+      ],
+      "takeaway": "Flow control addresses the receiver’s capacity.",
+      "visual": {
+        "mode": "window",
+        "client_isn": 100,
+        "server_isn": 500,
+        "receive_window": 300,
+        "in_flight": 200
+      },
+      "short_title": "Protect the receiver's buffer"
+    },
+    {
+      "id": "07-16",
+      "title": "Watch the receive window change",
+      "chapter": "Control the amount in flight",
+      "duration": 21.033333333333335,
+      "narration": "Fill the remaining hundred bytes: advertised space reaches zero. Then let the application consume two hundred bytes. The freed capacity can be advertised, permitting sending to continue appropriately.",
+      "bullets": [
+        "Allowance 300; in flight 200",
+        "Simplified remaining allowance: 100"
+      ],
+      "takeaway": "An advertised window can change as the application drains its buffer.",
+      "visual": {
+        "mode": "window",
+        "client_isn": 100,
+        "server_isn": 500,
+        "receive_window": 300,
+        "in_flight": 200,
+        "available": 100
+      },
+      "short_title": "Free space changes permission"
+    },
+    {
+      "id": "07-17",
+      "title": "Congestion control protects the path",
+      "chapter": "Control the amount in flight",
+      "duration": 23.2,
+      "narration": "The receiver can have room while a router's queue is full. Congestion control responds to path conditions, separately from receiver flow control. Effective sending must respect both constraints.",
+      "bullets": [
+        "Receiver capacity differs from path load",
+        "Both limits can constrain sending"
+      ],
+      "takeaway": "Flow control protects the receiver; congestion control protects the network.",
+      "visual": {
+        "mode": "window",
+        "client_isn": 100,
+        "server_isn": 500,
+        "receive_window": 1000,
+        "congestion_window": 400
+      },
+      "short_title": "Protect the network path"
+    },
+    {
+      "id": "07-18",
+      "title": "UDP under the same packet loss",
+      "chapter": "Compare UDP behavior",
+      "duration": 21.466666666666665,
+      "narration": "Under UDP alone, the missing second datagram is not automatically retransmitted. Later datagrams can still arrive. The application must decide whether recovery, replacement, or accepting the gap fits its purpose.",
+      "bullets": [
+        "Missing datagrams stay missing in UDP",
+        "The application decides how to react"
+      ],
+      "takeaway": "UDP does not add TCP’s retransmission and ordering behavior.",
+      "visual": {
+        "mode": "udp",
+        "client_isn": 100,
+        "server_isn": 500,
+        "datagrams": [
+          "ONE",
+          "TWO",
+          "THREE"
+        ],
+        "lost": 1
+      },
+      "short_title": "Lose a UDP datagram"
+    },
+    {
+      "id": "07-19",
+      "title": "Applications can build above UDP",
+      "chapter": "Compare UDP behavior",
+      "duration": 22.333333333333332,
+      "narration": "An application protocol can add acknowledgments, retransmission, encryption, and congestion control above UDP. UDP's minimal service does not forbid reliability; those features simply come from another layer.",
+      "bullets": [
+        "Reliability can exist above UDP",
+        "QUIC adds a richer transport service"
+      ],
+      "takeaway": "A UDP-based protocol can implement capabilities absent from UDP itself.",
+      "visual": {
+        "mode": "udp",
+        "client_isn": 100,
+        "server_isn": 500,
+        "application_features": [
+          "ACK",
+          "retransmission",
+          "congestion control",
+          "encryption"
+        ]
+      },
+      "short_title": "Build extra behavior above UDP"
+    },
+    {
+      "id": "07-20",
+      "title": "Faster is the wrong universal label",
+      "chapter": "Choose by requirements",
+      "duration": 20.2,
+      "narration": "UDP omits TCP's particular connection and reliability machinery, but experienced delay depends on application design and network conditions. Watch failure and recovery costs instead of assigning one permanent speed winner.",
+      "bullets": [
+        "Less built-in machinery is not a guarantee",
+        "Application recovery can add delay"
+      ],
+      "takeaway": "Transport choice does not create a universal speed ranking.",
+      "visual": {
+        "mode": "udp",
+        "client_isn": 100,
+        "server_isn": 500,
+        "compare": true,
+        "latency_caveat": true
+      },
+      "short_title": "Avoid the universal speed claim"
+    },
+    {
+      "id": "07-21",
+      "title": "Choose a service for a file transfer",
+      "chapter": "Choose by requirements",
+      "duration": 22.766666666666666,
+      "narration": "A file transfer normally needs all its bytes in order. Filling the gap allows complete reconstruction. TCP provides a suitable stream service, while the application still handles framing and failures.",
+      "bullets": [
+        "Complete ordered bytes are useful",
+        "Security and durable storage are separate"
+      ],
+      "takeaway": "TCP reliability is transport delivery, not every application guarantee.",
+      "visual": {
+        "mode": "bytestream",
+        "client_isn": 100,
+        "server_isn": 500,
+        "use_case": "file transfer"
+      },
+      "short_title": "Reassemble a complete file"
+    },
+    {
+      "id": "07-22",
+      "title": "Choose a service for timely updates",
+      "chapter": "Choose by requirements",
+      "duration": 22.333333333333332,
+      "narration": "For some position updates, a newer state can replace an old missing one. Watch the display accept later information. That policy belongs to the application, not a general UDP guarantee.",
+      "bullets": [
+        "Fresh updates may replace stale ones",
+        "Handle congestion and security explicitly"
+      ],
+      "takeaway": "A useful transport matches the meaning and timing of application data.",
+      "visual": {
+        "mode": "udp",
+        "client_isn": 100,
+        "server_isn": 500,
+        "use_case": "position updates",
+        "datagrams": [
+          "t=1",
+          "t=2",
+          "t=3"
+        ]
+      },
+      "short_title": "Prefer a fresh update when appropriate"
+    },
+    {
+      "id": "07-23",
+      "title": "Connections also need an ending",
+      "chapter": "Connection lifetime",
+      "duration": 21.9,
+      "narration": "TCP can close its two directions separately. FIN consumes a sequence position, and acknowledgments confirm it. Follow the example numbers without assuming every close follows one identical timing pattern.",
+      "bullets": [
+        "FIN ends one stream direction",
+        "RST aborts a connection"
+      ],
+      "takeaway": "Connection release is part of the transport’s state machine.",
+      "visual": {
+        "mode": "handshake",
+        "client_isn": 100,
+        "server_isn": 500,
+        "closing": true,
+        "label": "FIN / ACK"
+      },
+      "short_title": "Close each direction deliberately"
+    },
+    {
+      "id": "07-24",
+      "title": "Answer the transport puzzle",
+      "chapter": "Recap",
+      "duration": 21.466666666666665,
+      "narration": "TCP supplies a reliable ordered byte stream; UDP exposes datagrams without those built-in guarantees. Choose according to completeness, ordering, timeliness, and the behavior your application will add itself.",
+      "bullets": [
+        "TCP: ordered reliable byte stream",
+        "UDP: datagrams with minimal guarantees"
+      ],
+      "takeaway": "Understand the service contract before choosing the transport.",
+      "visual": {
+        "mode": "udp",
+        "client_isn": 100,
+        "server_isn": 500,
+        "compare": true
+      },
+      "short_title": "Choose behavior, then transport"
+    }
+  ],
+  "original_target_seconds": 480,
+  "timing_note": "Retimed for approximately140spoken words perminute;browser pauses are unlimited."
+}

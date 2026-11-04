@@ -1,0 +1,453 @@
+1
+00:00:00,000 --> 00:00:05,400
+Which route should this packet take? The path
+with fewer links
+
+2
+00:00:05,400 --> 00:00:10,800
+looks promising, but the costs tell a
+different story. Let's follow
+
+3
+00:00:10,800 --> 00:00:16,200
+how a router can discover a better answer,
+then adapt when
+
+4
+00:00:16,200 --> 00:00:21,600
+that answer breaks.
+
+5
+00:00:21,600 --> 00:00:26,792
+Represent the network as a graph: points are
+devices, lines are
+
+6
+00:00:26,792 --> 00:00:31,983
+connections, and numbers are costs. These
+positive example costs aren't automatically
+
+7
+00:00:31,983 --> 00:00:37,175
+seconds or distance. They define what cheaper
+means in the problem
+
+8
+00:00:37,175 --> 00:00:42,367
+we're solving.
+
+9
+00:00:42,367 --> 00:00:47,658
+A-B-D-F has three links and costs fifteen.
+A-C-B-D-E-F has five links
+
+10
+00:00:47,658 --> 00:00:52,950
+and costs thirteen. More steps, lower total.
+The drawing's apparent shortcut
+
+11
+00:00:52,950 --> 00:00:58,242
+loses as soon as we add the numbers along both
+complete
+
+12
+00:00:58,242 --> 00:01:03,533
+paths.
+
+13
+00:01:03,533 --> 00:01:08,825
+Before calculating, separate routing from
+forwarding. Routing builds the choices;
+forwarding
+
+14
+00:01:08,825 --> 00:01:14,117
+uses them to move a packet to its next hop. A
+
+15
+00:01:14,117 --> 00:01:19,408
+packet can follow an established choice
+without running a new shortest-path
+
+16
+00:01:19,408 --> 00:01:24,700
+calculation at every arrival.
+
+17
+00:01:24,700 --> 00:01:29,892
+Start Dijkstra's algorithm at A. Its distance
+is zero; others begin
+
+18
+00:01:29,892 --> 00:01:35,083
+at infinity, meaning no route has been found.
+Repeatedly settle the
+
+19
+00:01:35,083 --> 00:01:40,275
+lowest unfinished estimate, then ask whether
+routes through it improve the
+
+20
+00:01:40,275 --> 00:01:45,467
+remaining estimates.
+
+21
+00:01:45,467 --> 00:01:50,650
+From A, the first candidates are B at four and
+C
+
+22
+00:01:50,650 --> 00:01:55,833
+at two. These are tentative distances.
+Reaching a node once doesn't
+
+23
+00:01:55,833 --> 00:02:01,017
+prove we found its cheapest route; another
+connection might still offer
+
+24
+00:02:01,017 --> 00:02:06,200
+a lower total.
+
+25
+00:02:06,200 --> 00:02:11,492
+C has the smallest estimate, so settle it
+next. Through C,
+
+26
+00:02:11,492 --> 00:02:16,783
+B now costs two plus one: three instead of
+four. D
+
+27
+00:02:16,783 --> 00:02:22,075
+becomes ten and E twelve. One settled point
+has improved several
+
+28
+00:02:22,075 --> 00:02:27,367
+unfinished possibilities.
+
+29
+00:02:27,367 --> 00:02:32,558
+Next comes B at three. Its link to D costs
+five,
+
+30
+00:02:32,558 --> 00:02:37,750
+giving a total of eight. Replace D's old ten
+and remember
+
+31
+00:02:37,750 --> 00:02:42,942
+B as its predecessor. The number improves, and
+we save the
+
+32
+00:02:42,942 --> 00:02:48,133
+reason it improved.
+
+33
+00:02:48,133 --> 00:02:53,425
+D is now cheapest at eight. Exploring its
+connections improves E
+
+34
+00:02:53,425 --> 00:02:58,717
+to ten and discovers F at fourteen. We have
+reached the
+
+35
+00:02:58,717 --> 00:03:04,008
+destination in our search, but shouldn't stop
+yet: a cheaper unfinished
+
+36
+00:03:04,008 --> 00:03:09,300
+route may still exist.
+
+37
+00:03:09,300 --> 00:03:14,592
+Settle E at ten and add its three-cost link to
+F.
+
+38
+00:03:14,592 --> 00:03:19,883
+Thirteen beats fourteen. Update F and record E
+as its predecessor.
+
+39
+00:03:19,883 --> 00:03:25,175
+The earlier destination estimate was useful,
+but treating it as final
+
+40
+00:03:25,175 --> 00:03:30,467
+would have missed this improvement.
+
+41
+00:03:30,467 --> 00:03:35,767
+F's thirteen is now the smallest unfinished
+distance, so settle it.
+
+42
+00:03:35,767 --> 00:03:41,067
+The final distances from A are zero, three,
+two, eight, ten,
+
+43
+00:03:41,067 --> 00:03:46,367
+and thirteen. With nonnegative link costs, the
+algorithm's settling rule makes
+
+44
+00:03:46,367 --> 00:03:51,667
+those choices safe.
+
+45
+00:03:51,667 --> 00:03:56,958
+The costs alone aren't the route. Follow
+predecessors backward from F:
+
+46
+00:03:56,958 --> 00:04:02,250
+E, D, B, C, A. Reverse that chain to recover
+the
+
+47
+00:04:02,250 --> 00:04:07,542
+forward path. Each saved improvement left one
+clue that now reconstructs
+
+48
+00:04:07,542 --> 00:04:12,833
+the entire journey.
+
+49
+00:04:12,833 --> 00:04:18,233
+For packets leaving A toward F, the next hop
+is C.
+
+50
+00:04:18,233 --> 00:04:23,633
+The table can store that immediate choice
+rather than a full
+
+51
+00:04:23,633 --> 00:04:29,033
+itinerary inside each packet. In real
+networks, entries commonly refer to
+
+52
+00:04:29,033 --> 00:04:34,433
+destination address prefixes.
+
+53
+00:04:34,433 --> 00:04:39,625
+Distance-vector routing starts with different
+information. A neighbor advertises its
+distance
+
+54
+00:04:39,625 --> 00:04:44,817
+to a destination; we add the cost of reaching
+that neighbor.
+
+55
+00:04:44,817 --> 00:04:50,008
+Compare those totals, and select the best
+current option through the
+
+56
+00:04:50,008 --> 00:04:55,200
+neighbors we know.
+
+57
+00:04:55,200 --> 00:05:00,275
+B advertises ten to F; reaching B costs four,
+making fourteen.
+
+58
+00:05:00,275 --> 00:05:05,350
+C advertises eleven; reaching C costs two,
+making thirteen. C wins.
+
+59
+00:05:05,350 --> 00:05:10,425
+The smallest advertised distance alone wasn't
+enough; the local link cost
+
+60
+00:05:10,425 --> 00:05:15,500
+matters too.
+
+61
+00:05:15,500 --> 00:05:21,017
+Link-state routing shares local connection
+facts instead. Routers distribute which links
+
+62
+00:05:21,017 --> 00:05:26,533
+exist and their costs, build a map, and
+calculate routes from
+
+63
+00:05:26,533 --> 00:05:32,050
+it. The shared information describes the
+network's pieces, rather than only
+
+64
+00:05:32,050 --> 00:05:37,567
+destination-distance estimates.
+
+65
+00:05:37,567 --> 00:05:44,911
+Both approaches seek useful routes, but
+exchange different evidence: destination
+estimates
+
+66
+00:05:44,911 --> 00:05:52,256
+or link facts. Neither learns changes
+instantly. Messages must travel, and
+
+67
+00:05:52,256 --> 00:05:59,600
+routers need time to revise what they believe
+about the network.
+
+68
+00:05:59,600 --> 00:06:04,892
+Remove the D-to-E link. Our thirteen-cost
+route is broken. A-C-B-D-F now
+
+69
+00:06:04,892 --> 00:06:10,183
+costs fourteen, beating the fifteen-cost
+alternative through C and E. A
+
+70
+00:06:10,183 --> 00:06:15,475
+route is optimal only for the connections and
+costs that still
+
+71
+00:06:15,475 --> 00:06:20,767
+exist.
+
+72
+00:06:20,767 --> 00:06:26,058
+That change doesn't reach every router at
+once. Failure detection, update
+
+73
+00:06:26,058 --> 00:06:31,350
+delivery, and recalculation take time. During
+convergence, routers can briefly hold
+
+74
+00:06:31,350 --> 00:06:36,642
+inconsistent views. The network is updating
+many local decisions, not replacing
+
+75
+00:06:36,642 --> 00:06:41,933
+one central map instantly.
+
+76
+00:06:41,933 --> 00:06:47,342
+Watch two neighbors trust stale advice from
+each other. Each believes
+
+77
+00:06:47,342 --> 00:06:52,750
+the other still reaches the destination, so
+their estimates keep increasing.
+
+78
+00:06:52,750 --> 00:06:58,158
+This is counting to infinity. In RIP, sixteen
+represents unreachable, limiting
+
+79
+00:06:58,158 --> 00:07:03,567
+that particular count.
+
+80
+00:07:03,567 --> 00:07:09,075
+Poisoned reverse blocks a specific circular
+claim. If A reaches a
+
+81
+00:07:09,075 --> 00:07:14,583
+destination through C, it tells C that the
+destination is unreachable
+
+82
+00:07:14,583 --> 00:07:20,092
+through A. That helps prevent two-node loops,
+though it doesn't eliminate
+
+83
+00:07:20,092 --> 00:07:25,600
+every possible routing loop.
+
+84
+00:07:25,600 --> 00:07:30,892
+Change the costs and a different path can win.
+Shortest describes
+
+85
+00:07:30,892 --> 00:07:36,183
+the selected metric, not necessarily physical
+distance or fewest hops. Real
+
+86
+00:07:36,183 --> 00:07:41,475
+choices can also depend on policy, so
+understanding the objective matters
+
+87
+00:07:41,475 --> 00:07:46,767
+before comparing routes.
+
+88
+00:07:46,767 --> 00:07:52,175
+At larger scales, sharing every detail
+everywhere becomes expensive. Hierarchy groups
+
+89
+00:07:52,175 --> 00:07:57,583
+networks and summarizes address blocks,
+reducing the information each part must
+
+90
+00:07:57,583 --> 00:08:02,992
+handle. The trade-off is deciding which
+details remain local and which
+
+91
+00:08:02,992 --> 00:08:08,400
+need wider visibility.
+
+92
+00:08:08,400 --> 00:08:13,800
+The opening packet chose a five-link route
+costing thirteen, then a
+
+93
+00:08:13,800 --> 00:08:19,200
+different route costing fourteen after
+failure. The result wasn't a clever-looking
+
+94
+00:08:19,200 --> 00:08:24,600
+line on a map. It came from comparing costs
+and keeping
+
+95
+00:08:24,600 --> 00:08:30,000
+distributed information current.

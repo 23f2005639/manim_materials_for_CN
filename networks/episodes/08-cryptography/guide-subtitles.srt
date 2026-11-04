@@ -1,0 +1,460 @@
+1
+00:00:00,000 --> 00:00:05,592
+Alice wants to send Bob a secret across a
+network Eve
+
+2
+00:00:05,592 --> 00:00:11,183
+can watch. Encryption needs a key, but sending
+that key openly
+
+3
+00:00:11,183 --> 00:00:16,775
+would defeat the whole idea. How can the first
+private conversation
+
+4
+00:00:16,775 --> 00:00:22,367
+even begin?
+
+5
+00:00:22,367 --> 00:00:27,842
+Encryption uses a key to transform plaintext
+into ciphertext. The appropriate
+
+6
+00:00:27,842 --> 00:00:33,317
+key allows recovery. Our moving blocks
+illustrate that change; their shapes
+
+7
+00:00:33,317 --> 00:00:38,792
+aren't the security mechanism. Ask what
+information an observer would need
+
+8
+00:00:38,792 --> 00:00:44,267
+to reverse it.
+
+9
+00:00:44,267 --> 00:00:49,967
+The algorithm can be public. Security should
+depend on secret key
+
+10
+00:00:49,967 --> 00:00:55,667
+material, rather than on nobody discovering
+the instructions. This lets a
+
+11
+00:00:55,667 --> 00:01:01,367
+method be examined openly without giving every
+observer the ability to
+
+12
+00:01:01,367 --> 00:01:07,067
+recover its messages.
+
+13
+00:01:07,067 --> 00:01:12,650
+With symmetric encryption, Alice and Bob share
+secret key material. That
+
+14
+00:01:12,650 --> 00:01:18,233
+shared knowledge makes protection efficient,
+while Eve can know the algorithm
+
+15
+00:01:18,233 --> 00:01:23,817
+and observe ciphertext. But we've quietly
+assumed something important: both endpoints
+
+16
+00:01:23,817 --> 00:01:29,400
+already possess the secret.
+
+17
+00:01:29,400 --> 00:01:35,100
+A cryptographic key needs suitable length and
+unpredictability. A short memorable
+
+18
+00:01:35,100 --> 00:01:40,800
+phrase isn't automatically such a key, and
+passwords require appropriate processing.
+
+19
+00:01:40,800 --> 00:01:46,500
+Our small key symbol represents carefully
+generated material, rather than an
+
+20
+00:01:46,500 --> 00:01:52,200
+easily guessed word.
+
+21
+00:01:52,200 --> 00:01:57,675
+Now send the shared key where Eve can copy it.
+She
+
+22
+00:01:57,675 --> 00:02:03,150
+gains the information needed to recover the
+protected message. Encryption still
+
+23
+00:02:03,150 --> 00:02:08,625
+follows its rules; the failure came from
+distributing the secret that
+
+24
+00:02:08,625 --> 00:02:14,100
+those rules relied on.
+
+25
+00:02:14,100 --> 00:02:20,117
+Public-key encryption changes the arrangement.
+Bob keeps a private key and
+
+26
+00:02:20,117 --> 00:02:26,133
+publishes a related public key. In a suitable
+scheme, someone can
+
+27
+00:02:26,133 --> 00:02:32,150
+protect information using the public key while
+recovery depends on Bob's
+
+28
+00:02:32,150 --> 00:02:38,167
+private key.
+
+29
+00:02:38,167 --> 00:02:43,542
+Eve can read that public key too. Knowing it
+alone doesn't
+
+30
+00:02:43,542 --> 00:02:48,917
+reveal the private key. But a new question
+appears: how does
+
+31
+00:02:48,917 --> 00:02:54,292
+Alice establish that this public key really
+belongs to Bob, rather
+
+32
+00:02:54,292 --> 00:02:59,667
+than someone pretending?
+
+33
+00:02:59,667 --> 00:03:05,367
+Alice has authenticated Bob's public key. She
+uses it to protect
+
+34
+00:03:05,367 --> 00:03:11,067
+information for him. Eve sees the public key
+and ciphertext, yet
+
+35
+00:03:11,067 --> 00:03:16,767
+lacks the private decryption capability under
+the scheme's assumptions. Sharing this
+
+36
+00:03:16,767 --> 00:03:22,467
+key didn't share the secret.
+
+37
+00:03:22,467 --> 00:03:27,942
+Bob uses his private key to recover the
+protected information. The
+
+38
+00:03:27,942 --> 00:03:33,417
+private key never needs to travel with the
+ciphertext. Its safe
+
+39
+00:03:33,417 --> 00:03:38,892
+handling remains essential; public-key
+cryptography changes key distribution, without
+making private-key
+
+40
+00:03:38,892 --> 00:03:44,367
+theft harmless.
+
+41
+00:03:44,367 --> 00:03:49,525
+Why not use public-key operations for every
+byte? Their costs and
+
+42
+00:03:49,525 --> 00:03:54,683
+constraints make that an awkward choice for
+bulk data. Hybrid designs
+
+43
+00:03:54,683 --> 00:03:59,842
+divide the work: public-key tools help
+establish keys, and efficient symmetric
+
+44
+00:03:59,842 --> 00:04:05,000
+protection handles the content.
+
+45
+00:04:05,000 --> 00:04:10,700
+Generate a fresh random session key, K. This
+key will protect
+
+46
+00:04:10,700 --> 00:04:16,400
+the exchange's data rather than every
+unrelated conversation. Fresh key material
+
+47
+00:04:16,400 --> 00:04:22,100
+limits reuse, while proper generation and
+careful protocol rules remain necessary
+
+48
+00:04:22,100 --> 00:04:27,800
+for its protection.
+
+49
+00:04:27,800 --> 00:04:33,067
+Use K to protect the message with
+authenticated encryption. Alongside ciphertext
+
+50
+00:04:33,067 --> 00:04:38,333
+comes an authentication tag, bound to the
+protected inputs. The scheme
+
+51
+00:04:38,333 --> 00:04:43,600
+also defines nonce requirements and any
+additional information the receiver needs
+
+52
+00:04:43,600 --> 00:04:48,867
+for verification.
+
+53
+00:04:48,867 --> 00:04:54,450
+In this simplified model, Alice protects K
+with Bob's authenticated public
+
+54
+00:04:54,450 --> 00:05:00,033
+key. That's protected key transport: securing
+the key that secures the
+
+55
+00:05:00,033 --> 00:05:05,617
+data. It explains a hybrid design, rather than
+reproducing every step
+
+56
+00:05:05,617 --> 00:05:11,200
+of a modern TLS handshake.
+
+57
+00:05:11,200 --> 00:05:16,575
+The protected key material and authenticated
+ciphertext now travel together. Eve
+
+58
+00:05:16,575 --> 00:05:21,950
+can observe those packages without learning
+their contents under our assumptions.
+
+59
+00:05:21,950 --> 00:05:27,325
+Encryption may still reveal metadata,
+including the endpoints, message sizes, and
+
+60
+00:05:27,325 --> 00:05:32,700
+timing of the exchange.
+
+61
+00:05:32,700 --> 00:05:38,183
+Bob recovers K, then verifies and decrypts the
+data using the
+
+62
+00:05:38,183 --> 00:05:43,667
+scheme's rules. Failed authentication means
+rejection. Producing something readable isn't
+enough;
+
+63
+00:05:43,667 --> 00:05:49,150
+the receiver must establish that the protected
+message passed the required
+
+64
+00:05:49,150 --> 00:05:54,633
+integrity check.
+
+65
+00:05:54,633 --> 00:06:00,000
+Secrecy and integrity answer different
+questions. Can an observer read the
+
+66
+00:06:00,000 --> 00:06:05,367
+message? Can an attacker change it without
+detection? Encryption alone doesn't
+
+67
+00:06:05,367 --> 00:06:10,733
+automatically provide both. A suitable
+authenticated scheme protects the content and
+
+68
+00:06:10,733 --> 00:06:16,100
+detects unauthorized changes.
+
+69
+00:06:16,100 --> 00:06:21,583
+Change the protected message and watch
+verification fail. The tag isn't
+
+70
+00:06:21,583 --> 00:06:27,067
+a checksum an attacker can recalculate after
+editing. Its security depends
+
+71
+00:06:27,067 --> 00:06:32,550
+on the key and protected inputs, making
+unnoticed modification a different
+
+72
+00:06:32,550 --> 00:06:38,033
+problem from accidental corruption.
+
+73
+00:06:38,033 --> 00:06:43,408
+A nonce is an input, usually public. Many
+schemes require it
+
+74
+00:06:43,408 --> 00:06:48,783
+to be unique for each use of a key. Reusing
+the
+
+75
+00:06:48,783 --> 00:06:54,158
+wrong key-and-nonce pair can break protection,
+so its rules matter as
+
+76
+00:06:54,158 --> 00:06:59,533
+much as the key's secrecy.
+
+77
+00:06:59,533 --> 00:07:04,908
+Now let Eve replace Bob's public key with her
+own. Alice
+
+78
+00:07:04,908 --> 00:07:10,283
+can encrypt successfully and still protect the
+message for the wrong
+
+79
+00:07:10,283 --> 00:07:15,658
+recipient. The mathematics didn't fail. The
+missing step was authenticating the
+
+80
+00:07:15,658 --> 00:07:21,033
+identity behind the key.
+
+81
+00:07:21,033 --> 00:07:26,725
+There's another distinction. Anyone with Bob's
+public encryption key can send
+
+82
+00:07:26,725 --> 00:07:32,417
+something he can decrypt. Successful
+decryption doesn't prove Alice sent it.
+
+83
+00:07:32,417 --> 00:07:38,108
+Digital signatures use signing and
+verification mechanisms to address a claimed
+
+84
+00:07:38,108 --> 00:07:43,800
+sender separately.
+
+85
+00:07:43,800 --> 00:07:49,392
+TLS version one point three commonly
+establishes traffic keys through authenticated
+
+86
+00:07:49,392 --> 00:07:54,983
+ephemeral key exchange, then uses
+authenticated encryption. It removed static
+RSA
+
+87
+00:07:54,983 --> 00:08:00,575
+key transport. Our wrapped-key picture
+illustrates a broader hybrid idea, rather
+
+88
+00:08:00,575 --> 00:08:06,167
+than that exact handshake.
+
+89
+00:08:06,167 --> 00:08:11,533
+Real applications need established protocols
+and maintained libraries, with sound
+randomness
+
+90
+00:08:11,533 --> 00:08:16,900
+and identity checks. A correct encryption
+operation inside a poorly designed
+
+91
+00:08:16,900 --> 00:08:22,267
+exchange can still fail. The security comes
+from the whole protocol
+
+92
+00:08:22,267 --> 00:08:27,633
+working together.
+
+93
+00:08:27,633 --> 00:08:33,225
+The opening paradox had several parts.
+Symmetric protection handles data; public-key
+
+94
+00:08:33,225 --> 00:08:38,817
+tools help establish keys; authentication
+checks identities and protected messages.
+Secure
+
+95
+00:08:38,817 --> 00:08:44,408
+communication begins when those roles fit
+together, rather than when one
+
+96
+00:08:44,408 --> 00:08:50,000
+message merely looks scrambled.

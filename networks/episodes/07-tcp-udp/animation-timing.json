@@ -1,0 +1,175 @@
+{
+  "fps": 30.0,
+  "sections": [
+    {
+      "name": "Two transports, one unreliable network",
+      "animation_end_frame": 648,
+      "section_seconds": 22.333,
+      "visual_seconds": 21.133,
+      "visual_fraction": 0.946
+    },
+    {
+      "name": "Ports identify application endpoints",
+      "animation_end_frame": 1265,
+      "section_seconds": 20.6,
+      "visual_seconds": 19.45,
+      "visual_fraction": 0.944
+    },
+    {
+      "name": "UDP preserves datagram boundaries",
+      "animation_end_frame": 1936,
+      "section_seconds": 22.367,
+      "visual_seconds": 21.217,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "TCP exposes a byte stream",
+      "animation_end_frame": 2606,
+      "section_seconds": 22.333,
+      "visual_seconds": 21.183,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "First establish a connection",
+      "animation_end_frame": 3250,
+      "section_seconds": 21.467,
+      "visual_seconds": 20.317,
+      "visual_fraction": 0.946
+    },
+    {
+      "name": "Step one: the client sends SYN",
+      "animation_end_frame": 3908,
+      "section_seconds": 21.9,
+      "visual_seconds": 20.75,
+      "visual_fraction": 0.947
+    },
+    {
+      "name": "Step two: SYN plus acknowledgment",
+      "animation_end_frame": 4552,
+      "section_seconds": 21.467,
+      "visual_seconds": 20.317,
+      "visual_fraction": 0.946
+    },
+    {
+      "name": "Step three: acknowledge the server",
+      "animation_end_frame": 5248,
+      "section_seconds": 23.2,
+      "visual_seconds": 22.05,
+      "visual_fraction": 0.95
+    },
+    {
+      "name": "Number bytes, not whole packets",
+      "animation_end_frame": 5956,
+      "section_seconds": 23.633,
+      "visual_seconds": 22.483,
+      "visual_fraction": 0.951
+    },
+    {
+      "name": "Cumulative acknowledgment",
+      "animation_end_frame": 6626,
+      "section_seconds": 22.333,
+      "visual_seconds": 21.183,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Packets arrive out of order",
+      "animation_end_frame": 7284,
+      "section_seconds": 21.9,
+      "visual_seconds": 20.75,
+      "visual_fraction": 0.947
+    },
+    {
+      "name": "Recover the missing byte range",
+      "animation_end_frame": 7966,
+      "section_seconds": 22.767,
+      "visual_seconds": 21.617,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "A lost acknowledgment is not lost data",
+      "animation_end_frame": 8650,
+      "section_seconds": 22.767,
+      "visual_seconds": 21.617,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Reliability adds state and delay",
+      "animation_end_frame": 9294,
+      "section_seconds": 21.467,
+      "visual_seconds": 20.317,
+      "visual_fraction": 0.946
+    },
+    {
+      "name": "Protect the receiver with flow control",
+      "animation_end_frame": 9976,
+      "section_seconds": 22.767,
+      "visual_seconds": 21.617,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Watch the receive window change",
+      "animation_end_frame": 10608,
+      "section_seconds": 21.033,
+      "visual_seconds": 19.883,
+      "visual_fraction": 0.945
+    },
+    {
+      "name": "Congestion control protects the path",
+      "animation_end_frame": 11304,
+      "section_seconds": 23.2,
+      "visual_seconds": 22.05,
+      "visual_fraction": 0.95
+    },
+    {
+      "name": "UDP under the same packet loss",
+      "animation_end_frame": 11948,
+      "section_seconds": 21.467,
+      "visual_seconds": 20.317,
+      "visual_fraction": 0.946
+    },
+    {
+      "name": "Applications can build above UDP",
+      "animation_end_frame": 12618,
+      "section_seconds": 22.333,
+      "visual_seconds": 21.183,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Faster is the wrong universal label",
+      "animation_end_frame": 13224,
+      "section_seconds": 20.2,
+      "visual_seconds": 19.05,
+      "visual_fraction": 0.943
+    },
+    {
+      "name": "Choose a service for a file transfer",
+      "animation_end_frame": 13906,
+      "section_seconds": 22.767,
+      "visual_seconds": 21.617,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Choose a service for timely updates",
+      "animation_end_frame": 14576,
+      "section_seconds": 22.333,
+      "visual_seconds": 21.183,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Connections also need an ending",
+      "animation_end_frame": 15234,
+      "section_seconds": 21.9,
+      "visual_seconds": 20.75,
+      "visual_fraction": 0.947
+    },
+    {
+      "name": "Answer the transport puzzle",
+      "animation_end_frame": 15878,
+      "section_seconds": 21.467,
+      "visual_seconds": 20.317,
+      "visual_fraction": 0.946
+    }
+  ],
+  "duration": 530.0,
+  "edition": "visual"
+}

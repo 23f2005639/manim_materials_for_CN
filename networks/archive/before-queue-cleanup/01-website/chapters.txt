@@ -1,0 +1,9 @@
+00:00 The puzzle
+00:42 The route
+01:25 Finding the server
+02:29 Transport setup
+03:13 Create the request
+05:04 Cross the network
+06:54 At the destination
+08:01 Reality check
+08:23 Recap

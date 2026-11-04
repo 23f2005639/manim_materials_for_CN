@@ -1,0 +1,77 @@
+{
+  "cleanup_regression": "passed",
+  "decoded_frame_checks": [
+    {
+      "scene": 20,
+      "time": 425.117,
+      "old_box_cyan_pixels": 1759,
+      "corrected_box_cyan_pixels": 0
+    },
+    {
+      "scene": 20,
+      "time": 435.817,
+      "old_box_cyan_pixels": 1670,
+      "corrected_box_cyan_pixels": 0
+    },
+    {
+      "scene": 21,
+      "time": 447.667,
+      "old_box_cyan_pixels": 1755,
+      "corrected_box_cyan_pixels": 0
+    },
+    {
+      "scene": 21,
+      "time": 459.017,
+      "old_box_cyan_pixels": 1711,
+      "corrected_box_cyan_pixels": 0
+    },
+    {
+      "scene": 22,
+      "time": 470.217,
+      "old_box_cyan_pixels": 1755,
+      "corrected_box_cyan_pixels": 0
+    },
+    {
+      "scene": 22,
+      "time": 480.917,
+      "old_box_cyan_pixels": 1760,
+      "corrected_box_cyan_pixels": 0
+    },
+    {
+      "scene": 23,
+      "time": 492.133,
+      "old_box_cyan_pixels": 1712,
+      "corrected_box_cyan_pixels": 0
+    },
+    {
+      "scene": 23,
+      "time": 502.85,
+      "old_box_cyan_pixels": 1727,
+      "corrected_box_cyan_pixels": 0
+    },
+    {
+      "scene": 24,
+      "time": 514.067,
+      "old_box_cyan_pixels": 1754,
+      "corrected_box_cyan_pixels": 0
+    },
+    {
+      "scene": 24,
+      "time": 524.783,
+      "old_box_cyan_pixels": 1756,
+      "corrected_box_cyan_pixels": 0
+    }
+  ],
+  "clips_20_through_24": "passed",
+  "regenerated_video_files": 25,
+  "changed_video_files": [
+    "networks/episodes/01-website/episode.mp4",
+    "networks/episodes/01-website/clips/23-add-the-modern-distinctions.mp4",
+    "networks/episodes/01-website/clips/21-send-an-http-response.mp4",
+    "networks/episodes/01-website/clips/22-a-page-can-trigger-more-requests.mp4",
+    "networks/episodes/01-website/clips/24-retell-the-whole-journey.mp4",
+    "networks/episodes/01-website/clips/19-shared-links-can-queue-or-lose.mp4",
+    "networks/episodes/01-website/clips/20-unwrap-at-the-server.mp4"
+  ],
+  "other_video_files_unchanged": 194
+}

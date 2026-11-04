@@ -1,0 +1,27 @@
+# Local tool environments and Python caches
+.uv-cache/
+.tools/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+
+# Render logs and temporary outputs
+*.log
+*.tmp
+*.part
+*.cfr.mp4
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

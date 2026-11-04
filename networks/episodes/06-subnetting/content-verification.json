@@ -1,0 +1,18 @@
+{
+  "episode": "06",
+  "review_type": "Independent source, storyboard, and animation-code review",
+  "status": "passed after corrections",
+  "narration_words": 1156,
+  "sections": 24,
+  "sources_checked": 3,
+  "checks": [
+    "Four /26 subnets checked independently using Python ipaddress.",
+    "Network octets are 0, 64, 128, 192; broadcasts are 63, 127, 191, 255; each ordinary subnet has 62 host addresses.",
+    "The /31 point-to-point and /32 host-route exceptions are explained.",
+    "Prefix /26, mask 255.255.255.192, and address .70 mapping to network .64 are consistent.",
+    "Private address scope and the distinction between subnetting and security policy are explained."
+  ],
+  "limitations": "This report verifies concepts and source alignment. Separate media and browser reports cover rendered files and controls.",
+  "integrated_layout_inspection": "Passed: no problems in all 24 sampled sections",
+  "visual_review": "Inspected storyboard sheet 2 for representative calculations and protocol sequences."
+}

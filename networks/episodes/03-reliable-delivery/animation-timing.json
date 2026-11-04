@@ -1,0 +1,175 @@
+{
+  "fps": 30.0,
+  "sections": [
+    {
+      "name": "A packet vanishes",
+      "animation_end_frame": 660,
+      "section_seconds": 22.733,
+      "visual_seconds": 21.533,
+      "visual_fraction": 0.947
+    },
+    {
+      "name": "Read the timeline",
+      "animation_end_frame": 1330,
+      "section_seconds": 22.333,
+      "visual_seconds": 21.183,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Send one, then wait",
+      "animation_end_frame": 2012,
+      "section_seconds": 22.733,
+      "visual_seconds": 21.583,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Choose an ACK convention",
+      "animation_end_frame": 2694,
+      "section_seconds": 22.733,
+      "visual_seconds": 21.583,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Notice the idle gap",
+      "animation_end_frame": 3364,
+      "section_seconds": 22.333,
+      "visual_seconds": 21.183,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Separate two kinds of time",
+      "animation_end_frame": 4058,
+      "section_seconds": 23.167,
+      "visual_seconds": 22.017,
+      "visual_fraction": 0.95
+    },
+    {
+      "name": "Calculate stop-and-wait use",
+      "animation_end_frame": 4740,
+      "section_seconds": 22.733,
+      "visual_seconds": 21.583,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Lose the data packet",
+      "animation_end_frame": 5424,
+      "section_seconds": 22.767,
+      "visual_seconds": 21.617,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Expire a timer",
+      "animation_end_frame": 6106,
+      "section_seconds": 22.733,
+      "visual_seconds": 21.583,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Retransmit the saved copy",
+      "animation_end_frame": 6774,
+      "section_seconds": 22.3,
+      "visual_seconds": 21.15,
+      "visual_fraction": 0.948
+    },
+    {
+      "name": "Lose the acknowledgment instead",
+      "animation_end_frame": 7432,
+      "section_seconds": 21.9,
+      "visual_seconds": 20.75,
+      "visual_fraction": 0.947
+    },
+    {
+      "name": "Recognize the duplicate",
+      "animation_end_frame": 8114,
+      "section_seconds": 22.733,
+      "visual_seconds": 21.583,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Why alternating bits can work",
+      "animation_end_frame": 8810,
+      "section_seconds": 23.2,
+      "visual_seconds": 22.05,
+      "visual_fraction": 0.95
+    },
+    {
+      "name": "Choose a sensible timeout",
+      "animation_end_frame": 9504,
+      "section_seconds": 23.167,
+      "visual_seconds": 22.017,
+      "visual_fraction": 0.95
+    },
+    {
+      "name": "Allow four packets in flight",
+      "animation_end_frame": 10200,
+      "section_seconds": 23.167,
+      "visual_seconds": 22.017,
+      "visual_fraction": 0.95
+    },
+    {
+      "name": "Fill the pipeline",
+      "animation_end_frame": 10882,
+      "section_seconds": 22.733,
+      "visual_seconds": 21.583,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Use cumulative acknowledgments",
+      "animation_end_frame": 11538,
+      "section_seconds": 21.9,
+      "visual_seconds": 20.75,
+      "visual_fraction": 0.947
+    },
+    {
+      "name": "Slide the sending window",
+      "animation_end_frame": 12220,
+      "section_seconds": 22.733,
+      "visual_seconds": 21.583,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Go-Back-N: lose packet 1",
+      "animation_end_frame": 12916,
+      "section_seconds": 23.167,
+      "visual_seconds": 22.017,
+      "visual_fraction": 0.95
+    },
+    {
+      "name": "Discard later arrivals",
+      "animation_end_frame": 13572,
+      "section_seconds": 21.9,
+      "visual_seconds": 20.75,
+      "visual_fraction": 0.947
+    },
+    {
+      "name": "Retransmit from the gap",
+      "animation_end_frame": 14280,
+      "section_seconds": 23.6,
+      "visual_seconds": 22.45,
+      "visual_fraction": 0.951
+    },
+    {
+      "name": "Accept the repaired sequence",
+      "animation_end_frame": 14962,
+      "section_seconds": 22.733,
+      "visual_seconds": 21.583,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Compare the mechanisms carefully",
+      "animation_end_frame": 15633,
+      "section_seconds": 22.333,
+      "visual_seconds": 21.183,
+      "visual_fraction": 0.949
+    },
+    {
+      "name": "Reconstruct reliability yourself",
+      "animation_end_frame": 16328,
+      "section_seconds": 23.167,
+      "visual_seconds": 22.017,
+      "visual_fraction": 0.95
+    }
+  ],
+  "duration": 545.0,
+  "edition": "visual"
+}

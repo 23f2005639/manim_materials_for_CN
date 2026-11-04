@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>__TITLE__ — Networks Studio</title>
+<style>
+:root{color-scheme:dark;background:#03080f;color:#edf4ff;font-family:system-ui,sans-serif}*{box-sizing:border-box}body{margin:0;overflow:hidden}.stage{position:fixed;inset:0;background:#03080f}video{display:block;width:100%;height:100%;object-fit:contain;outline-offset:-4px}video:focus-visible{outline:2px solid #64d8eb}video::cue{background:#06111feb;color:#fff}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}#error{position:absolute;inset:35% 12% auto;padding:24px;background:#17283b;border:1px solid #ff9a9a;line-height:1.6}#error[hidden]{display:none}
+</style>
+</head>
+<body><main id="app" class="stage">
+<video id="film" src="episode.mp4?v=__MEDIA_VERSION__" preload="auto" playsinline tabindex="0" aria-label="__TITLE__. Click or press Right arrow to start fullscreen and advance scenes. Up and Down arrows change speed. P pauses, R replays, F toggles fullscreen, Shift P opens presenter notes." aria-describedby="status"></video>
+<p id="status" class="sr-only" role="status" aria-live="polite">Loading animation.</p>
+<p id="error" hidden></p>
+</main>
+<script>
+"use strict";
+const deck=__DECK__;
+const $=id=>document.getElementById(id),film=$('film'),all=deck.sections,fps=deck.fps;
+let current=0,state='ready',loaded=false,generation=0,presenter=null,started=false;
+const start=i=>all[i].frame/fps;
+const finish=i=>((i+1<all.length?all[i+1].frame:deck.frames)-0.5)/fps;
+const motionFinish=i=>Math.min(finish(i),(all[i].animation_end_frame??((i+1<all.length?all[i+1].frame:deck.frames)-1))/fps);
+const track=film.addTextTrack('captions','Guide captions','en');
+for(const [a,b,t] of deck.captions)track.addCue(new VTTCue(a,b,t));
+track.mode='hidden';
+function sync(){
+  const speed=`${film.playbackRate}×`;
+  document.title=`${deck.title} · ${current+1}/${all.length} · ${speed}`;
+  $('status').textContent=`Scene ${current+1} of ${all.length}: ${all[current].name}. ${state}. Speed ${speed}.`;
+  if(presenter&&!presenter.closed){
+    const d=presenter.document;
+    d.getElementById('section').textContent=`${current+1} / ${all.length} — ${all[current].name}`;
+    d.getElementById('script').textContent=all[current].notes;
+    d.getElementById('speed').textContent=`Speed: ${speed}`;
+    d.getElementById('scenes').value=current;
+    d.getElementById('upnext').textContent=current+1<all.length?`Up next: ${all[current+1].name}`:'Final scene';
+    const v=d.getElementById('preview');
+    if(v.readyState>=1)v.currentTime=Math.min(film.currentTime,finish(current));
+  }
+}
+function choose(i){if(!loaded)return;generation++;film.pause();current=Math.max(0,Math.min(i,all.length-1));state='ready';film.currentTime=finish(current);sync()}
+function hold(){if(state!=='playing')return;generation++;film.pause();state='held';film.currentTime=finish(current);sync()}
+function check(time){if(state==='playing'&&time>=motionFinish(current)-1/fps)hold()}
+function watch(token){if(!film.requestVideoFrameCallback)return;film.requestVideoFrameCallback((_,meta)=>{if(token!==generation||state!=='playing')return;check(meta.mediaTime);if(state==='playing')watch(token)})}
+async function run(restart=true){
+  if(!loaded)return;
+  const token=++generation;
+  if(restart)film.currentTime=start(current)+0.5/fps;
+  started=true;$('error').hidden=true;state='playing';sync();
+  try{await film.play();if(token===generation)watch(token)}catch(e){if(token===generation){state='paused';sync();$('error').hidden=false;$('error').textContent=`Playback could not start: ${e.message}. Press P to retry.`}}
+}
+function next(){if(!loaded)return;if(!started&&!document.fullscreenElement)fullscreen();if(state!=='ready'){if(current===all.length-1)return;current++}run()}
+function pause(){if(state==='playing'){generation++;film.pause();state='paused';sync()}else if(state==='paused')run(false)}
+function fullscreen(){if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});else if($('app').requestFullscreen)$('app').requestFullscreen().catch(()=>{})}
+function speed(delta){film.playbackRate=Math.max(.25,Math.min(4,Math.round((film.playbackRate+delta)*4)/4));sync()}
+function openPresenter(){
+  presenter=window.open('','networks-presenter','width=900,height=760');
+  if(!presenter){$('status').textContent='Allow the presenter popup to read the script.';return}
+  const d=presenter.document;d.title='Presenter notes — '+deck.title;d.body.replaceChildren();
+  const style=d.createElement('style');style.textContent='body{background:#07111f;color:#edf4ff;font:22px/1.65 system-ui;padding:24px}h1{font-size:24px;color:#64d8eb}video{width:100%;max-height:230px;object-fit:contain}p{white-space:pre-wrap}button,select{padding:12px;margin:4px;background:#17334b;color:white;border:1px solid #456;border-radius:8px;font-size:18px}small{color:#9bb3ce}';d.head.append(style);
+  const h=d.createElement('h1');h.id='section';d.body.append(h);
+  const v=d.createElement('video');v.id='preview';v.src=film.currentSrc||film.src;v.muted=true;d.body.append(v);
+  const n=d.createElement('p');n.id='script';d.body.append(n);
+  const rate=d.createElement('p');rate.id='speed';d.body.append(rate);
+  for(const [text,action] of [['← Previous',()=>choose(current-1)],['Replay',()=>run()],['Pause / Resume',pause],['Next →',next],['Slower ↓',()=>speed(-.25)],['Faster ↑',()=>speed(.25)]]){const b=d.createElement('button');b.textContent=text;b.onclick=action;d.body.append(b)}
+  const select=d.createElement('select');select.id='scenes';select.setAttribute('aria-label','Choose scene');
+  all.forEach((s,i)=>{const o=d.createElement('option');o.value=i;o.textContent=`${i+1}. ${s.name}`;select.append(o)});
+  select.onchange=()=>choose(Number(select.value));d.body.append(select);
+  const up=d.createElement('p');up.id='upnext';d.body.append(up);
+  const small=d.createElement('small');small.textContent='Main window: video only. → next · ← previous · ↑/↓ speed (0.25× to 4×) · P pause · R replay · F fullscreen · C captions. Speed also appears in the main browser tab title.';d.body.append(small);
+  d.addEventListener('keydown',key);v.addEventListener('loadedmetadata',sync,{once:true});sync();
+}
+function key(e){
+  if(e.repeat||['SELECT','INPUT','TEXTAREA'].includes(e.target.tagName))return;
+  if(e.target.tagName==='BUTTON'&&[' ','Enter'].includes(e.key))return;
+  if(e.shiftKey&&e.key.toLowerCase()==='p'){e.preventDefault();openPresenter();return}
+  const actions={' ':next,Enter:next,ArrowRight:next,PageDown:next,ArrowLeft:()=>choose(current-1),PageUp:()=>choose(current-1),ArrowUp:()=>speed(.25),ArrowDown:()=>speed(-.25),r:()=>run(),p:pause,f:fullscreen,c:()=>{track.mode=track.mode==='showing'?'hidden':'showing'},Home:()=>choose(0),End:()=>choose(all.length-1)};
+  const action=actions[e.key]||actions[e.key.toLowerCase()];if(action){e.preventDefault();action()}
+}
+film.onclick=next;
+film.addEventListener('loadeddata',()=>{loaded=true;choose(0)},{once:true});
+film.addEventListener('timeupdate',()=>check(film.currentTime));film.addEventListener('ended',hold);
+film.addEventListener('ratechange',sync);
+film.addEventListener('error',()=>{$('error').hidden=false;$('error').textContent='Cannot load episode.mp4. Keep it beside presentation.html, or open this lesson using the local server link in the README.'});
+document.addEventListener('keydown',key);sync();
+window.lessonState=()=>({current,state,loaded,time:film.currentTime,start:start(current),end:finish(current),motionEnd:motionFinish(current),count:all.length,speed:film.playbackRate});
+</script></body></html>

@@ -1,0 +1,9 @@
+00:00 The puzzle
+00:22 The model
+00:45 Stop-and-wait
+02:16 Worked example
+02:38 Failure and recovery
+05:17 Sliding windows
+06:48 Go-Back-N example
+08:19 Comparison
+08:41 Recap

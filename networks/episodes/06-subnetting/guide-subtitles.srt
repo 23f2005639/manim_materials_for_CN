@@ -1,0 +1,437 @@
+1
+00:00:00,000 --> 00:00:05,408
+This block contains 256 addresses. We want
+four separate networks, with
+
+2
+00:00:05,408 --> 00:00:10,817
+no gaps and no overlap. How can a few extra
+bits
+
+3
+00:00:10,817 --> 00:00:16,225
+create all four boundaries? Watch what happens
+when we move one
+
+4
+00:00:16,225 --> 00:00:21,633
+dividing line.
+
+5
+00:00:21,633 --> 00:00:26,717
+An IPv4 address contains thirty-two bits,
+displayed as four decimal octets.
+
+6
+00:00:26,717 --> 00:00:31,800
+Each octet represents eight bits. The familiar
+dotted form makes the
+
+7
+00:00:31,800 --> 00:00:36,883
+number readable, but the block structure
+becomes much clearer when we
+
+8
+00:00:36,883 --> 00:00:41,967
+expose the bits underneath.
+
+9
+00:00:41,967 --> 00:00:47,367
+Slash twenty-four fixes the first twenty-four
+positions. The last eight may
+
+10
+00:00:47,367 --> 00:00:52,767
+vary, so every address in this block shares
+the same beginning.
+
+11
+00:00:52,767 --> 00:00:58,167
+A prefix describes that common part and tells
+us which remaining
+
+12
+00:00:58,167 --> 00:01:03,567
+combinations belong together.
+
+13
+00:01:03,567 --> 00:01:08,542
+A mask makes this boundary explicit: ones mark
+the fixed prefix
+
+14
+00:01:08,542 --> 00:01:13,517
+positions; zeros mark the changing positions.
+For slash twenty-four, the mask
+
+15
+00:01:13,517 --> 00:01:18,492
+is 255.255.255.0. The decimal form is simply
+another view of those
+
+16
+00:01:18,492 --> 00:01:23,467
+thirty-two bits.
+
+17
+00:01:23,467 --> 00:01:30,678
+To extract the network, apply bitwise AND. A
+mask one keeps
+
+18
+00:01:30,678 --> 00:01:37,889
+the address bit; a zero clears it. Applying
+this mask to
+
+19
+00:01:37,889 --> 00:01:45,100
+192.168.1.42 leaves 192.168.1.0. The variable
+part disappears, exposing the common prefix.
+
+20
+00:01:45,100 --> 00:01:49,967
+Eight variable bits allow two to the power of
+eight combinations:
+
+21
+00:01:49,967 --> 00:01:54,833
+256 addresses. In the last octet, that's zero
+through 255. This
+
+22
+00:01:54,833 --> 00:01:59,700
+counts every address in the block, before
+assigning any special network
+
+23
+00:01:59,700 --> 00:02:04,567
+or broadcast roles.
+
+24
+00:02:04,567 --> 00:02:09,542
+Fix one more bit and the possibilities split
+in half. Fix
+
+25
+00:02:09,542 --> 00:02:14,517
+a second and each half splits again. Four
+subnets require two
+
+26
+00:02:14,517 --> 00:02:19,492
+extra prefix bits, moving our boundary from
+slash twenty-four to slash
+
+27
+00:02:19,492 --> 00:02:24,467
+twenty-six.
+
+28
+00:02:24,467 --> 00:02:29,550
+The last octet of the new mask begins with two
+ones.
+
+29
+00:02:29,550 --> 00:02:34,633
+Their values are 128 and sixty-four, totaling
+192. Six zeros follow.
+
+30
+00:02:34,633 --> 00:02:39,717
+That's why the complete slash-twenty-six mask
+becomes 255.255.255.192, rather than an
+
+31
+00:02:39,717 --> 00:02:44,800
+arbitrary number to memorize.
+
+32
+00:02:44,800 --> 00:02:49,883
+Six bits remain free inside each subnet. They
+produce sixty-four addresses.
+
+33
+00:02:49,883 --> 00:02:54,967
+Four times sixty-four gives the original 256,
+which is a useful
+
+34
+00:02:54,967 --> 00:03:00,050
+consistency check: moving the boundary divides
+the existing space without changing
+
+35
+00:03:00,050 --> 00:03:05,133
+its total size.
+
+36
+00:03:05,133 --> 00:03:10,425
+The two new subnet bits can be zero-zero,
+zero-one, one-zero, or
+
+37
+00:03:10,425 --> 00:03:15,717
+one-one. With all host bits cleared, those
+prefixes begin at zero,
+
+38
+00:03:15,717 --> 00:03:21,008
+sixty-four, 128, and 192. Four binary choices
+create four evenly spaced
+
+39
+00:03:21,008 --> 00:03:26,300
+boundaries.
+
+40
+00:03:26,300 --> 00:03:32,933
+The first subnet covers last-octet values zero
+through sixty-three. On an
+
+41
+00:03:32,933 --> 00:03:39,567
+ordinary LAN, zero identifies the network and
+sixty-three is broadcast. Hosts
+
+42
+00:03:39,567 --> 00:03:46,200
+use one through sixty-two: sixty-two usable
+addresses within a sixty-four-address block.
+
+43
+00:03:46,200 --> 00:03:51,608
+The second subnet starts at sixty-four and
+ends at 127. Hosts
+
+44
+00:03:51,608 --> 00:03:57,017
+occupy sixty-five through 126. Notice the
+broadcast ends in 127 here.
+
+45
+00:03:57,017 --> 00:04:02,425
+Its identity comes from all host bits being
+one, not from
+
+46
+00:04:02,425 --> 00:04:07,833
+always ending in 255.
+
+47
+00:04:07,833 --> 00:04:13,025
+The third prefix begins at 128 and covers
+through 191. Its
+
+48
+00:04:13,025 --> 00:04:18,217
+ordinary host range is 129 through 190. The
+calculation hasn't changed;
+
+49
+00:04:18,217 --> 00:04:23,408
+the fixed subnet bits have moved us into the
+next group
+
+50
+00:04:23,408 --> 00:04:28,600
+of sixty-four combinations.
+
+51
+00:04:28,600 --> 00:04:33,683
+The fourth block runs from 192 through 255,
+with hosts from
+
+52
+00:04:33,683 --> 00:04:38,767
+193 through 254. Together, the four ranges
+cover the parent exactly
+
+53
+00:04:38,767 --> 00:04:43,850
+once. Their boundaries meet cleanly, and each
+address belongs to just
+
+54
+00:04:43,850 --> 00:04:48,933
+one subnet.
+
+55
+00:04:48,933 --> 00:04:55,133
+Where does seventy fit? Its binary last octet
+is 01000110. AND
+
+56
+00:04:55,133 --> 00:05:01,333
+with 11000000 leaves 01000000: sixty-four. So
+192.168.1.70 lies in 192.168.1.64 slash
+
+57
+00:05:01,333 --> 00:05:07,533
+twenty-six. The mask finds the block directly,
+without searching a table.
+
+58
+00:05:07,533 --> 00:05:12,725
+Seventy and one hundred share that sixty-four
+prefix. Address 130 belongs
+
+59
+00:05:12,725 --> 00:05:17,917
+to the block starting at 128. Similar decimal
+addresses can cross
+
+60
+00:05:17,917 --> 00:05:23,108
+a subnet boundary; masking both addresses
+reveals whether their network portions
+
+61
+00:05:23,108 --> 00:05:28,300
+actually match.
+
+62
+00:05:28,300 --> 00:05:33,700
+That boundary affects delivery. A host
+normally reaches a destination in
+
+63
+00:05:33,700 --> 00:05:39,100
+its own subnet locally; another subnet needs a
+suitable next-hop router.
+
+64
+00:05:39,100 --> 00:05:44,500
+This is a logical addressing decision,
+independent of whether the devices
+
+65
+00:05:44,500 --> 00:05:49,900
+occupy different physical rooms.
+
+66
+00:05:49,900 --> 00:05:55,200
+Suppose the network needs fifty host
+addresses. Slash twenty-seven offers thirty
+
+67
+00:05:55,200 --> 00:06:00,500
+usable addresses on an ordinary LAN, which
+isn't enough. Slash twenty-six
+
+68
+00:06:00,500 --> 00:06:05,800
+offers sixty-two. Work backward from the
+required capacity to choose the
+
+69
+00:06:05,800 --> 00:06:11,100
+smallest suitable block.
+
+70
+00:06:11,100 --> 00:06:18,311
+Every extra fixed prefix bit halves the
+remaining combinations. Slash twenty-five
+
+71
+00:06:18,311 --> 00:06:25,522
+gives 128 total addresses, slash twenty-six
+sixty-four, slash twenty-seven thirty-two.
+Longer
+
+72
+00:06:25,522 --> 00:06:32,733
+prefixes mean smaller blocks because fewer
+positions remain free to change.
+
+73
+00:06:32,733 --> 00:06:37,925
+Subtracting two is useful for ordinary LAN
+subnets, but isn't universal.
+
+74
+00:06:37,925 --> 00:06:43,117
+Suitable slash-thirty-one point-to-point links
+can use both addresses; slash thirty-two
+identifies
+
+75
+00:06:43,117 --> 00:06:48,308
+a single address. The address roles depend on
+the network's purpose
+
+76
+00:06:48,308 --> 00:06:53,500
+and prefix.
+
+77
+00:06:53,500 --> 00:07:00,856
+A subnet boundary doesn't itself encrypt
+traffic or forbid crossing. Routing
+
+78
+00:07:00,856 --> 00:07:08,211
+and access policies determine which
+communication is allowed. Splitting an address
+
+79
+00:07:08,211 --> 00:07:15,567
+block organizes delivery; protection requires
+the relevant security mechanisms as well.
+
+80
+00:07:15,567 --> 00:07:21,075
+Modern classless addressing uses the supplied
+prefix, rather than guessing a
+
+81
+00:07:21,075 --> 00:07:26,583
+class from the first octet. Also, our
+192.168.1 block uses private
+
+82
+00:07:26,583 --> 00:07:32,092
+addresses. It illustrates internal network
+organization, rather than a globally routable
+
+83
+00:07:32,092 --> 00:07:37,600
+public block.
+
+84
+00:07:37,600 --> 00:07:42,575
+Check the four starts: zero, sixty-four, 128,
+192. Each broadcast sits
+
+85
+00:07:42,575 --> 00:07:47,550
+one below the next boundary, ending at 255 for
+the last
+
+86
+00:07:47,550 --> 00:07:52,525
+block. Equal block sizes and clean boundaries
+let us verify the
+
+87
+00:07:52,525 --> 00:07:57,500
+entire split together.
+
+88
+00:07:57,500 --> 00:08:03,125
+Two bits created four prefixes; six remaining
+bits created sixty-four addresses
+
+89
+00:08:03,125 --> 00:08:08,750
+per prefix. Masks, ranges, and host counts all
+follow from that
+
+90
+00:08:08,750 --> 00:08:14,375
+same boundary. Once you see the division, the
+separate-looking rules become
+
+91
+00:08:14,375 --> 00:08:20,000
+consequences of one picture.

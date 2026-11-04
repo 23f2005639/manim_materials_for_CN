@@ -1,0 +1,19 @@
+{
+  "episode": "07",
+  "review_type": "Independent source, storyboard, and animation-code review",
+  "status": "passed after corrections",
+  "narration_words": 1234,
+  "sections": 24,
+  "sources_checked": 4,
+  "checks": [
+    "The SYN 100, SYN-ACK 500/101, and final ACK 501 handshake is correct.",
+    "Bytes 101-200 produce cumulative ACK 201; filling the 201-300 gap with 301-400 buffered advances the ACK to 401.",
+    "Lost acknowledgments are distinguished from duplicate application delivery.",
+    "The retransmission diagram now shows the actual missing range, rather than an extra fictitious full-stream packet.",
+    "A receiver allowance of 300 with 200 outstanding leaves 100 under the stated simplification.",
+    "Flow and congestion control remain distinct; UDP application reliability and latency caveats are present."
+  ],
+  "limitations": "This report verifies concepts and source alignment. Separate media and browser reports cover rendered files and controls.",
+  "integrated_layout_inspection": "Passed: no problems in all 24 sampled sections",
+  "visual_review": "Inspected storyboard sheet 2 for representative calculations and protocol sequences."
+}

@@ -1,0 +1,9 @@
+00:00 The transport puzzle
+00:42 Understand the services
+01:27 The TCP handshake
+02:55 Reliable delivery
+05:10 Control the amount in flight
+06:17 Compare UDP behavior
+07:01 Choose by requirements
+08:06 Connection lifetime
+08:28 Recap

@@ -1,0 +1,5 @@
+{
+  "base_url": "http://127.0.0.1:8765/networks/",
+  "all_eight_presentations_and_videos": "HTTP200",
+  "browser_load_play_pause": "passed"
+}
