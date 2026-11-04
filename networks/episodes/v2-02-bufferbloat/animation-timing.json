@@ -2,118 +2,118 @@
   "fps": 30.0,
   "sections": [
     {
-      "name": "The speed-test paradox",
-      "animation_end_frame": 385,
-      "section_seconds": 36.533,
-      "visual_seconds": 12.42,
-      "visual_fraction": 0.34
-    },
-    {
-      "name": "One shared exit",
-      "animation_end_frame": 1590,
-      "section_seconds": 37.867,
-      "visual_seconds": 16.08,
-      "visual_fraction": 0.425
-    },
-    {
-      "name": "The exit has a rhythm",
-      "animation_end_frame": 2745,
-      "section_seconds": 35.667,
-      "visual_seconds": 16.7,
-      "visual_fraction": 0.468
-    },
-    {
-      "name": "An empty queue feels quick",
-      "animation_end_frame": 3788,
+      "name": "Start with one message",
+      "animation_end_frame": 258,
       "section_seconds": 31.667,
+      "visual_seconds": 8.2,
+      "visual_fraction": 0.259
+    },
+    {
+      "name": "Give the message a doorway",
+      "animation_end_frame": 1205,
+      "section_seconds": 31.2,
+      "visual_seconds": 8.1,
+      "visual_fraction": 0.26
+    },
+    {
+      "name": "Watch what the exit can do",
+      "animation_end_frame": 2252,
+      "section_seconds": 33.0,
+      "visual_seconds": 11.8,
+      "visual_fraction": 0.358
+    },
+    {
+      "name": "Try a quiet connection",
+      "animation_end_frame": 3362,
+      "section_seconds": 37.0,
       "visual_seconds": 15.8,
-      "visual_fraction": 0.499
+      "visual_fraction": 0.427
     },
     {
-      "name": "A download builds a line",
-      "animation_end_frame": 4627,
-      "section_seconds": 37.0,
-      "visual_seconds": 12.1,
-      "visual_fraction": 0.327
-    },
-    {
-      "name": "The small packet gets trapped",
-      "animation_end_frame": 5804,
-      "section_seconds": 37.433,
-      "visual_seconds": 14.32,
-      "visual_fraction": 0.383
-    },
-    {
-      "name": "More storage is not more speed",
-      "animation_end_frame": 6815,
-      "section_seconds": 35.667,
-      "visual_seconds": 10.6,
-      "visual_fraction": 0.297
-    },
-    {
-      "name": "Turn the line into a quantity",
-      "animation_end_frame": 7754,
+      "name": "Let a download join in",
+      "animation_end_frame": 4361,
       "section_seconds": 36.1,
-      "visual_seconds": 6.22,
-      "visual_fraction": 0.172
+      "visual_seconds": 12.1,
+      "visual_fraction": 0.335
     },
     {
-      "name": "Bytes and bits must agree",
-      "animation_end_frame": 8887,
-      "section_seconds": 34.767,
-      "visual_seconds": 7.9,
-      "visual_fraction": 0.227
-    },
-    {
-      "name": "Four hundred milliseconds of waiting",
-      "animation_end_frame": 10367,
-      "section_seconds": 35.667,
-      "visual_seconds": 22.46,
-      "visual_fraction": 0.63
-    },
-    {
-      "name": "The round trip has other parts",
-      "animation_end_frame": 10985,
-      "section_seconds": 37.0,
-      "visual_seconds": 7.4,
-      "visual_fraction": 0.2
-    },
-    {
-      "name": "Watch arrivals and departures",
-      "animation_end_frame": 12331,
-      "section_seconds": 32.533,
-      "visual_seconds": 15.26,
-      "visual_fraction": 0.469
-    },
-    {
-      "name": "A burst can be harmless",
-      "animation_end_frame": 13304,
+      "name": "Put the small message behind it",
+      "animation_end_frame": 5511,
       "section_seconds": 36.533,
-      "visual_seconds": 15.15,
-      "visual_fraction": 0.415
+      "visual_seconds": 14.32,
+      "visual_fraction": 0.392
     },
     {
-      "name": "A full queue can also drop",
-      "animation_end_frame": 14201,
-      "section_seconds": 37.867,
-      "visual_seconds": 8.54,
-      "visual_fraction": 0.226
-    },
-    {
-      "name": "What would a better picture look like?",
-      "animation_end_frame": 15576,
-      "section_seconds": 39.2,
-      "visual_seconds": 16.5,
-      "visual_fraction": 0.421
-    },
-    {
-      "name": "Answer the opening puzzle",
-      "animation_end_frame": 16608,
+      "name": "Try making the waiting room bigger",
+      "animation_end_frame": 6495,
       "section_seconds": 37.433,
+      "visual_seconds": 10.6,
+      "visual_fraction": 0.283
+    },
+    {
+      "name": "Measure the wait with a simple division",
+      "animation_end_frame": 7487,
+      "section_seconds": 37.867,
+      "visual_seconds": 6.22,
+      "visual_fraction": 0.164
+    },
+    {
+      "name": "Make the units match",
+      "animation_end_frame": 8673,
+      "section_seconds": 38.333,
+      "visual_seconds": 7.9,
+      "visual_fraction": 0.206
+    },
+    {
+      "name": "Drain one megabyte through the exit",
+      "animation_end_frame": 10260,
+      "section_seconds": 37.867,
+      "visual_seconds": 22.46,
+      "visual_fraction": 0.593
+    },
+    {
+      "name": "Put the wait inside the whole journey",
+      "animation_end_frame": 10944,
+      "section_seconds": 37.433,
+      "visual_seconds": 7.4,
+      "visual_fraction": 0.198
+    },
+    {
+      "name": "Keep replacing everything that leaves",
+      "animation_end_frame": 12303,
+      "section_seconds": 37.0,
+      "visual_seconds": 15.26,
+      "visual_fraction": 0.412
+    },
+    {
+      "name": "Compare a rush with a permanent queue",
+      "animation_end_frame": 13410,
+      "section_seconds": 37.867,
+      "visual_seconds": 15.15,
+      "visual_fraction": 0.4
+    },
+    {
+      "name": "See what happens when the room fills",
+      "animation_end_frame": 14347,
+      "section_seconds": 37.433,
+      "visual_seconds": 8.54,
+      "visual_fraction": 0.228
+    },
+    {
+      "name": "Compare two queues with the same exit",
+      "animation_end_frame": 15709,
+      "section_seconds": 37.867,
+      "visual_seconds": 16.5,
+      "visual_fraction": 0.436
+    },
+    {
+      "name": "Name the problem we have built",
+      "animation_end_frame": 16701,
+      "section_seconds": 38.333,
       "visual_seconds": 11.7,
-      "visual_fraction": 0.313
+      "visual_fraction": 0.305
     }
   ],
-  "duration": 578.9333333333333,
+  "duration": 582.9333333333333,
   "edition": "focused-v2"
 }

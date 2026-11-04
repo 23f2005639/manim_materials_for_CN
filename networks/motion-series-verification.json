@@ -2,49 +2,49 @@
   {
     "topic": "dns",
     "phases": 16,
-    "native_changing_frame_fraction": 0.3059,
+    "native_changing_frame_fraction": 0.2815,
     "deliberate_holds": "Narration-paced; the player holds after useful motion."
   },
   {
     "topic": "bufferbloat",
     "phases": 16,
-    "native_changing_frame_fraction": 0.3734,
+    "native_changing_frame_fraction": 0.3415,
     "deliberate_holds": "Narration-paced; the player holds after useful motion."
   },
   {
     "topic": "wdm",
     "phases": 16,
-    "native_changing_frame_fraction": 0.2964,
+    "native_changing_frame_fraction": 0.3063,
     "deliberate_holds": "Narration-paced; the player holds after useful motion."
   },
   {
     "topic": "packet-switching",
     "phases": 16,
-    "native_changing_frame_fraction": 0.2488,
+    "native_changing_frame_fraction": 0.2562,
     "deliberate_holds": "Narration-paced; the player holds after useful motion."
   },
   {
     "topic": "dijkstra",
     "phases": 16,
-    "native_changing_frame_fraction": 0.2983,
+    "native_changing_frame_fraction": 0.3136,
     "deliberate_holds": "Narration-paced; the player holds after useful motion."
   },
   {
     "topic": "subnetting",
     "phases": 16,
-    "native_changing_frame_fraction": 0.1834,
+    "native_changing_frame_fraction": 0.1775,
     "deliberate_holds": "Narration-paced; the player holds after useful motion."
   },
   {
     "topic": "tcp-slow-start",
     "phases": 16,
-    "native_changing_frame_fraction": 0.28,
+    "native_changing_frame_fraction": 0.2937,
     "deliberate_holds": "Narration-paced; the player holds after useful motion."
   },
   {
     "topic": "rsa",
     "phases": 16,
-    "native_changing_frame_fraction": 0.1789,
+    "native_changing_frame_fraction": 0.1833,
     "deliberate_holds": "Narration-paced; the player holds after useful motion."
   }
 ]

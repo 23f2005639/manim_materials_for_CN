@@ -1,8 +1,5 @@
-00:00 The puzzle
-00:32 The model
-01:39 The lookup
-04:29 The mathematics
-05:38 The cache
-07:23 The failure
-07:57 The reveal
-08:32 The answer
+00:00 Start here
+02:20 Follow the idea
+04:42 Make it measurable
+05:53 Try a change
+08:17 The idea comes together

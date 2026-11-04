@@ -1,85 +1,85 @@
-# How Does a Download Discover Its Speed?
+# TCP Slow Start: How a Download Learns to Speed Up
 
-English narration for your own voice. Planned runtime: 00:09:45.
+English narration for your own voice. Planned runtime: 00:09:44.
 
 The browser pauses after each section. The timestamps below refer to the continuous MP4.
 
 
-## 01. An unknown road ahead — 00:00:00
+## 01. Send a photo in pieces — 00:00:00
 
-A download is ready to send millions of bytes. Somewhere ahead is a connection that limits how quickly they can pass, but the sender does not begin with a map of its available capacity. Sending everything immediately could overwhelm it. Sending painfully little forever wastes an opportunity. So how does a sender start? Watch the first packets and their returning acknowledgments. They will do more than confirm delivery: they will help pace a growing experiment called TCP slow start.
-
-
-## 02. Separate the limits — 00:00:37
-
-Our picture has a sender, a receiver, and a bottleneck along the path. Assume the receiver has plenty of free buffer space, so its advertised window is not the limit in this story. We are focusing on the sender's congestion window, usually called cwnd. It bounds how many bytes may be outstanding without acknowledgment. That is a quantity of data, not a transmission speed printed on the cable. Keeping those two meanings separate will make the later equation much easier.
+You send a photo to a friend. The network carries its data in smaller pieces instead of one enormous object. Watch one piece leave your computer and arrive at theirs. In this video we will follow TCP, a set of rules computers can use to deliver data reliably. A piece of TCP data is called a segment. Our question: how many pieces should we send before waiting to hear back?
 
 
-## 03. Begin with a small window — 00:01:14
+## 02. How do we know it arrived? — 00:00:33
 
-For our illustration, begin with room for four full-size segments. Four is a teaching choice, not a claim that every TCP connection starts there. Initial-window choices have changed across specifications and implementations. We are also assuming one useful acknowledgment for each new segment and steady round-trip timing. These clean assumptions let us see the mechanism before real network variation blurs it. The sender has more data ready, but only these first four segments are allowed into the experiment.
-
-
-## 04. The first packets leave — 00:01:50
-
-One, two, three, four. The sender puts those segments onto the path, then waits for progress to be confirmed. At this point, there can be four segments of unacknowledged data in flight. They are not travelling on four new cables. They are sharing the same path at different positions. If the sender released its whole file just because the first segment had left its machine, it would be ignoring the very uncertainty slow start is trying to manage.
+Sending something is not the same as knowing it arrived. So the receiving computer sends a small reply meaning, I've received data up to this point. That reply is an acknowledgment, shortened to ACK. Watch blue data go right and a green reply return left. We will draw one reply for each piece to keep the idea clear. Actual TCP can acknowledge several pieces together. The returning replies give the sender evidence of progress instead of making it guess blindly.
 
 
-## 05. An acknowledgment opens space — 00:02:27
+## 03. Leave room for four pieces — 00:01:10
 
-The first acknowledgment comes back. Part of its effect is straightforward: the confirmed data no longer counts as outstanding. There is now room to send a replacement segment within the old window. But slow start also increases the congestion window when new data is acknowledged, subject to its rules. In our simplified full-segment example, it adds one more segment of allowance. One acknowledgment therefore frees old space and helps create new space. That combination is what makes the next round grow.
-
-
-## 06. Four acknowledgments become eight — 00:03:05
-
-Repeat that process for the four initial segments. Each acknowledgment confirms progress and contributes one segment to our illustrative window growth. By the end of this round, cwnd has increased from four segments to eight. The sender can now have twice as much unacknowledged data outstanding. It did not ask a router for an exact bandwidth number. It used successful delivery feedback to expand cautiously from its starting point. The growth is emerging from the acknowledgment rule, not a stopwatch alone.
+Let's begin with an allowance of four pieces. The four empty boxes are spaces for data we have sent but haven't yet had confirmed. This allowance is called the congestion window, often written cwnd. Here, window means a limit, not something on your screen. We chose four for this demonstration; real starting values can differ. Also assume the receiver has plenty of room. That lets us focus on how the sender grows its allowance using feedback from the journey.
 
 
-## 07. The acknowledgment clock — 00:03:43
+## 04. Four pieces, then wait — 00:01:47
 
-Look closely at the returning arrows. Acknowledgments do not just arrive after an abstract round has finished; each one can permit new sending as it arrives. That is an ACK clock. The flow of feedback helps pace the outgoing flow of data. Our round-by-round grouping makes the count easier to follow, but a real sender does not have to wait for all acknowledgments in a batch before doing anything. It reacts as progress arrives.
-
-
-## 08. Why the growth doubles — 00:04:18
-
-After eight segments are acknowledged under our assumptions, the window grows by another eight, reaching sixteen. Then sixteen successful segment acknowledgments can take it to thirty-two. Why doubling? Start with W segments of allowance, add roughly W more over a round trip, and the next round has about two W. The exponential-looking graph is the accumulated result of many small increases. The name slow start sounds modest, but its early growth can become surprisingly quick across several rounds.
+Send piece one. Fill the first box. Send piece two, then three, then four. All four spaces are now occupied. We call this data outstanding: sent, but not yet confirmed by a reply. The sender cannot keep adding pieces beyond its allowance. It waits for progress. That waiting isn't wasted caution. The sender doesn't yet know how much traffic the path can handle. The blue boxes show exactly what it is waiting to hear about.
 
 
-## 09. Turn the pattern into math — 00:04:54
+## 05. One reply makes more room — 00:02:22
 
-We can now write the pattern instead of memorizing it. Starting from four, the idealized window after k complete growth rounds is four times two to the power k. Zero rounds gives four; one gives eight; two gives sixteen; three gives thirty-two. The equation describes the clean picture we just built. Delayed acknowledgments, different growth rules, losses, and application limits can change the actual trace. So use this model to understand the mechanism, rather than as a prediction for every download.
-
-
-## 10. A window is not a rate — 00:05:32
-
-Suppose each segment carries one thousand bytes, to keep the arithmetic visible. A sixteen-segment window holds sixteen thousand bytes of outstanding data. If that much data can be acknowledged every hundred milliseconds, the window supports an average of one hundred sixty thousand bytes per second. Multiply by eight and that is about one point two eight megabits per second. This is a window-limited approximation, not a promise that the path can deliver that rate.
+Now the first green reply arrives. Two things happen. First, one piece is confirmed, so it no longer occupies a space. Second, during our version of slow start, this reply increases the allowance by one piece. Our limit rises from four to five, with three old pieces still unconfirmed. Five spaces minus three occupied spaces leaves room for two new pieces. Watch both spaces open. A reply both clears old work and gives us permission to try a little more.
 
 
-## 11. Distance changes the result — 00:06:07
+## 06. Four replies grow the allowance — 00:03:00
 
-Keep the same sixteen thousand bytes, but double the round-trip time to two hundred milliseconds. The approximate rate halves, because replenishing the same allowance takes twice as long. Now the expression window divided by round-trip time has a visible meaning: an amount of outstanding data, renewed over a period of time. A larger window can help keep a longer path busy, but it cannot force more through a bottleneck than that connection can actually transmit.
-
-
-## 12. When the path cannot keep up — 00:06:42
-
-Our growing train eventually reaches a point where the bottleneck cannot serve arrivals as quickly as they build up. Packets wait, and the feedback reaches the sender later. Congestion may also lead to packet loss or explicit signals. Successful earlier rounds did not prove that unlimited growth would remain safe. They only justified increasing from the earlier operating point. Slow start explores available capacity through feedback; it does not receive advance permission to overfill every buffer on the path.
+Let the other replies come back too. Under our one-reply-per-piece assumption, each adds one space. Starting with four spaces, four replies increase the limit to eight. That's the surprise: we added only one at a time, yet a complete round doubled the allowance. We haven't measured a perfect network speed. We've learned that this batch got through and cautiously allowed more data. The rule is called slow start because it begins with limited data, even though its growth soon becomes rapid.
 
 
-## 13. Give exponential growth a boundary — 00:07:19
+## 07. Replies set the rhythm — 00:03:37
 
-TCP has a slow-start threshold, commonly called ssthresh. While the congestion window is below that threshold, slow-start growth can continue. Reaching the threshold or observing congestion changes what happens next. We will stop our explanation at that boundary, because slow start is one part of a larger congestion-control process. The point is that doubling is not meant to continue forever. The same graph that explains its speed also explains why it needs a stopping condition.
-
-
-## 14. Starting larger changes the early trip — 00:07:54
-
-Try starting with eight segments instead of four in the same idealized example. The growth sequence becomes eight, sixteen, thirty-two. That reaches the thirty-two-segment level one round earlier. A larger initial window can save an early round, but it also begins by placing more unconfirmed data on an unknown path. This is a trade-off, not free speed. Standards and implementations make practical initial-window choices; our animation isolates how that starting choice changes the first few rounds.
+Real replies don't have to arrive as one tidy pile at the end of a round. Watch them return separately. Each reply can make room for more sending immediately. This gives the data a rhythm: progress comes back, more data goes out. People call this the acknowledgment clock. It isn't a separate clock inside the cable. It describes how returning feedback helps pace the sender. Our arrows are deliberately slow so you can follow that cause and effect.
 
 
-## 15. Read a real trace carefully — 00:08:30
+## 08. Watch four become eight — 00:04:14
 
-Before turning this tidy curve into a universal rule, check the assumptions. Does the sender have enough data ready? Does the receiver have room? Are acknowledgments delayed or grouped? Is another bottleneck already limiting the flow? Each can alter what you observe. The congestion window is permission to have data outstanding, rather than an order to send at a smooth rate. The useful explanation survives those complications: confirmed progress helps the sender grow and pace its early traffic.
+Now repeat the experiment with eight pieces. Eight replies can add eight more spaces, making sixteen. Sixteen can then become thirty-two. Look at the dots rising on the graph: four, eight, sixteen, thirty-two. Each step represents a complete ideal growth round, not a fixed second. Twice as many pieces can produce twice as many replies, which can create twice as much room. That's why adding one per reply produces such a fast-growing pattern over several rounds.
 
 
-## 16. Answer the speed puzzle — 00:09:06
+## 09. Write the doubling pattern — 00:04:50
 
-So the sender did not discover a perfect speed setting written somewhere inside the network. It began with limited outstanding data, used acknowledgments to make room and grow that allowance, and stopped the rapid growth when its rules required a transition. The math, the window, and the moving packets were three views of that same feedback process. Slow start is how a connection can begin exploring an uncertain path without treating either permanent caution or an immediate flood as its only option.
+We can write what the picture already showed. Begin with four, then multiply by two once for every completed round. After k rounds, the allowance is four times two to the power k. That power just means repeated multiplication: after two rounds, four times two times two equals sixteen. At zero rounds we still have four. You don't need the formula to discover the pattern; it is a short way to describe the doubling we just watched.
+
+
+## 10. How much per second? — 00:05:26
+
+Does an allowance of sixteen pieces tell us the download speed? Not by itself. We also need the time for data to go out and feedback to return. That's the round-trip time, or RTT. Suppose each piece carries one thousand bytes and a round trip takes one tenth of a second. Sixteen thousand bytes divided by that time gives one hundred sixty thousand bytes per second. Eight bits make a byte, so that's about 1.28 million bits per second.
+
+
+## 11. Waiting longer changes the speed — 00:06:03
+
+Keep those same sixteen spaces, but make the round trip twice as long: two tenths of a second. Reusing the allowance now takes longer, so our estimated rate halves to 0.64 million bits per second. Nothing shrank the boxes. Feedback simply returned more slowly. This estimate assumes the window is the main limit and data keeps flowing. It helps explain why a window size and a rate are different things: one counts how much; the other also includes time.
+
+
+## 12. Too much reaches the narrow link — 00:06:40
+
+Can we keep doubling forever? Watch the narrow link in the middle. A link is one connection along the route. This one can pass data more slowly than the sender now brings it. Pieces start waiting, just like people arriving faster than a door lets them through. This limiting connection is called a bottleneck. More data in the waiting line does not make that connection faster. Eventually the sender needs to change how it grows, rather than doubling without a boundary.
+
+
+## 13. Growth needs a stopping point — 00:07:18
+
+TCP uses a boundary called the slow-start threshold. The short label on the diagram is ssthresh. Below that boundary, slow-start growth can continue. At the boundary, the sender moves to another growth phase. In our picture we chose thirty-two so you can see where the steep curve stops. This is a teaching value, not a number shared by every connection. Loss and other feedback can also change the behavior. Today we're following this opening growth idea, not every TCP rule.
+
+
+## 14. Try a different starting allowance — 00:07:55
+
+Let's change just one starting condition. Begin with eight spaces instead of four. Our ideal sequence is now eight, sixteen, thirty-two. We reach thirty-two one round earlier. A bigger starting allowance can save early waiting, but it also places more data onto a path whose capacity we may not know. The two colored curves make that tradeoff visible. There isn't one magic starting number that makes every network behave the same way under every possible load.
+
+
+## 15. Real downloads vary — 00:08:31
+
+If you record a real download, don't expect every curve to match our neat staircase. Perhaps the app has no more data ready. Perhaps replies confirm several pieces at once. Perhaps the receiver has limited space, or data gets lost along the way. Each changes the picture. Our demonstration deliberately kept these distractions out so one cause was visible: replies can grow the sending allowance. Now you can spot the idea without treating our drawing as a universal stopwatch.
+
+
+## 16. Start small, listen, then grow — 00:09:08
+
+Return to that first photo. We began with small pieces, learned what a reply tells us, and used four spaces to track unconfirmed data. Each successful reply both released space and helped grow the allowance. Over ideal rounds, four became eight, then sixteen. The sender didn't need a sign announcing the perfect speed. It began with a limit and learned from feedback. That is the central idea of TCP slow start: start small, listen to progress, and grow.

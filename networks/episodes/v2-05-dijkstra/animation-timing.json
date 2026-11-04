@@ -2,118 +2,118 @@
   "fps": 30.0,
   "sections": [
     {
-      "name": "The tempting shortcut",
-      "animation_end_frame": 429,
+      "name": "First, send one message",
+      "animation_end_frame": 276,
       "section_seconds": 35.2,
-      "visual_seconds": 13.9,
-      "visual_fraction": 0.395
+      "visual_seconds": 8.8,
+      "visual_fraction": 0.25
     },
     {
-      "name": "Give the links a cost",
-      "animation_end_frame": 1184,
+      "name": "Give each step a price",
+      "animation_end_frame": 1392,
+      "section_seconds": 35.2,
+      "visual_seconds": 10.8,
+      "visual_fraction": 0.307
+    },
+    {
+      "name": "Grow a small map",
+      "animation_end_frame": 2834,
       "section_seconds": 33.867,
-      "visual_seconds": 3.85,
-      "visual_fraction": 0.114
+      "visual_seconds": 23.68,
+      "visual_fraction": 0.699
     },
     {
-      "name": "Count costs, not connections",
-      "animation_end_frame": 2690,
-      "section_seconds": 34.333,
-      "visual_seconds": 20.2,
-      "visual_fraction": 0.588
-    },
-    {
-      "name": "Start with what is known",
-      "animation_end_frame": 3315,
-      "section_seconds": 34.333,
-      "visual_seconds": 6.7,
-      "visual_fraction": 0.195
-    },
-    {
-      "name": "Open the first possibilities",
-      "animation_end_frame": 4459,
+      "name": "Keep a little scorecard",
+      "animation_end_frame": 3512,
       "section_seconds": 35.667,
+      "visual_seconds": 12.4,
+      "visual_fraction": 0.348
+    },
+    {
+      "name": "Look one step from home",
+      "animation_end_frame": 4525,
+      "section_seconds": 34.767,
       "visual_seconds": 10.5,
-      "visual_fraction": 0.294
+      "visual_fraction": 0.302
     },
     {
-      "name": "A cheaper way to B",
-      "animation_end_frame": 5622,
-      "section_seconds": 33.867,
+      "name": "A better way to B",
+      "animation_end_frame": 5661,
+      "section_seconds": 35.667,
       "visual_seconds": 13.6,
-      "visual_fraction": 0.402
+      "visual_fraction": 0.381
     },
     {
-      "name": "Improve the route to D",
-      "animation_end_frame": 6431,
-      "section_seconds": 35.2,
+      "name": "Choose the cheapest unfinished dot",
+      "animation_end_frame": 6524,
+      "section_seconds": 36.533,
       "visual_seconds": 6.7,
-      "visual_fraction": 0.19
+      "visual_fraction": 0.183
     },
     {
-      "name": "Finding F is not finishing",
-      "animation_end_frame": 7601,
+      "name": "Find a first route to F",
+      "animation_end_frame": 7734,
       "section_seconds": 35.2,
       "visual_seconds": 10.5,
       "visual_fraction": 0.298
     },
     {
       "name": "One last improvement",
-      "animation_end_frame": 8522,
-      "section_seconds": 34.767,
+      "animation_end_frame": 8655,
+      "section_seconds": 36.1,
       "visual_seconds": 6.0,
-      "visual_fraction": 0.173
+      "visual_fraction": 0.166
     },
     {
-      "name": "The frontier reaches F",
-      "animation_end_frame": 9715,
-      "section_seconds": 35.2,
+      "name": "Know when the answer is ready",
+      "animation_end_frame": 9888,
+      "section_seconds": 36.533,
       "visual_seconds": 11.0,
-      "visual_fraction": 0.313
+      "visual_fraction": 0.301
     },
     {
-      "name": "Why the smallest choice works",
-      "animation_end_frame": 10561,
+      "name": "Why the rule works",
+      "animation_end_frame": 10774,
       "section_seconds": 36.533,
       "visual_seconds": 4.0,
       "visual_fraction": 0.109
     },
     {
-      "name": "Recover the actual journey",
-      "animation_end_frame": 11822,
-      "section_seconds": 37.0,
+      "name": "Remember the way back",
+      "animation_end_frame": 12035,
+      "section_seconds": 35.667,
       "visual_seconds": 9.5,
-      "visual_fraction": 0.257
+      "visual_fraction": 0.266
     },
     {
-      "name": "Send a packet along the answer",
-      "animation_end_frame": 13016,
-      "section_seconds": 35.2,
+      "name": "Walk the winning route",
+      "animation_end_frame": 13189,
+      "section_seconds": 36.1,
       "visual_seconds": 12.3,
-      "visual_fraction": 0.349
+      "visual_fraction": 0.341
     },
     {
-      "name": "Take away a connection",
-      "animation_end_frame": 13937,
+      "name": "What if a connection breaks?",
+      "animation_end_frame": 14137,
       "section_seconds": 36.1,
       "visual_seconds": 7.8,
       "visual_fraction": 0.216
     },
     {
-      "name": "Recalculate against the new graph",
-      "animation_end_frame": 15245,
-      "section_seconds": 37.0,
+      "name": "Find the new winner",
+      "animation_end_frame": 15445,
+      "section_seconds": 37.433,
       "visual_seconds": 15.3,
-      "visual_fraction": 0.414
+      "visual_fraction": 0.409
     },
     {
-      "name": "Answer the opening question",
-      "animation_end_frame": 16199,
-      "section_seconds": 36.533,
+      "name": "A big answer from small steps",
+      "animation_end_frame": 16412,
+      "section_seconds": 37.0,
       "visual_seconds": 10.1,
-      "visual_fraction": 0.276
+      "visual_fraction": 0.273
     }
   ],
-  "duration": 566.0,
+  "duration": 573.5666666666667,
   "edition": "focused-v2"
 }

@@ -2,121 +2,121 @@
   {
     "episode": "v2-01-dns",
     "section": 1,
-    "maximum_channel_mean_error": 0.028
+    "maximum_channel_mean_error": 0.0399
   },
   {
     "episode": "v2-01-dns",
     "section": 9,
-    "maximum_channel_mean_error": 0.0198
+    "maximum_channel_mean_error": 0.0116
   },
   {
     "episode": "v2-01-dns",
     "section": 16,
-    "maximum_channel_mean_error": 0.036
+    "maximum_channel_mean_error": 0.034
   },
   {
     "episode": "v2-02-bufferbloat",
     "section": 1,
-    "maximum_channel_mean_error": 0.0427
+    "maximum_channel_mean_error": 0.0205
   },
   {
     "episode": "v2-02-bufferbloat",
     "section": 9,
-    "maximum_channel_mean_error": 0.0512
+    "maximum_channel_mean_error": 0.0545
   },
   {
     "episode": "v2-02-bufferbloat",
     "section": 16,
+    "maximum_channel_mean_error": 0.018
+  },
+  {
+    "episode": "v2-03-wdm",
+    "section": 1,
+    "maximum_channel_mean_error": 0.0173
+  },
+  {
+    "episode": "v2-03-wdm",
+    "section": 9,
     "maximum_channel_mean_error": 0.0199
   },
   {
     "episode": "v2-03-wdm",
-    "section": 1,
-    "maximum_channel_mean_error": 0.0481
-  },
-  {
-    "episode": "v2-03-wdm",
-    "section": 9,
-    "maximum_channel_mean_error": 0.0231
-  },
-  {
-    "episode": "v2-03-wdm",
     "section": 16,
-    "maximum_channel_mean_error": 0.027
+    "maximum_channel_mean_error": 0.0288
   },
   {
     "episode": "v2-04-packet-switching",
     "section": 1,
-    "maximum_channel_mean_error": 0.0112
+    "maximum_channel_mean_error": 0.0515
   },
   {
     "episode": "v2-04-packet-switching",
     "section": 9,
-    "maximum_channel_mean_error": 0.018
+    "maximum_channel_mean_error": 0.0156
   },
   {
     "episode": "v2-04-packet-switching",
     "section": 16,
-    "maximum_channel_mean_error": 0.0231
-  },
-  {
-    "episode": "v2-05-dijkstra",
-    "section": 1,
-    "maximum_channel_mean_error": 0.021
-  },
-  {
-    "episode": "v2-05-dijkstra",
-    "section": 9,
-    "maximum_channel_mean_error": 0.0464
-  },
-  {
-    "episode": "v2-05-dijkstra",
-    "section": 16,
-    "maximum_channel_mean_error": 0.0452
-  },
-  {
-    "episode": "v2-06-subnetting",
-    "section": 1,
-    "maximum_channel_mean_error": 0.0661
-  },
-  {
-    "episode": "v2-06-subnetting",
-    "section": 9,
-    "maximum_channel_mean_error": 0.067
-  },
-  {
-    "episode": "v2-06-subnetting",
-    "section": 16,
-    "maximum_channel_mean_error": 0.0382
-  },
-  {
-    "episode": "v2-07-tcp-slow-start",
-    "section": 1,
-    "maximum_channel_mean_error": 0.0388
-  },
-  {
-    "episode": "v2-07-tcp-slow-start",
-    "section": 9,
-    "maximum_channel_mean_error": 0.0301
-  },
-  {
-    "episode": "v2-07-tcp-slow-start",
-    "section": 16,
-    "maximum_channel_mean_error": 0.0516
-  },
-  {
-    "episode": "v2-08-rsa",
-    "section": 1,
-    "maximum_channel_mean_error": 0.0355
-  },
-  {
-    "episode": "v2-08-rsa",
-    "section": 9,
     "maximum_channel_mean_error": 0.0286
   },
   {
+    "episode": "v2-05-dijkstra",
+    "section": 1,
+    "maximum_channel_mean_error": 0.0325
+  },
+  {
+    "episode": "v2-05-dijkstra",
+    "section": 9,
+    "maximum_channel_mean_error": 0.0445
+  },
+  {
+    "episode": "v2-05-dijkstra",
+    "section": 16,
+    "maximum_channel_mean_error": 0.0397
+  },
+  {
+    "episode": "v2-06-subnetting",
+    "section": 1,
+    "maximum_channel_mean_error": 0.0298
+  },
+  {
+    "episode": "v2-06-subnetting",
+    "section": 9,
+    "maximum_channel_mean_error": 0.071
+  },
+  {
+    "episode": "v2-06-subnetting",
+    "section": 16,
+    "maximum_channel_mean_error": 0.0387
+  },
+  {
+    "episode": "v2-07-tcp-slow-start",
+    "section": 1,
+    "maximum_channel_mean_error": 0.0451
+  },
+  {
+    "episode": "v2-07-tcp-slow-start",
+    "section": 9,
+    "maximum_channel_mean_error": 0.0318
+  },
+  {
+    "episode": "v2-07-tcp-slow-start",
+    "section": 16,
+    "maximum_channel_mean_error": 0.0356
+  },
+  {
+    "episode": "v2-08-rsa",
+    "section": 1,
+    "maximum_channel_mean_error": 0.0145
+  },
+  {
+    "episode": "v2-08-rsa",
+    "section": 9,
+    "maximum_channel_mean_error": 0.0348
+  },
+  {
     "episode": "v2-08-rsa",
     "section": 16,
-    "maximum_channel_mean_error": 0.023
+    "maximum_channel_mean_error": 0.0419
   }
 ]

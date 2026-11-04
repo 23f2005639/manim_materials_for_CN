@@ -2,118 +2,118 @@
   "fps": 30.0,
   "sections": [
     {
-      "name": "One block, four networks",
-      "animation_end_frame": 174,
-      "section_seconds": 33.433,
-      "visual_seconds": 5.4,
-      "visual_fraction": 0.162
+      "name": "A device needs an address",
+      "animation_end_frame": 231,
+      "section_seconds": 34.767,
+      "visual_seconds": 7.3,
+      "visual_fraction": 0.21
     },
     {
-      "name": "Expose the thirty-two bits",
-      "animation_end_frame": 1090,
-      "section_seconds": 33.0,
-      "visual_seconds": 2.5,
-      "visual_fraction": 0.076
-    },
-    {
-      "name": "Fix the shared beginning",
-      "animation_end_frame": 2152,
-      "section_seconds": 33.0,
-      "visual_seconds": 4.9,
-      "visual_fraction": 0.148
-    },
-    {
-      "name": "Count the free combinations",
-      "animation_end_frame": 3256,
-      "section_seconds": 33.433,
-      "visual_seconds": 8.7,
-      "visual_fraction": 0.26
-    },
-    {
-      "name": "One new bit creates halves",
-      "animation_end_frame": 4139,
-      "section_seconds": 31.667,
-      "visual_seconds": 4.7,
-      "visual_fraction": 0.148
-    },
-    {
-      "name": "Two new bits create quarters",
-      "animation_end_frame": 5182,
-      "section_seconds": 33.0,
-      "visual_seconds": 7.8,
-      "visual_fraction": 0.236
-    },
-    {
-      "name": "Six bits remain inside each",
-      "animation_end_frame": 6034,
-      "section_seconds": 32.1,
-      "visual_seconds": 3.2,
-      "visual_fraction": 0.1
-    },
-    {
-      "name": "Read the four starts",
-      "animation_end_frame": 7138,
-      "section_seconds": 33.867,
-      "visual_seconds": 7.9,
-      "visual_fraction": 0.233
-    },
-    {
-      "name": "Turn the boundary into a mask",
-      "animation_end_frame": 8040,
-      "section_seconds": 32.1,
-      "visual_seconds": 4.1,
-      "visual_fraction": 0.128
-    },
-    {
-      "name": "Find where seventy belongs",
-      "animation_end_frame": 9084,
-      "section_seconds": 30.333,
-      "visual_seconds": 6.8,
-      "visual_fraction": 0.224
-    },
-    {
-      "name": "Give the endpoints their jobs",
-      "animation_end_frame": 9922,
-      "section_seconds": 35.2,
-      "visual_seconds": 4.4,
-      "visual_fraction": 0.125
-    },
-    {
-      "name": "Read the first two ranges",
-      "animation_end_frame": 10975,
-      "section_seconds": 32.1,
-      "visual_seconds": 4.3,
-      "visual_fraction": 0.134
-    },
-    {
-      "name": "Complete the remaining ranges",
-      "animation_end_frame": 11938,
-      "section_seconds": 34.333,
-      "visual_seconds": 4.3,
-      "visual_fraction": 0.125
-    },
-    {
-      "name": "Choose room for fifty hosts",
-      "animation_end_frame": 12971,
-      "section_seconds": 32.533,
-      "visual_seconds": 4.4,
-      "visual_fraction": 0.135
-    },
-    {
-      "name": "Check the boundary, not appearances",
-      "animation_end_frame": 14097,
-      "section_seconds": 32.533,
-      "visual_seconds": 9.4,
-      "visual_fraction": 0.289
-    },
-    {
-      "name": "Four networks from two bits",
-      "animation_end_frame": 14989,
-      "section_seconds": 32.533,
+      "name": "Start with one tiny choice",
+      "animation_end_frame": 1253,
+      "section_seconds": 35.667,
       "visual_seconds": 6.6,
-      "visual_fraction": 0.203
+      "visual_fraction": 0.185
+    },
+    {
+      "name": "Keep the beginning the same",
+      "animation_end_frame": 2356,
+      "section_seconds": 35.2,
+      "visual_seconds": 7.7,
+      "visual_fraction": 0.219
+    },
+    {
+      "name": "Count the possible endings",
+      "animation_end_frame": 3370,
+      "section_seconds": 36.533,
+      "visual_seconds": 6.3,
+      "visual_fraction": 0.172
+    },
+    {
+      "name": "Split the group in half",
+      "animation_end_frame": 4418,
+      "section_seconds": 36.533,
+      "visual_seconds": 4.7,
+      "visual_fraction": 0.129
+    },
+    {
+      "name": "Split each half again",
+      "animation_end_frame": 5607,
+      "section_seconds": 35.667,
+      "visual_seconds": 7.8,
+      "visual_fraction": 0.219
+    },
+    {
+      "name": "Count what each group holds",
+      "animation_end_frame": 6539,
+      "section_seconds": 35.2,
+      "visual_seconds": 3.2,
+      "visual_fraction": 0.091
+    },
+    {
+      "name": "Find where each group starts",
+      "animation_end_frame": 7736,
+      "section_seconds": 37.0,
+      "visual_seconds": 7.9,
+      "visual_fraction": 0.214
+    },
+    {
+      "name": "Make a stencil for the boundary",
+      "animation_end_frame": 8732,
+      "section_seconds": 37.0,
+      "visual_seconds": 4.1,
+      "visual_fraction": 0.111
+    },
+    {
+      "name": "Where does address seventy belong?",
+      "animation_end_frame": 9923,
+      "section_seconds": 34.767,
+      "visual_seconds": 6.8,
+      "visual_fraction": 0.196
+    },
+    {
+      "name": "Two addresses have special jobs",
+      "animation_end_frame": 10894,
+      "section_seconds": 37.0,
+      "visual_seconds": 4.4,
+      "visual_fraction": 0.119
+    },
+    {
+      "name": "Read the first two groups",
+      "animation_end_frame": 12001,
+      "section_seconds": 36.533,
+      "visual_seconds": 4.3,
+      "visual_fraction": 0.118
+    },
+    {
+      "name": "Finish the address map",
+      "animation_end_frame": 13097,
+      "section_seconds": 37.0,
+      "visual_seconds": 4.3,
+      "visual_fraction": 0.116
+    },
+    {
+      "name": "Choose enough room for devices",
+      "animation_end_frame": 14210,
+      "section_seconds": 36.1,
+      "visual_seconds": 4.4,
+      "visual_fraction": 0.122
+    },
+    {
+      "name": "Check whether two devices match",
+      "animation_end_frame": 15443,
+      "section_seconds": 36.533,
+      "visual_seconds": 9.4,
+      "visual_fraction": 0.257
+    },
+    {
+      "name": "One boundary explains the numbers",
+      "animation_end_frame": 16455,
+      "section_seconds": 37.0,
+      "visual_seconds": 6.6,
+      "visual_fraction": 0.178
     }
   ],
-  "duration": 525.1666666666666,
+  "duration": 578.5,
   "edition": "focused-v2"
 }

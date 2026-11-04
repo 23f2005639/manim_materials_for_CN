@@ -38,7 +38,7 @@
       "bullets": [
         "A photo lives somewhere"
       ],
-      "takeaway": "Before asking for the photo, your computer needs to know which address to contact.",
+      "takeaway": "A website name must lead to an address before we can request its content.",
       "visual": {
         "phase": 0
       }
@@ -53,7 +53,7 @@
       "bullets": [
         "Names are easier to remember"
       ],
-      "takeaway": "The address is made up for teaching too.",
+      "takeaway": "DNS helps turn a readable website name into an IP address.",
       "visual": {
         "phase": 1
       }
@@ -68,7 +68,7 @@
       "bullets": [
         "Ask a helper"
       ],
-      "takeaway": "Assume the helper hasn't saved an answer yet.",
+      "takeaway": "A resolver is the helper that searches for an answer.",
       "visual": {
         "phase": 2
       }
@@ -83,7 +83,7 @@
       "bullets": [
         "A name has smaller parts"
       ],
-      "takeaway": "The dots tell the helper how to narrow its search.",
+      "takeaway": "The dots in a name divide responsibility into smaller branches.",
       "visual": {
         "phase": 3
       }
@@ -98,7 +98,7 @@
       "bullets": [
         "Start at the directory"
       ],
-      "takeaway": "The helper now knows its next stop.",
+      "takeaway": "The root directory gives the helper a direction.",
       "visual": {
         "phase": 4
       }
@@ -113,7 +113,7 @@
       "bullets": [
         "Follow one useful clue"
       ],
-      "takeaway": "The helper is doing this work for us.",
+      "takeaway": "The top-level directory points toward the right record keeper.",
       "visual": {
         "phase": 5
       }
@@ -128,7 +128,7 @@
       "bullets": [
         "Find the address keeper"
       ],
-      "takeaway": "Watch the green answer travel back.",
+      "takeaway": "The authoritative server supplies the relevant official answer.",
       "visual": {
         "phase": 6
       }
@@ -143,7 +143,7 @@
       "bullets": [
         "Bring the answer home"
       ],
-      "takeaway": "DNS hasn't delivered the picture itself, and an address doesn't promise the server will answer.",
+      "takeaway": "Finding an address finishes the lookup; fetching the photo comes next.",
       "visual": {
         "phase": 7
       }
@@ -158,7 +158,7 @@
       "bullets": [
         "Put a clock on it"
       ],
-      "takeaway": "These are chosen numbers, not promised Internet timings.",
+      "takeaway": "Add the four dependent waits to get 92 milliseconds.",
       "visual": {
         "phase": 8
       }
@@ -173,7 +173,7 @@
       "bullets": [
         "Remember the answer"
       ],
-      "takeaway": "Only the lookup! We haven't made the photo download forty-six times faster.",
+      "takeaway": "A saved answer avoids repeating the lookup.",
       "visual": {
         "phase": 9
       }
@@ -188,7 +188,7 @@
       "bullets": [
         "Memory needs an expiry date"
       ],
-      "takeaway": "Reading the saved answer does not restart that timer.",
+      "takeaway": "The TTL timer limits how long a saved answer stays fresh.",
       "visual": {
         "phase": 10
       }
@@ -203,7 +203,7 @@
       "bullets": [
         "What if the address changes?"
       ],
-      "takeaway": "This explains why changing a website's DNS record can take time to be noticed everywhere.",
+      "takeaway": "An official change does not instantly replace every saved copy.",
       "visual": {
         "phase": 11
       }
@@ -218,7 +218,7 @@
       "bullets": [
         "Look again when time runs out"
       ],
-      "takeaway": "Our useful rule is simple: reuse an answer for a while, then check again.",
+      "takeaway": "When this copy expires, the next request looks for a fresh answer.",
       "visual": {
         "phase": 12
       }
@@ -233,7 +233,7 @@
       "bullets": [
         "Connected, but missing directions"
       ],
-      "takeaway": "We have broken only the naming step in this experiment.",
+      "takeaway": "A working connection can still be missing a name lookup.",
       "visual": {
         "phase": 13
       }
@@ -248,7 +248,7 @@
       "bullets": [
         "Three jobs, one simple search"
       ],
-      "takeaway": "The countdown adds one more detail: remembered answers need a time limit.",
+      "takeaway": "Directories divide the work, referrals guide it, and caches save it.",
       "visual": {
         "phase": 14
       }
@@ -263,7 +263,7 @@
       "bullets": [
         "From a name to an address"
       ],
-      "takeaway": "It may finish almost instantly because somebody remembered the answer.",
+      "takeaway": "A readable name becomes useful contact information through a small search.",
       "visual": {
         "phase": 15
       }

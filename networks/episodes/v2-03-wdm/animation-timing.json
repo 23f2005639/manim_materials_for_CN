@@ -2,118 +2,118 @@
   "fps": 30.0,
   "sections": [
     {
-      "name": "A crowd inside one strand",
-      "animation_end_frame": 231,
+      "name": "A message needs a path",
+      "animation_end_frame": 387,
       "section_seconds": 34.333,
-      "visual_seconds": 7.3,
-      "visual_fraction": 0.213
+      "visual_seconds": 12.5,
+      "visual_fraction": 0.364
     },
     {
-      "name": "Keep four conversations separate",
-      "animation_end_frame": 1408,
+      "name": "Two choices can carry information",
+      "animation_end_frame": 1432,
+      "section_seconds": 35.667,
+      "visual_seconds": 13.0,
+      "visual_fraction": 0.364
+    },
+    {
+      "name": "Meet the shape of light",
+      "animation_end_frame": 2376,
       "section_seconds": 35.2,
-      "visual_seconds": 12.2,
-      "visual_fraction": 0.347
-    },
-    {
-      "name": "Measure the spacing of crests",
-      "animation_end_frame": 2362,
-      "section_seconds": 33.867,
       "visual_seconds": 8.8,
-      "visual_fraction": 0.26
+      "visual_fraction": 0.25
     },
     {
-      "name": "Put data onto the light",
-      "animation_end_frame": 3345,
-      "section_seconds": 33.0,
-      "visual_seconds": 7.7,
-      "visual_fraction": 0.233
+      "name": "Four senders want to talk",
+      "animation_end_frame": 3486,
+      "section_seconds": 34.767,
+      "visual_seconds": 10.6,
+      "visual_fraction": 0.305
     },
     {
-      "name": "Why identity matters",
-      "animation_end_frame": 4251,
-      "section_seconds": 34.333,
+      "name": "What if they look identical?",
+      "animation_end_frame": 4358,
+      "section_seconds": 36.1,
       "visual_seconds": 4.9,
-      "visual_fraction": 0.143
+      "visual_fraction": 0.136
     },
     {
-      "name": "Give each channel a wavelength",
-      "animation_end_frame": 5305,
+      "name": "Give each channel its own spacing",
+      "animation_end_frame": 5465,
       "section_seconds": 34.333,
       "visual_seconds": 5.7,
       "visual_fraction": 0.166
     },
     {
-      "name": "Combine at the multiplexer",
-      "animation_end_frame": 6695,
-      "section_seconds": 33.433,
-      "visual_seconds": 17.7,
-      "visual_fraction": 0.529
-    },
-    {
-      "name": "Travel together",
-      "animation_end_frame": 7407,
-      "section_seconds": 33.867,
-      "visual_seconds": 8.0,
-      "visual_fraction": 0.236
-    },
-    {
-      "name": "Separate at the destination",
-      "animation_end_frame": 8714,
-      "section_seconds": 31.667,
-      "visual_seconds": 17.7,
-      "visual_fraction": 0.559
-    },
-    {
-      "name": "Try selecting only one channel",
-      "animation_end_frame": 9433,
-      "section_seconds": 32.533,
-      "visual_seconds": 10.0,
-      "visual_fraction": 0.307
-    },
-    {
-      "name": "Add the channel rates",
-      "animation_end_frame": 10379,
-      "section_seconds": 32.533,
-      "visual_seconds": 9.0,
-      "visual_fraction": 0.277
-    },
-    {
-      "name": "Keep the units honest",
-      "animation_end_frame": 11205,
-      "section_seconds": 33.867,
-      "visual_seconds": 4.0,
-      "visual_fraction": 0.118
-    },
-    {
-      "name": "More channels need more room",
-      "animation_end_frame": 12329,
-      "section_seconds": 35.667,
-      "visual_seconds": 7.6,
-      "visual_fraction": 0.213
-    },
-    {
-      "name": "Unequal channels still add",
-      "animation_end_frame": 13441,
-      "section_seconds": 33.867,
-      "visual_seconds": 9.0,
-      "visual_fraction": 0.266
-    },
-    {
-      "name": "Connect the picture to research",
-      "animation_end_frame": 14355,
-      "section_seconds": 34.333,
-      "visual_seconds": 5.6,
-      "visual_fraction": 0.163
-    },
-    {
-      "name": "Return to the single strand",
-      "animation_end_frame": 15769,
+      "name": "Combine the light",
+      "animation_end_frame": 6885,
       "section_seconds": 34.767,
-      "visual_seconds": 18.4,
-      "visual_fraction": 0.529
+      "visual_seconds": 18.7,
+      "visual_fraction": 0.538
+    },
+    {
+      "name": "Travel together through one fiber",
+      "animation_end_frame": 7607,
+      "section_seconds": 35.2,
+      "visual_seconds": 8.0,
+      "visual_fraction": 0.227
+    },
+    {
+      "name": "Sort the light at the end",
+      "animation_end_frame": 8984,
+      "section_seconds": 36.1,
+      "visual_seconds": 18.7,
+      "visual_fraction": 0.518
+    },
+    {
+      "name": "Listen to just one conversation",
+      "animation_end_frame": 9776,
+      "section_seconds": 36.533,
+      "visual_seconds": 9.0,
+      "visual_fraction": 0.246
+    },
+    {
+      "name": "Count the information per second",
+      "animation_end_frame": 10872,
+      "section_seconds": 36.1,
+      "visual_seconds": 9.0,
+      "visual_fraction": 0.249
+    },
+    {
+      "name": "Bits and bytes are different",
+      "animation_end_frame": 11805,
+      "section_seconds": 37.433,
+      "visual_seconds": 4.0,
+      "visual_fraction": 0.107
+    },
+    {
+      "name": "Why not add colors forever?",
+      "animation_end_frame": 13036,
+      "section_seconds": 36.533,
+      "visual_seconds": 7.6,
+      "visual_fraction": 0.208
+    },
+    {
+      "name": "Different channels can have different rates",
+      "animation_end_frame": 14174,
+      "section_seconds": 36.533,
+      "visual_seconds": 9.0,
+      "visual_fraction": 0.246
+    },
+    {
+      "name": "Predict one missing channel",
+      "animation_end_frame": 15330,
+      "section_seconds": 37.0,
+      "visual_seconds": 11.0,
+      "visual_fraction": 0.297
+    },
+    {
+      "name": "One strand, several readable streams",
+      "animation_end_frame": 16692,
+      "section_seconds": 36.533,
+      "visual_seconds": 19.4,
+      "visual_fraction": 0.531
     }
   ],
-  "duration": 541.6,
+  "duration": 573.1333333333333,
   "edition": "focused-v2"
 }

@@ -2,118 +2,118 @@
   "fps": 30.0,
   "sections": [
     {
-      "name": "The elephant and the message",
-      "animation_end_frame": 207,
-      "section_seconds": 36.533,
-      "visual_seconds": 6.5,
-      "visual_fraction": 0.178
+      "name": "Begin with a picture to send",
+      "animation_end_frame": 225,
+      "section_seconds": 35.667,
+      "visual_seconds": 7.1,
+      "visual_fraction": 0.199
     },
     {
-      "name": "Give each piece an identity",
-      "animation_end_frame": 1338,
-      "section_seconds": 36.1,
-      "visual_seconds": 7.65,
-      "visual_fraction": 0.212
-    },
-    {
-      "name": "Sharing happens between packets",
-      "animation_end_frame": 2611,
-      "section_seconds": 37.433,
-      "visual_seconds": 14.0,
-      "visual_fraction": 0.374
-    },
-    {
-      "name": "Each packet still occupies time",
-      "animation_end_frame": 3494,
-      "section_seconds": 37.433,
-      "visual_seconds": 6.0,
-      "visual_fraction": 0.16
-    },
-    {
-      "name": "Build length divided by rate",
-      "animation_end_frame": 4620,
-      "section_seconds": 33.433,
-      "visual_seconds": 6.1,
-      "visual_fraction": 0.182
-    },
-    {
-      "name": "Store the packet before forwarding",
-      "animation_end_frame": 5800,
-      "section_seconds": 36.533,
-      "visual_seconds": 12.0,
-      "visual_fraction": 0.328
-    },
-    {
-      "name": "One packet crosses three links",
-      "animation_end_frame": 6712,
-      "section_seconds": 36.533,
-      "visual_seconds": 5.85,
-      "visual_fraction": 0.16
-    },
-    {
-      "name": "Can the empty links work?",
-      "animation_end_frame": 7969,
-      "section_seconds": 37.867,
-      "visual_seconds": 11.25,
-      "visual_fraction": 0.297
-    },
-    {
-      "name": "Fill the pipeline together",
-      "animation_end_frame": 8993,
-      "section_seconds": 35.2,
+      "name": "Cut the data into manageable pieces",
+      "animation_end_frame": 1307,
+      "section_seconds": 32.533,
       "visual_seconds": 7.5,
-      "visual_fraction": 0.213
+      "visual_fraction": 0.231
     },
     {
-      "name": "Count six slots instead of twelve",
-      "animation_end_frame": 10157,
-      "section_seconds": 39.2,
-      "visual_seconds": 11.1,
-      "visual_fraction": 0.283
+      "name": "Give a second message a turn",
+      "animation_end_frame": 2478,
+      "section_seconds": 35.667,
+      "visual_seconds": 14.0,
+      "visual_fraction": 0.393
     },
     {
-      "name": "Read the formula as a picture",
-      "animation_end_frame": 11144,
-      "section_seconds": 33.867,
-      "visual_seconds": 4.8,
-      "visual_fraction": 0.142
+      "name": "Zoom into the data being sent",
+      "animation_end_frame": 3407,
+      "section_seconds": 31.667,
+      "visual_seconds": 9.3,
+      "visual_fraction": 0.294
     },
     {
-      "name": "Traffic does not arrive on schedule",
-      "animation_end_frame": 12362,
-      "section_seconds": 37.0,
-      "visual_seconds": 11.55,
-      "visual_fraction": 0.312
-    },
-    {
-      "name": "A queue is the waiting part",
-      "animation_end_frame": 13330,
-      "section_seconds": 37.433,
-      "visual_seconds": 6.8,
-      "visual_fraction": 0.182
-    },
-    {
-      "name": "Boundaries have a cost",
-      "animation_end_frame": 14393,
-      "section_seconds": 36.533,
-      "visual_seconds": 4.8,
-      "visual_fraction": 0.131
-    },
-    {
-      "name": "Put the useful pieces back together",
-      "animation_end_frame": 15796,
-      "section_seconds": 35.2,
-      "visual_seconds": 15.05,
-      "visual_fraction": 0.428
-    },
-    {
-      "name": "Answer the opening puzzle",
-      "animation_end_frame": 16628,
+      "name": "Calculate the time for one packet",
+      "animation_end_frame": 4261,
       "section_seconds": 38.333,
+      "visual_seconds": 6.1,
+      "visual_fraction": 0.159
+    },
+    {
+      "name": "Add a device along the way",
+      "animation_end_frame": 5588,
+      "section_seconds": 34.767,
+      "visual_seconds": 12.0,
+      "visual_fraction": 0.345
+    },
+    {
+      "name": "Follow one packet across three links",
+      "animation_end_frame": 6446,
+      "section_seconds": 37.867,
+      "visual_seconds": 5.85,
+      "visual_fraction": 0.154
+    },
+    {
+      "name": "Let the first link work again",
+      "animation_end_frame": 7744,
+      "section_seconds": 38.333,
+      "visual_seconds": 11.25,
+      "visual_fraction": 0.293
+    },
+    {
+      "name": "Read the moving picture as a timetable",
+      "animation_end_frame": 8782,
+      "section_seconds": 34.767,
+      "visual_seconds": 7.5,
+      "visual_fraction": 0.216
+    },
+    {
+      "name": "Count the turns for four packets",
+      "animation_end_frame": 9933,
+      "section_seconds": 35.667,
+      "visual_seconds": 11.1,
+      "visual_fraction": 0.311
+    },
+    {
+      "name": "Give the pattern a short formula",
+      "animation_end_frame": 10814,
+      "section_seconds": 37.867,
+      "visual_seconds": 4.8,
+      "visual_fraction": 0.127
+    },
+    {
+      "name": "Share a link when messages are ready",
+      "animation_end_frame": 12152,
+      "section_seconds": 35.667,
+      "visual_seconds": 11.55,
+      "visual_fraction": 0.324
+    },
+    {
+      "name": "Keep the doorway limited",
+      "animation_end_frame": 13080,
+      "section_seconds": 38.767,
+      "visual_seconds": 6.8,
+      "visual_fraction": 0.175
+    },
+    {
+      "name": "Notice the extra labels",
+      "animation_end_frame": 14183,
+      "section_seconds": 38.333,
+      "visual_seconds": 4.8,
+      "visual_fraction": 0.125
+    },
+    {
+      "name": "Meet the pieces at the other end",
+      "animation_end_frame": 15640,
+      "section_seconds": 37.433,
+      "visual_seconds": 15.05,
+      "visual_fraction": 0.402
+    },
+    {
+      "name": "Return to the picture we sent",
+      "animation_end_frame": 16538,
+      "section_seconds": 38.767,
       "visual_seconds": 7.55,
-      "visual_fraction": 0.197
+      "visual_fraction": 0.195
     }
   ],
-  "duration": 584.6333333333333,
+  "duration": 582.1,
   "edition": "focused-v2"
 }

@@ -1,19 +1,19 @@
 {
   "episode": "02",
   "title": "Why Fast Internet Can Still Feel Slow",
-  "duration_seconds": 578.966016,
+  "duration_seconds": 582.966667,
   "resolution": "1920x1080",
   "fps": 30,
   "codec": "h264",
   "sections": 16,
   "section_clips_verified": 16,
-  "narration_words": 1235,
+  "narration_words": 1244,
   "automated_media_checks": "passed",
   "edition": "focused-v2",
   "voiceover": "User records their own voice",
   "motion": {
-    "native_changing_frame_fraction": 0.3734,
-    "minimum_section_visual_fraction": 0.172,
-    "longest_final_hold_seconds": 29.480000000000004
+    "native_changing_frame_fraction": 0.3415,
+    "minimum_section_visual_fraction": 0.164,
+    "longest_final_hold_seconds": 31.247
   }
 }

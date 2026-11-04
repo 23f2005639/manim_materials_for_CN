@@ -6,19 +6,19 @@ Guide subtitles use planned timing. Match final subtitles to your recording afte
 
 | Section | Start | Length | What to show | Recording cue |
 |---|---|---|---|---|
-| 01 | 00:00:00 | 34.77s | The public lock puzzle | The public lock puzzle |
-| 02 | 00:00:34 | 35.67s | Easy forward, difficult backward | Easy forward, difficult backward |
-| 03 | 00:01:10 | 34.77s | Numbers that wrap around | Numbers that wrap around |
-| 04 | 00:01:45 | 35.20s | Choose two small primes | Choose two small primes |
-| 05 | 00:02:20 | 34.33s | Count the useful positions | Count the useful positions |
-| 06 | 00:02:54 | 35.20s | Choose the public exponent | Choose the public exponent |
-| 07 | 00:03:29 | 33.87s | Find the matching private exponent | Find the matching private exponent |
-| 08 | 00:04:03 | 34.77s | Encrypt the message seven | Encrypt the message seven |
-| 09 | 00:04:38 | 35.20s | Keep the remainder as you go | Keep the remainder as you go |
-| 10 | 00:05:13 | 34.33s | Decrypt using twenty-seven | Decrypt using twenty-seven |
-| 11 | 00:05:48 | 35.67s | Why those exponents cooperate | Why those exponents cooperate |
-| 12 | 00:06:23 | 35.20s | Test the wrong exponent | Test the wrong exponent |
-| 13 | 00:06:58 | 35.67s | What the hidden factors reveal | What the hidden factors reveal |
-| 14 | 00:07:34 | 35.67s | Textbook numbers are not enough | Textbook numbers are not enough |
-| 15 | 00:08:10 | 35.20s | Why this mathematics still matters | Why this mathematics still matters |
-| 16 | 00:08:45 | 37.47s | Return to the public lock | Return to the public lock |
+| 01 | 00:00:00 | 36.53s | Who can read this message? | Who can read this message? |
+| 02 | 00:00:36 | 36.53s | A lock with two different jobs | A lock with two different jobs |
+| 03 | 00:01:13 | 34.33s | Keep what is left over | Keep what is left over |
+| 04 | 00:01:47 | 37.43s | Build the number fifty-five | Build the number fifty-five |
+| 05 | 00:02:24 | 37.87s | Find a useful repeating structure | Find a useful repeating structure |
+| 06 | 00:03:02 | 35.67s | The public rule repeats a multiplication | The public rule repeats a multiplication |
+| 07 | 00:03:38 | 36.10s | Choose a matching private rule | Choose a matching private rule |
+| 08 | 00:04:14 | 35.67s | Turn seven into thirteen | Turn seven into thirteen |
+| 09 | 00:04:50 | 35.67s | Keep the numbers manageable | Keep the numbers manageable |
+| 10 | 00:05:25 | 37.00s | Bring the message back | Bring the message back |
+| 11 | 00:06:02 | 37.43s | Why the pair fits together | Why the pair fits together |
+| 12 | 00:06:40 | 35.67s | Try the wrong private number | Try the wrong private number |
+| 13 | 00:07:15 | 36.53s | What must remain hard? | What must remain hard? |
+| 14 | 00:07:52 | 37.87s | The tiny example needs boundaries | The tiny example needs boundaries |
+| 15 | 00:08:30 | 36.53s | Connect the two kinds of rules | Connect the two kinds of rules |
+| 16 | 00:09:06 | 37.90s | Rebuild the idea from the start | Rebuild the idea from the start |

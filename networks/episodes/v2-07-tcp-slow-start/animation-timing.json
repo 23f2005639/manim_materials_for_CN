@@ -2,118 +2,118 @@
   "fps": 30.0,
   "sections": [
     {
-      "name": "An unknown road ahead",
-      "animation_end_frame": 320,
-      "section_seconds": 37.0,
-      "visual_seconds": 10.25,
-      "visual_fraction": 0.277
+      "name": "Send a photo in pieces",
+      "animation_end_frame": 279,
+      "section_seconds": 33.0,
+      "visual_seconds": 8.9,
+      "visual_fraction": 0.27
     },
     {
-      "name": "Separate the limits",
-      "animation_end_frame": 1215,
+      "name": "How do we know it arrived?",
+      "animation_end_frame": 1248,
       "section_seconds": 37.433,
-      "visual_seconds": 3.1,
-      "visual_fraction": 0.083
+      "visual_seconds": 8.2,
+      "visual_fraction": 0.219
     },
     {
-      "name": "Begin with a small window",
-      "animation_end_frame": 2452,
-      "section_seconds": 36.533,
-      "visual_seconds": 6.9,
-      "visual_fraction": 0.189
-    },
-    {
-      "name": "The first packets leave",
-      "animation_end_frame": 3644,
-      "section_seconds": 36.533,
-      "visual_seconds": 10.1,
-      "visual_fraction": 0.276
-    },
-    {
-      "name": "An acknowledgment opens space",
-      "animation_end_frame": 4694,
-      "section_seconds": 37.867,
-      "visual_seconds": 8.55,
-      "visual_fraction": 0.226
-    },
-    {
-      "name": "Four acknowledgments become eight",
-      "animation_end_frame": 5870,
-      "section_seconds": 37.867,
-      "visual_seconds": 9.9,
-      "visual_fraction": 0.261
-    },
-    {
-      "name": "The acknowledgment clock",
-      "animation_end_frame": 7058,
-      "section_seconds": 34.767,
-      "visual_seconds": 11.65,
-      "visual_fraction": 0.335
-    },
-    {
-      "name": "Why the growth doubles",
-      "animation_end_frame": 7929,
-      "section_seconds": 36.533,
-      "visual_seconds": 5.9,
-      "visual_fraction": 0.161
-    },
-    {
-      "name": "Turn the pattern into math",
-      "animation_end_frame": 9145,
-      "section_seconds": 37.867,
-      "visual_seconds": 9.9,
-      "visual_fraction": 0.261
-    },
-    {
-      "name": "A window is not a rate",
-      "animation_end_frame": 10185,
-      "section_seconds": 34.767,
-      "visual_seconds": 6.7,
-      "visual_fraction": 0.193
-    },
-    {
-      "name": "Distance changes the result",
-      "animation_end_frame": 11288,
-      "section_seconds": 35.2,
-      "visual_seconds": 8.7,
-      "visual_fraction": 0.247
-    },
-    {
-      "name": "When the path cannot keep up",
-      "animation_end_frame": 12533,
+      "name": "Leave room for four pieces",
+      "animation_end_frame": 2293,
       "section_seconds": 37.0,
-      "visual_seconds": 15.0,
-      "visual_fraction": 0.405
+      "visual_seconds": 5.6,
+      "visual_fraction": 0.151
     },
     {
-      "name": "Give exponential growth a boundary",
-      "animation_end_frame": 13421,
+      "name": "Four pieces, then wait",
+      "animation_end_frame": 3562,
       "section_seconds": 35.2,
-      "visual_seconds": 7.6,
-      "visual_fraction": 0.216
+      "visual_seconds": 10.9,
+      "visual_fraction": 0.31
     },
     {
-      "name": "Starting larger changes the early trip",
-      "animation_end_frame": 14564,
+      "name": "One reply makes more room",
+      "animation_end_frame": 4572,
+      "section_seconds": 37.433,
+      "visual_seconds": 9.35,
+      "visual_fraction": 0.25
+    },
+    {
+      "name": "Four replies grow the allowance",
+      "animation_end_frame": 5735,
+      "section_seconds": 37.867,
+      "visual_seconds": 10.7,
+      "visual_fraction": 0.283
+    },
+    {
+      "name": "Replies set the rhythm",
+      "animation_end_frame": 6924,
+      "section_seconds": 36.533,
+      "visual_seconds": 12.45,
+      "visual_fraction": 0.341
+    },
+    {
+      "name": "Watch four become eight",
+      "animation_end_frame": 7823,
+      "section_seconds": 35.667,
+      "visual_seconds": 5.9,
+      "visual_fraction": 0.165
+    },
+    {
+      "name": "Write the doubling pattern",
+      "animation_end_frame": 9013,
+      "section_seconds": 36.1,
+      "visual_seconds": 9.9,
+      "visual_fraction": 0.274
+    },
+    {
+      "name": "How much per second?",
+      "animation_end_frame": 10000,
+      "section_seconds": 37.0,
+      "visual_seconds": 6.7,
+      "visual_fraction": 0.181
+    },
+    {
+      "name": "Waiting longer changes the speed",
+      "animation_end_frame": 11170,
+      "section_seconds": 37.0,
+      "visual_seconds": 8.7,
+      "visual_fraction": 0.235
+    },
+    {
+      "name": "Too much reaches the narrow link",
+      "animation_end_frame": 12514,
+      "section_seconds": 37.867,
+      "visual_seconds": 16.5,
+      "visual_fraction": 0.436
+    },
+    {
+      "name": "Growth needs a stopping point",
+      "animation_end_frame": 13383,
+      "section_seconds": 37.433,
+      "visual_seconds": 7.6,
+      "visual_fraction": 0.203
+    },
+    {
+      "name": "Try a different starting allowance",
+      "animation_end_frame": 14593,
       "section_seconds": 35.667,
       "visual_seconds": 10.5,
       "visual_fraction": 0.294
     },
     {
-      "name": "Read a real trace carefully",
-      "animation_end_frame": 15517,
-      "section_seconds": 36.533,
+      "name": "Real downloads vary",
+      "animation_end_frame": 15546,
+      "section_seconds": 37.0,
       "visual_seconds": 6.6,
-      "visual_fraction": 0.181
+      "visual_fraction": 0.178
     },
     {
-      "name": "Answer the speed puzzle",
-      "animation_end_frame": 17180,
-      "section_seconds": 38.333,
-      "visual_seconds": 25.5,
-      "visual_fraction": 0.665
+      "name": "Start small, listen, then grow",
+      "animation_end_frame": 17247,
+      "section_seconds": 36.533,
+      "visual_seconds": 26.3,
+      "visual_fraction": 0.72
     }
   ],
-  "duration": 585.1,
+  "duration": 584.7333333333333,
   "edition": "focused-v2"
 }

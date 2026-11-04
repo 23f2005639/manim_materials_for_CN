@@ -1,4 +1,3 @@
-00:00 The puzzle
-02:16 Build the mechanism
-04:32 Make the math visible
-06:42 Resolve the story
+00:00 Start with the basics
+02:19 Build the idea
+05:53 Test and understand

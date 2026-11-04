@@ -1,19 +1,19 @@
 {
   "episode": "07",
-  "title": "How Does a Download Discover Its Speed?",
-  "duration_seconds": 585.133008,
+  "title": "TCP Slow Start: How a Download Learns to Speed Up",
+  "duration_seconds": 584.766016,
   "resolution": "1920x1080",
   "fps": 30,
   "codec": "h264",
   "sections": 16,
   "section_clips_verified": 16,
-  "narration_words": 1249,
+  "narration_words": 1248,
   "automated_media_checks": "passed",
   "edition": "focused-v2",
   "voiceover": "User records their own voice",
   "motion": {
-    "native_changing_frame_fraction": 0.28,
-    "minimum_section_visual_fraction": 0.083,
-    "longest_final_hold_seconds": 33.933
+    "native_changing_frame_fraction": 0.2937,
+    "minimum_section_visual_fraction": 0.151,
+    "longest_final_hold_seconds": 31.0
   }
 }

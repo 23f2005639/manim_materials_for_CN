@@ -1,4 +1,4 @@
-# References — How Does a Download Discover Its Speed?
+# References — TCP Slow Start: How a Download Learns to Speed Up
 
 Sources checked while writing the teaching script; narration is original.
 

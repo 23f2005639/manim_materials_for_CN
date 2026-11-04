@@ -1,85 +1,85 @@
 # Why the Internet Breaks Everything Into Pieces
 
-English narration for your own voice. Planned runtime: 00:09:44.
+English narration for your own voice. Planned runtime: 00:09:42.
 
 The browser pauses after each section. The timestamps below refer to the continuous MP4.
 
 
-## 01. The elephant and the message — 00:00:00
+## 01. Send one picture — 00:00:00
 
-A huge transfer reaches a shared connection just before a tiny message. If the huge transfer holds the connection until its whole message finishes, the small one gets a very long wait. Yet the Internet carries enormous transfers and tiny interactions together. How does it divide their turns? Watch us replace one giant uninterrupted shape with smaller pieces. Those boundaries are not just a drawing choice. They create opportunities for other traffic to use the same physical link.
-
-
-## 02. Give each piece an identity — 00:00:36
-
-Call each piece a packet. It carries a limited portion of the data, along with information needed to handle that piece. The receiver eventually needs the right content, but the network can now work with individual units instead of waiting for one entire application message. Our path stays fixed. We will not decide how that path was chosen or how an application recovers missing data. Our question is what dividing the transfer changes about sharing and timing.
+You send a picture to a friend. It appears as one complete image on your screen, so perhaps the Internet carries it as one big object. Here are two computers and a connection between them. Connected devices that exchange information form a network. We call a connection along the way a link. The computers send data: information represented electronically. Our blue rectangle stands for the picture's data. How should it take its turn on that link?
 
 
-## 03. Sharing happens between packets — 00:01:12
+## 02. Meet a packet — 00:00:35
 
-Let blue represent the large transfer and green the small message. Blue sends one packet, then green gets a turn before another blue packet. The link is still transmitting one sequence of bits. We did not create two simultaneous exits. What changed is the size of the indivisible turn: the waiting green data no longer needs the entire blue message to finish first. This interleaving is possible sharing, not a promise that every real queue always schedules these colors fairly.
-
-
-## 04. Each packet still occupies time — 00:01:50
-
-A packet is smaller than the complete transfer, but it is not instantaneous. Its bits must enter the outgoing link one after another. Imagine the packet as a rectangle whose width is its transmission time. Making a smaller rectangle means finishing that turn sooner; making the link faster also makes the rectangle narrower. These are two different ways to reduce the time taken by one transmission. To calculate either change, we need the packet's length and the link's bit rate.
+Instead of sending that whole blue rectangle as one uninterrupted unit, divide its data into smaller pieces. Add a little handling information to each, including where it needs to go. That unit is called a packet. Think of several labeled parcels instead of one enormous delivery. The numbers in our drawing help us follow the pieces; they are not a claim that every network packet has a sequence number.
 
 
-## 05. Build length divided by rate — 00:02:27
+## 03. Share between packets — 00:01:08
 
-Let L be the number of bits in a packet and R the number of bits the link can transmit each second. Sending L bits takes L divided by R seconds. Our example packet contains fifteen hundred bytes, or twelve thousand bits. On a ten-million-bit-per-second link, that occupies one point two milliseconds. We are calculating transmission time only. Signal travel adds delay, and it is left out of this particular arithmetic.
-
-
-## 06. Store the packet before forwarding — 00:03:00
-
-Now add an intermediate switch in our model. It receives the complete packet before starting to send that packet on the next link. This is store-and-forward operation. Follow the blue rectangle: first it finishes arriving, then it begins leaving. The switch can use other forwarding methods in other settings, but keeping this rule explicit lets us reason clearly. A packet's boundary gives this switch a complete unit to receive, hold briefly, and forward toward the next fixed stop.
+Now your friend sends a tiny green message while the blue picture is being sent. If the entire picture took one uninterrupted turn, green would wait for the whole thing. With packets, there is a choice between pieces. Send one blue packet, then green, then more blue. The link still sends one stream of data, but several conversations can share it. Dividing data creates chances to share; it does not guarantee every message an immediate turn.
 
 
-## 07. One packet crosses three links — 00:03:37
+## 04. Bits take time to send — 00:01:43
 
-Place three equal-rate links in a row. Our one packet occupies the first link for one point two milliseconds, then the second, then the third. Ignoring propagation, processing, and competing traffic, its final bit reaches the end after three point six milliseconds. Three links multiplied by one transmission time gives this result because our single packet must finish one store-and-forward step before beginning the next. There is not yet another packet available to overlap any of those steps.
-
-
-## 08. Can the empty links work? — 00:04:14
-
-Now prepare four packets. After the first leaves the source, must the source remain idle until that packet reaches the destination? It does not. The first link is free for packet two while the first packet uses link two. This is the next opportunity created by dividing the message. Different links can handle different packets at the same time. The network becomes a pipeline, with several stages doing useful work during the same interval instead of waiting for one complete journey.
+Zoom inside one packet. Computers represent information using zeros and ones, called bits. Those bits take time to enter a link. A link's bit rate is how many it can send each second. So two things affect a turn: how many bits the packet contains, and how many bits the link sends per second. More bits mean a longer turn. A higher rate means a shorter one.
 
 
-## 09. Fill the pipeline together — 00:04:51
+## 05. Amount divided by rate — 00:02:15
 
-Watch the first three slots. At first, only the first link works. Next, links one and two work on different packets. Then all three links are occupied. Follow the packet colors: simultaneous work does not mean the same packet magically appears everywhere. Each packet still follows the store-and-forward rule. The overlap happens between different packets on different links, just as several items can occupy different stages of a process without any item skipping a stage.
-
-
-## 10. Count six slots instead of twelve — 00:05:27
-
-For one packet, the journey needs three transmission slots. Once the pipeline is filled, each additional packet can finish one slot after the previous one. Four packets therefore need three slots for the first, then three more for the remaining packets: six slots total. At one point two milliseconds per slot, that is seven point two milliseconds. Sending each packet through the entire path before starting another would need twelve slots. The improvement comes from overlap, while the individual links keep the same rate.
+A byte contains eight bits. Our example packet has fifteen hundred bytes, so multiply by eight to get twelve thousand bits. The link sends ten million bits each second. Divide twelve thousand by ten million and we get zero point zero zero one two seconds: one point two milliseconds. A millisecond is one thousandth of a second. The shorthand is L divided by R: length in bits divided by rate. This measures putting data onto the link; signal travel time is extra.
 
 
-## 11. Read the formula as a picture — 00:06:06
+## 06. Receive, then send onward — 00:02:53
 
-With N equal packets and H equal-rate links, this ideal pipeline takes N plus H minus one transmission slots. Multiply that count by L divided by R to obtain the total time. The minus one is not a mysterious correction: the first packet is already included when we count the H slots that fill its journey. Unequal rates, propagation, processing, and other traffic change the timing. The formula describes our clean model.
-
-
-## 12. Traffic does not arrive on schedule — 00:06:40
-
-Bring back the green message. Sources do not always take neat repeating turns. Some are quiet, some send bursts, and several can suddenly want the same output. Packet switching lets a link carry whichever packets are selected when capacity becomes available, instead of requiring each source to occupy a fixed turn continuously. That flexibility helps share a connection among uneven conversations. It also means we must examine what happens when several ready packets want the same next transmission opportunity.
+Real journeys can pass through devices between the two computers. Add two forwarding devices, labeled switches, that pass data to the next link. In our model, each waits until a whole packet arrives before sending that packet onward. We call this store-and-forward. The name describes the action: receive it, then pass it on. Watch packet one finish the first step before starting the second. We will keep this path and rule for our experiment.
 
 
-## 13. A queue is the waiting part — 00:07:17
+## 07. Three links, three turns — 00:03:28
 
-When arrivals reach an output faster than it can transmit, packets wait. Notice the green packet can still be delayed behind blue packets. Packet boundaries create chances for interleaving, but they do not guarantee a perfectly fair schedule, zero waiting, or unlimited capacity. If a finite queue fills, packets can be dropped. Those details limit our opening promise: breaking data into pieces makes flexible sharing possible, but the particular scheduling and available resources determine the experience each packet actually gets.
-
-
-## 14. Boundaries have a cost — 00:07:54
-
-Making packets tiny seems tempting. Each turn would finish quickly, so perhaps we should use the smallest pieces imaginable. But each packet also carries handling information, and equipment must process those packets. More pieces can mean more overhead for the same useful content. The picture shows that trade-off by keeping the useful blue payload separate from the small header. Packetization is a design choice balancing useful sharing opportunities, transmission efficiency, and the work required to handle individual units.
+Our path now has three links of equal rate. One packet spends one point two milliseconds being sent on the first, then the second, then the third. Add those three turns: three point six milliseconds. For this little experiment, we ignore travel time, device processing, and any other traffic. Those things matter in real life, but hiding them briefly lets us see the pattern. With only one packet, the steps happen in order. What happens if we have several packets ready?
 
 
-## 15. Put the useful pieces back together — 00:08:31
+## 08. The next packet can follow — 00:04:06
 
-At the far end, follow the pieces belonging to the blue transfer and the green message. Their journeys shared resources, but their identities remain distinguishable. Recovering the complete application meaning requires the appropriate endpoint mechanisms, which sit outside our timing model. Our network's contribution was to move manageable units between successive links. It never needed the whole blue application message to occupy one continuous end-to-end turn before allowing green data onto the same shared infrastructure.
+Packet one has reached the first switch. It is now being sent on link two. Look back at link one: it is free. Why leave it doing nothing? Send packet two there. A moment later, packet one uses link three, packet two uses link two, and packet three can use link one. Different parts of the path work at once. This is called a pipeline, like several parcels moving through different stations. Each parcel still visits every station in the proper order.
 
 
-## 16. Answer the opening puzzle — 00:09:06
+## 09. Watch the overlap grow — 00:04:44
 
-The tiny message escaped the elephant's full turn because the elephant was divided into packets. That created shorter opportunities for sharing. It also let different packets occupy successive links at once, turning a chain of transmissions into a pipeline. Queues, overhead, and finite rates still matter, so packet switching is not a trick for unlimited speed. Its power is more practical: many uneven conversations can share links in small units, while each link keeps doing one clear transmission job at a time.
+Let's draw that motion as a timetable. Each row is one link. Each column is one turn of one point two milliseconds. A colored box shows which packet uses that link during that turn. First, only the top row works. Next, two rows work. Then all three do. Follow one color diagonally: that is one packet moving through its three steps. Follow one column downward: those are different packets moving at the same time.
+
+
+## 10. Six turns for four packets — 00:05:19
+
+Continue until all four packets arrive. The first packet takes three turns to reach the end. After that, another packet finishes each turn. There are three more packets, so add three more turns: six in total. Six times one point two milliseconds gives seven point two milliseconds. If we waited for each packet's whole journey before starting the next, we would need twelve turns. We simply let separate links do useful work at the same time.
+
+
+## 11. Count first, write second — 00:05:55
+
+Now the formula is just a short version of our counting. Call the number of links H and the number of packets N. The first packet needs H turns. The remaining N minus one packets each add a turn. Together, that is H plus N minus one. Multiply by the time for one turn, L divided by R. That gives our total. It works for this clean model with equal packets and equal-rate links, without extra travel, processing, or traffic delays.
+
+
+## 12. Conversations come and go — 00:06:33
+
+Bring back the green message. Real conversations are uneven. Someone sends a picture, another person pauses, then a new message arrives. Packet switching means the network handles and forwards individual packets, allowing shared links to serve different conversations. A quiet sender need not keep occupying a turn. A ready packet can use the next available opportunity when selected. Two useful effects: different conversations can share one link, and different links can work on different pieces together.
+
+
+## 13. Packets can still wait — 00:07:08
+
+There is a limit. If packets arrive at a device faster than its outgoing link can send them, they form a waiting line, called a queue. Green can still get stuck behind blue. Splitting the picture does not create an endlessly fast connection or a perfectly fair order. If the waiting space fills, a packet may even be discarded. So our claim is modest and useful: packet boundaries give the network manageable turns to share, while actual capacity and queue choices still matter.
+
+
+## 14. More pieces need more labels — 00:07:47
+
+Why not make every piece tiny? Short turns sound wonderful. But remember the handling information added to each packet. That information uses space too. Blue is useful picture data; yellow is the extra label, called a header. Divide the same blue data into more pieces and count the yellow labels. There are more of them. Devices also have more individual packets to handle. Smaller pieces can help sharing, but they are not free. We must balance shorter turns against this extra work.
+
+
+## 15. The picture comes back together — 00:08:25
+
+At the destination, the blue pieces belong to the picture and green belongs to the little message. The receiving computer uses the arriving data to recover the content the application needs. Keeping things complete and in order involves other parts of the communication system; packet switching alone does not promise that. Here, all our pieces arrive successfully. Notice the useful trick: the network could move each piece along without giving the entire picture one enormous turn from beginning to end.
+
+
+## 16. Small pieces, useful possibilities — 00:09:03
+
+We began with one picture on a screen. Breaking its data into packets gave us shorter turns on a shared link. Those pieces also let several links work at once, just like the stations in our parcel line. We still pay for headers, we can still wait in queues, and every link has a limit. But now a big picture and a tiny message can use the same network in manageable pieces. The Internet's useful trick starts with something simple: divide the work.

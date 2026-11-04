@@ -5,711 +5,711 @@ Original narration for eight visual networking explainers. Scene headings and ti
 
 ---
 
-# Why Can Your Internet Work While Your Apps Don’t?
+# DNS: How a Website Name Finds Its Address
 
-English narration for your own voice. Planned runtime: 00:09:07.
+English narration for your own voice. Planned runtime: 00:09:29.
 
 The browser pauses after each section. The timestamps below refer to the continuous MP4.
 
 
-## 01. Connected, but not found — 00:00:00
+## 01. A photo lives somewhere — 00:00:00
 
-Your connection says online. A download is still moving. Yet one app refuses to open. That sounds impossible until you separate two questions: can your computer reach the network, and does it know where this service lives? The second question belongs to DNS. Let's follow one name through a small imagined network, then break just the naming part. By the end, an apparently contradictory failure will make perfect sense.
-
-
-## 02. A name is not an address — 00:00:32
-
-We want photos.orbit.example. That name is convenient for a person, but the network needs an address. Imagine a contact name and its phone number: changing the number doesn't require changing what you call the person. DNS provides a structured way to find information associated with a name. Our made-up domain and addresses are teaching examples. The blue label is the question; the green address is the answer we hope to receive.
+You type a website name and a photo appears. Let's slow that tiny moment down. Your computer does not already have the photo. Another computer stores it and can send it back. A computer doing that job is called a server. The line between them represents a way to exchange messages. But there are countless possible destinations. Before asking for the photo, your computer needs to know which address to contact. How does it find that?
 
 
-## 03. Read the name backward — 00:01:05
+## 02. Names are easier to remember — 00:00:35
 
-The dots have a job. Read the name from the right: the root, example, orbit, then photos. Each level belongs beneath a larger part of the naming tree. This organization lets responsibility be divided. One organization can manage its own branch without maintaining every other branch. Watch the address-like string become a tree. We haven't located a machine yet; we've uncovered the structure that will tell our search where to go next.
-
-
-## 04. Meet the resolver — 00:01:39
-
-Your computer usually asks a recursive resolver to do the search. Recursive describes the service being offered: please obtain an answer for me. The resolver may already know something useful. For our first pass, assume its relevant caches are empty. That deliberately removes the shortcuts so we can see the work. The resolver becomes our moving point of view, asking more specific questions while your application waits for one useful result.
+Think about calling a friend. You remember their name; your phone uses a number. Websites have a similar split. We type a name, while the network uses a number called an IP address to help deliver messages. Watch the name turn into an address. DNS, short for Domain Name System, helps make that lookup. Our pretend website is photos.orbit.example. The address is made up for teaching too. You don't need to memorize either one.
 
 
-## 05. The root gives a direction — 00:02:13
+## 03. Ask a helper — 00:01:10
 
-The resolver first asks a root service about the name. It doesn't receive the final photo-server address. Instead, it receives a referral toward the service responsible for the next branch. Watch the yellow arrow: it points to where the resolver should ask next. A referral is useful knowledge, even though it isn't the final answer. Think of each step as reducing the remaining search, rather than each server holding the entire directory.
-
-
-## 06. A smaller branch — 00:02:47
-
-The next service handles our example top-level branch. It directs the resolver toward the authoritative servers for orbit.example. The search is getting narrower. Notice who is doing the asking: the resolver contacts these services, rather than your browser personally visiting every box. The drawing shows logical roles, not one special physical computer per role. Real DNS infrastructure can distribute each role across many machines and locations while preserving this hierarchy of responsibility.
+Your computer could ask, where is this website? But who should answer? Meet one helper, shown in green. Its job is to find the address and bring it back. The technical name for this helper is a resolver. That's all the word means here: it resolves our question. Start with just these two characters, your computer and its helper. Assume the helper hasn't saved an answer yet. We are going to follow its search together.
 
 
-## 07. The authority answers — 00:03:21
+## 04. A name has smaller parts — 00:01:45
 
-Now the resolver reaches an authoritative server for our imagined zone. This is where the relevant record is maintained. In our example, the answer associates the photos name with 192.0.2.10. The green address finally appears. It's tempting to call every earlier server unhelpful because it didn't know this number. But their referrals made this last step possible. DNS scales by sharing responsibility and directions, instead of requiring every participant to know every answer.
-
-
-## 08. Return the useful result — 00:03:55
-
-The resolver returns the address to your computer. Keep the jobs separate: finding this address doesn't download the photos, prove the application is healthy, or promise that the destination will respond. It supplies information the application needs for its next action. Our story stops at that boundary. The original blue question has become a green result, and the rest of the network can now be used with a specific destination in mind.
+A single helper cannot keep a fresh list of every website. Instead, responsibility is split into smaller parts. Look at the dots in photos.orbit.example. Read from the right: example, then orbit.example, then the full name. It's like opening a large folder, then a smaller folder inside it. This nested arrangement is called a hierarchy. The dots tell the helper how to narrow its search. No address yet; first we are learning where to ask.
 
 
-## 09. Where the waiting comes from — 00:04:29
+## 05. Start at the directory — 00:02:20
 
-Let's attach clocks to the lookup. Suppose the local resolver exchange takes two milliseconds, and the three upstream round trips take twenty, thirty, and forty milliseconds. These are illustrative values, not Internet constants. Since each referral tells us where to ask next, these particular steps happen in sequence. Add the waits: two plus twenty plus thirty plus forty equals ninety-two milliseconds. The equation simply records the journey we just watched, one dependent step after another.
-
-
-## 10. Repeat the same question — 00:05:04
-
-Now ask the same question again while the answer is cached. The resolver can reply without repeating our three upstream exchanges. In this simplified example, only the two-millisecond local exchange remains. Ninety-two divided by two is forty-six: this lookup is forty-six times quicker. That doesn't mean the entire application becomes forty-six times faster. We measured one task. Still, reusing a valid answer can remove a surprising amount of repeated work from that task.
+The helper begins at a starting directory called the root. Imagine a reception desk that says, for names ending in example, ask over there. It gives a useful direction, not the website's final address. That direction is called a referral. Follow the question going out and the clue coming back. The helper now knows its next stop. In this drawing, each circle is a job performed by DNS servers, not one unique machine for the whole world.
 
 
-## 11. Give the memory a lifetime — 00:05:38
+## 06. Follow one useful clue — 00:02:56
 
-A saved answer needs an expiration rule. Our record's time to live, or TTL, is sixty seconds when this cache receives it. Watch the countdown shrink as the answer gets older. Reusing it doesn't restart the clock. If every hit renewed its lifetime indefinitely, a popular old address could remain around forever. The TTL limits how long this cached copy may normally be reused before the resolver needs fresh information for another query.
-
-
-## 12. Change the address — 00:06:13
-
-Now the authoritative record changes to 203.0.113.20. Does every cache change instantly? Predict the next reply before the colors move. Our cache still holds the earlier answer with thirty seconds remaining, so it may keep returning that old address until its permitted lifetime ends. The authority and cache can temporarily disagree without either ignoring its rules. Changing an authoritative record and replacing every cached copy are different events, separated here by a visible countdown.
+The next directory handles the last part of our name: example. That part is called a top-level domain, or TLD. You have seen real ones such as com and org. Our teaching name uses example. This directory points toward the people responsible for orbit.example. Notice the pattern: ask a broad directory, receive a narrower direction, ask again. The helper is doing this work for us. Your browser doesn't need you to visit these directories yourself.
 
 
-## 13. Expiration causes new work — 00:06:47
+## 07. Find the address keeper — 00:03:31
 
-At zero, the saved answer is no longer fresh. For our normal example, the next query triggers a new lookup and retrieves the changed record. We replay the referrals to make the refresh visible; real resolvers may retain other cached information and take a shorter route. The important change is the answer's freshness. The cache wasn't useless because it eventually expired. Its temporary nature is what lets yesterday's useful shortcut give way to today's information.
-
-
-## 14. Break only the naming step — 00:07:23
-
-Return to the opening puzzle. The network path is available, but this resolver cannot obtain the answer it needs. The app may fail before it even knows a destination address. Another task can continue because it already has a destination or a still-useful cached answer. That's how online and unable to open this service can coexist. Real outages can have additional causes; here, we deliberately broke only name resolution to isolate its contribution.
+Now we reach the keeper of the website's DNS information. This is called an authoritative server because it holds the relevant official record. In our example, that record pairs the photo website's name with 192.0.2.10. Finally, a number! The earlier stops were useful even though they didn't know it. They guided our helper here. Watch the green answer travel back. We found the address by following responsibility from a broad directory to a specific record.
 
 
-## 15. Responsibility, time, and memory — 00:07:57
+## 08. Bring the answer home — 00:04:06
 
-Three ideas now fit together. Hierarchy divides responsibility, referrals lead the search, and caches save work for a limited time. Remove hierarchy and the directory becomes harder to distribute. Remove caching and repeat questions repeat the journey. Remove expiration and changes become harder to discover reliably. Follow the colored answer rather than memorizing the box names. Its movement, reuse, and replacement explain the mechanism much more clearly than calling DNS a mysterious Internet switch.
+The helper gives that address to your computer. Now your computer can try to contact the photo server. The name lookup has finished; asking for the actual photo is a separate step. Think of finding a friend's phone number: you still have to make the call. DNS hasn't delivered the picture itself, and an address doesn't promise the server will answer. It has solved one smaller problem: turning the name you recognize into useful contact information.
 
 
-## 16. Resolve the opening contradiction — 00:08:32
+## 09. Put a clock on it — 00:04:42
 
-A working connection and a successful name lookup are separate requirements. DNS turns a readable question into useful location information through a hierarchy, a resolver, and temporary memory. The small clocks explain why that answer can be fast, slow, or briefly old. So when one app stops while another keeps working, the situation isn't logically impossible. One journey may be missing a piece that another already has. The connection is alive; the directions may be missing.
+How long did that search take? A millisecond is one thousandth of a second. Let's give our example four small waits: two milliseconds for the helper exchange, then twenty, thirty, and forty for its three directory exchanges. Watch each colored piece extend the time bar. Add them: two plus twenty plus thirty plus forty makes ninety-two milliseconds. These are chosen numbers, not promised Internet timings. We add because each step needs the previous step's answer.
+
+
+## 10. Remember the answer — 00:05:17
+
+What happens when someone asks the same question again? The helper can keep a temporary copy of the answer. That saved copy is called a cache. Now the long trip disappears: in our example the reply needs only two milliseconds. Ninety-two divided by two is forty-six, so this lookup is forty-six times quicker. Only the lookup! We haven't made the photo download forty-six times faster. Saving a useful answer simply avoids repeating work we already did.
+
+
+## 11. Memory needs an expiry date — 00:05:53
+
+But websites can move. If our helper remembers an address forever, it might keep sending people to an old place. So the saved answer comes with a time limit. Here it is sixty seconds. Its name is time to live, or TTL. Watch the timer count down. Reading the saved answer does not restart that timer. Think of a note with an expiry time printed on it: using the note doesn't make the information new again.
+
+
+## 12. What if the address changes? — 00:06:29
+
+Let's move the website while the timer still has thirty seconds left. The official record changes to a new address, 203.0.113.20. Does our helper magically know? No. It still has the old saved copy and may reply with that address until its allowed time runs out. The two boxes now show different numbers. This explains why changing a website's DNS record can take time to be noticed everywhere. Copies don't all update at the same instant.
+
+
+## 13. Look again when time runs out — 00:07:04
+
+The countdown reaches zero. For this example, the next request makes the helper look again. This time it finds the new address and replaces its old copy. We show the directory trip again so the refresh is easy to follow; real helpers may remember some directions and skip steps. Our useful rule is simple: reuse an answer for a while, then check again. A temporary memory gives us speed without pretending that yesterday's information must stay true forever.
+
+
+## 14. Connected, but missing directions — 00:07:41
+
+Now we can try a little mystery. Leave the network connection working, but stop our helper from finding the address. An app may fail before it knows where to send its request. Meanwhile, another task that already knows its destination can keep going. So online does not always mean every website name can be found. We have broken only the naming step in this experiment. Real failures can have other causes, but this picture explains one possible reason.
+
+
+## 15. Three jobs, one simple search — 00:08:17
+
+Let's shrink the whole journey into three pictures. First, split the directory into smaller branches. Second, follow directions until the right record answers. Third, remember that answer briefly. The formal words are hierarchy, referrals, and caching. You already know what those words describe because you've watched them happen. The countdown adds one more detail: remembered answers need a time limit. These jobs work together so no single directory has to hold every fresh answer to every question.
+
+
+## 16. From a name to an address — 00:08:53
+
+Return to the photo. A name you can remember becomes an address the network can use. A helper finds it, directories guide the helper, and temporary memory saves repeat trips. That's the core of DNS. Next time you type a website name, imagine that small search taking place before the page begins to arrive. It may finish almost instantly because somebody remembered the answer. The website name looked like a destination; first, it was a question.
 
 
 ---
 
 # Why Fast Internet Can Still Feel Slow
 
-English narration for your own voice. Planned runtime: 00:09:38.
+English narration for your own voice. Planned runtime: 00:09:42.
 
 The browser pauses after each section. The timestamps below refer to the continuous MP4.
 
 
-## 01. The speed-test paradox — 00:00:00
+## 01. You tap send — 00:00:00
 
-Your download counter is flying. The connection looks healthy. Then a tiny action in a game takes forever to reach the other side. How can a fast connection also feel slow? Watch the small green packet. It contains almost nothing compared with the blue transfer, but it has arrived at exactly the wrong moment. The mystery is not how fast bits can leave. It is how long this particular packet must wait before they can leave at all.
-
-
-## 02. One shared exit — 00:00:36
-
-Here is our entire model: arrivals on the left, a waiting area in the middle, and one outgoing link on the right. Everything that needs that exit must share it. Blue packets carry a large transfer; green packets represent a small interactive exchange. Their colors help us follow them, but this queue gives neither color special treatment. For now, the rule is first in, first out. Earlier arrivals stand ahead of later arrivals, regardless of how urgently someone wants a reply.
+You tap send. Somewhere else, a friend sees your message. Let's slow that tiny journey down. Here is your computer, here is your friend's, and here is a connection between them. A network is simply connected devices that exchange information. The message travels as small pieces of data, called packets. We will draw one as a green box. What could make such a little thing arrive late?
 
 
-## 03. The exit has a rhythm — 00:01:14
+## 02. One shared doorway — 00:00:31
 
-Watch the departure marks. The outgoing link can put only a certain number of bits onto the wire each second. Even when several packets arrive together, they cannot all occupy the same transmission time. They leave in a sequence. The waiting area absorbs that difference between arrivals and departures. This is useful: a short burst does not have to disappear simply because its packets arrived close together. Persistent waiting is the part we need to understand.
-
-
-## 04. An empty queue feels quick — 00:01:50
-
-Start with very little traffic. The green packet arrives, finds no blue line ahead of it, and moves toward the exit almost immediately. The complete exchange still takes time: signals travel, equipment processes data, and the other endpoint responds. But our queue adds almost no extra delay in this case. We are about to change the amount waiting, while leaving the outgoing link itself exactly the same.
+Between our two computers sits a router: a device that passes packets toward the next part of their journey. Several packets may need the same outgoing connection, or link. Picture a doorway that serves one packet after another. Arrive while it is busy, and you wait. The router has memory for that waiting data. That space is called a buffer; the waiting line is a queue.
 
 
-## 05. A download builds a line — 00:02:21
+## 03. Count what leaves — 00:01:02
 
-Now bring in the bulk transfer. For a while, arrivals outrun the exit. Blue packets accumulate faster than the link can remove them, so the line grows backward. The outgoing link stays busy throughout. A throughput display can therefore look impressive even as waiting gets worse. These measurements differ: throughput counts how much data gets through over time; delay measures how long an individual piece takes. A busy exit can produce plenty of throughput and plenty of delay together.
-
-
-## 06. The small packet gets trapped — 00:02:58
-
-Here comes the green packet again. Predict what happens before it reaches the line. Its small size will make its own transmission brief, but that does not move it past earlier packets. In our first-in, first-out queue, it waits behind all the blue data already present. The green packet has not become larger. The physical route has not become longer. Yet the interaction now feels late because a new kind of distance has appeared: a distance measured in waiting bits.
+Now watch the door. It cannot send all the waiting data at once. Computers represent data using zeros and ones. Each zero or one is a bit. A link's rate tells us how many bits it can send each second. More bits per second means more data gets through. Think of counting people leaving a cinema. It does not yet tell us how long one person waited before reaching it.
 
 
-## 07. More storage is not more speed — 00:03:36
+## 04. An empty line — 00:01:35
 
-Suppose we make the waiting area twice as large. Does the green packet escape sooner? The larger buffer can hold more arrivals, but the outgoing link still removes bits at the same rate. Under sustained load, the longer space can become a longer line. That is the trap behind bufferbloat: oversized or poorly managed queues can hold a great deal of delay. Extra storage helps absorb bursts, but storage alone cannot increase the exit's transmission capacity.
-
-
-## 08. Turn the line into a quantity — 00:04:11
-
-Let's replace our drawn packets with an amount of data. Call the bits waiting ahead of the green packet Q. Call the outgoing bit rate R. Each second, the exit removes approximately R of those bits, assuming it remains available to this queue. So how many seconds clear Q? Divide the amount to be removed by the amount removed each second. The picture is already doing the division; the equation simply gives that movement a compact name.
+Start with an empty waiting room. Our green packet arrives and takes its turn almost straight away. It still needs time to be sent and to travel, so the journey is not instant. But there is almost nothing waiting ahead of it. Send another small message and the same thing happens. This is the experience we want when pressing a button or talking on a call: a small action gets a quick response. Now let's make the connection busy.
 
 
-## 09. Bytes and bits must agree — 00:04:47
+## 05. A line starts growing — 00:02:12
 
-Our example has one megabyte waiting ahead of the green packet. Here mega means one million, so that is one million bytes. The link rate, however, is measured in bits per second. Eight bits make a byte, which turns our waiting amount into eight million bits. Dividing a byte count directly by a bit rate would quietly make the answer eight times too small. The units tell us which quantities are allowed to meet.
-
-
-## 10. Four hundred milliseconds of waiting — 00:05:22
-
-The exit runs at twenty million bits per second. Eight million waiting bits divided by twenty million bits per second gives zero point four seconds: four hundred milliseconds. Notice what disappeared in the division: bits cancel, leaving seconds. That is the time needed to clear the data ahead, before our green packet gets its turn. It is an illustrative queueing calculation, not a claim that every twenty-megabit connection always adds four hundred milliseconds to every interaction.
+Imagine a large download arriving as lots of blue packets. For a while, they reach our doorway faster than it can send them onward. One leaves, but more join. A line builds up. The exit keeps working, which looks great on a download counter. Yet look inside the waiting room. That pile is growing. We have changed the amount of waiting without making the doorway any narrower. This is the clue that a speed test can miss.
 
 
-## 11. The round trip has other parts — 00:05:58
+## 06. Little message, long wait — 00:02:48
 
-Now place that waiting beside the rest of the journey. Propagation, processing, transmission, and any other queues still contribute. A request and its response can also face different conditions in different directions. Our four hundred milliseconds is one added waiting component, not a complete prediction of a ping measurement. This is why a speed-test result cannot describe the whole experience. It tells us something useful about transfer capacity, but it does not reveal where every packet spends its time.
-
-
-## 12. Watch arrivals and departures — 00:06:35
-
-The line grows when arrivals exceed departures. It shrinks when departures exceed arrivals. And if those amounts balance while the line is already long, the line can remain long. a steady queue does not mean zero delay. Watch the height stop growing while the green packets still wait behind a large amount of blue data. The problem can persist without an endlessly rising graph or an ever-increasing memory requirement.
+Send the green message again. It is just as small as before. But this time, blue packets got here first. In our simple first-come, first-served line, green must wait behind them. Being small helps with its own turn at the door; it does not erase everybody else's turn. A download can keep moving while your call feels late. Two things are happening at once: plenty of data is leaving, and one particular packet is spending too long waiting.
 
 
-## 13. A burst can be harmless — 00:07:07
+## 07. More room, same door — 00:03:25
 
-Compare two bursts. In the first, a short rush creates a queue, then quiet time lets it drain. Later interactive traffic finds an empty path again. In the second, new data keeps replacing what leaves, maintaining the queue. Both pictures contain buffering, but their delay experience is different. The goal is not to declare every queued packet a failure. It is to distinguish a temporary cushion for uneven arrivals from a standing line that repeatedly delays useful interactions.
-
-
-## 14. A full queue can also drop — 00:07:44
-
-Eventually, a finite buffer can fill. A new arrival may then be discarded instead of joining the line. More buffer space might postpone that moment, but it can also allow a larger standing delay before anything is dropped. Loss and delay are different outcomes, and neither should be hidden by looking at only one meter. Our model is deliberately simple; real equipment can manage queues in more sophisticated ways. The essential issue remains the amount kept waiting at a constrained exit.
+Here is a tempting fix: make the waiting room bigger. Surely more space means a better connection? Watch carefully. The room expands, but the door stays exactly the same. It still sends the same number of bits each second. Extra memory lets more packets wait inside. It does not make their turns finish sooner. A bigger room can be useful for a short rush. But if we keep it full, we have built a longer wait, not a faster exit.
 
 
-## 15. What would improve the queue? — 00:08:22
+## 08. Amount divided by rate — 00:04:02
 
-Keep the same outgoing rate, but compare a long standing queue with a shorter controlled queue. Useful traffic still crosses the link, while the green packet spends less time waiting behind old data. The important improvement is visible before any product name or configuration screen appears: reduce persistent queueing while using the connection well. Real mechanisms have trade-offs, and an empty buffer is not a universal goal. We are identifying the behavior a solution should improve, rather than promising one setting fixes every network.
+We can measure that wait using an everyday idea. If ten people are ahead of you and two leave each second, clearing the line takes five seconds. Data works the same way in our model. Take the number of bits ahead and divide by the number leaving each second. We call those quantities Q and R, so the shorthand is Q divided by R. The letters add nothing mysterious. They stand for how much is waiting and how fast it leaves.
 
 
-## 16. Answer the opening puzzle — 00:09:01
+## 09. Eight bits make a byte — 00:04:40
 
-Return to the fast download and the late interaction. There was no contradiction. The connection moved many bits each second, while our small packet waited behind bits that arrived first. Bufferbloat describes that excessive queueing delay under load. It is one explanation for lag, not a diagnosis of every slow connection. The useful question has changed: instead of asking only how wide the exit is, ask how much data stands in front of the packet you care about right now.
+Before using real numbers, we need one small unit check. A byte is a group of eight bits. Files are often measured in bytes, while connection rates are often given in bits per second. Our waiting data is one megabyte. Here, mega means one million, so that is one million bytes. Expand each byte into eight bits and we get eight million bits. Now both our waiting amount and our outgoing rate can use the same unit. The division will make sense.
+
+
+## 10. Four tenths of a second — 00:05:19
+
+Our exit sends twenty million bits each second. There are eight million bits ahead of green. Divide eight million by twenty million: zero point four seconds. That is four hundred milliseconds, because a second contains one thousand milliseconds. Watch eight blocks leave; each block represents one million bits, not one normal packet. Every block adds fifty milliseconds. By the eighth, four hundred milliseconds have passed before green can start its own turn. A short message can inherit a surprisingly long delay.
+
+
+## 11. Waiting is one part — 00:05:57
+
+That four hundred milliseconds is only the wait at this doorway. Signals also need time to travel. Devices need time to examine data, and putting a packet onto a link takes time too. A reply must make a journey back. Those other delays have not vanished; we simply left them out while measuring this one queue. The important point is visible in the bar: a large waiting line can add a big chunk of delay to an otherwise working connection.
+
+
+## 12. A busy line can stay long — 00:06:34
+
+Perhaps the line will fix itself once arrivals slow down. Let's test that. One packet leaves, and one new packet joins. Another leaves, another joins. Count the boxes. The line stays the same length. Equal arrivals and departures stop the queue from growing, but they do not make an existing queue disappear. To shrink it, more data must leave than arrives for a while. The door can work perfectly steadily while every new message still finds a line ahead.
+
+
+## 13. A rush can clear — 00:07:11
+
+Now try a brief rush followed by a quiet moment. Blue packets arrive together, wait briefly, and drain away. When green arrives later, the doorway is clear again. That is useful buffering: the room absorbed uneven arrivals. The problem is a line that stays large, delaying message after message. So we should not treat every waiting packet as a disaster. A short queue during a rush and a standing queue all evening are very different experiences, even with the same doorway.
+
+
+## 14. No room for another packet — 00:07:49
+
+Our waiting room is not endless. Fill every space, then bring in another packet. There may be nowhere to put it, so the device discards it. That is packet loss. Waiting and being discarded are different problems: one packet arrives late, another does not arrive through this attempt. A larger room may delay the moment it fills, while also allowing longer waits. Real devices can manage their queues more carefully. Our drawing explains why simply adding storage is not enough.
+
+
+## 15. Shorter line, quicker response — 00:08:26
+
+Compare these two doors. Both send data at the same rate. The top has a long standing queue; the bottom has a shorter one. Watch the blue packets already ahead leave first in both rows. Green gets its turn much earlier in the shorter line. It has not jumped the queue, and the door has not become faster. This is what better queue management aims to improve: keep the connection useful while avoiding a big pile of data that waits unnecessarily.
+
+
+## 16. Fast can still feel slow — 00:09:04
+
+Now the name makes sense. Bufferbloat is excessive delay caused by too much data sitting in buffers when a connection is busy. Throughput means how much data gets through; delay means how long something takes. A connection can have good throughput and still respond slowly. Bufferbloat is one possible cause of lag, not the answer to every connection problem. Next time a download looks fast but a conversation feels late, remember our green box. How much is waiting in front of it?
 
 
 ---
 
 # How One Fiber Carries So Many Conversations
 
-English narration for your own voice. Planned runtime: 00:09:01.
+English narration for your own voice. Planned runtime: 00:09:33.
 
 The browser pauses after each section. The timestamps below refer to the continuous MP4.
 
 
-## 01. A crowd inside one strand — 00:00:00
+## 01. A message needs a path — 00:00:00
 
-This thin strand carries light, yet an enormous number of conversations can cross it together. How can the receiver tell them apart? Imagine four senders all insisting on using the same fiber at the same time. We could build four separate paths, but the more interesting solution is to give each signal a property that survives the journey. Today, that property is wavelength. Watch the four colors; each represents a separate optical channel.
-
-
-## 02. Keep four conversations separate — 00:00:34
-
-Each sender has its own changing stream of bits. For now, we draw four separate paths so their identities are obvious. The blue signal might carry one stream of data while the green signal carries another. They needn't contain the same pattern, begin together, or tell the same story. The problem is to combine them physically while leaving the receiver enough information to reconstruct each stream. Simply remembering that there were four senders isn't enough.
+Start with a photo on your phone. To send it somewhere else, the phone must turn that photo into a pattern another device can read. A cable carries that changing pattern between places. Some cables use electrical signals. This thin glass strand uses light. It is an optical fiber. Watch one light pulse travel through it. That is our starting point: something changes at one end, and the other end detects the change.
 
 
-## 03. Measure the spacing of crests — 00:01:09
+## 02. Two choices can carry information — 00:00:34
 
-First look at a wave rather than its data. Wavelength is the distance between repeating points, such as neighboring crests. Compress the spacing and the wavelength gets shorter; spread the crests and it gets longer. Our colors make that difference easy to follow. Real communication systems commonly use infrared light, so these display colors are labels for our eyes. They are not a promise that the fiber contains these exact visible colors.
-
-
-## 04. Put data onto the light — 00:01:43
-
-A channel needs to carry something more interesting than a perfectly unchanging wave. A transmitter varies properties of its optical signal to represent information. Here, brightness changes illustrate that idea: the pattern changes while the channel keeps its wavelength identity. Real modulation can be more sophisticated. Keep those two jobs separate in your mind: modulation carries the information, while the wavelength helps identify which optical channel we are looking at.
+How can light stand for a photo? Start much smaller: a yes or a no. We can agree that a bright pulse means one and a dark time means zero. Each choice is called a bit. Put many bits together, and their pattern can represent text, sound, or a picture. Our blinking light is a simple teaching example. Real equipment can use more detailed patterns, but the basic job stays the same: carry information using changes.
 
 
-## 05. Why identity matters — 00:02:16
+## 03. Meet the shape of light — 00:01:10
 
-Suppose we deliberately remove the difference between the channels. Now the receiver cannot separate them merely by choosing a wavelength, because they occupy the same wavelength region. Combining signals only helps when there is a usable separation rule. The problem isn't that two messages dislike each other. The receiver has lost the clue that distinguished them. Give the channels different wavelength allocations again, and that clue returns without adding another strand of fiber.
-
-
-## 06. Give each channel a wavelength — 00:02:50
-
-Place the four channels at separate positions on this wavelength axis. Each position stands for a narrow optical channel with room for its modulated signal. The spaces between them matter: actual signals and optical filters don't have infinitely sharp boundaries. If we pack channels too closely for the equipment, separating them becomes harder. Wavelength division is organized sharing of optical spectrum, not permission to place an unlimited number of channels wherever we like.
+Now look closer at the light itself. We draw it as a wave, with repeating peaks. This curve shows a repeating light property; the beam does not wiggle through the cable like a snake. The distance from one peak to the next is its wavelength. Wide spacing means a longer wavelength. Close spacing means a shorter one. That spacing gives us a way to tell different light signals apart, even when they share a path.
 
 
-## 07. Combine at the multiplexer — 00:03:25
+## 04. Four senders want to talk — 00:01:45
 
-Now watch the multiplexer. Separate optical inputs enter; a combined optical signal leaves through one path. None of our four conversations has been turned into the others. They coexist in the outgoing light because they occupy different wavelength channels. This is the central move in wavelength-division multiplexing, usually shortened to WDM. The name sounds elaborate, but the drawing has already done most of the explaining: different wavelengths, together in one fiber.
-
-
-## 08. Travel together — 00:03:58
-
-Inside the shared link, all four channels propagate together. Follow one pulse from each input and notice that they can occupy the fiber at the same time. They are not taking four long turns. The colored paths are a visual aid showing channel identity, rather than separate colored tubes hidden inside the strand. One physical optical path is carrying several distinguishable optical channels, and each channel can carry its own changing information.
+Bring in four senders. Each has its own bits to send: four different conversations. So far, our easiest drawing gives every conversation its own path. Blue can carry one pattern while green carries another. Neither needs to copy the other. We call each separately usable signal path a channel. Four channels, four independent messages. But building a separate long cable for every conversation sounds expensive. Can these four channels share just one glass strand?
 
 
-## 09. Separate at the destination — 00:04:32
+## 05. What if they look identical? — 00:02:19
 
-At the far end, the demultiplexer reverses the arrangement. Optical components direct different wavelength regions toward their corresponding receivers. Blue returns to blue's output; green returns to green's output. The useful achievement is not just that light reached the destination. The receiver recovered the right stream at the right output. Keep an eye on the pulse pattern: separation preserves the identity needed to interpret the original data.
-
-
-## 10. Try selecting only one channel — 00:05:04
-
-Cover three outputs and inspect the remaining one. Its receiver is interested in the selected wavelength channel while the others continue through their own outputs. This is why the wavelength allocation matters at both ends. The transmitter alone can't invent a private rule and hope the receiver guesses it. Multiplexing and demultiplexing form a coordinated system: combine according to an agreed arrangement, then use that arrangement to separate again.
+Before solving that, try a bad idea. Put two changing signals into the same wavelength region and ask the receiver to separate them using wavelength alone. There is no useful difference for that filter to select. Our colored boxes overlap to show the problem. Simply mixing more light is not enough. We need a recognizable difference that the receiving equipment can use. Think of labels on luggage: sharing a conveyor works better when the bags remain identifiable.
 
 
-## 11. Add the channel rates — 00:05:36
+## 06. Give each channel its own spacing — 00:02:56
 
-Let's attach numbers to the picture. Suppose each of our four channels carries one hundred gigabits per second. One channel contributes one hundred; two contribute two hundred; four contribute four hundred gigabits per second of combined raw rate. The sum comes from parallel channel capacity. We haven't made each individual channel four times faster. We've arranged four channels so their rates contribute to the total at the same time.
-
-
-## 12. Keep the units honest — 00:06:09
-
-Four hundred gigabits per second is not four hundred gigabytes per second. Eight bits make a byte, so dividing by eight gives fifty gigabytes per second as the corresponding raw byte rate. Even that is not a promised file-download speed. Coding, framing, and other overhead consume part of the transmitted information, and the rest of the system may impose limits. The multiplication describes our optical channel model, not every application's measured throughput.
+Here is the useful difference. Give each channel a different wavelength. Our four colors are labels for those different spacings. They do not mean four visible colored beams; communication fibers commonly carry infrared light that our eyes cannot see. Each channel also needs some space around its chosen wavelength because its information changes over time. Spread the channels apart, leaving suitable room for the signals and for equipment that will separate them later.
 
 
-## 13. More channels need more room — 00:06:42
+## 07. Combine the light — 00:03:30
 
-It is tempting to keep adding channels and declare victory over physics. But the available spectrum, channel spacing, amplification, noise, and receiver equipment constrain the arrangement. In the picture, adding another channel means finding a usable place for its signal and a way to recover it. More wavelength channels can increase total capacity, but the equipment must support the whole transmission. An extra colored line on a diagram is much easier than a working optical link.
-
-
-## 14. Unequal channels still add — 00:07:18
-
-Our equal-rate example was convenient, not compulsory. Let two channels carry one hundred gigabits per second each and two carry fifty each. The combined raw rate is now three hundred gigabits per second. Nothing about the word multiplexing requires equal contributions. This is the same sum written more generally: add the individual channel rates. The diagram changes one channel's contribution at a time, so the arithmetic stays attached to the physical arrangement.
+At the sending end, an optical device brings the separate channels onto one shared path. It is called a multiplexer. The name is longer than the idea: many inputs, one shared output. Follow blue into the box, then green, yellow, and purple. Each still carries its own changing information. The device combines their light for the journey. It does not merge the four messages into a new sentence or make their bit patterns identical.
 
 
-## 15. Connect the picture to research — 00:07:52
+## 08. Travel together through one fiber — 00:04:05
 
-The scale becomes striking in real optical research. In June twenty twenty-six, NICT reported a wideband transmission demonstration over installed fiber using more than a thousand wavelength channels. That achievement also depended on amplification, modulation, and receiver techniques; WDM did not produce the entire result by itself. Our four-channel drawing isolates one essential idea inside that much richer system. The same separation principle can operate at a scale far beyond four colored inputs.
+Now watch the middle of the link. The four wavelength channels travel through the same fiber at the same time. Our small vertical gaps are only there so you can follow the colors on screen; there are no four little pipes inside the glass. This sharing method is wavelength division multiplexing, or WDM. The words now describe something we have already seen: divide the available wavelengths into channels, then let those channels share a fiber.
 
 
-## 16. Return to the single strand — 00:08:26
+## 09. Sort the light at the end — 00:04:40
 
-We began with four senders competing for one fiber. The solution was to preserve a distinction the receiver could use: wavelength. Give each channel a suitable optical allocation, combine them, carry them together, and separate them again. The capacity arithmetic follows the picture because several channels contribute simultaneously. One strand can support many conversations when sharing does not destroy their identities. That is the useful idea to keep when the long name fades away.
+Sharing only helps if we can recover the separate information. At the far end, another optical device sorts different wavelength regions toward different outputs. It is called a demultiplexer: the separating partner of the combining box. Follow blue to its matching output. Green goes to another. The receivers can now detect changes in their selected channels. Four messages entered the system, traveled together, and came out as four separately readable streams. The wavelength difference survived the journey.
+
+
+## 10. Listen to just one conversation — 00:05:16
+
+Let us follow only the green channel. Dim the others so your eye can stay with one bit pattern. Green enters, travels alongside the other light, and reaches the green output. Its receiver reads those changes. It does not need the blue message to stop talking first. This is the central trick: the shared fiber carries several distinguishable channels at once. Our labels track their identities; the actual separation is performed by optical equipment designed for their wavelengths.
+
+
+## 11. Count the information per second — 00:05:53
+
+Now the numbers have a picture to attach to. A bit rate tells us how many bits a channel carries each second. Suppose each of our four channels carries one hundred billion bits per second. We shorten that to one hundred gigabits per second, written Gb/s. Add the channels one at a time: one hundred, two hundred, three hundred, four hundred. Four equal channels provide four hundred gigabits per second of combined raw capacity in this example.
+
+
+## 12. Bits and bytes are different — 00:06:29
+
+There is one small trap in that impressive number. File sizes often use bytes, while link rates often use bits. A byte is a group of eight bits. Watch eight little boxes become one group. To turn four hundred gigabits per second into gigabytes per second, divide by eight. The answer is fifty. That is a raw capacity conversion, not a promise that a download reaches fifty gigabytes every second. The rest of the system also takes time and capacity.
+
+
+## 13. Why not add colors forever? — 00:07:06
+
+If four channels help, why not squeeze in endlessly more? Look at the spaces between the channels. The equipment has a usable range, and the signals need enough room to remain distinguishable. Add too many into the same space and separation becomes harder. Noise and other physical effects matter too. Engineers must match the fiber, light sources, amplifiers, and receivers. More channels can increase capacity, but the drawing cannot create unlimited room that real equipment does not have.
+
+
+## 14. Different channels can have different rates — 00:07:43
+
+Our channels do not have to carry equal amounts. Keep blue and green at one hundred gigabits per second, but let yellow and purple carry fifty each. Add what each contributes: one hundred plus one hundred plus fifty plus fifty gives three hundred. The rule is still simple addition of the usable channel rates in our example. Counting colors alone is not enough. Four channels can have different total capacity depending on how much information each channel carries.
+
+
+## 15. Predict one missing channel — 00:08:19
+
+Try a quick prediction. Return to four channels carrying one hundred gigabits per second each. Now switch off the green transmitter while keeping the rest of our model unchanged. Does all the light stop? No. The other three channels still travel. The combined raw rate drops from four hundred to three hundred gigabits per second. Green has gone quiet; it has not taken the whole fiber with it. Distinct channels give us a useful way to understand the result.
+
+
+## 16. One strand, several readable streams — 00:08:56
+
+We can now rebuild the whole idea from the beginning. A message becomes a changing signal. Different wavelength channels give several signals identities the equipment can distinguish. One device combines them, one glass strand carries them, and another device separates them. Adding the channel rates tells us the combined raw capacity. That is WDM. The fiber did not become four separate cables. We learned how to let several conversations share the same physical path while keeping them readable.
 
 
 ---
 
 # Why the Internet Breaks Everything Into Pieces
 
-English narration for your own voice. Planned runtime: 00:09:44.
+English narration for your own voice. Planned runtime: 00:09:42.
 
 The browser pauses after each section. The timestamps below refer to the continuous MP4.
 
 
-## 01. The elephant and the message — 00:00:00
+## 01. Send one picture — 00:00:00
 
-A huge transfer reaches a shared connection just before a tiny message. If the huge transfer holds the connection until its whole message finishes, the small one gets a very long wait. Yet the Internet carries enormous transfers and tiny interactions together. How does it divide their turns? Watch us replace one giant uninterrupted shape with smaller pieces. Those boundaries are not just a drawing choice. They create opportunities for other traffic to use the same physical link.
-
-
-## 02. Give each piece an identity — 00:00:36
-
-Call each piece a packet. It carries a limited portion of the data, along with information needed to handle that piece. The receiver eventually needs the right content, but the network can now work with individual units instead of waiting for one entire application message. Our path stays fixed. We will not decide how that path was chosen or how an application recovers missing data. Our question is what dividing the transfer changes about sharing and timing.
+You send a picture to a friend. It appears as one complete image on your screen, so perhaps the Internet carries it as one big object. Here are two computers and a connection between them. Connected devices that exchange information form a network. We call a connection along the way a link. The computers send data: information represented electronically. Our blue rectangle stands for the picture's data. How should it take its turn on that link?
 
 
-## 03. Sharing happens between packets — 00:01:12
+## 02. Meet a packet — 00:00:35
 
-Let blue represent the large transfer and green the small message. Blue sends one packet, then green gets a turn before another blue packet. The link is still transmitting one sequence of bits. We did not create two simultaneous exits. What changed is the size of the indivisible turn: the waiting green data no longer needs the entire blue message to finish first. This interleaving is possible sharing, not a promise that every real queue always schedules these colors fairly.
-
-
-## 04. Each packet still occupies time — 00:01:50
-
-A packet is smaller than the complete transfer, but it is not instantaneous. Its bits must enter the outgoing link one after another. Imagine the packet as a rectangle whose width is its transmission time. Making a smaller rectangle means finishing that turn sooner; making the link faster also makes the rectangle narrower. These are two different ways to reduce the time taken by one transmission. To calculate either change, we need the packet's length and the link's bit rate.
+Instead of sending that whole blue rectangle as one uninterrupted unit, divide its data into smaller pieces. Add a little handling information to each, including where it needs to go. That unit is called a packet. Think of several labeled parcels instead of one enormous delivery. The numbers in our drawing help us follow the pieces; they are not a claim that every network packet has a sequence number.
 
 
-## 05. Build length divided by rate — 00:02:27
+## 03. Share between packets — 00:01:08
 
-Let L be the number of bits in a packet and R the number of bits the link can transmit each second. Sending L bits takes L divided by R seconds. Our example packet contains fifteen hundred bytes, or twelve thousand bits. On a ten-million-bit-per-second link, that occupies one point two milliseconds. We are calculating transmission time only. Signal travel adds delay, and it is left out of this particular arithmetic.
-
-
-## 06. Store the packet before forwarding — 00:03:00
-
-Now add an intermediate switch in our model. It receives the complete packet before starting to send that packet on the next link. This is store-and-forward operation. Follow the blue rectangle: first it finishes arriving, then it begins leaving. The switch can use other forwarding methods in other settings, but keeping this rule explicit lets us reason clearly. A packet's boundary gives this switch a complete unit to receive, hold briefly, and forward toward the next fixed stop.
+Now your friend sends a tiny green message while the blue picture is being sent. If the entire picture took one uninterrupted turn, green would wait for the whole thing. With packets, there is a choice between pieces. Send one blue packet, then green, then more blue. The link still sends one stream of data, but several conversations can share it. Dividing data creates chances to share; it does not guarantee every message an immediate turn.
 
 
-## 07. One packet crosses three links — 00:03:37
+## 04. Bits take time to send — 00:01:43
 
-Place three equal-rate links in a row. Our one packet occupies the first link for one point two milliseconds, then the second, then the third. Ignoring propagation, processing, and competing traffic, its final bit reaches the end after three point six milliseconds. Three links multiplied by one transmission time gives this result because our single packet must finish one store-and-forward step before beginning the next. There is not yet another packet available to overlap any of those steps.
-
-
-## 08. Can the empty links work? — 00:04:14
-
-Now prepare four packets. After the first leaves the source, must the source remain idle until that packet reaches the destination? It does not. The first link is free for packet two while the first packet uses link two. This is the next opportunity created by dividing the message. Different links can handle different packets at the same time. The network becomes a pipeline, with several stages doing useful work during the same interval instead of waiting for one complete journey.
+Zoom inside one packet. Computers represent information using zeros and ones, called bits. Those bits take time to enter a link. A link's bit rate is how many it can send each second. So two things affect a turn: how many bits the packet contains, and how many bits the link sends per second. More bits mean a longer turn. A higher rate means a shorter one.
 
 
-## 09. Fill the pipeline together — 00:04:51
+## 05. Amount divided by rate — 00:02:15
 
-Watch the first three slots. At first, only the first link works. Next, links one and two work on different packets. Then all three links are occupied. Follow the packet colors: simultaneous work does not mean the same packet magically appears everywhere. Each packet still follows the store-and-forward rule. The overlap happens between different packets on different links, just as several items can occupy different stages of a process without any item skipping a stage.
-
-
-## 10. Count six slots instead of twelve — 00:05:27
-
-For one packet, the journey needs three transmission slots. Once the pipeline is filled, each additional packet can finish one slot after the previous one. Four packets therefore need three slots for the first, then three more for the remaining packets: six slots total. At one point two milliseconds per slot, that is seven point two milliseconds. Sending each packet through the entire path before starting another would need twelve slots. The improvement comes from overlap, while the individual links keep the same rate.
+A byte contains eight bits. Our example packet has fifteen hundred bytes, so multiply by eight to get twelve thousand bits. The link sends ten million bits each second. Divide twelve thousand by ten million and we get zero point zero zero one two seconds: one point two milliseconds. A millisecond is one thousandth of a second. The shorthand is L divided by R: length in bits divided by rate. This measures putting data onto the link; signal travel time is extra.
 
 
-## 11. Read the formula as a picture — 00:06:06
+## 06. Receive, then send onward — 00:02:53
 
-With N equal packets and H equal-rate links, this ideal pipeline takes N plus H minus one transmission slots. Multiply that count by L divided by R to obtain the total time. The minus one is not a mysterious correction: the first packet is already included when we count the H slots that fill its journey. Unequal rates, propagation, processing, and other traffic change the timing. The formula describes our clean model.
-
-
-## 12. Traffic does not arrive on schedule — 00:06:40
-
-Bring back the green message. Sources do not always take neat repeating turns. Some are quiet, some send bursts, and several can suddenly want the same output. Packet switching lets a link carry whichever packets are selected when capacity becomes available, instead of requiring each source to occupy a fixed turn continuously. That flexibility helps share a connection among uneven conversations. It also means we must examine what happens when several ready packets want the same next transmission opportunity.
+Real journeys can pass through devices between the two computers. Add two forwarding devices, labeled switches, that pass data to the next link. In our model, each waits until a whole packet arrives before sending that packet onward. We call this store-and-forward. The name describes the action: receive it, then pass it on. Watch packet one finish the first step before starting the second. We will keep this path and rule for our experiment.
 
 
-## 13. A queue is the waiting part — 00:07:17
+## 07. Three links, three turns — 00:03:28
 
-When arrivals reach an output faster than it can transmit, packets wait. Notice the green packet can still be delayed behind blue packets. Packet boundaries create chances for interleaving, but they do not guarantee a perfectly fair schedule, zero waiting, or unlimited capacity. If a finite queue fills, packets can be dropped. Those details limit our opening promise: breaking data into pieces makes flexible sharing possible, but the particular scheduling and available resources determine the experience each packet actually gets.
-
-
-## 14. Boundaries have a cost — 00:07:54
-
-Making packets tiny seems tempting. Each turn would finish quickly, so perhaps we should use the smallest pieces imaginable. But each packet also carries handling information, and equipment must process those packets. More pieces can mean more overhead for the same useful content. The picture shows that trade-off by keeping the useful blue payload separate from the small header. Packetization is a design choice balancing useful sharing opportunities, transmission efficiency, and the work required to handle individual units.
+Our path now has three links of equal rate. One packet spends one point two milliseconds being sent on the first, then the second, then the third. Add those three turns: three point six milliseconds. For this little experiment, we ignore travel time, device processing, and any other traffic. Those things matter in real life, but hiding them briefly lets us see the pattern. With only one packet, the steps happen in order. What happens if we have several packets ready?
 
 
-## 15. Put the useful pieces back together — 00:08:31
+## 08. The next packet can follow — 00:04:06
 
-At the far end, follow the pieces belonging to the blue transfer and the green message. Their journeys shared resources, but their identities remain distinguishable. Recovering the complete application meaning requires the appropriate endpoint mechanisms, which sit outside our timing model. Our network's contribution was to move manageable units between successive links. It never needed the whole blue application message to occupy one continuous end-to-end turn before allowing green data onto the same shared infrastructure.
+Packet one has reached the first switch. It is now being sent on link two. Look back at link one: it is free. Why leave it doing nothing? Send packet two there. A moment later, packet one uses link three, packet two uses link two, and packet three can use link one. Different parts of the path work at once. This is called a pipeline, like several parcels moving through different stations. Each parcel still visits every station in the proper order.
 
 
-## 16. Answer the opening puzzle — 00:09:06
+## 09. Watch the overlap grow — 00:04:44
 
-The tiny message escaped the elephant's full turn because the elephant was divided into packets. That created shorter opportunities for sharing. It also let different packets occupy successive links at once, turning a chain of transmissions into a pipeline. Queues, overhead, and finite rates still matter, so packet switching is not a trick for unlimited speed. Its power is more practical: many uneven conversations can share links in small units, while each link keeps doing one clear transmission job at a time.
+Let's draw that motion as a timetable. Each row is one link. Each column is one turn of one point two milliseconds. A colored box shows which packet uses that link during that turn. First, only the top row works. Next, two rows work. Then all three do. Follow one color diagonally: that is one packet moving through its three steps. Follow one column downward: those are different packets moving at the same time.
+
+
+## 10. Six turns for four packets — 00:05:19
+
+Continue until all four packets arrive. The first packet takes three turns to reach the end. After that, another packet finishes each turn. There are three more packets, so add three more turns: six in total. Six times one point two milliseconds gives seven point two milliseconds. If we waited for each packet's whole journey before starting the next, we would need twelve turns. We simply let separate links do useful work at the same time.
+
+
+## 11. Count first, write second — 00:05:55
+
+Now the formula is just a short version of our counting. Call the number of links H and the number of packets N. The first packet needs H turns. The remaining N minus one packets each add a turn. Together, that is H plus N minus one. Multiply by the time for one turn, L divided by R. That gives our total. It works for this clean model with equal packets and equal-rate links, without extra travel, processing, or traffic delays.
+
+
+## 12. Conversations come and go — 00:06:33
+
+Bring back the green message. Real conversations are uneven. Someone sends a picture, another person pauses, then a new message arrives. Packet switching means the network handles and forwards individual packets, allowing shared links to serve different conversations. A quiet sender need not keep occupying a turn. A ready packet can use the next available opportunity when selected. Two useful effects: different conversations can share one link, and different links can work on different pieces together.
+
+
+## 13. Packets can still wait — 00:07:08
+
+There is a limit. If packets arrive at a device faster than its outgoing link can send them, they form a waiting line, called a queue. Green can still get stuck behind blue. Splitting the picture does not create an endlessly fast connection or a perfectly fair order. If the waiting space fills, a packet may even be discarded. So our claim is modest and useful: packet boundaries give the network manageable turns to share, while actual capacity and queue choices still matter.
+
+
+## 14. More pieces need more labels — 00:07:47
+
+Why not make every piece tiny? Short turns sound wonderful. But remember the handling information added to each packet. That information uses space too. Blue is useful picture data; yellow is the extra label, called a header. Divide the same blue data into more pieces and count the yellow labels. There are more of them. Devices also have more individual packets to handle. Smaller pieces can help sharing, but they are not free. We must balance shorter turns against this extra work.
+
+
+## 15. The picture comes back together — 00:08:25
+
+At the destination, the blue pieces belong to the picture and green belongs to the little message. The receiving computer uses the arriving data to recover the content the application needs. Keeping things complete and in order involves other parts of the communication system; packet switching alone does not promise that. Here, all our pieces arrive successfully. Notice the useful trick: the network could move each piece along without giving the entire picture one enormous turn from beginning to end.
+
+
+## 16. Small pieces, useful possibilities — 00:09:03
+
+We began with one picture on a screen. Breaking its data into packets gave us shorter turns on a shared link. Those pieces also let several links work at once, just like the stations in our parcel line. We still pay for headers, we can still wait in queues, and every link has a limit. But now a big picture and a tiny message can use the same network in manageable pieces. The Internet's useful trick starts with something simple: divide the work.
 
 
 ---
 
 # The Shortest Route Can Have More Steps
 
-English narration for your own voice. Planned runtime: 00:09:26.
+English narration for your own voice. Planned runtime: 00:09:33.
 
 The browser pauses after each section. The timestamps below refer to the continuous MP4.
 
 
-## 01. The tempting shortcut — 00:00:00
+## 01. First, send one message — 00:00:00
 
-Which route would you choose for this packet? The one with three connections looks shorter than the winding one with five. But a network does not pay for how tidy a route looks on a drawing. It pays the cost of every connection it uses. In a moment, that longer-looking path will beat the shortcut. The interesting question is how to discover it without trying every possible journey. That is the puzzle Dijkstra's algorithm solves.
-
-
-## 02. Give the links a cost — 00:00:35
-
-Here is our small world: six points, nine connections, and a positive number on each connection. A point could represent a router, but the algorithm only needs the graph. The numbers are illustrative costs, not automatically seconds or kilometers. We choose what they mean before asking for the cheapest route. Keep your eye on A, our starting point, and F, our destination. Everything else is a possible intermediate step in their journey.
+Imagine sending a photo to a friend. Your computer cannot jump straight into their computer. The photo travels through connected machines. We draw each machine as a dot and each connection as a line. A small piece of the photo, called a packet, moves along those lines. Some machines pass it onward; these are routers. For now, forget the big internet. We only need a starting dot, an ending dot, and a path between them.
 
 
-## 03. Count costs, not connections — 00:01:09
+## 02. Give each step a price — 00:00:35
 
-Follow A to B, B to D, then D to F. The costs are four, five, and six, totaling fifteen. Now take A to C to B to D to E to F. Two, one, five, two, three: thirteen. More connections, smaller bill. Try predicting the winner from the picture alone and it is easy to get fooled. The numbers describe our objective, so the complete sum must decide which route is better.
-
-
-## 04. Start with what is known — 00:01:43
-
-Instead of guessing a complete route, we will grow a region of known shortest distances. A starts at zero because reaching the place where we already are costs nothing. Every other point begins at infinity, our shorthand for no route discovered yet. These are distance estimates, not numbers written on the links. The central rule is simple: choose the smallest unfinished estimate, settle it, and check whether going through it improves any neighbor.
+Now give each connection a price. These numbers are made-up points, so a four costs twice as much as a two. Going straight from A to B costs four. But watch the other way: A to C costs two, then C to B costs one. Two plus one is three. Taking two steps was cheaper than taking one! That is our whole puzzle: find the route with the smallest total, rather than the fewest lines.
 
 
-## 05. Open the first possibilities — 00:02:17
+## 03. Grow a small map — 00:01:10
 
-A is the only point with a finite estimate, so it is settled first. Its connection to B offers a distance of four; its connection to C offers two. Write both as tentative results. Tentative matters: discovering a route to B does not mean we have discovered the cheapest route to B. We have only found the best one so far. Which unfinished point should we explore next? Choose the smallest estimate, not the closest-looking dot.
-
-
-## 06. A cheaper way to B — 00:02:53
-
-C wins with distance two. Explore its connections and something useful happens. Through C, reaching B costs two plus one: three. That improves B's earlier four, so replace the estimate and remember C as B's predecessor. Through C, we also discover D at ten and E at twelve. This repeated operation is called relaxation. The word sounds restful, but the job is simply comparing an old estimate with a newly discovered candidate.
+Let's add a few more machines. Our starting point is still A, but now we want to reach F. The red route costs four, then five, then six: fifteen altogether. The green route takes more steps, yet its prices add to thirteen. You can compare these two by eye. On a huge map, guessing every route would get messy. We need a repeatable recipe. That recipe has a name: Dijkstra's shortest-path algorithm.
 
 
-## 07. Improve the route to D — 00:03:27
+## 04. Keep a little scorecard — 00:01:44
 
-Now B has the smallest unfinished distance: three. Its connection to D costs five. Add that connection to the known cost of reaching B, and the candidate for D becomes eight. Eight beats ten, so update D and save B as its predecessor. Notice what the calculation includes. We are not choosing the cheapest outgoing connection in isolation. Every candidate includes the entire cost already spent getting to the point where this new step begins.
-
-
-## 08. Finding F is not finishing — 00:04:02
-
-D is next at eight. Through D, E improves from twelve to ten, and F appears with distance fourteen. We have reached the destination in our search. Should we stop? Hold that thought. Fourteen is still an unfinished estimate, and E is waiting with a smaller distance of ten. If the remaining link from E offers a better total, stopping now would miss it. Discovering the destination is different from proving its distance is final.
+Start with a fresh scorecard beside our map. Each score means the cheapest total we have found so far from A. A starts at zero because we are already there. Everywhere else gets a question mark: we have not found a route yet. Books often use this sideways eight, called infinity, for those unknown scores. It does not mean the machines are impossibly far away. It means we still need to discover how to reach them.
 
 
-## 09. One last improvement — 00:04:37
+## 05. Look one step from home — 00:02:19
 
-Settle E at ten. Its connection to F costs three, making thirteen. That beats F's fourteen, so the estimate changes and its predecessor becomes E. This is the same small operation we have used all along: known distance plus link cost, compared with the current estimate. There is no special clever trick for the destination. The repeated local calculation is enough to uncover a complete route that our first visual guess failed to recognize.
-
-
-## 10. The frontier reaches F — 00:05:12
-
-F now has the smallest unfinished estimate, thirteen, so settle it. Our final distances from A are zero for A, three for B, two for C, eight for D, ten for E, and thirteen for F. Watch the green settled region finish growing. Each number was earned by a comparison, rather than copied from a completed answer. The destination's cost is now final because it has crossed the same settled boundary as the earlier points.
+Look at the lines leaving A. We can reach B for four points, so write four beside B. We can reach C for two points, so write two beside C. Which unfinished score is smaller? C, with two. That is where we look next. We always choose the smallest unfinished score, then check its neighboring dots. Green will mean a score is finished. Yellow will mean we have found an improvement worth writing down.
 
 
-## 11. Why the smallest choice works — 00:05:47
+## 06. A better way to B — 00:02:54
 
-Why can that boundary be trusted? Imagine a cheaper undiscovered route to the point we are about to settle. It must leave our settled region somewhere. But our frontier already contains the cheapest available unfinished estimate, and every remaining connection has a nonnegative cost. Continuing farther cannot secretly subtract distance. That is the intuition behind the rule. Negative links would break this argument, which is why the graph's cost assumptions are part of the algorithm, not fine print.
-
-
-## 12. Recover the actual journey — 00:06:24
-
-We have a cost, but a packet needs a route. Each improvement saved a predecessor: the point that gave us the better estimate. Begin at F and follow those clues backward: E, D, B, C, A. Reverse that chain and the forward route appears. The distance number tells us how much the best journey costs; the predecessor chain tells us which journey achieved it. Without those saved clues, the cheapest total alone would not draw the path for us.
+We have reached C for two points. From here, B costs only one more. Add them: two plus one makes three. Our old score for B was four, so replace it with three. We just found the little shortcut from earlier! Also check C's other connections. D would cost two plus eight, or ten. E would cost two plus ten, or twelve. Write those down as possible routes. A score can improve before it becomes final.
 
 
-## 13. Send a packet along the answer — 00:07:01
+## 07. Choose the cheapest unfinished dot — 00:03:30
 
-Now let the packet travel from A through C, B, D, E, and finally F. Add each link as it moves: two, three, eight, ten, thirteen. The arithmetic and the picture describe the same thing at different scales. A only needs C as its immediate next step toward this destination. We are showing a route on a small teaching graph; actual routing systems apply their own rules when they turn such calculations into forwarding decisions.
-
-
-## 14. Take away a connection — 00:07:36
-
-Suppose the connection between D and E fails. Our thirteen-cost route no longer exists. Keeping the old answer would be wonderfully efficient right up until the packet reaches the missing connection. So change the graph and ask the same question again. We are not changing the meaning of cheapest, and we do not need a new algorithm. We need to run the calculation against the connections that are actually available now, rather than the ones we remember.
+Our unfinished scores are now three at B, ten at D, and twelve at E. Choose B because three is the smallest. From B, the connection to D costs five. We have already spent three getting to B, so the whole journey to D costs eight. Eight beats the old ten. Cross out ten and write eight. Notice that we are adding to the journey so far, not choosing a connection only because its own price looks small.
 
 
-## 15. Recalculate against the new graph — 00:08:12
+## 08. Find a first route to F — 00:04:06
 
-Without that connection, A to C to B to D to F costs two plus one plus five plus six: fourteen. The route through C and E costs two plus ten plus three: fifteen. Fourteen wins. The updated distances keep E at twelve and reach F at fourteen. A failure does not mean every earlier number must change, but none should be trusted merely because it appeared in yesterday's answer. The graph determines what the calculation can justify today.
+D now has the smallest unfinished score: eight. Finish D and look outward. Reaching E through D costs eight plus two, which is ten. That improves E's old twelve. Reaching F through D costs eight plus six, which is fourteen. At last, we have found a route to our destination! But wait before celebrating. Fourteen is the best answer we have found so far. Another unfinished dot might still lead us to a cheaper route.
 
 
-## 16. Answer the opening question — 00:08:49
+## 09. One last improvement — 00:04:42
 
-Return to the two routes we started with. The shortest-looking line was never the right test. The useful question was which complete journey had the lowest sum, and Dijkstra answered by growing a trustworthy boundary of distances. Small comparisons produced a global result, then the same method adapted to a changed connection. That is the satisfying idea to keep: we did not need to guess the whole winning route. We built enough correct local knowledge to reveal it.
+The next smallest unfinished score is E at ten. Its connection to F costs three. Ten plus three is thirteen, beating the fourteen we just wrote down. Replace it. This is why finding the destination once was not enough. The first route we noticed was useful, but it was not the winner. Our rule stayed exactly the same: choose the smallest unfinished score, add the next connection's price, and keep the result only when it improves something.
+
+
+## 10. Know when the answer is ready — 00:05:18
+
+F now has the smallest unfinished score, thirteen. When we choose it, that score becomes final. We can stop if F was our only destination. If we wanted answers for every machine, we would keep following the same rule until all reachable dots were finished. The changing numbers were not random guesses. Each one described a real route we had found, and each replacement made that route cheaper. Green marks the point where we know it cannot improve.
+
+
+## 11. Why the rule works — 00:05:54
+
+Why trust the smallest unfinished score? Every connection in our picture adds a positive cost. Suppose the cheapest unfinished dot costs eight. A route that first goes through an unfinished dot costing ten cannot come back and beat eight; adding more positive prices only makes ten larger. That is the key idea behind the recipe. Zero-cost connections also work. Negative prices would break this reasoning, so this version of the algorithm requires costs that never go below zero.
+
+
+## 12. Remember the way back — 00:06:31
+
+A score tells us the price, but how do we recover the actual route? Whenever a score improves, remember which dot supplied that improvement. F remembers E. E remembers D. D remembers B. B remembers C, and C remembers A. Follow those reminders backward and you arrive home. Now reverse the list to get the travel directions. There is no need to try all the routes again. We saved just enough information while improving the numbers.
+
+
+## 13. Walk the winning route — 00:07:06
+
+Let's take the journey ourselves: A to C, C to B, B to D, D to E, and E to F. The connection prices are two, one, five, two, and three. Keep a running total as the packet moves: two, three, eight, ten, thirteen. Five steps beat the three-step route that cost fifteen. A drawing can make one line look short and another look long. The numbers, rather than the shape of our drawing, decide the winner.
+
+
+## 14. What if a connection breaks? — 00:07:43
+
+Now remove the connection between D and E. The old winning route runs straight into a missing line. We cannot repair it simply by pretending the old answer is still true. Update the map and run the same recipe again. Some scores may stay the same, because their routes never needed that connection. Others will change. This is a useful networking lesson: a good set of directions depends on an accurate picture of which connections are available.
+
+
+## 15. Find the new winner — 00:08:19
+
+With that line gone, try A to C to B to D to F. Its prices add to two plus one plus five plus six: fourteen. The route through C and E costs two plus ten plus three: fifteen. Fourteen wins. The updated calculation gives E a score of twelve and F a score of fourteen. We did not invent a special rule for broken connections. We changed the map, then let the same small comparisons find the new answer.
+
+
+## 16. A big answer from small steps — 00:08:56
+
+We began with one message and a few connected dots. A line had a price, a route added those prices, and a score remembered the best total found so far. Dijkstra's method chose the cheapest unfinished score and improved its neighbors, one step at a time. That simple routine revealed a whole route. So next time a winding path beats a tidy shortcut, it will not feel mysterious. More steps can cost less when the steps themselves are cheaper.
 
 
 ---
 
 # Move Two Bits, Create Four Networks
 
-English narration for your own voice. Planned runtime: 00:08:45.
+English narration for your own voice. Planned runtime: 00:09:38.
 
 The browser pauses after each section. The timestamps below refer to the continuous MP4.
 
 
-## 01. One block, four networks — 00:00:00
+## 01. A device needs an address — 00:00:00
 
-Here is a block of two hundred and fifty-six addresses. We want four equal networks, with every address accounted for exactly once. Where should the boundaries go? Guessing decimal numbers makes this feel like a memorization exercise. But the boundaries come from a much simpler picture: some address bits stay fixed, and the others are free to change. We are going to move that dividing line and watch four networks appear.
-
-
-## 02. Expose the thirty-two bits — 00:00:33
-
-An IPv4 address contains thirty-two bits. We normally display them as four decimal numbers separated by dots, with eight bits represented by each number. Those eight-bit groups are called octets. Expand the final octet and the familiar address becomes a row of switches, each either zero or one. The dotted format is useful for reading. The bit view is useful for seeing which combinations belong to the same address block.
+Imagine a small office with several computers. When one computer sends a message, how do the others know who it is for? Each needs an address, a little like a house number. Here we use IPv4 addresses, written as four numbers with dots between them. Watch a message go to the computer marked 192.168.1.20. Our question today is how to divide one collection of these addresses into smaller groups. That division is called subnetting.
 
 
-## 03. Fix the shared beginning — 00:01:06
+## 02. Start with one tiny choice — 00:00:34
 
-In our example, the block is 192.168.1.0 slash twenty-four. Slash twenty-four says that the first twenty-four bit positions are fixed. Every address in the block shares that beginning. The final eight positions can change, giving us different addresses within the block. This boundary is what the prefix describes. It does not mean the address contains a slash bit; the slash is our way of stating how many positions are shared.
-
-
-## 04. Count the free combinations — 00:01:39
-
-Each free bit has two choices. Two free bits make four combinations; three make eight. Keep doubling until eight free bits give two to the power of eight, or two hundred and fifty-six combinations. In the final octet, they run from zero through two hundred and fifty-five. We have counted the entire block, including addresses with special roles. We will assign those roles after dividing the block into its smaller networks.
+Before dividing anything, meet the smallest building block: a bit. A bit can be zero or one. Think of a switch with just two positions. Put eight bits side by side and they can represent one of the numbers in our address. All four numbers together use thirty-two bits. The dots make the address easier for people to read; underneath, it is a row of zeros and ones. We will mostly watch the final eight positions.
 
 
-## 05. One new bit creates halves — 00:02:12
+## 03. Keep the beginning the same — 00:01:10
 
-Move the boundary one position right. The first formerly free bit now identifies which half we mean: zero on one side, one on the other. Each half has seven free bits left, so each contains one hundred and twenty-eight addresses. The total has not changed. We have simply described the original space as two smaller blocks. A longer fixed prefix leaves fewer possibilities inside each individual block.
-
-
-## 06. Two new bits create quarters — 00:02:44
-
-Move the boundary once more. Each half splits in two, giving four groups identified by zero-zero, zero-one, one-zero, and one-one. Two additional fixed bits create two to the power of two subnets. Starting at slash twenty-four and adding two gives slash twenty-six. The prefix length, the number of groups, and the visible split are three views of the same operation. No address has been created or lost along the way.
+Look at these addresses: they all start with 192.168.1, while the last number changes. Those first three numbers use twenty-four bits. If we keep those bits fixed, we get one group with eight positions left to change. We write the group as 192.168.1.0 slash twenty-four. The slash tells us how many beginning bits stay fixed. That shared beginning is called a prefix. It is simply the part every address in this group has in common.
 
 
-## 07. Six bits remain inside each — 00:03:17
+## 04. Count the possible endings — 00:01:45
 
-Each new subnet has six free host bits. Two to the power of six gives sixty-four addresses per subnet. Check the accounting: four subnets multiplied by sixty-four addresses equals our original two hundred and fifty-six. This is a useful way to catch a wrong boundary. If the groups overlap, leave gaps, or contain the wrong number of combinations, their totals will stop matching the space we started with.
-
-
-## 08. Read the four starts — 00:03:49
-
-Keep the six host bits at zero and change only the two subnet bits. Zero-zero begins at zero. Zero-one begins at sixty-four. One-zero begins at one hundred and twenty-eight. One-one begins at one hundred and ninety-two. Those are the four network starts in the final octet. Their spacing is sixty-four because each block contains sixty-four combinations. The decimal pattern comes directly from the binary positions, rather than a separate shortcut to memorize.
+One free bit has two choices: zero or one. Two free bits have four: zero-zero, zero-one, one-zero, one-one. Every extra free bit doubles the choices. Keep doubling until eight bits give two hundred and fifty-six possibilities. We write that as two to the power of eight. The final number can therefore run from zero through two hundred and fifty-five. Zero counts as a possibility too. Now we know the size of the group we are about to divide.
 
 
-## 09. Turn the boundary into a mask — 00:04:23
+## 05. Split the group in half — 00:02:22
 
-A subnet mask marks fixed prefix positions with ones and the remaining positions with zeros. For slash twenty-six, the final octet begins one-one, followed by six zeros. The first two positions have values one hundred and twenty-eight and sixty-four. Add them and the mask's last octet is one hundred and ninety-two. The complete mask is 255.255.255.192. Now the mask and our moving boundary describe exactly the same division.
-
-
-## 10. Find where seventy belongs — 00:04:55
-
-Take the address 192.168.1.70. The final octet, seventy, is 01000110 in binary. Apply the mask 11000000 using bitwise AND. A mask one keeps the corresponding address bit; a zero clears it. The result is 01000000, or sixty-four. So this address belongs to 192.168.1.64 slash twenty-six. We did not search four separate lists. We removed the varying host part and exposed the subnet's shared beginning.
+Take the first of those eight free bits and use it to choose a side. Zero means the left half; one means the right half. Seven bits are still free inside each half, giving one hundred and twenty-eight addresses apiece. Each smaller group now shares twenty-five beginning bits, so we call it slash twenty-five. Nothing new has been added. The same addresses have been sorted into two groups, just as one drawer can be divided into two compartments.
 
 
-## 11. Give the endpoints their jobs — 00:05:25
+## 06. Split each half again — 00:02:58
 
-On an ordinary LAN subnet, the address with all host bits zero identifies the network, and the address with all host bits one is its broadcast address. In a sixty-four-address block, those two roles leave sixty-two addresses for hosts. This is why total addresses and usable host addresses are different counts. We are applying the ordinary LAN convention in this example, rather than claiming that subtracting two is a universal rule for every possible prefix.
-
-
-## 12. Read the first two ranges — 00:06:01
-
-The first block spans zero through sixty-three. Its network is zero, its broadcast is sixty-three, and hosts use one through sixty-two. The second spans sixty-four through one hundred and twenty-seven. Its hosts use sixty-five through one hundred and twenty-six. Notice that this broadcast ends in one hundred and twenty-seven, not two hundred and fifty-five. Broadcast follows the host-bit pattern inside the chosen subnet, not a particular decimal ending.
+Use one more bit to split each half. Now the group labels are zero-zero, zero-one, one-zero, and one-one. Two choices followed by two choices make four groups. These smaller address groups are our subnets. Each shares twenty-six beginning bits, so each is slash twenty-six. This is why moving the boundary just two places turns one network's address block into four smaller blocks. The labels may look technical, but underneath we have only made two yes-or-no choices.
 
 
-## 13. Complete the remaining ranges — 00:06:33
+## 07. Count what each group holds — 00:03:34
 
-The third block spans one hundred and twenty-eight through one hundred and ninety-one, with hosts between one hundred and twenty-nine and one hundred and ninety. The fourth spans one hundred and ninety-two through two hundred and fifty-five, with hosts from one hundred and ninety-three through two hundred and fifty-four. Watch their edges meet. Each block starts immediately after the previous block ends, covering the original parent without an overlap or a missing address.
-
-
-## 14. Choose room for fifty hosts — 00:07:07
-
-Suppose a network needs fifty host addresses. Five free bits give thirty-two total addresses, or thirty ordinary LAN host addresses, which is too small. Six free bits give sixty-four total and sixty-two usable, which fits. Thirty-two minus six leaves a slash-twenty-six prefix. Instead of starting with a memorized mask, we started with the required capacity and counted the combinations needed to accommodate it. The mask follows from that decision.
+We started with eight free positions and used two to choose a group. That leaves six positions to choose addresses inside each group. These are called host bits; a host is a device using an address. Six free bits give sixty-four combinations. Check our work: four groups times sixty-four addresses equals two hundred and fifty-six, exactly where we began. A longer shared beginning makes each individual group smaller, because fewer bits remain free to change.
 
 
-## 15. Check the boundary, not appearances — 00:07:40
+## 08. Find where each group starts — 00:04:09
 
-Compare last-octet values seventy and one hundred. Masking each produces sixty-four, so they share this subnet. Now compare seventy with one hundred and thirty. The latter produces one hundred and twenty-eight, placing it in another subnet. Similar-looking decimal addresses are not the deciding evidence. Their fixed prefix bits are. When a result feels suspicious, return to the boundary and ask which bits were allowed to vary inside the block.
+Put zeros in all six positions inside each group. That gives its first address. Change only the two group bits and watch the starts appear: zero, sixty-four, one hundred and twenty-eight, one hundred and ninety-two. We only show the last number here; 192.168.1 stays the same throughout. Why do the starts jump by sixty-four? Each group occupies sixty-four places. The next group starts immediately after those places finish. We can count the spaces instead of memorizing four special numbers.
 
 
-## 16. Four networks from two bits — 00:08:12
+## 09. Make a stencil for the boundary — 00:04:46
 
-Return to the original block. Two borrowed positions created four subnet prefixes, and six remaining positions created sixty-four addresses in each. The starts, mask, broadcast boundaries, and host counts all came from that same division. They are not five unrelated rules. Subnetting becomes easier when the arithmetic stays connected to the picture: fix a longer beginning, count what remains free, and give each resulting address range its correct role.
+A computer needs a way to mark which bits belong to the shared beginning. We use a mask, like a stencil: ones mark the shared positions, zeros mark the changing positions. Our first twenty-four bits are shared, plus two more in the final group of eight. That last pattern is one-one followed by six zeros. The first two positions are worth one hundred and twenty-eight and sixty-four. Add them to get one hundred and ninety-two. Our mask is 255.255.255.192.
+
+
+## 10. Where does address seventy belong? — 00:05:23
+
+Try the address ending in seventy. In bits, seventy is zero-one-zero-zero-zero-one-one-zero. Place our mask underneath it. Keep an address bit where the mask has a one; replace it with zero where the mask has a zero. This operation is called AND. The answer is zero-one followed by six zeros: sixty-four. So seventy belongs to the group starting at sixty-four. The mask has erased the individual device's part and left the group's starting address behind.
+
+
+## 11. Two addresses have special jobs — 00:05:58
+
+Can we give all sixty-four addresses to computers? In this ordinary local network example, two have other jobs. The first address names the whole subnet. The last is the broadcast address, used for a message addressed to everyone in that subnet. That leaves sixty-two device addresses: sixty-four minus two. Remember what we counted before: total addresses, not just device addresses. Some special network arrangements use different rules, so we are applying this subtraction to our ordinary local network example.
+
+
+## 12. Read the first two groups — 00:06:35
+
+The first group runs from zero to sixty-three. Reserve zero for the network and sixty-three for broadcast. Computers use one through sixty-two. The next group runs from sixty-four to one hundred and twenty-seven. Reserve those endpoints, leaving sixty-five through one hundred and twenty-six for computers. Follow the colored ends of each bar as we name their jobs. Broadcast does not always end in two hundred and fifty-five. It is the final address of the particular subnet we chose.
+
+
+## 13. Finish the address map — 00:07:11
+
+The third group starts at one hundred and twenty-eight and ends at one hundred and ninety-one. Its device addresses sit between those endpoints. The fourth starts at one hundred and ninety-two and ends at two hundred and fifty-five, again with the middle addresses available for devices. Look across all four bars. They fit together without gaps or overlaps. Every address from our original group has a place, and each smaller group follows the same rule for its two endpoints.
+
+
+## 14. Choose enough room for devices — 00:07:48
+
+Suppose one group needs fifty computers. How much room should we leave? Five free bits give thirty-two total addresses. After the two special ones, only thirty remain. Too small. Six free bits give sixty-four total and sixty-two for devices. That fits. An IPv4 address has thirty-two bits, so leaving six free means fixing twenty-six: slash twenty-six. We chose the size by counting the room needed. The slash number followed from that choice, rather than appearing from nowhere.
+
+
+## 15. Check whether two devices match — 00:08:24
+
+Do addresses ending in seventy and one hundred belong together? Our mask sends both to the group starting at sixty-four, so yes. What about seventy and one hundred and thirty? The second one belongs to the group starting at one hundred and twenty-eight. They are in different subnets. This is why the mask matters alongside the address. Seeing the same first three dotted numbers is not enough: our smaller groups share two more bits after those first twenty-four.
+
+
+## 16. One boundary explains the numbers — 00:09:01
+
+We started with computers needing addresses. Those addresses became rows of bits, and bits gave us simple choices. Keep a beginning fixed, then count the endings that can change. Using two more bits for group labels made four subnets, each with sixty-four addresses. The starts, the mask, and the device counts all came from that one division. Subnetting looks like a page of mysterious numbers until you see the picture underneath: one collection, a movable boundary, and smaller groups.
 
 
 ---
 
-# How Does a Download Discover Its Speed?
+# TCP Slow Start: How a Download Learns to Speed Up
 
-English narration for your own voice. Planned runtime: 00:09:45.
+English narration for your own voice. Planned runtime: 00:09:44.
 
 The browser pauses after each section. The timestamps below refer to the continuous MP4.
 
 
-## 01. An unknown road ahead — 00:00:00
+## 01. Send a photo in pieces — 00:00:00
 
-A download is ready to send millions of bytes. Somewhere ahead is a connection that limits how quickly they can pass, but the sender does not begin with a map of its available capacity. Sending everything immediately could overwhelm it. Sending painfully little forever wastes an opportunity. So how does a sender start? Watch the first packets and their returning acknowledgments. They will do more than confirm delivery: they will help pace a growing experiment called TCP slow start.
-
-
-## 02. Separate the limits — 00:00:37
-
-Our picture has a sender, a receiver, and a bottleneck along the path. Assume the receiver has plenty of free buffer space, so its advertised window is not the limit in this story. We are focusing on the sender's congestion window, usually called cwnd. It bounds how many bytes may be outstanding without acknowledgment. That is a quantity of data, not a transmission speed printed on the cable. Keeping those two meanings separate will make the later equation much easier.
+You send a photo to a friend. The network carries its data in smaller pieces instead of one enormous object. Watch one piece leave your computer and arrive at theirs. In this video we will follow TCP, a set of rules computers can use to deliver data reliably. A piece of TCP data is called a segment. Our question: how many pieces should we send before waiting to hear back?
 
 
-## 03. Begin with a small window — 00:01:14
+## 02. How do we know it arrived? — 00:00:33
 
-For our illustration, begin with room for four full-size segments. Four is a teaching choice, not a claim that every TCP connection starts there. Initial-window choices have changed across specifications and implementations. We are also assuming one useful acknowledgment for each new segment and steady round-trip timing. These clean assumptions let us see the mechanism before real network variation blurs it. The sender has more data ready, but only these first four segments are allowed into the experiment.
-
-
-## 04. The first packets leave — 00:01:50
-
-One, two, three, four. The sender puts those segments onto the path, then waits for progress to be confirmed. At this point, there can be four segments of unacknowledged data in flight. They are not travelling on four new cables. They are sharing the same path at different positions. If the sender released its whole file just because the first segment had left its machine, it would be ignoring the very uncertainty slow start is trying to manage.
+Sending something is not the same as knowing it arrived. So the receiving computer sends a small reply meaning, I've received data up to this point. That reply is an acknowledgment, shortened to ACK. Watch blue data go right and a green reply return left. We will draw one reply for each piece to keep the idea clear. Actual TCP can acknowledge several pieces together. The returning replies give the sender evidence of progress instead of making it guess blindly.
 
 
-## 05. An acknowledgment opens space — 00:02:27
+## 03. Leave room for four pieces — 00:01:10
 
-The first acknowledgment comes back. Part of its effect is straightforward: the confirmed data no longer counts as outstanding. There is now room to send a replacement segment within the old window. But slow start also increases the congestion window when new data is acknowledged, subject to its rules. In our simplified full-segment example, it adds one more segment of allowance. One acknowledgment therefore frees old space and helps create new space. That combination is what makes the next round grow.
-
-
-## 06. Four acknowledgments become eight — 00:03:05
-
-Repeat that process for the four initial segments. Each acknowledgment confirms progress and contributes one segment to our illustrative window growth. By the end of this round, cwnd has increased from four segments to eight. The sender can now have twice as much unacknowledged data outstanding. It did not ask a router for an exact bandwidth number. It used successful delivery feedback to expand cautiously from its starting point. The growth is emerging from the acknowledgment rule, not a stopwatch alone.
+Let's begin with an allowance of four pieces. The four empty boxes are spaces for data we have sent but haven't yet had confirmed. This allowance is called the congestion window, often written cwnd. Here, window means a limit, not something on your screen. We chose four for this demonstration; real starting values can differ. Also assume the receiver has plenty of room. That lets us focus on how the sender grows its allowance using feedback from the journey.
 
 
-## 07. The acknowledgment clock — 00:03:43
+## 04. Four pieces, then wait — 00:01:47
 
-Look closely at the returning arrows. Acknowledgments do not just arrive after an abstract round has finished; each one can permit new sending as it arrives. That is an ACK clock. The flow of feedback helps pace the outgoing flow of data. Our round-by-round grouping makes the count easier to follow, but a real sender does not have to wait for all acknowledgments in a batch before doing anything. It reacts as progress arrives.
-
-
-## 08. Why the growth doubles — 00:04:18
-
-After eight segments are acknowledged under our assumptions, the window grows by another eight, reaching sixteen. Then sixteen successful segment acknowledgments can take it to thirty-two. Why doubling? Start with W segments of allowance, add roughly W more over a round trip, and the next round has about two W. The exponential-looking graph is the accumulated result of many small increases. The name slow start sounds modest, but its early growth can become surprisingly quick across several rounds.
+Send piece one. Fill the first box. Send piece two, then three, then four. All four spaces are now occupied. We call this data outstanding: sent, but not yet confirmed by a reply. The sender cannot keep adding pieces beyond its allowance. It waits for progress. That waiting isn't wasted caution. The sender doesn't yet know how much traffic the path can handle. The blue boxes show exactly what it is waiting to hear about.
 
 
-## 09. Turn the pattern into math — 00:04:54
+## 05. One reply makes more room — 00:02:22
 
-We can now write the pattern instead of memorizing it. Starting from four, the idealized window after k complete growth rounds is four times two to the power k. Zero rounds gives four; one gives eight; two gives sixteen; three gives thirty-two. The equation describes the clean picture we just built. Delayed acknowledgments, different growth rules, losses, and application limits can change the actual trace. So use this model to understand the mechanism, rather than as a prediction for every download.
-
-
-## 10. A window is not a rate — 00:05:32
-
-Suppose each segment carries one thousand bytes, to keep the arithmetic visible. A sixteen-segment window holds sixteen thousand bytes of outstanding data. If that much data can be acknowledged every hundred milliseconds, the window supports an average of one hundred sixty thousand bytes per second. Multiply by eight and that is about one point two eight megabits per second. This is a window-limited approximation, not a promise that the path can deliver that rate.
+Now the first green reply arrives. Two things happen. First, one piece is confirmed, so it no longer occupies a space. Second, during our version of slow start, this reply increases the allowance by one piece. Our limit rises from four to five, with three old pieces still unconfirmed. Five spaces minus three occupied spaces leaves room for two new pieces. Watch both spaces open. A reply both clears old work and gives us permission to try a little more.
 
 
-## 11. Distance changes the result — 00:06:07
+## 06. Four replies grow the allowance — 00:03:00
 
-Keep the same sixteen thousand bytes, but double the round-trip time to two hundred milliseconds. The approximate rate halves, because replenishing the same allowance takes twice as long. Now the expression window divided by round-trip time has a visible meaning: an amount of outstanding data, renewed over a period of time. A larger window can help keep a longer path busy, but it cannot force more through a bottleneck than that connection can actually transmit.
-
-
-## 12. When the path cannot keep up — 00:06:42
-
-Our growing train eventually reaches a point where the bottleneck cannot serve arrivals as quickly as they build up. Packets wait, and the feedback reaches the sender later. Congestion may also lead to packet loss or explicit signals. Successful earlier rounds did not prove that unlimited growth would remain safe. They only justified increasing from the earlier operating point. Slow start explores available capacity through feedback; it does not receive advance permission to overfill every buffer on the path.
+Let the other replies come back too. Under our one-reply-per-piece assumption, each adds one space. Starting with four spaces, four replies increase the limit to eight. That's the surprise: we added only one at a time, yet a complete round doubled the allowance. We haven't measured a perfect network speed. We've learned that this batch got through and cautiously allowed more data. The rule is called slow start because it begins with limited data, even though its growth soon becomes rapid.
 
 
-## 13. Give exponential growth a boundary — 00:07:19
+## 07. Replies set the rhythm — 00:03:37
 
-TCP has a slow-start threshold, commonly called ssthresh. While the congestion window is below that threshold, slow-start growth can continue. Reaching the threshold or observing congestion changes what happens next. We will stop our explanation at that boundary, because slow start is one part of a larger congestion-control process. The point is that doubling is not meant to continue forever. The same graph that explains its speed also explains why it needs a stopping condition.
-
-
-## 14. Starting larger changes the early trip — 00:07:54
-
-Try starting with eight segments instead of four in the same idealized example. The growth sequence becomes eight, sixteen, thirty-two. That reaches the thirty-two-segment level one round earlier. A larger initial window can save an early round, but it also begins by placing more unconfirmed data on an unknown path. This is a trade-off, not free speed. Standards and implementations make practical initial-window choices; our animation isolates how that starting choice changes the first few rounds.
+Real replies don't have to arrive as one tidy pile at the end of a round. Watch them return separately. Each reply can make room for more sending immediately. This gives the data a rhythm: progress comes back, more data goes out. People call this the acknowledgment clock. It isn't a separate clock inside the cable. It describes how returning feedback helps pace the sender. Our arrows are deliberately slow so you can follow that cause and effect.
 
 
-## 15. Read a real trace carefully — 00:08:30
+## 08. Watch four become eight — 00:04:14
 
-Before turning this tidy curve into a universal rule, check the assumptions. Does the sender have enough data ready? Does the receiver have room? Are acknowledgments delayed or grouped? Is another bottleneck already limiting the flow? Each can alter what you observe. The congestion window is permission to have data outstanding, rather than an order to send at a smooth rate. The useful explanation survives those complications: confirmed progress helps the sender grow and pace its early traffic.
+Now repeat the experiment with eight pieces. Eight replies can add eight more spaces, making sixteen. Sixteen can then become thirty-two. Look at the dots rising on the graph: four, eight, sixteen, thirty-two. Each step represents a complete ideal growth round, not a fixed second. Twice as many pieces can produce twice as many replies, which can create twice as much room. That's why adding one per reply produces such a fast-growing pattern over several rounds.
 
 
-## 16. Answer the speed puzzle — 00:09:06
+## 09. Write the doubling pattern — 00:04:50
 
-So the sender did not discover a perfect speed setting written somewhere inside the network. It began with limited outstanding data, used acknowledgments to make room and grow that allowance, and stopped the rapid growth when its rules required a transition. The math, the window, and the moving packets were three views of that same feedback process. Slow start is how a connection can begin exploring an uncertain path without treating either permanent caution or an immediate flood as its only option.
+We can write what the picture already showed. Begin with four, then multiply by two once for every completed round. After k rounds, the allowance is four times two to the power k. That power just means repeated multiplication: after two rounds, four times two times two equals sixteen. At zero rounds we still have four. You don't need the formula to discover the pattern; it is a short way to describe the doubling we just watched.
+
+
+## 10. How much per second? — 00:05:26
+
+Does an allowance of sixteen pieces tell us the download speed? Not by itself. We also need the time for data to go out and feedback to return. That's the round-trip time, or RTT. Suppose each piece carries one thousand bytes and a round trip takes one tenth of a second. Sixteen thousand bytes divided by that time gives one hundred sixty thousand bytes per second. Eight bits make a byte, so that's about 1.28 million bits per second.
+
+
+## 11. Waiting longer changes the speed — 00:06:03
+
+Keep those same sixteen spaces, but make the round trip twice as long: two tenths of a second. Reusing the allowance now takes longer, so our estimated rate halves to 0.64 million bits per second. Nothing shrank the boxes. Feedback simply returned more slowly. This estimate assumes the window is the main limit and data keeps flowing. It helps explain why a window size and a rate are different things: one counts how much; the other also includes time.
+
+
+## 12. Too much reaches the narrow link — 00:06:40
+
+Can we keep doubling forever? Watch the narrow link in the middle. A link is one connection along the route. This one can pass data more slowly than the sender now brings it. Pieces start waiting, just like people arriving faster than a door lets them through. This limiting connection is called a bottleneck. More data in the waiting line does not make that connection faster. Eventually the sender needs to change how it grows, rather than doubling without a boundary.
+
+
+## 13. Growth needs a stopping point — 00:07:18
+
+TCP uses a boundary called the slow-start threshold. The short label on the diagram is ssthresh. Below that boundary, slow-start growth can continue. At the boundary, the sender moves to another growth phase. In our picture we chose thirty-two so you can see where the steep curve stops. This is a teaching value, not a number shared by every connection. Loss and other feedback can also change the behavior. Today we're following this opening growth idea, not every TCP rule.
+
+
+## 14. Try a different starting allowance — 00:07:55
+
+Let's change just one starting condition. Begin with eight spaces instead of four. Our ideal sequence is now eight, sixteen, thirty-two. We reach thirty-two one round earlier. A bigger starting allowance can save early waiting, but it also places more data onto a path whose capacity we may not know. The two colored curves make that tradeoff visible. There isn't one magic starting number that makes every network behave the same way under every possible load.
+
+
+## 15. Real downloads vary — 00:08:31
+
+If you record a real download, don't expect every curve to match our neat staircase. Perhaps the app has no more data ready. Perhaps replies confirm several pieces at once. Perhaps the receiver has limited space, or data gets lost along the way. Each changes the picture. Our demonstration deliberately kept these distractions out so one cause was visible: replies can grow the sending allowance. Now you can spot the idea without treating our drawing as a universal stopwatch.
+
+
+## 16. Start small, listen, then grow — 00:09:08
+
+Return to that first photo. We began with small pieces, learned what a reply tells us, and used four spaces to track unconfirmed data. Each successful reply both released space and helped grow the allowance. Over ideal rounds, four became eight, then sixteen. The sender didn't need a sign announcing the perfect speed. It began with a limit and learned from feedback. That is the central idea of TCP slow start: start small, listen to progress, and grow.
 
 
 ---
 
 # A Lock Anyone Can Close, but Only You Can Open
 
-English narration for your own voice. Planned runtime: 00:09:22.
+English narration for your own voice. Planned runtime: 00:09:44.
 
 The browser pauses after each section. The timestamps below refer to the continuous MP4.
 
 
-## 01. The public lock puzzle — 00:00:00
+## 01. Who can read this message? — 00:00:00
 
-Imagine publishing a lock that anyone can use to protect a message for you, while keeping the ability to open it to yourself. That sounds backwards if locking and unlocking require exactly the same secret. RSA makes the two operations different. We will build a tiny numerical example, watch a message change, and then recover it. The numbers are deliberately small enough to see; they are a teaching model, not a secure encryption system.
-
-
-## 02. Easy forward, difficult backward — 00:00:34
-
-The public-key idea begins with an imbalance. Some calculations are easy to perform when you have the inputs, while reversing the result can be much harder without extra information. Multiplying two large primes is straightforward compared with recovering those primes from their product. RSA connects that hidden structure to a reversible message transformation. We will not pretend that multiplying numbers alone encrypts a message. The important part is how the product supports two related exponent operations.
+Suppose you send a friend a private message: meet at seven. On its journey, someone else might see the data. If the message is readable, that person can read it too. So we want to change it into something they cannot understand, then let our friend change it back. That process is encryption. A simple approach uses a shared secret. But here is a puzzle: how do we send privately to someone before we have shared that secret?
 
 
-## 03. Numbers that wrap around — 00:01:10
+## 02. A lock with two different jobs — 00:00:36
 
-Before the keys, meet the arithmetic. On this circle, counting past the final position wraps back to zero. Modulo fifty-five means keeping the remainder after division by fifty-five. Fifty-six lands at one, and one hundred and eleven also lands at one. Very different ordinary numbers can occupy the same position after wrapping. RSA uses this kind of modular arithmetic, so enormous powers can be handled through their remainders rather than written out in full.
-
-
-## 04. Choose two small primes — 00:01:45
-
-Choose five and eleven as our two primes. Their product is fifty-five, which becomes the modulus, n. That number is public. The prime factors are the extra structure we keep private when constructing a real key. Our example is intentionally easy to factor, so do not confuse visible small numbers with actual security. They let us inspect the mechanism. Larger keys make the underlying problem harder, but correct schemes need more than large numbers alone.
+Picture your friend handing out open padlocks while keeping the opening key. Anyone can put a message in a box and snap a lock shut. Only your friend can open it. RSA uses a mathematical version of two different jobs: a public rule for encrypting and a private rule for recovering the message. Computers represent messages as numbers, so our tiny demonstration will protect the number seven. The padlock is an analogy; the real work will be arithmetic.
 
 
-## 05. Count the useful positions — 00:02:20
+## 03. Keep what is left over — 00:01:13
 
-Between zero and fifty-four, some positions share a factor with fifty-five. Highlight multiples of five, then multiples of eleven. The positions left over are relatively prime to fifty-five: their greatest common divisor with it is one. There are forty such positions. For distinct primes, that count is five minus one, multiplied by eleven minus one: four times ten. This count, called phi of n, helps us choose the relationship between the two exponents.
-
-
-## 06. Choose the public exponent — 00:02:54
-
-Let the public exponent e be three. It must have a suitable inverse modulo our count of forty; three and forty are relatively prime, so that inverse exists. Publishing n and e gives the pair fifty-five and three. Someone protecting a message uses the public exponent operation with this modulus. Knowing the public numbers is expected. The system's intended security does not depend on keeping the public algorithm or the public key out of view.
+Before any keys, we need one easy operation: a remainder. Put eleven counters into groups of five. Two full groups use ten counters, leaving one. Eleven divided by five has remainder one. The short mathematical name is modulo: eleven mod five equals one. We will later use groups of fifty-five, but the idea is identical. Keep what is left after removing complete groups. No mysterious new kind of number, just the leftover amount.
 
 
-## 07. Find the matching private exponent — 00:03:29
+## 04. Build the number fifty-five — 00:01:47
 
-We need a private exponent d whose product with three leaves remainder one when divided by forty. Twenty-seven works: three times twenty-seven equals eighty-one, and eighty-one is one plus two times forty. So d is twenty-seven. Keep that relationship in view. The private operation is not an ordinary division by three. These exponents cooperate through modular arithmetic and the structure established by the prime factors, which is why the wrapping picture matters.
-
-
-## 08. Encrypt the message seven — 00:04:03
-
-Represent our message by the number seven. Raise it to the public exponent three: seven cubed is three hundred and forty-three. Divide by fifty-five and keep the remainder. Six lots of fifty-five make three hundred and thirty, leaving thirteen. That thirteen is our ciphertext in this toy example. Anyone with the public pair can perform this calculation. The interesting question is how the private exponent will recover seven from thirteen without ordinary cube-root arithmetic.
+Choose five and eleven. Both are prime numbers: whole numbers greater than one that divide evenly only by one and themselves. Primes act like building blocks for multiplication. Multiply our two choices and we get fifty-five. That becomes the number we will use when keeping remainders. We call it n, simply a short label. Our public instructions will include fifty-five. The two factors, five and eleven, help us build the private instructions. These tiny numbers are for seeing the idea.
 
 
-## 09. Keep the remainder as you go — 00:04:38
+## 05. Find a useful repeating structure — 00:02:24
 
-Huge exponents look intimidating if we imagine writing the entire power first. We do not have to. After a multiplication, keeping the remainder preserves what matters for subsequent modular multiplication. Follow the moving number around the fifty-five-position circle. It wraps, returns, and wraps again, while the remainder stays small. This is the intuition behind efficient modular exponentiation: repeatedly calculate with manageable remainders instead of carrying a giant ordinary integer all the way to the end.
-
-
-## 10. Decrypt using twenty-seven — 00:05:13
-
-Now apply the private exponent: thirteen to the power of twenty-seven, modulo fifty-five. The calculation returns seven. We have recovered the original message using a different exponent from the one that protected it. The public side used three; the private side used twenty-seven. Watch the ciphertext marker return to the message position. That reversal is the behavior our key construction was designed to produce, rather than an accidental property of one unconnected formula.
+Why did we keep those two factors? They help describe a repeating pattern in the remainder arithmetic. Look at the numbers from zero through fifty-four. Cross out multiples of five and multiples of eleven. Forty positions remain. None of those shares a factor with fifty-five except one. For these primes, we can count them as four times ten: forty. Keep that number nearby. We will use its repeating structure to choose two operations that work together, rather than guessing a secret.
 
 
-## 11. Why those exponents cooperate — 00:05:48
+## 06. The public rule repeats a multiplication — 00:03:02
 
-For our message, which is relatively prime to fifty-five, the modular powers follow a repeating structure tied to the forty valid positions. Because the two exponents multiply to one plus a multiple of forty, applying them together returns the starting message. The animation shows that return, while the equation summarizes it. This is intuition for the mechanism, not a full number-theory proof. Our choice of message seven lets the relationship appear cleanly in the small example.
-
-
-## 12. Test the wrong exponent — 00:06:23
-
-Replace the private exponent with a guess. The same ciphertext generally lands somewhere else, rather than returning to seven. This makes the relationship between the exponents visible: the private operation is carefully chosen, not simply any different calculation. In this tiny example someone could quickly try all the possibilities, which is another reason it offers no security. The drawing demonstrates a mathematical construction. It does not demonstrate resistance to a determined attacker using realistic equipment.
+Let our public instruction be: multiply three copies of the message number together, then keep the remainder after dividing by fifty-five. Three copies multiplied together is called the third power, or cubing. We label that power e, and choose e equal to three. The public key is just the pair fifty-five and three. Why this choice? Three and our count of forty share no factor above one, which lets us find a matching private power next.
 
 
-## 13. What the hidden factors reveal — 00:06:58
+## 07. Choose a matching private rule — 00:03:38
 
-If someone factors fifty-five into five and eleven, they can calculate our count of forty and find a matching private exponent. That is why the factorization matters. In real RSA, the public modulus is vastly larger, and recovering its factors is intended to be computationally difficult for classical attackers using appropriate parameters. Factoring is a known way to recover the private information; we are not claiming every imaginable RSA attack must literally follow this exact route.
-
-
-## 14. Textbook numbers are not enough — 00:07:34
-
-Our calculation directly transformed a small message number. Real encryption requires a suitable, carefully specified encoding and padding scheme, along with correct implementations and secure key handling. Repeating these tiny textbook operations is not a recipe for protecting personal messages. Keep the mathematical insight without mistaking the demonstration for deployable cryptography. Publishing a pair of numbers safely depends on the complete scheme, not only on whether a cube followed by another power returns the expected remainder.
+Now find a number which, when multiplied by three, leaves one after removing complete groups of forty. Twenty-seven works. Three times twenty-seven is eighty-one, and eighty-one is forty plus forty plus one. We label the matching private power d, so d is twenty-seven. Notice the important part: this number was chosen to fit the public operation. It is not an unrelated password. The relationship between three, twenty-seven, and forty is what will let the two operations cooperate.
 
 
-## 15. Why this mathematics still matters — 00:08:10
+## 08. Turn seven into thirteen — 00:04:14
 
-Interest in quantum-resistant cryptography makes these assumptions worth understanding. A sufficiently capable future quantum computer could threaten RSA's underlying problem, which is one reason organizations are preparing transitions. That does not mean our video has shown such a computer breaking a deployed key today. The lesson here remains RSA itself: identify what the public operation reveals, what the private structure enables, and which assumptions make the difference between an easy demonstration and a security claim.
+Time to send our tiny message, seven. Follow the public rule: seven times seven times seven is three hundred and forty-three. Remove complete groups of fifty-five. Six groups account for three hundred and thirty, leaving thirteen. That leftover number is the encrypted result, also called ciphertext. Seven has become thirteen. Anyone with the public pair fifty-five and three can perform this forward calculation. We have now watched encryption happen, using only multiplication and keeping a remainder.
 
 
-## 16. Return to the public lock — 00:08:45
+## 09. Keep the numbers manageable — 00:04:50
 
-We can now replace the lock metaphor with something precise. The public pair fifty-five and three transformed seven into thirteen. The private exponent twenty-seven transformed thirteen back into seven. Prime factors helped construct the exponent relationship, and modular arithmetic made the two operations fit together. Anyone can perform the public calculation, while the intended private capability depends on information we keep. The remarkable idea is not hiding the instructions. It is publishing one useful operation without publishing its intended inverse.
+The private rule asks us to use a much bigger power. Must we write an enormous number first? Happily, no. We can keep remainders while calculating. Start with thirteen. Square it, meaning multiply it by itself: one hundred and sixty-nine leaves four after division by fifty-five. Square that four to get sixteen. Square sixteen and keep its remainder, thirty-six. Each step keeps the same useful remainder information while preventing the working numbers from growing without limit.
+
+
+## 10. Bring the message back — 00:05:25
+
+Now use the private power, twenty-seven. We can split it into sixteen plus eight plus two plus one. The boxes show the remainders of thirteen raised to those powers. Multiply those values together, keeping the remainder after each step. Watch the result settle on seven. We recovered the original message. Written compactly, thirteen to the power twenty-seven, mod fifty-five, equals seven. The arithmetic looks longer than encryption, but it uses the same two actions: multiply and keep a remainder.
+
+
+## 11. Why the pair fits together — 00:06:02
+
+The interesting question is why seven returns. For numbers such as seven, which share no factor with fifty-five except one, these powers have a repeating structure linked to our count of forty. Encrypting with power three and decrypting with power twenty-seven combines into power eighty-one. That is one plus two times forty. The matching construction brings us back to the original value. The circle illustrates repetition; it is not a claim that every message takes exactly forty steps to repeat.
+
+
+## 12. Try the wrong private number — 00:06:40
+
+What if we replace twenty-seven with a guess? Use five instead. The same encrypted number thirteen now produces forty-three, not seven. The right side uses twenty-seven and recovers seven. So the private rule is not simply any large number or any secret number. It must fit the public construction. This small experiment does not prove security. It shows what correctness requires: the intended pair must undo the message transformation, while an arbitrary guess generally does not.
+
+
+## 13. What must remain hard? — 00:07:15
+
+Our public key contains fifty-five, but not its two prime factors. If someone discovers five and eleven, they can repeat our private-key construction: calculate forty, then find the matching power twenty-seven. For fifty-five that is easy, which is why this example protects nothing. Real RSA uses far larger carefully generated primes. Multiplying them is practical, while recovering their factors from the product is intended to be difficult. The security depends on such mathematical assumptions and on correct implementation.
+
+
+## 14. The tiny example needs boundaries — 00:07:52
+
+There is another reason not to use our little calculation directly as real encryption. Encrypt seven twice with this bare rule and thirteen appears twice. That visible repetition can leak information. Practical encryption needs a complete, carefully designed encoding scheme that adds the right structure and randomness before the RSA operation. We are looking inside one mathematical mechanism, not building a safe messaging app. The small numbers let us understand the moving parts without pretending that understanding alone makes them secure.
+
+
+## 15. Connect the two kinds of rules — 00:08:30
+
+Step back from the arithmetic. With a shared-secret method, the people communicating must have a suitable secret in common. With this public-key arrangement, the receiving person can publish the encrypting instructions and keep the recovery instructions private. The private key is related to the public key, but should be impractical to derive from it. That last condition matters. Publishing an operation is useful only if seeing how to perform it does not make recovering the private operation easy.
+
+
+## 16. Rebuild the idea from the start — 00:09:06
+
+We wanted to send a private message without first handing the sender our opening secret. The lock picture suggested separate public and private jobs. Our tiny RSA example made those jobs concrete: seven became thirteen using the public pair fifty-five and three; thirteen returned to seven using the private power twenty-seven. Remainders kept the arithmetic inside a limited set of values. The carefully chosen relationship made recovery work. That is the idea beneath RSA: shared public instructions, paired with private recovery.

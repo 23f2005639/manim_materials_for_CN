@@ -1,5 +1,5 @@
-00:00 The puzzle
-01:14 See the mechanism
-04:11 Understand the mathematics
-06:35 Test the idea
-09:01 The answer
+00:00 Build from the beginning
+02:12 See the mechanism
+04:02 Understand the numbers
+06:34 Test the idea
+09:04 The answer

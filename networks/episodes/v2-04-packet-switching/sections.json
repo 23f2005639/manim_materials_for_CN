@@ -1,767 +1,752 @@
 {
   "fps": 30,
-  "frames": 17540,
+  "frames": 17464,
   "sections": [
     {
-      "name": "The elephant and the message",
+      "name": "Begin with a picture to send",
       "frame": 0,
       "type": "default.normal",
-      "notes": "A huge transfer reaches a shared connection just before a tiny message. If the huge transfer holds the connection until its whole message finishes, the small one gets a very long wait. Yet the Internet carries enormous transfers and tiny interactions together. How does it divide their turns? Watch us replace one giant uninterrupted shape with smaller pieces. Those boundaries are not just a drawing choice. They create opportunities for other traffic to use the same physical link.",
+      "notes": "You send a picture to a friend. It appears as one complete image on your screen, so perhaps the Internet carries it as one big object. Here are two computers and a connection between them. Connected devices that exchange information form a network. We call a connection along the way a link. The computers send data: information represented electronically. Our blue rectangle stands for the picture's data. How should it take its turn on that link?",
       "id": "04-01",
-      "chapter": "The puzzle",
-      "animation_end_frame": 207
+      "chapter": "Build from the beginning",
+      "animation_end_frame": 225
     },
     {
-      "name": "Give each piece an identity",
-      "frame": 1096,
+      "name": "Cut the data into manageable pieces",
+      "frame": 1070,
       "type": "default.normal",
-      "notes": "Call each piece a packet. It carries a limited portion of the data, along with information needed to handle that piece. The receiver eventually needs the right content, but the network can now work with individual units instead of waiting for one entire application message. Our path stays fixed. We will not decide how that path was chosen or how an application recovers missing data. Our question is what dividing the transfer changes about sharing and timing.",
+      "notes": "Instead of sending that whole blue rectangle as one uninterrupted unit, divide its data into smaller pieces. Add a little handling information to each, including where it needs to go. That unit is called a packet. Think of several labeled parcels instead of one enormous delivery. The numbers in our drawing help us follow the pieces; they are not a claim that every network packet has a sequence number.",
       "id": "04-02",
-      "chapter": "The puzzle",
-      "animation_end_frame": 1338
+      "chapter": "Build from the beginning",
+      "animation_end_frame": 1307
     },
     {
-      "name": "Sharing happens between packets",
-      "frame": 2179,
+      "name": "Give a second message a turn",
+      "frame": 2046,
       "type": "default.normal",
-      "notes": "Let blue represent the large transfer and green the small message. Blue sends one packet, then green gets a turn before another blue packet. The link is still transmitting one sequence of bits. We did not create two simultaneous exits. What changed is the size of the indivisible turn: the waiting green data no longer needs the entire blue message to finish first. This interleaving is possible sharing, not a promise that every real queue always schedules these colors fairly.",
+      "notes": "Now your friend sends a tiny green message while the blue picture is being sent. If the entire picture took one uninterrupted turn, green would wait for the whole thing. With packets, there is a choice between pieces. Send one blue packet, then green, then more blue. The link still sends one stream of data, but several conversations can share it. Dividing data creates chances to share; it does not guarantee every message an immediate turn.",
       "id": "04-03",
-      "chapter": "See the mechanism",
-      "animation_end_frame": 2611
+      "chapter": "Build from the beginning",
+      "animation_end_frame": 2478
     },
     {
-      "name": "Each packet still occupies time",
-      "frame": 3302,
+      "name": "Zoom into the data being sent",
+      "frame": 3116,
       "type": "default.normal",
-      "notes": "A packet is smaller than the complete transfer, but it is not instantaneous. Its bits must enter the outgoing link one after another. Imagine the packet as a rectangle whose width is its transmission time. Making a smaller rectangle means finishing that turn sooner; making the link faster also makes the rectangle narrower. These are two different ways to reduce the time taken by one transmission. To calculate either change, we need the packet's length and the link's bit rate.",
+      "notes": "Zoom inside one packet. Computers represent information using zeros and ones, called bits. Those bits take time to enter a link. A link's bit rate is how many it can send each second. So two things affect a turn: how many bits the packet contains, and how many bits the link sends per second. More bits mean a longer turn. A higher rate means a shorter one.",
       "id": "04-04",
-      "chapter": "See the mechanism",
-      "animation_end_frame": 3494
+      "chapter": "Build from the beginning",
+      "animation_end_frame": 3407
     },
     {
-      "name": "Build length divided by rate",
-      "frame": 4425,
+      "name": "Calculate the time for one packet",
+      "frame": 4066,
       "type": "default.normal",
-      "notes": "Let L be the number of bits in a packet and R the number of bits the link can transmit each second. Sending L bits takes L divided by R seconds. Our example packet contains fifteen hundred bytes, or twelve thousand bits. On a ten-million-bit-per-second link, that occupies one point two milliseconds. We are calculating transmission time only. Signal travel adds delay, and it is left out of this particular arithmetic.",
+      "notes": "A byte contains eight bits. Our example packet has fifteen hundred bytes, so multiply by eight to get twelve thousand bits. The link sends ten million bits each second. Divide twelve thousand by ten million and we get zero point zero zero one two seconds: one point two milliseconds. A millisecond is one thousandth of a second. The shorthand is L divided by R: length in bits divided by rate. This measures putting data onto the link; signal travel time is extra.",
       "id": "04-05",
       "chapter": "See the mechanism",
-      "animation_end_frame": 4620
+      "animation_end_frame": 4261
     },
     {
-      "name": "Store the packet before forwarding",
-      "frame": 5428,
+      "name": "Add a device along the way",
+      "frame": 5216,
       "type": "default.normal",
-      "notes": "Now add an intermediate switch in our model. It receives the complete packet before starting to send that packet on the next link. This is store-and-forward operation. Follow the blue rectangle: first it finishes arriving, then it begins leaving. The switch can use other forwarding methods in other settings, but keeping this rule explicit lets us reason clearly. A packet's boundary gives this switch a complete unit to receive, hold briefly, and forward toward the next fixed stop.",
+      "notes": "Real journeys can pass through devices between the two computers. Add two forwarding devices, labeled switches, that pass data to the next link. In our model, each waits until a whole packet arrives before sending that packet onward. We call this store-and-forward. The name describes the action: receive it, then pass it on. Watch packet one finish the first step before starting the second. We will keep this path and rule for our experiment.",
       "id": "04-06",
       "chapter": "See the mechanism",
-      "animation_end_frame": 5800
+      "animation_end_frame": 5588
     },
     {
-      "name": "One packet crosses three links",
-      "frame": 6524,
+      "name": "Follow one packet across three links",
+      "frame": 6259,
       "type": "default.normal",
-      "notes": "Place three equal-rate links in a row. Our one packet occupies the first link for one point two milliseconds, then the second, then the third. Ignoring propagation, processing, and competing traffic, its final bit reaches the end after three point six milliseconds. Three links multiplied by one transmission time gives this result because our single packet must finish one store-and-forward step before beginning the next. There is not yet another packet available to overlap any of those steps.",
+      "notes": "Our path now has three links of equal rate. One packet spends one point two milliseconds being sent on the first, then the second, then the third. Add those three turns: three point six milliseconds. For this little experiment, we ignore travel time, device processing, and any other traffic. Those things matter in real life, but hiding them briefly lets us see the pattern. With only one packet, the steps happen in order. What happens if we have several packets ready?",
       "id": "04-07",
       "chapter": "See the mechanism",
-      "animation_end_frame": 6712
+      "animation_end_frame": 6446
     },
     {
-      "name": "Can the empty links work?",
-      "frame": 7620,
+      "name": "Let the first link work again",
+      "frame": 7395,
       "type": "default.normal",
-      "notes": "Now prepare four packets. After the first leaves the source, must the source remain idle until that packet reaches the destination? It does not. The first link is free for packet two while the first packet uses link two. This is the next opportunity created by dividing the message. Different links can handle different packets at the same time. The network becomes a pipeline, with several stages doing useful work during the same interval instead of waiting for one complete journey.",
+      "notes": "Packet one has reached the first switch. It is now being sent on link two. Look back at link one: it is free. Why leave it doing nothing? Send packet two there. A moment later, packet one uses link three, packet two uses link two, and packet three can use link one. Different parts of the path work at once. This is called a pipeline, like several parcels moving through different stations. Each parcel still visits every station in the proper order.",
       "id": "04-08",
-      "chapter": "Understand the mathematics",
-      "animation_end_frame": 7969
+      "chapter": "Understand the numbers",
+      "animation_end_frame": 7744
     },
     {
-      "name": "Fill the pipeline together",
-      "frame": 8756,
+      "name": "Read the moving picture as a timetable",
+      "frame": 8545,
       "type": "default.normal",
-      "notes": "Watch the first three slots. At first, only the first link works. Next, links one and two work on different packets. Then all three links are occupied. Follow the packet colors: simultaneous work does not mean the same packet magically appears everywhere. Each packet still follows the store-and-forward rule. The overlap happens between different packets on different links, just as several items can occupy different stages of a process without any item skipping a stage.",
+      "notes": "Let's draw that motion as a timetable. Each row is one link. Each column is one turn of one point two milliseconds. A colored box shows which packet uses that link during that turn. First, only the top row works. Next, two rows work. Then all three do. Follow one color diagonally: that is one packet moving through its three steps. Follow one column downward: those are different packets moving at the same time.",
       "id": "04-09",
-      "chapter": "Understand the mathematics",
-      "animation_end_frame": 8993
+      "chapter": "Understand the numbers",
+      "animation_end_frame": 8782
     },
     {
-      "name": "Count six slots instead of twelve",
-      "frame": 9812,
+      "name": "Count the turns for four packets",
+      "frame": 9588,
       "type": "default.normal",
-      "notes": "For one packet, the journey needs three transmission slots. Once the pipeline is filled, each additional packet can finish one slot after the previous one. Four packets therefore need three slots for the first, then three more for the remaining packets: six slots total. At one point two milliseconds per slot, that is seven point two milliseconds. Sending each packet through the entire path before starting another would need twelve slots. The improvement comes from overlap, while the individual links keep the same rate.",
+      "notes": "Continue until all four packets arrive. The first packet takes three turns to reach the end. After that, another packet finishes each turn. There are three more packets, so add three more turns: six in total. Six times one point two milliseconds gives seven point two milliseconds. If we waited for each packet's whole journey before starting the next, we would need twelve turns. We simply let separate links do useful work at the same time.",
       "id": "04-10",
-      "chapter": "Understand the mathematics",
-      "animation_end_frame": 10157
+      "chapter": "Understand the numbers",
+      "animation_end_frame": 9933
     },
     {
-      "name": "Read the formula as a picture",
-      "frame": 10988,
+      "name": "Give the pattern a short formula",
+      "frame": 10658,
       "type": "default.normal",
-      "notes": "With N equal packets and H equal-rate links, this ideal pipeline takes N plus H minus one transmission slots. Multiply that count by L divided by R to obtain the total time. The minus one is not a mysterious correction: the first packet is already included when we count the H slots that fill its journey. Unequal rates, propagation, processing, and other traffic change the timing. The formula describes our clean model.",
+      "notes": "Now the formula is just a short version of our counting. Call the number of links H and the number of packets N. The first packet needs H turns. The remaining N minus one packets each add a turn. Together, that is H plus N minus one. Multiply by the time for one turn, L divided by R. That gives our total. It works for this clean model with equal packets and equal-rate links, without extra travel, processing, or traffic delays.",
       "id": "04-11",
-      "chapter": "Understand the mathematics",
-      "animation_end_frame": 11144
+      "chapter": "Understand the numbers",
+      "animation_end_frame": 10814
     },
     {
-      "name": "Traffic does not arrive on schedule",
-      "frame": 12004,
+      "name": "Share a link when messages are ready",
+      "frame": 11794,
       "type": "default.normal",
-      "notes": "Bring back the green message. Sources do not always take neat repeating turns. Some are quiet, some send bursts, and several can suddenly want the same output. Packet switching lets a link carry whichever packets are selected when capacity becomes available, instead of requiring each source to occupy a fixed turn continuously. That flexibility helps share a connection among uneven conversations. It also means we must examine what happens when several ready packets want the same next transmission opportunity.",
+      "notes": "Bring back the green message. Real conversations are uneven. Someone sends a picture, another person pauses, then a new message arrives. Packet switching means the network handles and forwards individual packets, allowing shared links to serve different conversations. A quiet sender need not keep occupying a turn. A ready packet can use the next available opportunity when selected. Two useful effects: different conversations can share one link, and different links can work on different pieces together.",
       "id": "04-12",
       "chapter": "Test the idea",
-      "animation_end_frame": 12362
+      "animation_end_frame": 12152
     },
     {
-      "name": "A queue is the waiting part",
-      "frame": 13114,
+      "name": "Keep the doorway limited",
+      "frame": 12864,
       "type": "default.normal",
-      "notes": "When arrivals reach an output faster than it can transmit, packets wait. Notice the green packet can still be delayed behind blue packets. Packet boundaries create chances for interleaving, but they do not guarantee a perfectly fair schedule, zero waiting, or unlimited capacity. If a finite queue fills, packets can be dropped. Those details limit our opening promise: breaking data into pieces makes flexible sharing possible, but the particular scheduling and available resources determine the experience each packet actually gets.",
+      "notes": "There is a limit. If packets arrive at a device faster than its outgoing link can send them, they form a waiting line, called a queue. Green can still get stuck behind blue. Splitting the picture does not create an endlessly fast connection or a perfectly fair order. If the waiting space fills, a packet may even be discarded. So our claim is modest and useful: packet boundaries give the network manageable turns to share, while actual capacity and queue choices still matter.",
       "id": "04-13",
       "chapter": "Test the idea",
-      "animation_end_frame": 13330
+      "animation_end_frame": 13080
     },
     {
-      "name": "Boundaries have a cost",
-      "frame": 14237,
+      "name": "Notice the extra labels",
+      "frame": 14027,
       "type": "default.normal",
-      "notes": "Making packets tiny seems tempting. Each turn would finish quickly, so perhaps we should use the smallest pieces imaginable. But each packet also carries handling information, and equipment must process those packets. More pieces can mean more overhead for the same useful content. The picture shows that trade-off by keeping the useful blue payload separate from the small header. Packetization is a design choice balancing useful sharing opportunities, transmission efficiency, and the work required to handle individual units.",
+      "notes": "Why not make every piece tiny? Short turns sound wonderful. But remember the handling information added to each packet. That information uses space too. Blue is useful picture data; yellow is the extra label, called a header. Divide the same blue data into more pieces and count the yellow labels. There are more of them. Devices also have more individual packets to handle. Smaller pieces can help sharing, but they are not free. We must balance shorter turns against this extra work.",
       "id": "04-14",
       "chapter": "Test the idea",
-      "animation_end_frame": 14393
+      "animation_end_frame": 14183
     },
     {
-      "name": "Put the useful pieces back together",
-      "frame": 15333,
+      "name": "Meet the pieces at the other end",
+      "frame": 15177,
       "type": "default.normal",
-      "notes": "At the far end, follow the pieces belonging to the blue transfer and the green message. Their journeys shared resources, but their identities remain distinguishable. Recovering the complete application meaning requires the appropriate endpoint mechanisms, which sit outside our timing model. Our network's contribution was to move manageable units between successive links. It never needed the whole blue application message to occupy one continuous end-to-end turn before allowing green data onto the same shared infrastructure.",
+      "notes": "At the destination, the blue pieces belong to the picture and green belongs to the little message. The receiving computer uses the arriving data to recover the content the application needs. Keeping things complete and in order involves other parts of the communication system; packet switching alone does not promise that. Here, all our pieces arrive successfully. Notice the useful trick: the network could move each piece along without giving the entire picture one enormous turn from beginning to end.",
       "id": "04-15",
       "chapter": "Test the idea",
-      "animation_end_frame": 15796
+      "animation_end_frame": 15640
     },
     {
-      "name": "Answer the opening puzzle",
-      "frame": 16389,
+      "name": "Return to the picture we sent",
+      "frame": 16300,
       "type": "default.normal",
-      "notes": "The tiny message escaped the elephant's full turn because the elephant was divided into packets. That created shorter opportunities for sharing. It also let different packets occupy successive links at once, turning a chain of transmissions into a pipeline. Queues, overhead, and finite rates still matter, so packet switching is not a trick for unlimited speed. Its power is more practical: many uneven conversations can share links in small units, while each link keeps doing one clear transmission job at a time.",
+      "notes": "We began with one picture on a screen. Breaking its data into packets gave us shorter turns on a shared link. Those pieces also let several links work at once, just like the stations in our parcel line. We still pay for headers, we can still wait in queues, and every link has a limit. But now a big picture and a tiny message can use the same network in manageable pieces. The Internet's useful trick starts with something simple: divide the work.",
       "id": "04-16",
       "chapter": "The answer",
-      "animation_end_frame": 16628
+      "animation_end_frame": 16538
     }
   ],
   "captions": [
     [
       0.0,
-      4.566666666666666,
-      "A huge transfer reaches a shared connection\njust before a tiny"
+      5.095238095238095,
+      "You send a picture to a friend. It appears as\none"
     ],
     [
-      4.566666666666666,
-      9.133333333333333,
-      "message. If the huge transfer holds the\nconnection until its whole"
+      5.095238095238095,
+      10.19047619047619,
+      "complete image on your screen, so perhaps the\nInternet carries it"
     ],
     [
-      9.133333333333333,
-      13.7,
-      "message finishes, the small one gets a very\nlong wait. Yet"
+      10.19047619047619,
+      15.285714285714286,
+      "as one big object. Here are two computers and\na connection"
     ],
     [
-      13.7,
-      18.266666666666666,
-      "the Internet carries enormous transfers and\ntiny interactions together. How does"
+      15.285714285714286,
+      20.38095238095238,
+      "between them. Connected devices that exchange\ninformation form a network. We"
     ],
     [
-      18.266666666666666,
-      22.833333333333332,
-      "it divide their turns? Watch us replace one\ngiant uninterrupted shape"
+      20.38095238095238,
+      25.476190476190474,
+      "call a connection along the way a link. The\ncomputers send"
     ],
     [
-      22.833333333333332,
-      27.4,
-      "with smaller pieces. Those boundaries are not\njust a drawing choice."
+      25.476190476190474,
+      30.571428571428573,
+      "data: information represented electronically.\nOur blue rectangle stands for the picture's"
     ],
     [
-      27.4,
-      31.966666666666665,
-      "They create opportunities for other traffic to\nuse the same physical"
+      30.571428571428573,
+      35.666666666666664,
+      "data. How should it take its turn on that\nlink?"
     ],
     [
-      31.966666666666665,
-      36.53333333333333,
-      "link."
+      35.666666666666664,
+      40.31428571428571,
+      "Instead of sending that whole blue rectangle\nas one uninterrupted unit,"
     ],
     [
-      36.53333333333333,
-      41.69047619047619,
-      "Call each piece a packet. It carries a limited\nportion of"
+      40.31428571428571,
+      44.96190476190476,
+      "divide its data into smaller pieces. Add a\nlittle handling information"
     ],
     [
-      41.69047619047619,
-      46.84761904761905,
-      "the data, along with information needed to\nhandle that piece. The"
+      44.96190476190476,
+      49.60952380952381,
+      "to each, including where it needs to go. That\nunit is"
     ],
     [
-      46.84761904761905,
-      52.00476190476191,
-      "receiver eventually needs the right content,\nbut the network can now"
+      49.60952380952381,
+      54.25714285714285,
+      "called a packet. Think of several labeled\nparcels instead of one"
     ],
     [
-      52.00476190476191,
-      57.161904761904765,
-      "work with individual units instead of waiting\nfor one entire application"
+      54.25714285714285,
+      58.904761904761905,
+      "enormous delivery. The numbers in our drawing\nhelp us follow the"
     ],
     [
-      57.161904761904765,
-      62.31904761904762,
-      "message. Our path stays fixed. We will not\ndecide how that"
+      58.904761904761905,
+      63.55238095238096,
+      "pieces; they are not a claim that every\nnetwork packet has"
     ],
     [
-      62.31904761904762,
-      67.47619047619048,
-      "path was chosen or how an application recovers\nmissing data. Our"
+      63.55238095238096,
+      68.2,
+      "a sequence number."
     ],
     [
-      67.47619047619048,
-      72.63333333333334,
-      "question is what dividing the transfer changes\nabout sharing and timing."
+      68.2,
+      73.29523809523809,
+      "Now your friend sends a tiny green message\nwhile the blue"
     ],
     [
-      72.63333333333334,
-      77.3125,
-      "Let blue represent the large transfer and\ngreen the small message."
+      73.29523809523809,
+      78.39047619047619,
+      "picture is being sent. If the entire picture\ntook one uninterrupted"
     ],
     [
-      77.3125,
-      81.99166666666667,
-      "Blue sends one packet, then green gets a turn\nbefore another"
+      78.39047619047619,
+      83.48571428571428,
+      "turn, green would wait for the whole thing.\nWith packets, there"
     ],
     [
-      81.99166666666667,
-      86.67083333333333,
-      "blue packet. The link is still transmitting\none sequence of bits."
+      83.48571428571428,
+      88.58095238095238,
+      "is a choice between pieces. Send one blue\npacket, then green,"
     ],
     [
-      86.67083333333333,
-      91.35,
-      "We did not create two simultaneous exits. What\nchanged is the"
+      88.58095238095238,
+      93.67619047619047,
+      "then more blue. The link still sends one\nstream of data,"
     ],
     [
-      91.35,
-      96.02916666666667,
-      "size of the indivisible turn: the waiting\ngreen data no longer"
+      93.67619047619047,
+      98.77142857142857,
+      "but several conversations can share it.\nDividing data creates chances to"
     ],
     [
-      96.02916666666667,
-      100.70833333333333,
-      "needs the entire blue message to finish first.\nThis interleaving is"
+      98.77142857142857,
+      103.86666666666666,
+      "share; it does not guarantee every message an\nimmediate turn."
     ],
     [
-      100.70833333333333,
-      105.38749999999999,
-      "possible sharing, not a promise that every\nreal queue always schedules"
+      103.86666666666666,
+      108.39047619047618,
+      "Zoom inside one packet. Computers represent\ninformation using zeros and ones,"
     ],
     [
-      105.38749999999999,
-      110.06666666666666,
-      "these colors fairly."
+      108.39047619047618,
+      112.91428571428571,
+      "called bits. Those bits take time to enter a\nlink. A"
     ],
     [
-      110.06666666666666,
-      114.74583333333334,
-      "A packet is smaller than the complete\ntransfer, but it is"
+      112.91428571428571,
+      117.43809523809523,
+      "link's bit rate is how many it can send each\nsecond."
     ],
     [
-      114.74583333333334,
-      119.425,
-      "not instantaneous. Its bits must enter the\noutgoing link one after"
+      117.43809523809523,
+      121.96190476190476,
+      "So two things affect a turn: how many bits the\npacket"
     ],
     [
-      119.425,
-      124.10416666666666,
-      "another. Imagine the packet as a rectangle\nwhose width is its"
+      121.96190476190476,
+      126.48571428571428,
+      "contains, and how many bits the link sends per\nsecond. More"
     ],
     [
-      124.10416666666666,
-      128.78333333333333,
-      "transmission time. Making a smaller rectangle\nmeans finishing that turn sooner;"
+      126.48571428571428,
+      131.0095238095238,
+      "bits mean a longer turn. A higher rate means a\nshorter"
     ],
     [
-      128.78333333333333,
-      133.4625,
-      "making the link faster also makes the\nrectangle narrower. These are"
+      131.0095238095238,
+      135.53333333333333,
+      "one."
     ],
     [
-      133.4625,
-      138.14166666666665,
-      "two different ways to reduce the time taken by\none transmission."
+      135.53333333333333,
+      140.325,
+      "A byte contains eight bits. Our example packet\nhas fifteen hundred"
     ],
     [
-      138.14166666666665,
-      142.82083333333333,
-      "To calculate either change, we need the\npacket's length and the"
+      140.325,
+      145.11666666666667,
+      "bytes, so multiply by eight to get twelve\nthousand bits. The"
     ],
     [
-      142.82083333333333,
-      147.5,
-      "link's bit rate."
+      145.11666666666667,
+      149.90833333333333,
+      "link sends ten million bits each second.\nDivide twelve thousand by"
     ],
     [
-      147.5,
-      152.27619047619046,
-      "Let L be the number of bits in a packet and"
+      149.90833333333333,
+      154.7,
+      "ten million and we get zero point zero zero\none two"
     ],
     [
-      152.27619047619046,
-      157.05238095238096,
-      "R the number of bits the link can transmit\neach second."
+      154.7,
+      159.49166666666667,
+      "seconds: one point two milliseconds. A\nmillisecond is one thousandth of"
     ],
     [
-      157.05238095238096,
-      161.82857142857142,
-      "Sending L bits takes L divided by R seconds.\nOur example"
+      159.49166666666667,
+      164.28333333333333,
+      "a second. The shorthand is L divided by R:\nlength in"
     ],
     [
-      161.82857142857142,
-      166.60476190476192,
-      "packet contains fifteen hundred bytes, or\ntwelve thousand bits. On a"
+      164.28333333333333,
+      169.075,
+      "bits divided by rate. This measures putting\ndata onto the link;"
     ],
     [
-      166.60476190476192,
-      171.38095238095238,
-      "ten-million-bit-per-second link, that occupies\none point two milliseconds. We are calculating"
+      169.075,
+      173.86666666666667,
+      "signal travel time is extra."
     ],
     [
-      171.38095238095238,
-      176.15714285714287,
-      "transmission time only. Signal travel adds\ndelay, and it is left"
+      173.86666666666667,
+      178.83333333333334,
+      "Real journeys can pass through devices between\nthe two computers. Add"
     ],
     [
-      176.15714285714287,
-      180.93333333333334,
-      "out of this particular arithmetic."
+      178.83333333333334,
+      183.8,
+      "two forwarding devices, labeled switches, that\npass data to the next"
     ],
     [
-      180.93333333333334,
-      185.5,
-      "Now add an intermediate switch in our model.\nIt receives the"
+      183.8,
+      188.76666666666668,
+      "link. In our model, each waits until a whole\npacket arrives"
     ],
     [
-      185.5,
-      190.06666666666666,
-      "complete packet before starting to send that\npacket on the next"
+      188.76666666666668,
+      193.73333333333332,
+      "before sending that packet onward. We call\nthis store-and-forward. The name"
     ],
     [
-      190.06666666666666,
-      194.63333333333333,
-      "link. This is store-and-forward operation.\nFollow the blue rectangle: first it"
+      193.73333333333332,
+      198.7,
+      "describes the action: receive it, then pass it\non. Watch packet"
     ],
     [
-      194.63333333333333,
-      199.2,
-      "finishes arriving, then it begins leaving. The\nswitch can use other"
+      198.7,
+      203.66666666666666,
+      "one finish the first step before starting the\nsecond. We will"
     ],
     [
-      199.2,
-      203.76666666666668,
-      "forwarding methods in other settings, but\nkeeping this rule explicit lets"
+      203.66666666666666,
+      208.63333333333333,
+      "keep this path and rule for our experiment."
     ],
     [
-      203.76666666666668,
-      208.33333333333334,
-      "us reason clearly. A packet's boundary gives\nthis switch a complete"
+      208.63333333333333,
+      213.36666666666667,
+      "Our path now has three links of equal rate.\nOne packet"
     ],
     [
-      208.33333333333334,
-      212.9,
-      "unit to receive, hold briefly, and forward\ntoward the next fixed"
+      213.36666666666667,
+      218.1,
+      "spends one point two milliseconds being sent\non the first, then"
     ],
     [
-      212.9,
-      217.46666666666667,
-      "stop."
+      218.1,
+      222.83333333333331,
+      "the second, then the third. Add those three\nturns: three point"
     ],
     [
-      217.46666666666667,
-      222.03333333333333,
-      "Place three equal-rate links in a row. Our one\npacket occupies"
+      222.83333333333331,
+      227.56666666666666,
+      "six milliseconds. For this little experiment,\nwe ignore travel time, device"
     ],
     [
-      222.03333333333333,
-      226.6,
-      "the first link for one point two milliseconds,\nthen the second,"
+      227.56666666666666,
+      232.3,
+      "processing, and any other traffic. Those\nthings matter in real life,"
     ],
     [
-      226.6,
-      231.16666666666666,
-      "then the third. Ignoring propagation,\nprocessing, and competing traffic, its final"
+      232.3,
+      237.03333333333333,
+      "but hiding them briefly lets us see the\npattern. With only"
     ],
     [
-      231.16666666666666,
-      235.73333333333335,
-      "bit reaches the end after three point six\nmilliseconds. Three links"
+      237.03333333333333,
+      241.76666666666665,
+      "one packet, the steps happen in order. What\nhappens if we"
     ],
     [
-      235.73333333333335,
-      240.3,
-      "multiplied by one transmission time gives this\nresult because our single"
+      241.76666666666665,
+      246.5,
+      "have several packets ready?"
     ],
     [
-      240.3,
-      244.86666666666667,
-      "packet must finish one store-and-forward step\nbefore beginning the next. There"
+      246.5,
+      251.29166666666666,
+      "Packet one has reached the first switch. It is\nnow being"
     ],
     [
-      244.86666666666667,
-      249.43333333333334,
-      "is not yet another packet available to overlap\nany of those"
+      251.29166666666666,
+      256.0833333333333,
+      "sent on link two. Look back at link one: it is"
     ],
     [
-      249.43333333333334,
-      254.0,
-      "steps."
+      256.0833333333333,
+      260.875,
+      "free. Why leave it doing nothing? Send packet\ntwo there. A"
     ],
     [
-      254.0,
-      258.73333333333335,
-      "Now prepare four packets. After the first\nleaves the source, must"
+      260.875,
+      265.66666666666663,
+      "moment later, packet one uses link three,\npacket two uses link"
     ],
     [
-      258.73333333333335,
-      263.4666666666667,
-      "the source remain idle until that packet\nreaches the destination? It"
+      265.66666666666663,
+      270.4583333333333,
+      "two, and packet three can use link one.\nDifferent parts of"
     ],
     [
-      263.4666666666667,
-      268.2,
-      "does not. The first link is free for packet\ntwo while"
+      270.4583333333333,
+      275.25,
+      "the path work at once. This is called a\npipeline, like"
     ],
     [
-      268.2,
-      272.93333333333334,
-      "the first packet uses link two. This is the\nnext opportunity"
+      275.25,
+      280.04166666666663,
+      "several parcels moving through different\nstations. Each parcel still visits every"
     ],
     [
-      272.93333333333334,
-      277.6666666666667,
-      "created by dividing the message. Different\nlinks can handle different packets"
+      280.04166666666663,
+      284.8333333333333,
+      "station in the proper order."
     ],
     [
-      277.6666666666667,
-      282.4,
-      "at the same time. The network becomes a\npipeline, with several"
+      284.8333333333333,
+      289.8,
+      "Let's draw that motion as a timetable. Each\nrow is one"
     ],
     [
-      282.4,
-      287.1333333333333,
-      "stages doing useful work during the same\ninterval instead of waiting"
+      289.8,
+      294.76666666666665,
+      "link. Each column is one turn of one point two\nmilliseconds."
     ],
     [
-      287.1333333333333,
-      291.8666666666667,
-      "for one complete journey."
+      294.76666666666665,
+      299.73333333333335,
+      "A colored box shows which packet uses that\nlink during that"
     ],
     [
-      291.8666666666667,
-      296.8952380952381,
-      "Watch the first three slots. At first, only\nthe first link"
+      299.73333333333335,
+      304.7,
+      "turn. First, only the top row works. Next, two\nrows work."
     ],
     [
-      296.8952380952381,
-      301.92380952380955,
-      "works. Next, links one and two work on\ndifferent packets. Then"
+      304.7,
+      309.6666666666667,
+      "Then all three do. Follow one color\ndiagonally: that is one"
     ],
     [
-      301.92380952380955,
-      306.95238095238096,
-      "all three links are occupied. Follow the\npacket colors: simultaneous work"
+      309.6666666666667,
+      314.6333333333333,
+      "packet moving through its three steps. Follow\none column downward: those"
     ],
     [
-      306.95238095238096,
-      311.9809523809524,
-      "does not mean the same packet magically\nappears everywhere. Each packet"
+      314.6333333333333,
+      319.6,
+      "are different packets moving at the same time."
     ],
     [
-      311.9809523809524,
-      317.0095238095238,
-      "still follows the store-and-forward rule. The\noverlap happens between different packets"
+      319.6,
+      324.6952380952381,
+      "Continue until all four packets arrive. The\nfirst packet takes three"
     ],
     [
-      317.0095238095238,
-      322.03809523809525,
-      "on different links, just as several items can\noccupy different stages"
+      324.6952380952381,
+      329.7904761904762,
+      "turns to reach the end. After that, another\npacket finishes each"
     ],
     [
-      322.03809523809525,
-      327.06666666666666,
-      "of a process without any item skipping a\nstage."
+      329.7904761904762,
+      334.8857142857143,
+      "turn. There are three more packets, so add\nthree more turns:"
     ],
     [
-      327.06666666666666,
-      331.96666666666664,
-      "For one packet, the journey needs three\ntransmission slots. Once the"
+      334.8857142857143,
+      339.9809523809524,
+      "six in total. Six times one point two\nmilliseconds gives seven"
     ],
     [
-      331.96666666666664,
-      336.8666666666667,
-      "pipeline is filled, each additional packet can\nfinish one slot after"
+      339.9809523809524,
+      345.07619047619045,
+      "point two milliseconds. If we waited for each\npacket's whole journey"
     ],
     [
-      336.8666666666667,
-      341.76666666666665,
-      "the previous one. Four packets therefore need\nthree slots for the"
+      345.07619047619045,
+      350.1714285714286,
+      "before starting the next, we would need twelve\nturns. We simply"
     ],
     [
-      341.76666666666665,
-      346.66666666666663,
-      "first, then three more for the remaining\npackets: six slots total."
+      350.1714285714286,
+      355.26666666666665,
+      "let separate links do useful work at the same\ntime."
     ],
     [
-      346.66666666666663,
-      351.56666666666666,
-      "At one point two milliseconds per slot, that\nis seven point"
+      355.26666666666665,
+      360.0,
+      "Now the formula is just a short version of our\ncounting."
     ],
     [
-      351.56666666666666,
-      356.46666666666664,
-      "two milliseconds. Sending each packet through\nthe entire path before starting"
+      360.0,
+      364.73333333333335,
+      "Call the number of links H and the number of\npackets"
     ],
     [
-      356.46666666666664,
-      361.3666666666667,
-      "another would need twelve slots. The\nimprovement comes from overlap, while"
+      364.73333333333335,
+      369.46666666666664,
+      "N. The first packet needs H turns. The\nremaining N minus"
     ],
     [
-      361.3666666666667,
-      366.26666666666665,
-      "the individual links keep the same rate."
+      369.46666666666664,
+      374.2,
+      "one packets each add a turn. Together, that is\nH plus"
     ],
     [
-      366.26666666666665,
-      371.1047619047619,
-      "With N equal packets and H equal-rate links,\nthis ideal pipeline"
+      374.2,
+      378.93333333333334,
+      "N minus one. Multiply by the time for one\nturn, L"
     ],
     [
-      371.1047619047619,
-      375.9428571428571,
-      "takes N plus H minus one transmission slots.\nMultiply that count"
+      378.93333333333334,
+      383.66666666666663,
+      "divided by R. That gives our total. It works\nfor this"
     ],
     [
-      375.9428571428571,
-      380.7809523809524,
-      "by L divided by R to obtain the total time.\nThe"
+      383.66666666666663,
+      388.4,
+      "clean model with equal packets and equal-rate\nlinks, without extra travel,"
     ],
     [
-      380.7809523809524,
-      385.6190476190476,
-      "minus one is not a mysterious correction: the\nfirst packet is"
+      388.4,
+      393.1333333333333,
+      "processing, or traffic delays."
     ],
     [
-      385.6190476190476,
-      390.45714285714286,
-      "already included when we count the H slots\nthat fill its"
+      393.1333333333333,
+      398.2285714285714,
+      "Bring back the green message. Real\nconversations are uneven. Someone sends"
     ],
     [
-      390.45714285714286,
-      395.29523809523806,
-      "journey. Unequal rates, propagation,\nprocessing, and other traffic change the\ntiming."
+      398.2285714285714,
+      403.32380952380953,
+      "a picture, another person pauses, then a new\nmessage arrives. Packet"
     ],
     [
-      395.29523809523806,
-      400.1333333333333,
-      "The formula describes our clean model."
+      403.32380952380953,
+      408.4190476190476,
+      "switching means the network handles and\nforwards individual packets, allowing shared"
     ],
     [
-      400.1333333333333,
-      404.7583333333333,
-      "Bring back the green message. Sources do not\nalways take neat"
+      408.4190476190476,
+      413.51428571428573,
+      "links to serve different conversations. A\nquiet sender need not keep"
     ],
     [
-      404.7583333333333,
-      409.3833333333333,
-      "repeating turns. Some are quiet, some send\nbursts, and several can"
+      413.51428571428573,
+      418.6095238095238,
+      "occupying a turn. A ready packet can use the\nnext available"
     ],
     [
-      409.3833333333333,
-      414.0083333333333,
-      "suddenly want the same output. Packet\nswitching lets a link carry"
+      418.6095238095238,
+      423.70476190476194,
+      "opportunity when selected. Two useful effects:\ndifferent conversations can share one"
     ],
     [
-      414.0083333333333,
-      418.6333333333333,
-      "whichever packets are selected when capacity\nbecomes available, instead of requiring"
+      423.70476190476194,
+      428.8,
+      "link, and different links can work on\ndifferent pieces together."
     ],
     [
-      418.6333333333333,
-      423.2583333333333,
-      "each source to occupy a fixed turn\ncontinuously. That flexibility helps"
+      428.8,
+      433.64583333333337,
+      "There is a limit. If packets arrive at a\ndevice faster"
     ],
     [
-      423.2583333333333,
-      427.8833333333333,
-      "share a connection among uneven conversations.\nIt also means we must"
+      433.64583333333337,
+      438.4916666666667,
+      "than its outgoing link can send them, they\nform a waiting"
     ],
     [
-      427.8833333333333,
-      432.5083333333333,
-      "examine what happens when several ready\npackets want the same next"
+      438.4916666666667,
+      443.3375,
+      "line, called a queue. Green can still get\nstuck behind blue."
     ],
     [
-      432.5083333333333,
-      437.1333333333333,
-      "transmission opportunity."
+      443.3375,
+      448.18333333333334,
+      "Splitting the picture does not create an\nendlessly fast connection or"
     ],
     [
-      437.1333333333333,
-      441.8125,
-      "When arrivals reach an output faster than it\ncan transmit, packets"
+      448.18333333333334,
+      453.0291666666667,
+      "a perfectly fair order. If the waiting space\nfills, a packet"
     ],
     [
-      441.8125,
-      446.4916666666667,
-      "wait. Notice the green packet can still be\ndelayed behind blue"
+      453.0291666666667,
+      457.875,
+      "may even be discarded. So our claim is modest\nand useful:"
     ],
     [
-      446.4916666666667,
-      451.17083333333335,
-      "packets. Packet boundaries create chances for\ninterleaving, but they do not"
+      457.875,
+      462.7208333333333,
+      "packet boundaries give the network manageable\nturns to share, while actual"
     ],
     [
-      451.17083333333335,
-      455.85,
-      "guarantee a perfectly fair schedule, zero\nwaiting, or unlimited capacity. If"
+      462.7208333333333,
+      467.56666666666666,
+      "capacity and queue choices still matter."
     ],
     [
-      455.85,
-      460.52916666666664,
-      "a finite queue fills, packets can be dropped.\nThose details limit"
+      467.56666666666666,
+      472.35833333333335,
+      "Why not make every piece tiny? Short turns\nsound wonderful. But"
     ],
     [
-      460.52916666666664,
-      465.2083333333333,
-      "our opening promise: breaking data into pieces\nmakes flexible sharing possible,"
+      472.35833333333335,
+      477.15,
+      "remember the handling information added to\neach packet. That information uses"
     ],
     [
-      465.2083333333333,
-      469.8875,
-      "but the particular scheduling and available\nresources determine the experience each"
+      477.15,
+      481.94166666666666,
+      "space too. Blue is useful picture data; yellow\nis the extra"
     ],
     [
-      469.8875,
-      474.56666666666666,
-      "packet actually gets."
+      481.94166666666666,
+      486.73333333333335,
+      "label, called a header. Divide the same blue\ndata into more"
     ],
     [
-      474.56666666666666,
-      479.1333333333333,
-      "Making packets tiny seems tempting. Each turn\nwould finish quickly, so"
+      486.73333333333335,
+      491.525,
+      "pieces and count the yellow labels. There are\nmore of them."
     ],
     [
-      479.1333333333333,
-      483.7,
-      "perhaps we should use the smallest pieces\nimaginable. But each packet"
+      491.525,
+      496.31666666666666,
+      "Devices also have more individual packets to\nhandle. Smaller pieces can"
     ],
     [
-      483.7,
-      488.26666666666665,
-      "also carries handling information, and\nequipment must process those packets. More"
+      496.31666666666666,
+      501.1083333333333,
+      "help sharing, but they are not free. We must\nbalance shorter"
     ],
     [
-      488.26666666666665,
-      492.83333333333337,
-      "pieces can mean more overhead for the same\nuseful content. The"
+      501.1083333333333,
+      505.9,
+      "turns against this extra work."
     ],
     [
-      492.83333333333337,
-      497.40000000000003,
-      "picture shows that trade-off by keeping the\nuseful blue payload separate"
+      505.9,
+      510.57916666666665,
+      "At the destination, the blue pieces belong to\nthe picture and"
     ],
     [
-      497.40000000000003,
-      501.9666666666667,
-      "from the small header. Packetization is a\ndesign choice balancing useful"
+      510.57916666666665,
+      515.2583333333333,
+      "green belongs to the little message. The\nreceiving computer uses the"
     ],
     [
-      501.9666666666667,
-      506.53333333333336,
-      "sharing opportunities, transmission\nefficiency, and the work required to handle\nindividual"
+      515.2583333333333,
+      519.9375,
+      "arriving data to recover the content the\napplication needs. Keeping things"
     ],
     [
-      506.53333333333336,
-      511.1,
-      "units."
+      519.9375,
+      524.6166666666667,
+      "complete and in order involves other parts of\nthe communication system;"
     ],
     [
-      511.1,
-      516.1285714285715,
-      "At the far end, follow the pieces belonging to\nthe blue"
+      524.6166666666667,
+      529.2958333333333,
+      "packet switching alone does not promise that.\nHere, all our pieces"
     ],
     [
-      516.1285714285715,
-      521.1571428571428,
-      "transfer and the green message. Their journeys\nshared resources, but their"
+      529.2958333333333,
+      533.975,
+      "arrive successfully. Notice the useful trick:\nthe network could move each"
     ],
     [
-      521.1571428571428,
-      526.1857142857143,
-      "identities remain distinguishable. Recovering\nthe complete application meaning requires the\nappropriate"
+      533.975,
+      538.6541666666667,
+      "piece along without giving the entire picture\none enormous turn from"
     ],
     [
-      526.1857142857143,
-      531.2142857142857,
-      "endpoint mechanisms, which sit outside our\ntiming model. Our network's contribution"
+      538.6541666666667,
+      543.3333333333334,
+      "beginning to end."
     ],
     [
-      531.2142857142857,
-      536.2428571428571,
-      "was to move manageable units between\nsuccessive links. It never needed"
+      543.3333333333334,
+      548.1791666666667,
+      "We began with one picture on a screen.\nBreaking its data"
     ],
     [
-      536.2428571428571,
-      541.2714285714285,
-      "the whole blue application message to occupy\none continuous end-to-end turn"
+      548.1791666666667,
+      553.0250000000001,
+      "into packets gave us shorter turns on a shared\nlink. Those"
     ],
     [
-      541.2714285714285,
-      546.3,
-      "before allowing green data onto the same\nshared infrastructure."
+      553.0250000000001,
+      557.8708333333334,
+      "pieces also let several links work at once,\njust like the"
     ],
     [
-      546.3,
-      551.0916666666666,
-      "The tiny message escaped the elephant's full\nturn because the elephant"
+      557.8708333333334,
+      562.7166666666667,
+      "stations in our parcel line. We still pay for\nheaders, we"
     ],
     [
-      551.0916666666666,
-      555.8833333333333,
-      "was divided into packets. That created shorter\nopportunities for sharing. It"
+      562.7166666666667,
+      567.5625,
+      "can still wait in queues, and every link has a\nlimit."
     ],
     [
-      555.8833333333333,
-      560.675,
-      "also let different packets occupy successive\nlinks at once, turning a"
+      567.5625,
+      572.4083333333333,
+      "But now a big picture and a tiny message can\nuse"
     ],
     [
-      560.675,
-      565.4666666666667,
-      "chain of transmissions into a pipeline.\nQueues, overhead, and finite rates"
+      572.4083333333333,
+      577.2541666666667,
+      "the same network in manageable pieces. The\nInternet's useful trick starts"
     ],
     [
-      565.4666666666667,
-      570.2583333333333,
-      "still matter, so packet switching is not a\ntrick for unlimited"
-    ],
-    [
-      570.2583333333333,
-      575.05,
-      "speed. Its power is more practical: many\nuneven conversations can share"
-    ],
-    [
-      575.05,
-      579.8416666666667,
-      "links in small units, while each link keeps\ndoing one clear"
-    ],
-    [
-      579.8416666666667,
-      584.6333333333333,
-      "transmission job at a time."
+      577.2541666666667,
+      582.1,
+      "with something simple: divide the work."
     ]
   ],
   "title": "Why the Internet Breaks Everything Into Pieces"

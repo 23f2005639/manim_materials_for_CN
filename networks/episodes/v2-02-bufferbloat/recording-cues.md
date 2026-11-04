@@ -6,19 +6,19 @@ Guide subtitles use planned timing. Match final subtitles to your recording afte
 
 | Section | Start | Length | What to show | Recording cue |
 |---|---|---|---|---|
-| 01 | 00:00:00 | 36.53s | The speed-test paradox | Your download counter is flying. |
-| 02 | 00:00:36 | 37.87s | One shared exit | Here is our entire model: arrivals on the left, a waiting area in the middle, and one outgoing link on the right. |
-| 03 | 00:01:14 | 35.67s | The exit has a rhythm | Watch the departure marks. |
-| 04 | 00:01:50 | 31.67s | An empty queue feels quick | Start with very little traffic. |
-| 05 | 00:02:21 | 37.00s | A download builds a line | Now bring in the bulk transfer. |
-| 06 | 00:02:58 | 37.43s | The small packet gets trapped | Here comes the green packet again. |
-| 07 | 00:03:36 | 35.67s | More storage is not more speed | Suppose we make the waiting area twice as large. |
-| 08 | 00:04:11 | 36.10s | Turn the line into a quantity | Let's replace our drawn packets with an amount of data. |
-| 09 | 00:04:47 | 34.77s | Bytes and bits must agree | Our example has one megabyte waiting ahead of the green packet. |
-| 10 | 00:05:22 | 35.67s | Four hundred milliseconds of waiting | The exit runs at twenty million bits per second. |
-| 11 | 00:05:58 | 37.00s | The round trip has other parts | Now place that waiting beside the rest of the journey. |
-| 12 | 00:06:35 | 32.53s | Watch arrivals and departures | The line grows when arrivals exceed departures. |
-| 13 | 00:07:07 | 36.53s | A burst can be harmless | Compare two bursts. |
-| 14 | 00:07:44 | 37.87s | A full queue can also drop | Eventually, a finite buffer can fill. |
-| 15 | 00:08:22 | 39.20s | What would a better picture look like? | Keep the same outgoing rate, but compare a long standing queue with a shorter controlled queue. |
-| 16 | 00:09:01 | 37.47s | Answer the opening puzzle | Return to the fast download and the late interaction. |
+| 01 | 00:00:00 | 31.67s | Start with one message | A packet is a small piece of data. |
+| 02 | 00:00:31 | 31.20s | Give the message a doorway | A buffer holds packets waiting for their turn. |
+| 03 | 00:01:02 | 33.00s | Watch what the exit can do | A link rate measures bits sent each second. |
+| 04 | 00:01:35 | 37.00s | Try a quiet connection | Little data ahead means little queueing delay. |
+| 05 | 00:02:12 | 36.10s | Let a download join in | The queue grows when data arrives faster than it leaves. |
+| 06 | 00:02:48 | 36.53s | Put the small message behind it | A small packet can wait behind a large amount of data. |
+| 07 | 00:03:25 | 37.43s | Try making the waiting room bigger | A larger buffer does not increase the outgoing rate. |
+| 08 | 00:04:02 | 37.87s | Measure the wait with a simple division | Waiting time is approximately waiting bits divided by bits per second. |
+| 09 | 00:04:40 | 38.33s | Make the units match | One decimal megabyte contains eight million bits. |
+| 10 | 00:05:19 | 37.87s | Drain one megabyte through the exit | Eight million bits at twenty million bits per second take 0.4 seconds. |
+| 11 | 00:05:57 | 37.43s | Put the wait inside the whole journey | Queueing is only one contributor to the total delay. |
+| 12 | 00:06:34 | 37.00s | Keep replacing everything that leaves | Balanced arrivals and departures can preserve an existing queue. |
+| 13 | 00:07:11 | 37.87s | Compare a rush with a permanent queue | Brief buffering can absorb a burst without a persistent wait. |
+| 14 | 00:07:49 | 37.43s | See what happens when the room fills | A full buffer may discard a new arrival. |
+| 15 | 00:08:26 | 37.87s | Compare two queues with the same exit | Less persistent waiting can improve response without a faster link. |
+| 16 | 00:09:04 | 38.37s | Name the problem we have built | Bufferbloat is excessive queueing delay under load. |

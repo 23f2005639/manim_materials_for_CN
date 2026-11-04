@@ -1,12 +1,13 @@
 {
   "edition": "focused-v2",
+  "revision": "beginner foundations",
   "episodes": [
     {
       "id": "01",
       "topic": "dns",
       "phases": 16,
-      "words": 1165,
-      "duration_seconds": 547.8,
+      "words": 1214,
+      "duration_seconds": 569.6,
       "presenter_notes_match": true,
       "script_matches_storyboard": true
     },
@@ -14,8 +15,8 @@
       "id": "02",
       "topic": "bufferbloat",
       "phases": 16,
-      "words": 1235,
-      "duration_seconds": 578.933,
+      "words": 1244,
+      "duration_seconds": 582.933333,
       "presenter_notes_match": true,
       "script_matches_storyboard": true
     },
@@ -23,8 +24,8 @@
       "id": "03",
       "topic": "wdm",
       "phases": 16,
-      "words": 1151,
-      "duration_seconds": 541.6,
+      "words": 1222,
+      "duration_seconds": 573.133333,
       "presenter_notes_match": true,
       "script_matches_storyboard": true
     },
@@ -32,8 +33,8 @@
       "id": "04",
       "topic": "packet-switching",
       "phases": 16,
-      "words": 1248,
-      "duration_seconds": 584.633,
+      "words": 1242,
+      "duration_seconds": 582.1,
       "presenter_notes_match": true,
       "script_matches_storyboard": true
     },
@@ -41,8 +42,8 @@
       "id": "05",
       "topic": "dijkstra",
       "phases": 16,
-      "words": 1206,
-      "duration_seconds": 566.0,
+      "words": 1223,
+      "duration_seconds": 573.566667,
       "presenter_notes_match": true,
       "script_matches_storyboard": true
     },
@@ -50,8 +51,8 @@
       "id": "06",
       "topic": "subnetting",
       "phases": 16,
-      "words": 1114,
-      "duration_seconds": 525.167,
+      "words": 1234,
+      "duration_seconds": 578.5,
       "presenter_notes_match": true,
       "script_matches_storyboard": true
     },
@@ -59,8 +60,8 @@
       "id": "07",
       "topic": "tcp-slow-start",
       "phases": 16,
-      "words": 1249,
-      "duration_seconds": 585.1,
+      "words": 1248,
+      "duration_seconds": 584.733333,
       "presenter_notes_match": true,
       "script_matches_storyboard": true
     },
@@ -68,12 +69,12 @@
       "id": "08",
       "topic": "rsa",
       "phases": 16,
-      "words": 1199,
-      "duration_seconds": 562.933,
+      "words": 1248,
+      "duration_seconds": 584.7,
       "presenter_notes_match": true,
       "script_matches_storyboard": true
     }
   ],
-  "total_words": 9567,
+  "total_words": 9875,
   "total_phases": 128
 }

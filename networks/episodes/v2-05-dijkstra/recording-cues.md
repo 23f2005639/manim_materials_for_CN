@@ -6,19 +6,19 @@ Guide subtitles use planned timing. Match final subtitles to your recording afte
 
 | Section | Start | Length | What to show | Recording cue |
 |---|---|---|---|---|
-| 01 | 00:00:00 | 35.20s | The tempting shortcut | The tempting shortcut |
-| 02 | 00:00:35 | 33.87s | Give the links a cost | Give the links a cost |
-| 03 | 00:01:09 | 34.33s | Count costs, not connections | Count costs, not connections |
-| 04 | 00:01:43 | 34.33s | Start with what is known | Start with what is known |
-| 05 | 00:02:17 | 35.67s | Open the first possibilities | Open the first possibilities |
-| 06 | 00:02:53 | 33.87s | A cheaper way to B | A cheaper way to B |
-| 07 | 00:03:27 | 35.20s | Improve the route to D | Improve the route to D |
-| 08 | 00:04:02 | 35.20s | Finding F is not finishing | Finding F is not finishing |
-| 09 | 00:04:37 | 34.77s | One last improvement | One last improvement |
-| 10 | 00:05:12 | 35.20s | The frontier reaches F | The frontier reaches F |
-| 11 | 00:05:47 | 36.53s | Why the smallest choice works | Why the smallest choice works |
-| 12 | 00:06:24 | 37.00s | Recover the actual journey | Recover the actual journey |
-| 13 | 00:07:01 | 35.20s | Send a packet along the answer | Send a packet along the answer |
-| 14 | 00:07:36 | 36.10s | Take away a connection | Take away a connection |
-| 15 | 00:08:12 | 37.00s | Recalculate against the new graph | Recalculate against the new graph |
-| 16 | 00:08:49 | 36.57s | Answer the opening question | Answer the opening question |
+| 01 | 00:00:00 | 35.20s | First, send one message | First, send one message |
+| 02 | 00:00:35 | 35.20s | Give each step a price | Give each step a price |
+| 03 | 00:01:10 | 33.87s | Grow a small map | Grow a small map |
+| 04 | 00:01:44 | 35.67s | Keep a little scorecard | Keep a little scorecard |
+| 05 | 00:02:19 | 34.77s | Look one step from home | Look one step from home |
+| 06 | 00:02:54 | 35.67s | A better way to B | A better way to B |
+| 07 | 00:03:30 | 36.53s | Choose the cheapest unfinished dot | Choose the cheapest unfinished dot |
+| 08 | 00:04:06 | 35.20s | Find a first route to F | Find a first route to F |
+| 09 | 00:04:42 | 36.10s | One last improvement | One last improvement |
+| 10 | 00:05:18 | 36.53s | Know when the answer is ready | Know when the answer is ready |
+| 11 | 00:05:54 | 36.53s | Why the rule works | Why the rule works |
+| 12 | 00:06:31 | 35.67s | Remember the way back | Remember the way back |
+| 13 | 00:07:06 | 36.10s | Walk the winning route | Walk the winning route |
+| 14 | 00:07:43 | 36.10s | What if a connection breaks? | What if a connection breaks? |
+| 15 | 00:08:19 | 37.43s | Find the new winner | Find the new winner |
+| 16 | 00:08:56 | 37.03s | A big answer from small steps | A big answer from small steps |

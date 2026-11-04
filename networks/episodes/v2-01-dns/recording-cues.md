@@ -1,4 +1,4 @@
-# Recording cues — Why Can Your Internet Work While Your Apps Don’t?
+# Recording cues — DNS: How a Website Name Finds Its Address
 
 Record one section at a time, or narrate the click-through presentation live.
 
@@ -6,19 +6,19 @@ Guide subtitles use planned timing. Match final subtitles to your recording afte
 
 | Section | Start | Length | What to show | Recording cue |
 |---|---|---|---|---|
-| 01 | 00:00:00 | 32.53s | Connected, but not found | Connected, but not found. |
-| 02 | 00:00:32 | 33.43s | A name is not an address | A name is not an address. |
-| 03 | 00:01:05 | 33.87s | Read the name backward | Read the name backward. |
-| 04 | 00:01:39 | 33.43s | Meet the resolver | Meet the resolver. |
-| 05 | 00:02:13 | 33.87s | The root gives a direction | The root gives a direction. |
-| 06 | 00:02:47 | 33.87s | A smaller branch | A smaller branch. |
-| 07 | 00:03:21 | 34.33s | The authority answers | The authority answers. |
-| 08 | 00:03:55 | 33.87s | Return the useful result | Return the useful result. |
-| 09 | 00:04:29 | 35.20s | Where the waiting comes from | Where the waiting comes from. |
-| 10 | 00:05:04 | 34.33s | Repeat the same question | Repeat the same question. |
-| 11 | 00:05:38 | 34.33s | Give the memory a lifetime | Give the memory a lifetime. |
-| 12 | 00:06:13 | 34.77s | Change the address | Change the address. |
-| 13 | 00:06:47 | 35.20s | Expiration causes new work | Expiration causes new work. |
-| 14 | 00:07:23 | 34.33s | Break only the naming step | Break only the naming step. |
-| 15 | 00:07:57 | 34.77s | Responsibility, time, and memory | Responsibility, time, and memory. |
-| 16 | 00:08:32 | 35.70s | Resolve the opening contradiction | Resolve the opening contradiction. |
+| 01 | 00:00:00 | 35.67s | A photo lives somewhere | A website name must lead to an address before we can request its content. |
+| 02 | 00:00:35 | 34.77s | Names are easier to remember | DNS helps turn a readable website name into an IP address. |
+| 03 | 00:01:10 | 35.20s | Ask a helper | A resolver is the helper that searches for an answer. |
+| 04 | 00:01:45 | 34.77s | A name has smaller parts | The dots in a name divide responsibility into smaller branches. |
+| 05 | 00:02:20 | 36.10s | Start at the directory | The root directory gives the helper a direction. |
+| 06 | 00:02:56 | 35.20s | Follow one useful clue | The top-level directory points toward the right record keeper. |
+| 07 | 00:03:31 | 35.20s | Find the address keeper | The authoritative server supplies the relevant official answer. |
+| 08 | 00:04:06 | 35.67s | Bring the answer home | Finding an address finishes the lookup; fetching the photo comes next. |
+| 09 | 00:04:42 | 35.20s | Put a clock on it | Add the four dependent waits to get 92 milliseconds. |
+| 10 | 00:05:17 | 35.67s | Remember the answer | A saved answer avoids repeating the lookup. |
+| 11 | 00:05:53 | 35.67s | Memory needs an expiry date | The TTL timer limits how long a saved answer stays fresh. |
+| 12 | 00:06:29 | 35.67s | What if the address changes? | An official change does not instantly replace every saved copy. |
+| 13 | 00:07:04 | 36.53s | Look again when time runs out | When this copy expires, the next request looks for a fresh answer. |
+| 14 | 00:07:41 | 36.53s | Connected, but missing directions | A working connection can still be missing a name lookup. |
+| 15 | 00:08:17 | 36.10s | Three jobs, one simple search | Directories divide the work, referrals guide it, and caches save it. |
+| 16 | 00:08:53 | 35.70s | From a name to an address | A readable name becomes useful contact information through a small search. |

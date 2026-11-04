@@ -28,7 +28,7 @@
       "bullets": [
         "Send a photo in pieces"
       ],
-      "takeaway": "Don't worry about the name yet.",
+      "takeaway": "Follow one data piece, then learn how replies help the sender grow.",
       "visual": {
         "phase": 0,
         "initial_window_segments": 4,
@@ -47,7 +47,7 @@
       "bullets": [
         "How do we know it arrived?"
       ],
-      "takeaway": "Actual TCP can acknowledge several pieces together.",
+      "takeaway": "An ACK is a reply confirming progress.",
       "visual": {
         "phase": 1,
         "initial_window_segments": 4,
@@ -66,7 +66,7 @@
       "bullets": [
         "Leave room for four pieces"
       ],
-      "takeaway": "Also assume the receiver has plenty of room.",
+      "takeaway": "The congestion window limits sent data that is not yet confirmed.",
       "visual": {
         "phase": 2,
         "initial_window_segments": 4,
@@ -85,7 +85,7 @@
       "bullets": [
         "Four pieces, then wait"
       ],
-      "takeaway": "The sender doesn't yet know how much traffic the path can handle.",
+      "takeaway": "Four occupied spaces mean the sender must wait for progress.",
       "visual": {
         "phase": 3,
         "initial_window_segments": 4,
@@ -104,7 +104,7 @@
       "bullets": [
         "One reply makes more room"
       ],
-      "takeaway": "Watch both spaces open.",
+      "takeaway": "One reply clears a space and adds another: room for two new pieces.",
       "visual": {
         "phase": 4,
         "initial_window_segments": 4,
@@ -123,7 +123,7 @@
       "bullets": [
         "Four replies grow the allowance"
       ],
-      "takeaway": "We've learned that this batch got through and cautiously allowed more data.",
+      "takeaway": "Four replies can grow a four-piece allowance to eight.",
       "visual": {
         "phase": 5,
         "initial_window_segments": 4,
@@ -142,7 +142,7 @@
       "bullets": [
         "Replies set the rhythm"
       ],
-      "takeaway": "It describes how returning feedback helps pace the sender.",
+      "takeaway": "Returning replies help pace new sending.",
       "visual": {
         "phase": 6,
         "initial_window_segments": 4,
@@ -161,7 +161,7 @@
       "bullets": [
         "Watch four become eight"
       ],
-      "takeaway": "Twice as many pieces can produce twice as many replies, which can create twice as much room.",
+      "takeaway": "Doubling emerges from adding one space per reply.",
       "visual": {
         "phase": 7,
         "initial_window_segments": 4,
@@ -180,7 +180,7 @@
       "bullets": [
         "Write the doubling pattern"
       ],
-      "takeaway": "At zero rounds we still have four.",
+      "takeaway": "The formula records the doubling pattern we already watched.",
       "visual": {
         "phase": 8,
         "initial_window_segments": 4,
@@ -199,7 +199,7 @@
       "bullets": [
         "How much per second?"
       ],
-      "takeaway": "Sixteen thousand bytes divided by that time gives one hundred sixty thousand bytes per second.",
+      "takeaway": "Divide the allowed data by round-trip time to estimate a window-limited rate.",
       "visual": {
         "phase": 9,
         "initial_window_segments": 4,
@@ -218,7 +218,7 @@
       "bullets": [
         "Waiting longer changes the speed"
       ],
-      "takeaway": "This estimate assumes the window is the main limit and data keeps flowing.",
+      "takeaway": "The same allowance can give a lower rate when replies take longer.",
       "visual": {
         "phase": 10,
         "initial_window_segments": 4,
@@ -237,7 +237,7 @@
       "bullets": [
         "Too much reaches the narrow link"
       ],
-      "takeaway": "More data in the waiting line does not make that connection faster.",
+      "takeaway": "The narrowest link cannot clear unlimited arrivals.",
       "visual": {
         "phase": 11,
         "initial_window_segments": 4,
@@ -256,7 +256,7 @@
       "bullets": [
         "Growth needs a stopping point"
       ],
-      "takeaway": "Loss and other feedback can also change the behavior.",
+      "takeaway": "The threshold marks a boundary for slow-start growth.",
       "visual": {
         "phase": 12,
         "initial_window_segments": 4,
@@ -275,7 +275,7 @@
       "bullets": [
         "Try a different starting allowance"
       ],
-      "takeaway": "The two colored curves make that tradeoff visible.",
+      "takeaway": "A larger initial allowance changes how quickly the ideal curve grows.",
       "visual": {
         "phase": 13,
         "initial_window_segments": 4,
@@ -294,7 +294,7 @@
       "bullets": [
         "Real downloads vary"
       ],
-      "takeaway": "Our demonstration deliberately kept these distractions out so one cause was visible: replies can grow the sending allowance.",
+      "takeaway": "Real data supply and feedback can change the tidy doubling picture.",
       "visual": {
         "phase": 14,
         "initial_window_segments": 4,
@@ -313,7 +313,7 @@
       "bullets": [
         "Start small, listen, then grow"
       ],
-      "takeaway": "It began with a limit and learned from feedback.",
+      "takeaway": "Start with limited data, listen to progress, and grow the allowance.",
       "visual": {
         "phase": 15,
         "initial_window_segments": 4,

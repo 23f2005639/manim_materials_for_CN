@@ -1,19 +1,19 @@
 {
   "episode": "01",
-  "title": "Why Can Your Internet Work While Your Apps Don\u2019t?",
-  "duration_seconds": 547.833008,
+  "title": "DNS: How a Website Name Finds Its Address",
+  "duration_seconds": 569.633008,
   "resolution": "1920x1080",
   "fps": 30,
   "codec": "h264",
   "sections": 16,
   "section_clips_verified": 16,
-  "narration_words": 1165,
+  "narration_words": 1214,
   "automated_media_checks": "passed",
   "edition": "focused-v2",
   "voiceover": "User records their own voice",
   "motion": {
-    "native_changing_frame_fraction": 0.3059,
-    "minimum_section_visual_fraction": 0.209,
-    "longest_final_hold_seconds": 27.667
+    "native_changing_frame_fraction": 0.2815,
+    "minimum_section_visual_fraction": 0.183,
+    "longest_final_hold_seconds": 28.467000000000002
   }
 }

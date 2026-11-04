@@ -1,768 +1,768 @@
 {
   "fps": 30,
-  "frames": 17554,
+  "frames": 17543,
   "sections": [
     {
-      "name": "An unknown road ahead",
+      "name": "Send a photo in pieces",
       "frame": 0,
       "type": "default.normal",
-      "notes": "A download is ready to send millions of bytes. Somewhere ahead is a connection that limits how quickly they can pass, but the sender does not begin with a map of its available capacity. Sending everything immediately could overwhelm it. Sending painfully little forever wastes an opportunity. So how does a sender start? Watch the first packets and their returning acknowledgments. They will do more than confirm delivery: they will help pace a growing experiment called TCP slow start.",
+      "notes": "You send a photo to a friend. The network carries its data in smaller pieces instead of one enormous object. Watch one piece leave your computer and arrive at theirs. In this video we will follow TCP, a set of rules computers can use to deliver data reliably. A piece of TCP data is called a segment. Our question: how many pieces should we send before waiting to hear back?",
       "id": "07-01",
-      "chapter": "The puzzle",
-      "animation_end_frame": 320
+      "chapter": "Start here",
+      "animation_end_frame": 279
     },
     {
-      "name": "Separate the limits",
-      "frame": 1110,
+      "name": "How do we know it arrived?",
+      "frame": 990,
       "type": "default.normal",
-      "notes": "Our picture has a sender, a receiver, and a bottleneck along the path. Assume the receiver has plenty of free buffer space, so its advertised window is not the limit in this story. We are focusing on the sender's congestion window, usually called cwnd. It bounds how many bytes may be outstanding without acknowledgment. That is a quantity of data, not a transmission speed printed on the cable. Keeping those two meanings separate will make the later equation much easier.",
+      "notes": "Sending something is not the same as knowing it arrived. So the receiving computer sends a small reply meaning, I've received data up to this point. That reply is an acknowledgment, shortened to ACK. Watch blue data go right and a green reply return left. We will draw one reply for each piece to keep the idea clear. Actual TCP can acknowledge several pieces together. The returning replies give the sender evidence of progress instead of making it guess blindly.",
       "id": "07-02",
-      "chapter": "The puzzle",
-      "animation_end_frame": 1215
+      "chapter": "Start here",
+      "animation_end_frame": 1248
     },
     {
-      "name": "Begin with a small window",
-      "frame": 2233,
+      "name": "Leave room for four pieces",
+      "frame": 2113,
       "type": "default.normal",
-      "notes": "For our illustration, begin with room for four full-size segments. Four is a teaching choice, not a claim that every TCP connection starts there. Initial-window choices have changed across specifications and implementations. We are also assuming one useful acknowledgment for each new segment and steady round-trip timing. These clean assumptions let us see the mechanism before real network variation blurs it. The sender has more data ready, but only these first four segments are allowed into the experiment.",
+      "notes": "Let's begin with an allowance of four pieces. The four empty boxes are spaces for data we have sent but haven't yet had confirmed. This allowance is called the congestion window, often written cwnd. Here, window means a limit, not something on your screen. We chose four for this demonstration; real starting values can differ. Also assume the receiver has plenty of room. That lets us focus on how the sender grows its allowance using feedback from the journey.",
       "id": "07-03",
-      "chapter": "The puzzle",
-      "animation_end_frame": 2452
+      "chapter": "Start here",
+      "animation_end_frame": 2293
     },
     {
-      "name": "The first packets leave",
-      "frame": 3329,
+      "name": "Four pieces, then wait",
+      "frame": 3223,
       "type": "default.normal",
-      "notes": "One, two, three, four. The sender puts those segments onto the path, then waits for progress to be confirmed. At this point, there can be four segments of unacknowledged data in flight. They are not travelling on four new cables. They are sharing the same path at different positions. If the sender released its whole file just because the first segment had left its machine, it would be ignoring the very uncertainty slow start is trying to manage.",
+      "notes": "Send piece one. Fill the first box. Send piece two, then three, then four. All four spaces are now occupied. We call this data outstanding: sent, but not yet confirmed by a reply. The sender cannot keep adding pieces beyond its allowance. It waits for progress. That waiting isn't wasted caution. The sender doesn't yet know how much traffic the path can handle. The blue boxes show exactly what it is waiting to hear about.",
       "id": "07-04",
-      "chapter": "Build the mechanism",
-      "animation_end_frame": 3644
+      "chapter": "Start here",
+      "animation_end_frame": 3562
     },
     {
-      "name": "An acknowledgment opens space",
-      "frame": 4425,
+      "name": "One reply makes more room",
+      "frame": 4279,
       "type": "default.normal",
-      "notes": "The first acknowledgment comes back. Part of its effect is straightforward: the confirmed data no longer counts as outstanding. There is now room to send a replacement segment within the old window. But slow start also increases the congestion window when new data is acknowledged, subject to its rules. In our simplified full-segment example, it adds one more segment of allowance. One acknowledgment therefore frees old space and helps create new space. That combination is what makes the next round grow.",
+      "notes": "Now the first green reply arrives. Two things happen. First, one piece is confirmed, so it no longer occupies a space. Second, during our version of slow start, this reply increases the allowance by one piece. Our limit rises from four to five, with three old pieces still unconfirmed. Five spaces minus three occupied spaces leaves room for two new pieces. Watch both spaces open. A reply both clears old work and gives us permission to try a little more.",
       "id": "07-05",
-      "chapter": "Build the mechanism",
-      "animation_end_frame": 4694
+      "chapter": "Follow the idea",
+      "animation_end_frame": 4572
     },
     {
-      "name": "Four acknowledgments become eight",
-      "frame": 5561,
+      "name": "Four replies grow the allowance",
+      "frame": 5402,
       "type": "default.normal",
-      "notes": "Repeat that process for the four initial segments. Each acknowledgment confirms progress and contributes one segment to our illustrative window growth. By the end of this round, cwnd has increased from four segments to eight. The sender can now have twice as much unacknowledged data outstanding. It did not ask a router for an exact bandwidth number. It used successful delivery feedback to expand cautiously from its starting point. The growth is emerging from the acknowledgment rule, not a stopwatch alone.",
+      "notes": "Let the other replies come back too. Under our one-reply-per-piece assumption, each adds one space. Starting with four spaces, four replies increase the limit to eight. That's the surprise: we added only one at a time, yet a complete round doubled the allowance. We haven't measured a perfect network speed. We've learned that this batch got through and cautiously allowed more data. The rule is called slow start because it begins with limited data, even though its growth soon becomes rapid.",
       "id": "07-06",
-      "chapter": "Build the mechanism",
-      "animation_end_frame": 5870
+      "chapter": "Follow the idea",
+      "animation_end_frame": 5735
     },
     {
-      "name": "The acknowledgment clock",
-      "frame": 6697,
+      "name": "Replies set the rhythm",
+      "frame": 6538,
       "type": "default.normal",
-      "notes": "Look closely at the returning arrows. Acknowledgments do not just arrive after an abstract round has finished; each one can permit new sending as it arrives. That is an ACK clock. The flow of feedback helps pace the outgoing flow of data. Our round-by-round grouping makes the count easier to follow, but a real sender does not have to wait for all acknowledgments in a batch before doing anything. It reacts as progress arrives.",
+      "notes": "Real replies don't have to arrive as one tidy pile at the end of a round. Watch them return separately. Each reply can make room for more sending immediately. This gives the data a rhythm: progress comes back, more data goes out. People call this the acknowledgment clock. It isn't a separate clock inside the cable. It describes how returning feedback helps pace the sender. Our arrows are deliberately slow so you can follow that cause and effect.",
       "id": "07-07",
-      "chapter": "Build the mechanism",
-      "animation_end_frame": 7058
+      "chapter": "Follow the idea",
+      "animation_end_frame": 6924
     },
     {
-      "name": "Why the growth doubles",
-      "frame": 7740,
+      "name": "Watch four become eight",
+      "frame": 7634,
       "type": "default.normal",
-      "notes": "After eight segments are acknowledged under our assumptions, the window grows by another eight, reaching sixteen. Then sixteen successful segment acknowledgments can take it to thirty-two. Why doubling? Start with W segments of allowance, add roughly W more over a round trip, and the next round has about two W. The exponential-looking graph is the accumulated result of many small increases. The name slow start sounds modest, but its early growth can become surprisingly quick across several rounds.",
+      "notes": "Now repeat the experiment with eight pieces. Eight replies can add eight more spaces, making sixteen. Sixteen can then become thirty-two. Look at the dots rising on the graph: four, eight, sixteen, thirty-two. Each step represents a complete ideal growth round, not a fixed second. Twice as many pieces can produce twice as many replies, which can create twice as much room. That's why adding one per reply produces such a fast-growing pattern over several rounds.",
       "id": "07-08",
-      "chapter": "Build the mechanism",
-      "animation_end_frame": 7929
+      "chapter": "Follow the idea",
+      "animation_end_frame": 7823
     },
     {
-      "name": "Turn the pattern into math",
-      "frame": 8836,
+      "name": "Write the doubling pattern",
+      "frame": 8704,
       "type": "default.normal",
-      "notes": "We can now write the pattern instead of memorizing it. Starting from four, the idealized window after k complete growth rounds is four times two to the power k. Zero rounds gives four; one gives eight; two gives sixteen; three gives thirty-two. The equation describes the clean picture we just built. Delayed acknowledgments, different growth rules, losses, and application limits can change the actual trace. So use this model to understand the mechanism, rather than as a prediction for every download.",
+      "notes": "We can write what the picture already showed. Begin with four, then multiply by two once for every completed round. After k rounds, the allowance is four times two to the power k. That power just means repeated multiplication: after two rounds, four times two times two equals sixteen. At zero rounds we still have four. You don't need the formula to discover the pattern; it is a short way to describe the doubling we just watched.",
       "id": "07-09",
-      "chapter": "Build the mechanism",
-      "animation_end_frame": 9145
+      "chapter": "Make it measurable",
+      "animation_end_frame": 9013
     },
     {
-      "name": "A window is not a rate",
-      "frame": 9972,
+      "name": "How much per second?",
+      "frame": 9787,
       "type": "default.normal",
-      "notes": "Suppose each segment carries one thousand bytes, to keep the arithmetic visible. A sixteen-segment window holds sixteen thousand bytes of outstanding data. If that much data can be acknowledged every hundred milliseconds, the window supports an average of one hundred sixty thousand bytes per second. Multiply by eight and that is about one point two eight megabits per second. This is a window-limited approximation, not a promise that the path can deliver that rate.",
+      "notes": "Does an allowance of sixteen pieces tell us the download speed? Not by itself. We also need the time for data to go out and feedback to return. That's the round-trip time, or RTT. Suppose each piece carries one thousand bytes and a round trip takes one tenth of a second. Sixteen thousand bytes divided by that time gives one hundred sixty thousand bytes per second. Eight bits make a byte, so that's about 1.28 million bits per second.",
       "id": "07-10",
-      "chapter": "Build the mechanism",
-      "animation_end_frame": 10185
+      "chapter": "Make it measurable",
+      "animation_end_frame": 10000
     },
     {
-      "name": "Distance changes the result",
-      "frame": 11015,
+      "name": "Waiting longer changes the speed",
+      "frame": 10897,
       "type": "default.normal",
-      "notes": "Keep the same sixteen thousand bytes, but double the round-trip time to two hundred milliseconds. The approximate rate halves, because replenishing the same allowance takes twice as long. Now the expression window divided by round-trip time has a visible meaning: an amount of outstanding data, renewed over a period of time. A larger window can help keep a longer path busy, but it cannot force more through a bottleneck than that connection can actually transmit.",
+      "notes": "Keep those same sixteen spaces, but make the round trip twice as long: two tenths of a second. Reusing the allowance now takes longer, so our estimated rate halves to 0.64 million bits per second. Nothing shrank the boxes. Feedback simply returned more slowly. This estimate assumes the window is the main limit and data keeps flowing. It helps explain why a window size and a rate are different things: one counts how much; the other also includes time.",
       "id": "07-11",
-      "chapter": "Build the mechanism",
-      "animation_end_frame": 11288
+      "chapter": "Try a change",
+      "animation_end_frame": 11170
     },
     {
-      "name": "When the path cannot keep up",
-      "frame": 12071,
+      "name": "Too much reaches the narrow link",
+      "frame": 12007,
       "type": "default.normal",
-      "notes": "Our growing train eventually reaches a point where the bottleneck cannot serve arrivals as quickly as they build up. Packets wait, and the feedback reaches the sender later. Congestion may also lead to packet loss or explicit signals. Successful earlier rounds did not prove that unlimited growth would remain safe. They only justified increasing from the earlier operating point. Slow start explores available capacity through feedback; it does not receive advance permission to overfill every buffer on the path.",
+      "notes": "Can we keep doubling forever? Watch the narrow link in the middle. A link is one connection along the route. This one can pass data more slowly than the sender now brings it. Pieces start waiting, just like people arriving faster than a door lets them through. This limiting connection is called a bottleneck. More data in the waiting line does not make that connection faster. Eventually the sender needs to change how it grows, rather than doubling without a boundary.",
       "id": "07-12",
-      "chapter": "Test the idea",
-      "animation_end_frame": 12533
+      "chapter": "Try a change",
+      "animation_end_frame": 12514
     },
     {
-      "name": "Give exponential growth a boundary",
-      "frame": 13181,
+      "name": "Growth needs a stopping point",
+      "frame": 13143,
       "type": "default.normal",
-      "notes": "TCP has a slow-start threshold, commonly called ssthresh. While the congestion window is below that threshold, slow-start growth can continue. Reaching the threshold or observing congestion changes what happens next. We will stop our explanation at that boundary, because slow start is one part of a larger congestion-control process. The point is that doubling is not meant to continue forever. The same graph that explains its speed also explains why it needs a stopping condition.",
+      "notes": "TCP uses a boundary called the slow-start threshold. The short label on the diagram is ssthresh. Below that boundary, slow-start growth can continue. At the boundary, the sender moves to another growth phase. In our picture we chose thirty-two so you can see where the steep curve stops. This is a teaching value, not a number shared by every connection. Loss and other feedback can also change the behavior. Today we're following this opening growth idea, not every TCP rule.",
       "id": "07-13",
-      "chapter": "Test the idea",
-      "animation_end_frame": 13421
+      "chapter": "Try a change",
+      "animation_end_frame": 13383
     },
     {
-      "name": "Starting larger changes the early trip",
-      "frame": 14237,
+      "name": "Try a different starting allowance",
+      "frame": 14266,
       "type": "default.normal",
-      "notes": "Try starting with eight segments instead of four in the same idealized example. The growth sequence becomes eight, sixteen, thirty-two. That reaches the thirty-two-segment level one round earlier. A larger initial window can save an early round, but it also begins by placing more unconfirmed data on an unknown path. This is a trade-off, not free speed. Standards and implementations make practical initial-window choices; our animation isolates how that starting choice changes the first few rounds.",
+      "notes": "Let's change just one starting condition. Begin with eight spaces instead of four. Our ideal sequence is now eight, sixteen, thirty-two. We reach thirty-two one round earlier. A bigger starting allowance can save early waiting, but it also places more data onto a path whose capacity we may not know. The two colored curves make that tradeoff visible. There isn't one magic starting number that makes every network behave the same way under every possible load.",
       "id": "07-14",
-      "chapter": "Test the idea",
-      "animation_end_frame": 14564
+      "chapter": "Try a change",
+      "animation_end_frame": 14593
     },
     {
-      "name": "Read a real trace carefully",
-      "frame": 15307,
+      "name": "Real downloads vary",
+      "frame": 15336,
       "type": "default.normal",
-      "notes": "Before turning this tidy curve into a universal rule, check the assumptions. Does the sender have enough data ready? Does the receiver have room? Are acknowledgments delayed or grouped? Is another bottleneck already limiting the flow? Each can alter what you observe. The congestion window is permission to have data outstanding, rather than an order to send at a smooth rate. The useful explanation survives those complications: confirmed progress helps the sender grow and pace its early traffic.",
+      "notes": "If you record a real download, don't expect every curve to match our neat staircase. Perhaps the app has no more data ready. Perhaps replies confirm several pieces at once. Perhaps the receiver has limited space, or data gets lost along the way. Each changes the picture. Our demonstration deliberately kept these distractions out so one cause was visible: replies can grow the sending allowance. Now you can spot the idea without treating our drawing as a universal stopwatch.",
       "id": "07-15",
-      "chapter": "Test the idea",
-      "animation_end_frame": 15517
+      "chapter": "The idea comes together",
+      "animation_end_frame": 15546
     },
     {
-      "name": "Answer the speed puzzle",
-      "frame": 16403,
+      "name": "Start small, listen, then grow",
+      "frame": 16446,
       "type": "default.normal",
-      "notes": "So the sender did not discover a perfect speed setting written somewhere inside the network. It began with limited outstanding data, used acknowledgments to make room and grow that allowance, and stopped the rapid growth when its rules required a transition. The math, the window, and the moving packets were three views of that same feedback process. Slow start is how a connection can begin exploring an uncertain path without treating either permanent caution or an immediate flood as its only option.",
+      "notes": "Return to that first photo. We began with small pieces, learned what a reply tells us, and used four spaces to track unconfirmed data. Each successful reply both released space and helped grow the allowance. Over ideal rounds, four became eight, then sixteen. The sender didn't need a sign announcing the perfect speed. It began with a limit and learned from feedback. That is the central idea of TCP slow start: start small, listen to progress, and grow.",
       "id": "07-16",
-      "chapter": "The answer",
-      "animation_end_frame": 17180
+      "chapter": "The idea comes together",
+      "animation_end_frame": 17247
     }
   ],
   "captions": [
     [
       0.0,
-      4.625,
-      "A download is ready to send millions of bytes.\nSomewhere ahead"
+      4.714285714285714,
+      "You send a photo to a friend. The network\ncarries its"
     ],
     [
-      4.625,
-      9.25,
-      "is a connection that limits how quickly they\ncan pass, but"
+      4.714285714285714,
+      9.428571428571429,
+      "data in smaller pieces instead of one enormous\nobject. Watch one"
     ],
     [
-      9.25,
-      13.875,
-      "the sender does not begin with a map of its\navailable"
+      9.428571428571429,
+      14.142857142857142,
+      "piece leave your computer and arrive at\ntheirs. In this video"
     ],
     [
-      13.875,
-      18.5,
-      "capacity. Sending everything immediately could\noverwhelm it. Sending painfully little forever"
+      14.142857142857142,
+      18.857142857142858,
+      "we will follow TCP, a set of rules computers\ncan use"
     ],
     [
-      18.5,
-      23.125,
-      "wastes an opportunity. So how does a sender\nstart? Watch the"
+      18.857142857142858,
+      23.571428571428573,
+      "to deliver data reliably. A piece of TCP data\nis called"
     ],
     [
-      23.125,
-      27.75,
-      "first packets and their returning\nacknowledgments. They will do more than"
+      23.571428571428573,
+      28.285714285714285,
+      "a segment. Our question: how many pieces\nshould we send before"
     ],
     [
-      27.75,
-      32.375,
-      "confirm delivery: they will help pace a\ngrowing experiment called TCP"
+      28.285714285714285,
+      33.0,
+      "waiting to hear back?"
     ],
     [
-      32.375,
-      37.0,
-      "slow start."
+      33.0,
+      37.67916666666667,
+      "Sending something is not the same as knowing\nit arrived. So"
     ],
     [
-      37.0,
-      41.67916666666667,
-      "Our picture has a sender, a receiver, and a\nbottleneck along"
+      37.67916666666667,
+      42.358333333333334,
+      "the receiving computer sends a small reply\nmeaning, I've received data"
     ],
     [
-      41.67916666666667,
-      46.358333333333334,
-      "the path. Assume the receiver has plenty of\nfree buffer space,"
+      42.358333333333334,
+      47.0375,
+      "up to this point. That reply is an\nacknowledgment, shortened to"
     ],
     [
-      46.358333333333334,
-      51.0375,
-      "so its advertised window is not the limit in\nthis story."
+      47.0375,
+      51.71666666666667,
+      "ACK. Watch blue data go right and a green\nreply return"
     ],
     [
-      51.0375,
-      55.71666666666667,
-      "We are focusing on the sender's congestion\nwindow, usually called cwnd."
+      51.71666666666667,
+      56.395833333333336,
+      "left. We will draw one reply for each piece to\nkeep"
     ],
     [
-      55.71666666666667,
-      60.395833333333336,
-      "It bounds how many bytes may be outstanding\nwithout acknowledgment. That"
+      56.395833333333336,
+      61.075,
+      "the idea clear. Actual TCP can acknowledge\nseveral pieces together. The"
     ],
     [
-      60.395833333333336,
-      65.075,
-      "is a quantity of data, not a transmission\nspeed printed on"
+      61.075,
+      65.75416666666666,
+      "returning replies give the sender evidence of\nprogress instead of making"
     ],
     [
-      65.075,
-      69.75416666666666,
-      "the cable. Keeping those two meanings separate\nwill make the later"
+      65.75416666666666,
+      70.43333333333334,
+      "it guess blindly."
     ],
     [
-      69.75416666666666,
-      74.43333333333334,
-      "equation much easier."
+      70.43333333333334,
+      75.05833333333334,
+      "Let's begin with an allowance of four pieces.\nThe four empty"
     ],
     [
-      74.43333333333334,
-      79.0,
-      "For our illustration, begin with room for four\nfull-size segments. Four"
+      75.05833333333334,
+      79.68333333333334,
+      "boxes are spaces for data we have sent but\nhaven't yet"
     ],
     [
-      79.0,
-      83.56666666666666,
-      "is a teaching choice, not a claim that every\nTCP connection"
+      79.68333333333334,
+      84.30833333333334,
+      "had confirmed. This allowance is called the\ncongestion window, often written"
     ],
     [
-      83.56666666666666,
-      88.13333333333334,
-      "starts there. Initial-window choices have\nchanged across specifications and\nimplementations. We"
+      84.30833333333334,
+      88.93333333333334,
+      "cwnd. Here, window means a limit, not\nsomething on your screen."
     ],
     [
-      88.13333333333334,
-      92.7,
-      "are also assuming one useful acknowledgment\nfor each new segment and"
+      88.93333333333334,
+      93.55833333333334,
+      "We chose four for this demonstration; real\nstarting values can differ."
     ],
     [
-      92.7,
-      97.26666666666667,
-      "steady round-trip timing. These clean\nassumptions let us see the mechanism"
+      93.55833333333334,
+      98.18333333333334,
+      "Also assume the receiver has plenty of room.\nThat lets us"
     ],
     [
-      97.26666666666667,
-      101.83333333333334,
-      "before real network variation blurs it. The\nsender has more data"
+      98.18333333333334,
+      102.80833333333334,
+      "focus on how the sender grows its allowance\nusing feedback from"
     ],
     [
-      101.83333333333334,
-      106.4,
-      "ready, but only these first four segments are\nallowed into the"
+      102.80833333333334,
+      107.43333333333334,
+      "the journey."
     ],
     [
-      106.4,
-      110.96666666666667,
-      "experiment."
+      107.43333333333334,
+      112.46190476190476,
+      "Send piece one. Fill the first box. Send piece\ntwo, then"
     ],
     [
-      110.96666666666667,
-      115.53333333333333,
-      "One, two, three, four. The sender puts those\nsegments onto the"
+      112.46190476190476,
+      117.49047619047619,
+      "three, then four. All four spaces are now\noccupied. We call"
     ],
     [
-      115.53333333333333,
-      120.1,
-      "path, then waits for progress to be confirmed.\nAt this point,"
+      117.49047619047619,
+      122.51904761904761,
+      "this data outstanding: sent, but not yet\nconfirmed by a reply."
     ],
     [
-      120.1,
-      124.66666666666667,
-      "there can be four segments of unacknowledged\ndata in flight. They"
+      122.51904761904761,
+      127.54761904761904,
+      "The sender cannot keep adding pieces beyond\nits allowance. It waits"
     ],
     [
-      124.66666666666667,
-      129.23333333333335,
-      "are not travelling on four new cables. They\nare sharing the"
+      127.54761904761904,
+      132.57619047619048,
+      "for progress. That waiting isn't wasted\ncaution. The sender doesn't yet"
     ],
     [
-      129.23333333333335,
-      133.8,
-      "same path at different positions. If the\nsender released its whole"
+      132.57619047619048,
+      137.6047619047619,
+      "know how much traffic the path can handle. The\nblue boxes"
     ],
     [
-      133.8,
-      138.36666666666667,
-      "file just because the first segment had left\nits machine, it"
+      137.6047619047619,
+      142.63333333333333,
+      "show exactly what it is waiting to hear about."
     ],
     [
-      138.36666666666667,
-      142.93333333333334,
-      "would be ignoring the very uncertainty slow\nstart is trying to"
+      142.63333333333333,
+      147.3125,
+      "Now the first green reply arrives. Two things\nhappen. First, one"
     ],
     [
-      142.93333333333334,
-      147.5,
-      "manage."
+      147.3125,
+      151.99166666666667,
+      "piece is confirmed, so it no longer occupies a\nspace. Second,"
     ],
     [
-      147.5,
-      152.23333333333335,
-      "The first acknowledgment comes back. Part of\nits effect is straightforward:"
+      151.99166666666667,
+      156.67083333333332,
+      "during our version of slow start, this reply\nincreases the allowance"
     ],
     [
-      152.23333333333335,
-      156.96666666666667,
-      "the confirmed data no longer counts as\noutstanding. There is now"
+      156.67083333333332,
+      161.35,
+      "by one piece. Our limit rises from four to\nfive, with"
     ],
     [
-      156.96666666666667,
-      161.7,
-      "room to send a replacement segment within the\nold window. But"
+      161.35,
+      166.02916666666667,
+      "three old pieces still unconfirmed. Five\nspaces minus three occupied spaces"
     ],
     [
-      161.7,
-      166.43333333333334,
-      "slow start also increases the congestion\nwindow when new data is"
+      166.02916666666667,
+      170.70833333333331,
+      "leaves room for two new pieces. Watch both\nspaces open. A"
     ],
     [
-      166.43333333333334,
-      171.16666666666669,
-      "acknowledged, subject to its rules. In our\nsimplified full-segment example, it"
+      170.70833333333331,
+      175.3875,
+      "reply both clears old work and gives us\npermission to try"
     ],
     [
-      171.16666666666669,
-      175.9,
-      "adds one more segment of allowance. One\nacknowledgment therefore frees old"
+      175.3875,
+      180.06666666666666,
+      "a little more."
     ],
     [
-      175.9,
-      180.63333333333333,
-      "space and helps create new space. That\ncombination is what makes"
+      180.06666666666666,
+      184.8,
+      "Let the other replies come back too. Under our\none-reply-per-piece assumption,"
     ],
     [
-      180.63333333333333,
-      185.36666666666667,
-      "the next round grow."
+      184.8,
+      189.53333333333333,
+      "each adds one space. Starting with four\nspaces, four replies increase"
     ],
     [
-      185.36666666666667,
-      190.1,
-      "Repeat that process for the four initial\nsegments. Each acknowledgment confirms"
+      189.53333333333333,
+      194.26666666666665,
+      "the limit to eight. That's the surprise: we\nadded only one"
     ],
     [
-      190.1,
-      194.83333333333334,
-      "progress and contributes one segment to our\nillustrative window growth. By"
+      194.26666666666665,
+      199.0,
+      "at a time, yet a complete round doubled the\nallowance. We"
     ],
     [
-      194.83333333333334,
-      199.56666666666666,
-      "the end of this round, cwnd has increased from\nfour segments"
+      199.0,
+      203.73333333333335,
+      "haven't measured a perfect network speed.\nWe've learned that this batch"
     ],
     [
-      199.56666666666666,
-      204.3,
-      "to eight. The sender can now have twice as\nmuch unacknowledged"
+      203.73333333333335,
+      208.46666666666667,
+      "got through and cautiously allowed more data.\nThe rule is called"
     ],
     [
-      204.3,
-      209.03333333333333,
-      "data outstanding. It did not ask a router for\nan exact"
+      208.46666666666667,
+      213.2,
+      "slow start because it begins with limited\ndata, even though its"
     ],
     [
-      209.03333333333333,
-      213.76666666666665,
-      "bandwidth number. It used successful delivery\nfeedback to expand cautiously from"
+      213.2,
+      217.93333333333334,
+      "growth soon becomes rapid."
     ],
     [
-      213.76666666666665,
-      218.5,
-      "its starting point. The growth is emerging\nfrom the acknowledgment rule,"
+      217.93333333333334,
+      222.5,
+      "Real replies don't have to arrive as one tidy\npile at"
     ],
     [
-      218.5,
-      223.23333333333332,
-      "not a stopwatch alone."
+      222.5,
+      227.06666666666666,
+      "the end of a round. Watch them return\nseparately. Each reply"
     ],
     [
-      223.23333333333332,
-      228.2,
-      "Look closely at the returning arrows.\nAcknowledgments do not just arrive"
+      227.06666666666666,
+      231.63333333333333,
+      "can make room for more sending immediately.\nThis gives the data"
     ],
     [
-      228.2,
-      233.16666666666666,
-      "after an abstract round has finished; each one\ncan permit new"
+      231.63333333333333,
+      236.2,
+      "a rhythm: progress comes back, more data goes\nout. People call"
     ],
     [
-      233.16666666666666,
-      238.13333333333333,
-      "sending as it arrives. That is an ACK clock.\nThe flow"
+      236.2,
+      240.76666666666668,
+      "this the acknowledgment clock. It isn't a\nseparate clock inside the"
     ],
     [
-      238.13333333333333,
-      243.1,
-      "of feedback helps pace the outgoing flow of\ndata. Our round-by-round"
+      240.76666666666668,
+      245.33333333333334,
+      "cable. It describes how returning feedback\nhelps pace the sender. Our"
     ],
     [
-      243.1,
-      248.06666666666666,
-      "grouping makes the count easier to follow, but\na real sender"
+      245.33333333333334,
+      249.9,
+      "arrows are deliberately slow so you can follow\nthat cause and"
     ],
     [
-      248.06666666666666,
-      253.03333333333333,
-      "does not have to wait for all acknowledgments\nin a batch"
+      249.9,
+      254.46666666666667,
+      "effect."
     ],
     [
-      253.03333333333333,
-      258.0,
-      "before doing anything. It reacts as progress\narrives."
+      254.46666666666667,
+      259.56190476190477,
+      "Now repeat the experiment with eight pieces.\nEight replies can add"
     ],
     [
-      258.0,
-      262.56666666666666,
-      "After eight segments are acknowledged under\nour assumptions, the window grows"
+      259.56190476190477,
+      264.65714285714284,
+      "eight more spaces, making sixteen. Sixteen can\nthen become thirty-two. Look"
     ],
     [
-      262.56666666666666,
-      267.1333333333333,
-      "by another eight, reaching sixteen. Then\nsixteen successful segment acknowledgments can"
+      264.65714285714284,
+      269.752380952381,
+      "at the dots rising on the graph: four, eight,\nsixteen, thirty-two."
     ],
     [
-      267.1333333333333,
-      271.7,
-      "take it to thirty-two. Why doubling? Start\nwith W segments of"
+      269.752380952381,
+      274.84761904761905,
+      "Each step represents a complete ideal growth\nround, not a fixed"
     ],
     [
-      271.7,
-      276.26666666666665,
-      "allowance, add roughly W more over a round\ntrip, and the"
+      274.84761904761905,
+      279.9428571428571,
+      "second. Twice as many pieces can produce twice\nas many replies,"
     ],
     [
-      276.26666666666665,
-      280.83333333333337,
-      "next round has about two W. The exponential-\nlooking graph is the"
+      279.9428571428571,
+      285.03809523809525,
+      "which can create twice as much room. That's\nwhy adding one"
     ],
     [
-      280.83333333333337,
-      285.40000000000003,
-      "accumulated result of many small increases.\nThe name slow start sounds"
+      285.03809523809525,
+      290.1333333333333,
+      "per reply produces such a fast-growing pattern\nover several rounds."
     ],
     [
-      285.40000000000003,
-      289.9666666666667,
-      "modest, but its early growth can become\nsurprisingly quick across several"
+      290.1333333333333,
+      295.29047619047617,
+      "We can write what the picture already showed.\nBegin with four,"
     ],
     [
-      289.9666666666667,
-      294.53333333333336,
-      "rounds."
+      295.29047619047617,
+      300.44761904761907,
+      "then multiply by two once for every completed\nround. After k"
     ],
     [
-      294.53333333333336,
-      299.2666666666667,
-      "We can now write the pattern instead of\nmemorizing it. Starting"
+      300.44761904761907,
+      305.6047619047619,
+      "rounds, the allowance is four times two to the\npower k."
     ],
     [
-      299.2666666666667,
-      304.0,
-      "from four, the idealized window after k\ncomplete growth rounds is"
+      305.6047619047619,
+      310.76190476190476,
+      "That power just means repeated multiplication:\nafter two rounds, four times"
     ],
     [
-      304.0,
-      308.73333333333335,
-      "four times two to the power k. Zero rounds\ngives four;"
+      310.76190476190476,
+      315.9190476190476,
+      "two times two equals sixteen. At zero rounds\nwe still have"
     ],
     [
-      308.73333333333335,
-      313.4666666666667,
-      "one gives eight; two gives sixteen; three\ngives thirty-two. The equation"
+      315.9190476190476,
+      321.0761904761905,
+      "four. You don't need the formula to discover\nthe pattern; it"
     ],
     [
-      313.4666666666667,
-      318.2,
-      "describes the clean picture we just built.\nDelayed acknowledgments, different growth"
+      321.0761904761905,
+      326.23333333333335,
+      "is a short way to describe the doubling we\njust watched."
     ],
     [
-      318.2,
-      322.93333333333334,
-      "rules, losses, and application limits can\nchange the actual trace. So"
+      326.23333333333335,
+      330.85833333333335,
+      "Does an allowance of sixteen pieces tell us\nthe download speed?"
     ],
     [
-      322.93333333333334,
-      327.66666666666663,
-      "use this model to understand the mechanism,\nrather than as a"
+      330.85833333333335,
+      335.48333333333335,
+      "Not by itself. We also need the time for data\nto"
     ],
     [
-      327.66666666666663,
-      332.4,
-      "prediction for every download."
+      335.48333333333335,
+      340.10833333333335,
+      "go out and feedback to return. That's the\nround-trip time, or"
     ],
     [
-      332.4,
-      337.3666666666667,
-      "Suppose each segment carries one thousand\nbytes, to keep the arithmetic"
+      340.10833333333335,
+      344.73333333333335,
+      "RTT. Suppose each piece carries one thousand\nbytes and a round"
     ],
     [
-      337.3666666666667,
-      342.3333333333333,
-      "visible. A sixteen-segment window holds\nsixteen thousand bytes of outstanding data."
+      344.73333333333335,
+      349.35833333333335,
+      "trip takes one tenth of a second. Sixteen\nthousand bytes divided"
     ],
     [
-      342.3333333333333,
-      347.3,
-      "If that much data can be acknowledged every\nhundred milliseconds, the"
+      349.35833333333335,
+      353.98333333333335,
+      "by that time gives one hundred sixty thousand\nbytes per second."
     ],
     [
-      347.3,
-      352.26666666666665,
-      "window supports an average of one hundred\nsixty thousand bytes per"
+      353.98333333333335,
+      358.60833333333335,
+      "Eight bits make a byte, so that's about 1.28\nmillion bits"
     ],
     [
-      352.26666666666665,
-      357.23333333333335,
-      "second. Multiply by eight and that is about\none point two"
+      358.60833333333335,
+      363.23333333333335,
+      "per second."
     ],
     [
-      357.23333333333335,
-      362.2,
-      "eight megabits per second. This is a window-\nlimited approximation, not a"
+      363.23333333333335,
+      367.85833333333335,
+      "Keep those same sixteen spaces, but make the\nround trip twice"
     ],
     [
-      362.2,
-      367.1666666666667,
-      "promise that the path can deliver that rate."
+      367.85833333333335,
+      372.48333333333335,
+      "as long: two tenths of a second. Reusing the\nallowance now"
     ],
     [
-      367.1666666666667,
-      372.1952380952381,
-      "Keep the same sixteen thousand bytes, but\ndouble the round-trip time"
+      372.48333333333335,
+      377.10833333333335,
+      "takes longer, so our estimated rate halves to\n0.64 million bits"
     ],
     [
-      372.1952380952381,
-      377.22380952380956,
-      "to two hundred milliseconds. The approximate\nrate halves, because replenishing the"
+      377.10833333333335,
+      381.73333333333335,
+      "per second. Nothing shrank the boxes. Feedback\nsimply returned more slowly."
     ],
     [
-      377.22380952380956,
-      382.252380952381,
-      "same allowance takes twice as long. Now the\nexpression window divided"
+      381.73333333333335,
+      386.35833333333335,
+      "This estimate assumes the window is the main\nlimit and data"
     ],
     [
-      382.252380952381,
-      387.2809523809524,
-      "by round-trip time has a visible meaning: an\namount of outstanding"
+      386.35833333333335,
+      390.98333333333335,
+      "keeps flowing. It helps explain why a window\nsize and a"
     ],
     [
-      387.2809523809524,
-      392.3095238095238,
-      "data, renewed over a period of time. A larger\nwindow can"
+      390.98333333333335,
+      395.60833333333335,
+      "rate are different things: one counts how\nmuch; the other also"
     ],
     [
-      392.3095238095238,
-      397.33809523809526,
-      "help keep a longer path busy, but it cannot\nforce more"
+      395.60833333333335,
+      400.23333333333335,
+      "includes time."
     ],
     [
-      397.33809523809526,
-      402.3666666666667,
-      "through a bottleneck than that connection can\nactually transmit."
+      400.23333333333335,
+      404.9666666666667,
+      "Can we keep doubling forever? Watch the narrow\nlink in the"
     ],
     [
-      402.3666666666667,
-      406.9916666666667,
-      "Our growing train eventually reaches a point\nwhere the bottleneck cannot"
+      404.9666666666667,
+      409.70000000000005,
+      "middle. A link is one connection along the\nroute. This one"
     ],
     [
-      406.9916666666667,
-      411.6166666666667,
-      "serve arrivals as quickly as they build up.\nPackets wait, and"
+      409.70000000000005,
+      414.43333333333334,
+      "can pass data more slowly than the sender now\nbrings it."
     ],
     [
-      411.6166666666667,
-      416.2416666666667,
-      "the feedback reaches the sender later.\nCongestion may also lead to"
+      414.43333333333334,
+      419.1666666666667,
+      "Pieces start waiting, just like people\narriving faster than a door"
     ],
     [
-      416.2416666666667,
-      420.8666666666667,
-      "packet loss or explicit signals. Successful\nearlier rounds did not prove"
+      419.1666666666667,
+      423.90000000000003,
+      "lets them through. This limiting connection is\ncalled a bottleneck. More"
     ],
     [
-      420.8666666666667,
-      425.4916666666667,
-      "that unlimited growth would remain safe. They\nonly justified increasing from"
+      423.90000000000003,
+      428.6333333333333,
+      "data in the waiting line does not make that\nconnection faster."
     ],
     [
-      425.4916666666667,
-      430.1166666666667,
-      "the earlier operating point. Slow start\nexplores available capacity through feedback;"
+      428.6333333333333,
+      433.3666666666667,
+      "Eventually the sender needs to change how it\ngrows, rather than"
     ],
     [
-      430.1166666666667,
-      434.7416666666667,
-      "it does not receive advance permission to\noverfill every buffer on"
+      433.3666666666667,
+      438.1,
+      "doubling without a boundary."
     ],
     [
-      434.7416666666667,
-      439.3666666666667,
-      "the path."
+      438.1,
+      442.7791666666667,
+      "TCP uses a boundary called the slow-start\nthreshold. The short label"
     ],
     [
-      439.3666666666667,
-      444.3952380952381,
-      "TCP has a slow-start threshold, commonly\ncalled ssthresh. While the congestion"
+      442.7791666666667,
+      447.45833333333337,
+      "on the diagram is ssthresh. Below that\nboundary, slow-start growth can"
     ],
     [
-      444.3952380952381,
-      449.42380952380955,
-      "window is below that threshold, slow-start\ngrowth can continue. Reaching the"
+      447.45833333333337,
+      452.13750000000005,
+      "continue. At the boundary, the sender moves to\nanother growth phase."
     ],
     [
-      449.42380952380955,
-      454.45238095238096,
-      "threshold or observing congestion changes what\nhappens next. We will stop"
+      452.13750000000005,
+      456.8166666666667,
+      "In our picture we chose thirty-two so you can\nsee where"
     ],
     [
-      454.45238095238096,
-      459.4809523809524,
-      "our explanation at that boundary, because slow\nstart is one part"
+      456.8166666666667,
+      461.49583333333334,
+      "the steep curve stops. This is a teaching\nvalue, not a"
     ],
     [
-      459.4809523809524,
-      464.5095238095238,
-      "of a larger congestion-control process. The\npoint is that doubling is"
+      461.49583333333334,
+      466.175,
+      "number shared by every connection. Loss and\nother feedback can also"
     ],
     [
-      464.5095238095238,
-      469.53809523809525,
-      "not meant to continue forever. The same graph\nthat explains its"
+      466.175,
+      470.8541666666667,
+      "change the behavior. Today we're following\nthis opening growth idea, not"
     ],
     [
-      469.53809523809525,
-      474.56666666666666,
-      "speed also explains why it needs a stopping\ncondition."
+      470.8541666666667,
+      475.53333333333336,
+      "every TCP rule."
     ],
     [
-      474.56666666666666,
-      479.66190476190474,
-      "Try starting with eight segments instead of\nfour in the same"
+      475.53333333333336,
+      480.62857142857143,
+      "Let's change just one starting condition.\nBegin with eight spaces instead"
     ],
     [
-      479.66190476190474,
-      484.75714285714287,
-      "idealized example. The growth sequence becomes\neight, sixteen, thirty-two. That reaches"
+      480.62857142857143,
+      485.72380952380956,
+      "of four. Our ideal sequence is now eight,\nsixteen, thirty-two. We"
     ],
     [
-      484.75714285714287,
-      489.85238095238094,
-      "the thirty-two-segment level one round\nearlier. A larger initial window can"
+      485.72380952380956,
+      490.81904761904764,
+      "reach thirty-two one round earlier. A bigger\nstarting allowance can save"
     ],
     [
-      489.85238095238094,
-      494.94761904761907,
-      "save an early round, but it also begins by\nplacing more"
+      490.81904761904764,
+      495.9142857142857,
+      "early waiting, but it also places more data\nonto a path"
     ],
     [
-      494.94761904761907,
-      500.04285714285714,
-      "unconfirmed data on an unknown path. This is a\ntrade-off, not"
+      495.9142857142857,
+      501.0095238095238,
+      "whose capacity we may not know. The two\ncolored curves make"
     ],
     [
-      500.04285714285714,
-      505.1380952380953,
-      "free speed. Standards and implementations make\npractical initial-window choices; our\nanimation"
+      501.0095238095238,
+      506.1047619047619,
+      "that tradeoff visible. There isn't one magic\nstarting number that makes"
     ],
     [
-      505.1380952380953,
-      510.23333333333335,
-      "isolates how that starting choice changes the\nfirst few rounds."
+      506.1047619047619,
+      511.2,
+      "every network behave the same way under every\npossible load."
     ],
     [
-      510.23333333333335,
-      514.8,
-      "Before turning this tidy curve into a\nuniversal rule, check the"
+      511.2,
+      515.825,
+      "If you record a real download, don't expect\nevery curve to"
     ],
     [
-      514.8,
-      519.3666666666667,
-      "assumptions. Does the sender have enough data\nready? Does the receiver"
+      515.825,
+      520.45,
+      "match our neat staircase. Perhaps the app has\nno more data"
     ],
     [
-      519.3666666666667,
-      523.9333333333334,
-      "have room? Are acknowledgments delayed or\ngrouped? Is another bottleneck already"
+      520.45,
+      525.075,
+      "ready. Perhaps replies confirm several pieces\nat once. Perhaps the receiver"
     ],
     [
-      523.9333333333334,
-      528.5,
-      "limiting the flow? Each can alter what you\nobserve. The congestion"
+      525.075,
+      529.7,
+      "has limited space, or data gets lost along the\nway. Each"
     ],
     [
-      528.5,
-      533.0666666666666,
-      "window is permission to have data outstanding,\nrather than an order"
+      529.7,
+      534.325,
+      "changes the picture. Our demonstration\ndeliberately kept these distractions out so"
     ],
     [
-      533.0666666666666,
-      537.6333333333333,
-      "to send at a smooth rate. The useful\nexplanation survives those"
+      534.325,
+      538.95,
+      "one cause was visible: replies can grow the\nsending allowance. Now"
     ],
     [
-      537.6333333333333,
-      542.2,
-      "complications: confirmed progress helps the\nsender grow and pace its early"
+      538.95,
+      543.575,
+      "you can spot the idea without treating our\ndrawing as a"
     ],
     [
-      542.2,
-      546.7666666666667,
-      "traffic."
+      543.575,
+      548.2,
+      "universal stopwatch."
     ],
     [
-      546.7666666666667,
-      551.5583333333333,
-      "So the sender did not discover a perfect speed\nsetting written"
+      548.2,
+      552.7666666666667,
+      "Return to that first photo. We began with\nsmall pieces, learned"
     ],
     [
-      551.5583333333333,
-      556.35,
-      "somewhere inside the network. It began with\nlimited outstanding data, used"
+      552.7666666666667,
+      557.3333333333334,
+      "what a reply tells us, and used four spaces to\ntrack"
     ],
     [
-      556.35,
-      561.1416666666667,
-      "acknowledgments to make room and grow that\nallowance, and stopped the"
+      557.3333333333334,
+      561.9000000000001,
+      "unconfirmed data. Each successful reply both\nreleased space and helped grow"
     ],
     [
-      561.1416666666667,
-      565.9333333333334,
-      "rapid growth when its rules required a\ntransition. The math, the"
+      561.9000000000001,
+      566.4666666666667,
+      "the allowance. Over ideal rounds, four became\neight, then sixteen. The"
     ],
     [
-      565.9333333333334,
-      570.725,
-      "window, and the moving packets were three\nviews of that same"
+      566.4666666666667,
+      571.0333333333333,
+      "sender didn't need a sign announcing the\nperfect speed. It began"
     ],
     [
-      570.725,
-      575.5166666666667,
-      "feedback process. Slow start is how a\nconnection can begin exploring"
+      571.0333333333333,
+      575.6,
+      "with a limit and learned from feedback. That\nis the central"
     ],
     [
-      575.5166666666667,
-      580.3083333333334,
-      "an uncertain path without treating either\npermanent caution or an immediate"
+      575.6,
+      580.1666666666667,
+      "idea of TCP slow start: start small, listen to\nprogress, and"
     ],
     [
-      580.3083333333334,
-      585.1,
-      "flood as its only option."
+      580.1666666666667,
+      584.7333333333333,
+      "grow."
     ]
   ],
-  "title": "How Does a Download Discover Its Speed?"
+  "title": "TCP Slow Start: How a Download Learns to Speed Up"
 }

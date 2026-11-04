@@ -1,85 +1,85 @@
 # Why Fast Internet Can Still Feel Slow
 
-English narration for your own voice. Planned runtime: 00:09:38.
+English narration for your own voice. Planned runtime: 00:09:42.
 
 The browser pauses after each section. The timestamps below refer to the continuous MP4.
 
 
-## 01. The speed-test paradox — 00:00:00
+## 01. You tap send — 00:00:00
 
-Your download counter is flying. The connection looks healthy. Then a tiny action in a game takes forever to reach the other side. How can a fast connection also feel slow? Watch the small green packet. It contains almost nothing compared with the blue transfer, but it has arrived at exactly the wrong moment. The mystery is not how fast bits can leave. It is how long this particular packet must wait before they can leave at all.
-
-
-## 02. One shared exit — 00:00:36
-
-Here is our entire model: arrivals on the left, a waiting area in the middle, and one outgoing link on the right. Everything that needs that exit must share it. Blue packets carry a large transfer; green packets represent a small interactive exchange. Their colors help us follow them, but this queue gives neither color special treatment. For now, the rule is first in, first out. Earlier arrivals stand ahead of later arrivals, regardless of how urgently someone wants a reply.
+You tap send. Somewhere else, a friend sees your message. Let's slow that tiny journey down. Here is your computer, here is your friend's, and here is a connection between them. A network is simply connected devices that exchange information. The message travels as small pieces of data, called packets. We will draw one as a green box. What could make such a little thing arrive late?
 
 
-## 03. The exit has a rhythm — 00:01:14
+## 02. One shared doorway — 00:00:31
 
-Watch the departure marks. The outgoing link can put only a certain number of bits onto the wire each second. Even when several packets arrive together, they cannot all occupy the same transmission time. They leave in a sequence. The waiting area absorbs that difference between arrivals and departures. This is useful: a short burst does not have to disappear simply because its packets arrived close together. Persistent waiting is the part we need to understand.
-
-
-## 04. An empty queue feels quick — 00:01:50
-
-Start with very little traffic. The green packet arrives, finds no blue line ahead of it, and moves toward the exit almost immediately. The complete exchange still takes time: signals travel, equipment processes data, and the other endpoint responds. But our queue adds almost no extra delay in this case. We are about to change the amount waiting, while leaving the outgoing link itself exactly the same.
+Between our two computers sits a router: a device that passes packets toward the next part of their journey. Several packets may need the same outgoing connection, or link. Picture a doorway that serves one packet after another. Arrive while it is busy, and you wait. The router has memory for that waiting data. That space is called a buffer; the waiting line is a queue.
 
 
-## 05. A download builds a line — 00:02:21
+## 03. Count what leaves — 00:01:02
 
-Now bring in the bulk transfer. For a while, arrivals outrun the exit. Blue packets accumulate faster than the link can remove them, so the line grows backward. The outgoing link stays busy throughout. A throughput display can therefore look impressive even as waiting gets worse. These measurements differ: throughput counts how much data gets through over time; delay measures how long an individual piece takes. A busy exit can produce plenty of throughput and plenty of delay together.
-
-
-## 06. The small packet gets trapped — 00:02:58
-
-Here comes the green packet again. Predict what happens before it reaches the line. Its small size will make its own transmission brief, but that does not move it past earlier packets. In our first-in, first-out queue, it waits behind all the blue data already present. The green packet has not become larger. The physical route has not become longer. Yet the interaction now feels late because a new kind of distance has appeared: a distance measured in waiting bits.
+Now watch the door. It cannot send all the waiting data at once. Computers represent data using zeros and ones. Each zero or one is a bit. A link's rate tells us how many bits it can send each second. More bits per second means more data gets through. Think of counting people leaving a cinema. It does not yet tell us how long one person waited before reaching it.
 
 
-## 07. More storage is not more speed — 00:03:36
+## 04. An empty line — 00:01:35
 
-Suppose we make the waiting area twice as large. Does the green packet escape sooner? The larger buffer can hold more arrivals, but the outgoing link still removes bits at the same rate. Under sustained load, the longer space can become a longer line. That is the trap behind bufferbloat: oversized or poorly managed queues can hold a great deal of delay. Extra storage helps absorb bursts, but storage alone cannot increase the exit's transmission capacity.
-
-
-## 08. Turn the line into a quantity — 00:04:11
-
-Let's replace our drawn packets with an amount of data. Call the bits waiting ahead of the green packet Q. Call the outgoing bit rate R. Each second, the exit removes approximately R of those bits, assuming it remains available to this queue. So how many seconds clear Q? Divide the amount to be removed by the amount removed each second. The picture is already doing the division; the equation simply gives that movement a compact name.
+Start with an empty waiting room. Our green packet arrives and takes its turn almost straight away. It still needs time to be sent and to travel, so the journey is not instant. But there is almost nothing waiting ahead of it. Send another small message and the same thing happens. This is the experience we want when pressing a button or talking on a call: a small action gets a quick response. Now let's make the connection busy.
 
 
-## 09. Bytes and bits must agree — 00:04:47
+## 05. A line starts growing — 00:02:12
 
-Our example has one megabyte waiting ahead of the green packet. Here mega means one million, so that is one million bytes. The link rate, however, is measured in bits per second. Eight bits make a byte, which turns our waiting amount into eight million bits. Dividing a byte count directly by a bit rate would quietly make the answer eight times too small. The units tell us which quantities are allowed to meet.
-
-
-## 10. Four hundred milliseconds of waiting — 00:05:22
-
-The exit runs at twenty million bits per second. Eight million waiting bits divided by twenty million bits per second gives zero point four seconds: four hundred milliseconds. Notice what disappeared in the division: bits cancel, leaving seconds. That is the time needed to clear the data ahead, before our green packet gets its turn. It is an illustrative queueing calculation, not a claim that every twenty-megabit connection always adds four hundred milliseconds to every interaction.
+Imagine a large download arriving as lots of blue packets. For a while, they reach our doorway faster than it can send them onward. One leaves, but more join. A line builds up. The exit keeps working, which looks great on a download counter. Yet look inside the waiting room. That pile is growing. We have changed the amount of waiting without making the doorway any narrower. This is the clue that a speed test can miss.
 
 
-## 11. The round trip has other parts — 00:05:58
+## 06. Little message, long wait — 00:02:48
 
-Now place that waiting beside the rest of the journey. Propagation, processing, transmission, and any other queues still contribute. A request and its response can also face different conditions in different directions. Our four hundred milliseconds is one added waiting component, not a complete prediction of a ping measurement. This is why a speed-test result cannot describe the whole experience. It tells us something useful about transfer capacity, but it does not reveal where every packet spends its time.
-
-
-## 12. Watch arrivals and departures — 00:06:35
-
-The line grows when arrivals exceed departures. It shrinks when departures exceed arrivals. And if those amounts balance while the line is already long, the line can remain long. a steady queue does not mean zero delay. Watch the height stop growing while the green packets still wait behind a large amount of blue data. The problem can persist without an endlessly rising graph or an ever-increasing memory requirement.
+Send the green message again. It is just as small as before. But this time, blue packets got here first. In our simple first-come, first-served line, green must wait behind them. Being small helps with its own turn at the door; it does not erase everybody else's turn. A download can keep moving while your call feels late. Two things are happening at once: plenty of data is leaving, and one particular packet is spending too long waiting.
 
 
-## 13. A burst can be harmless — 00:07:07
+## 07. More room, same door — 00:03:25
 
-Compare two bursts. In the first, a short rush creates a queue, then quiet time lets it drain. Later interactive traffic finds an empty path again. In the second, new data keeps replacing what leaves, maintaining the queue. Both pictures contain buffering, but their delay experience is different. The goal is not to declare every queued packet a failure. It is to distinguish a temporary cushion for uneven arrivals from a standing line that repeatedly delays useful interactions.
-
-
-## 14. A full queue can also drop — 00:07:44
-
-Eventually, a finite buffer can fill. A new arrival may then be discarded instead of joining the line. More buffer space might postpone that moment, but it can also allow a larger standing delay before anything is dropped. Loss and delay are different outcomes, and neither should be hidden by looking at only one meter. Our model is deliberately simple; real equipment can manage queues in more sophisticated ways. The essential issue remains the amount kept waiting at a constrained exit.
+Here is a tempting fix: make the waiting room bigger. Surely more space means a better connection? Watch carefully. The room expands, but the door stays exactly the same. It still sends the same number of bits each second. Extra memory lets more packets wait inside. It does not make their turns finish sooner. A bigger room can be useful for a short rush. But if we keep it full, we have built a longer wait, not a faster exit.
 
 
-## 15. What would improve the queue? — 00:08:22
+## 08. Amount divided by rate — 00:04:02
 
-Keep the same outgoing rate, but compare a long standing queue with a shorter controlled queue. Useful traffic still crosses the link, while the green packet spends less time waiting behind old data. The important improvement is visible before any product name or configuration screen appears: reduce persistent queueing while using the connection well. Real mechanisms have trade-offs, and an empty buffer is not a universal goal. We are identifying the behavior a solution should improve, rather than promising one setting fixes every network.
+We can measure that wait using an everyday idea. If ten people are ahead of you and two leave each second, clearing the line takes five seconds. Data works the same way in our model. Take the number of bits ahead and divide by the number leaving each second. We call those quantities Q and R, so the shorthand is Q divided by R. The letters add nothing mysterious. They stand for how much is waiting and how fast it leaves.
 
 
-## 16. Answer the opening puzzle — 00:09:01
+## 09. Eight bits make a byte — 00:04:40
 
-Return to the fast download and the late interaction. There was no contradiction. The connection moved many bits each second, while our small packet waited behind bits that arrived first. Bufferbloat describes that excessive queueing delay under load. It is one explanation for lag, not a diagnosis of every slow connection. The useful question has changed: instead of asking only how wide the exit is, ask how much data stands in front of the packet you care about right now.
+Before using real numbers, we need one small unit check. A byte is a group of eight bits. Files are often measured in bytes, while connection rates are often given in bits per second. Our waiting data is one megabyte. Here, mega means one million, so that is one million bytes. Expand each byte into eight bits and we get eight million bits. Now both our waiting amount and our outgoing rate can use the same unit. The division will make sense.
+
+
+## 10. Four tenths of a second — 00:05:19
+
+Our exit sends twenty million bits each second. There are eight million bits ahead of green. Divide eight million by twenty million: zero point four seconds. That is four hundred milliseconds, because a second contains one thousand milliseconds. Watch eight blocks leave; each block represents one million bits, not one normal packet. Every block adds fifty milliseconds. By the eighth, four hundred milliseconds have passed before green can start its own turn. A short message can inherit a surprisingly long delay.
+
+
+## 11. Waiting is one part — 00:05:57
+
+That four hundred milliseconds is only the wait at this doorway. Signals also need time to travel. Devices need time to examine data, and putting a packet onto a link takes time too. A reply must make a journey back. Those other delays have not vanished; we simply left them out while measuring this one queue. The important point is visible in the bar: a large waiting line can add a big chunk of delay to an otherwise working connection.
+
+
+## 12. A busy line can stay long — 00:06:34
+
+Perhaps the line will fix itself once arrivals slow down. Let's test that. One packet leaves, and one new packet joins. Another leaves, another joins. Count the boxes. The line stays the same length. Equal arrivals and departures stop the queue from growing, but they do not make an existing queue disappear. To shrink it, more data must leave than arrives for a while. The door can work perfectly steadily while every new message still finds a line ahead.
+
+
+## 13. A rush can clear — 00:07:11
+
+Now try a brief rush followed by a quiet moment. Blue packets arrive together, wait briefly, and drain away. When green arrives later, the doorway is clear again. That is useful buffering: the room absorbed uneven arrivals. The problem is a line that stays large, delaying message after message. So we should not treat every waiting packet as a disaster. A short queue during a rush and a standing queue all evening are very different experiences, even with the same doorway.
+
+
+## 14. No room for another packet — 00:07:49
+
+Our waiting room is not endless. Fill every space, then bring in another packet. There may be nowhere to put it, so the device discards it. That is packet loss. Waiting and being discarded are different problems: one packet arrives late, another does not arrive through this attempt. A larger room may delay the moment it fills, while also allowing longer waits. Real devices can manage their queues more carefully. Our drawing explains why simply adding storage is not enough.
+
+
+## 15. Shorter line, quicker response — 00:08:26
+
+Compare these two doors. Both send data at the same rate. The top has a long standing queue; the bottom has a shorter one. Watch the blue packets already ahead leave first in both rows. Green gets its turn much earlier in the shorter line. It has not jumped the queue, and the door has not become faster. This is what better queue management aims to improve: keep the connection useful while avoiding a big pile of data that waits unnecessarily.
+
+
+## 16. Fast can still feel slow — 00:09:04
+
+Now the name makes sense. Bufferbloat is excessive delay caused by too much data sitting in buffers when a connection is busy. Throughput means how much data gets through; delay means how long something takes. A connection can have good throughput and still respond slowly. Bufferbloat is one possible cause of lag, not the answer to every connection problem. Next time a download looks fast but a conversation feels late, remember our green box. How much is waiting in front of it?

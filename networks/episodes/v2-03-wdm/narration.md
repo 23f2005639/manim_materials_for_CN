@@ -1,85 +1,85 @@
 # How One Fiber Carries So Many Conversations
 
-English narration for your own voice. Planned runtime: 00:09:01.
+English narration for your own voice. Planned runtime: 00:09:33.
 
 The browser pauses after each section. The timestamps below refer to the continuous MP4.
 
 
-## 01. A crowd inside one strand — 00:00:00
+## 01. A message needs a path — 00:00:00
 
-This thin strand carries light, yet an enormous number of conversations can cross it together. How can the receiver tell them apart? Imagine four senders all insisting on using the same fiber at the same time. We could build four separate paths, but the more interesting solution is to give each signal a property that survives the journey. Today, that property is wavelength. Watch the four colors; each represents a separate optical channel.
-
-
-## 02. Keep four conversations separate — 00:00:34
-
-Each sender has its own changing stream of bits. For now, we draw four separate paths so their identities are obvious. The blue signal might carry one stream of data while the green signal carries another. They needn't contain the same pattern, begin together, or tell the same story. The problem is to combine them physically while leaving the receiver enough information to reconstruct each stream. Simply remembering that there were four senders isn't enough.
+Start with a photo on your phone. To send it somewhere else, the phone must turn that photo into a pattern another device can read. A cable carries that changing pattern between places. Some cables use electrical signals. This thin glass strand uses light. It is an optical fiber. Watch one light pulse travel through it. That is our starting point: something changes at one end, and the other end detects the change.
 
 
-## 03. Measure the spacing of crests — 00:01:09
+## 02. Two choices can carry information — 00:00:34
 
-First look at a wave rather than its data. Wavelength is the distance between repeating points, such as neighboring crests. Compress the spacing and the wavelength gets shorter; spread the crests and it gets longer. Our colors make that difference easy to follow. Real communication systems commonly use infrared light, so these display colors are labels for our eyes. They are not a promise that the fiber contains these exact visible colors.
-
-
-## 04. Put data onto the light — 00:01:43
-
-A channel needs to carry something more interesting than a perfectly unchanging wave. A transmitter varies properties of its optical signal to represent information. Here, brightness changes illustrate that idea: the pattern changes while the channel keeps its wavelength identity. Real modulation can be more sophisticated. Keep those two jobs separate in your mind: modulation carries the information, while the wavelength helps identify which optical channel we are looking at.
+How can light stand for a photo? Start much smaller: a yes or a no. We can agree that a bright pulse means one and a dark time means zero. Each choice is called a bit. Put many bits together, and their pattern can represent text, sound, or a picture. Our blinking light is a simple teaching example. Real equipment can use more detailed patterns, but the basic job stays the same: carry information using changes.
 
 
-## 05. Why identity matters — 00:02:16
+## 03. Meet the shape of light — 00:01:10
 
-Suppose we deliberately remove the difference between the channels. Now the receiver cannot separate them merely by choosing a wavelength, because they occupy the same wavelength region. Combining signals only helps when there is a usable separation rule. The problem isn't that two messages dislike each other. The receiver has lost the clue that distinguished them. Give the channels different wavelength allocations again, and that clue returns without adding another strand of fiber.
-
-
-## 06. Give each channel a wavelength — 00:02:50
-
-Place the four channels at separate positions on this wavelength axis. Each position stands for a narrow optical channel with room for its modulated signal. The spaces between them matter: actual signals and optical filters don't have infinitely sharp boundaries. If we pack channels too closely for the equipment, separating them becomes harder. Wavelength division is organized sharing of optical spectrum, not permission to place an unlimited number of channels wherever we like.
+Now look closer at the light itself. We draw it as a wave, with repeating peaks. This curve shows a repeating light property; the beam does not wiggle through the cable like a snake. The distance from one peak to the next is its wavelength. Wide spacing means a longer wavelength. Close spacing means a shorter one. That spacing gives us a way to tell different light signals apart, even when they share a path.
 
 
-## 07. Combine at the multiplexer — 00:03:25
+## 04. Four senders want to talk — 00:01:45
 
-Now watch the multiplexer. Separate optical inputs enter; a combined optical signal leaves through one path. None of our four conversations has been turned into the others. They coexist in the outgoing light because they occupy different wavelength channels. This is the central move in wavelength-division multiplexing, usually shortened to WDM. The name sounds elaborate, but the drawing has already done most of the explaining: different wavelengths, together in one fiber.
-
-
-## 08. Travel together — 00:03:58
-
-Inside the shared link, all four channels propagate together. Follow one pulse from each input and notice that they can occupy the fiber at the same time. They are not taking four long turns. The colored paths are a visual aid showing channel identity, rather than separate colored tubes hidden inside the strand. One physical optical path is carrying several distinguishable optical channels, and each channel can carry its own changing information.
+Bring in four senders. Each has its own bits to send: four different conversations. So far, our easiest drawing gives every conversation its own path. Blue can carry one pattern while green carries another. Neither needs to copy the other. We call each separately usable signal path a channel. Four channels, four independent messages. But building a separate long cable for every conversation sounds expensive. Can these four channels share just one glass strand?
 
 
-## 09. Separate at the destination — 00:04:32
+## 05. What if they look identical? — 00:02:19
 
-At the far end, the demultiplexer reverses the arrangement. Optical components direct different wavelength regions toward their corresponding receivers. Blue returns to blue's output; green returns to green's output. The useful achievement is not just that light reached the destination. The receiver recovered the right stream at the right output. Keep an eye on the pulse pattern: separation preserves the identity needed to interpret the original data.
-
-
-## 10. Try selecting only one channel — 00:05:04
-
-Cover three outputs and inspect the remaining one. Its receiver is interested in the selected wavelength channel while the others continue through their own outputs. This is why the wavelength allocation matters at both ends. The transmitter alone can't invent a private rule and hope the receiver guesses it. Multiplexing and demultiplexing form a coordinated system: combine according to an agreed arrangement, then use that arrangement to separate again.
+Before solving that, try a bad idea. Put two changing signals into the same wavelength region and ask the receiver to separate them using wavelength alone. There is no useful difference for that filter to select. Our colored boxes overlap to show the problem. Simply mixing more light is not enough. We need a recognizable difference that the receiving equipment can use. Think of labels on luggage: sharing a conveyor works better when the bags remain identifiable.
 
 
-## 11. Add the channel rates — 00:05:36
+## 06. Give each channel its own spacing — 00:02:56
 
-Let's attach numbers to the picture. Suppose each of our four channels carries one hundred gigabits per second. One channel contributes one hundred; two contribute two hundred; four contribute four hundred gigabits per second of combined raw rate. The sum comes from parallel channel capacity. We haven't made each individual channel four times faster. We've arranged four channels so their rates contribute to the total at the same time.
-
-
-## 12. Keep the units honest — 00:06:09
-
-Four hundred gigabits per second is not four hundred gigabytes per second. Eight bits make a byte, so dividing by eight gives fifty gigabytes per second as the corresponding raw byte rate. Even that is not a promised file-download speed. Coding, framing, and other overhead consume part of the transmitted information, and the rest of the system may impose limits. The multiplication describes our optical channel model, not every application's measured throughput.
+Here is the useful difference. Give each channel a different wavelength. Our four colors are labels for those different spacings. They do not mean four visible colored beams; communication fibers commonly carry infrared light that our eyes cannot see. Each channel also needs some space around its chosen wavelength because its information changes over time. Spread the channels apart, leaving suitable room for the signals and for equipment that will separate them later.
 
 
-## 13. More channels need more room — 00:06:42
+## 07. Combine the light — 00:03:30
 
-It is tempting to keep adding channels and declare victory over physics. But the available spectrum, channel spacing, amplification, noise, and receiver equipment constrain the arrangement. In the picture, adding another channel means finding a usable place for its signal and a way to recover it. More wavelength channels can increase total capacity, but the equipment must support the whole transmission. An extra colored line on a diagram is much easier than a working optical link.
-
-
-## 14. Unequal channels still add — 00:07:18
-
-Our equal-rate example was convenient, not compulsory. Let two channels carry one hundred gigabits per second each and two carry fifty each. The combined raw rate is now three hundred gigabits per second. Nothing about the word multiplexing requires equal contributions. This is the same sum written more generally: add the individual channel rates. The diagram changes one channel's contribution at a time, so the arithmetic stays attached to the physical arrangement.
+At the sending end, an optical device brings the separate channels onto one shared path. It is called a multiplexer. The name is longer than the idea: many inputs, one shared output. Follow blue into the box, then green, yellow, and purple. Each still carries its own changing information. The device combines their light for the journey. It does not merge the four messages into a new sentence or make their bit patterns identical.
 
 
-## 15. Connect the picture to research — 00:07:52
+## 08. Travel together through one fiber — 00:04:05
 
-The scale becomes striking in real optical research. In June twenty twenty-six, NICT reported a wideband transmission demonstration over installed fiber using more than a thousand wavelength channels. That achievement also depended on amplification, modulation, and receiver techniques; WDM did not produce the entire result by itself. Our four-channel drawing isolates one essential idea inside that much richer system. The same separation principle can operate at a scale far beyond four colored inputs.
+Now watch the middle of the link. The four wavelength channels travel through the same fiber at the same time. Our small vertical gaps are only there so you can follow the colors on screen; there are no four little pipes inside the glass. This sharing method is wavelength division multiplexing, or WDM. The words now describe something we have already seen: divide the available wavelengths into channels, then let those channels share a fiber.
 
 
-## 16. Return to the single strand — 00:08:26
+## 09. Sort the light at the end — 00:04:40
 
-We began with four senders competing for one fiber. The solution was to preserve a distinction the receiver could use: wavelength. Give each channel a suitable optical allocation, combine them, carry them together, and separate them again. The capacity arithmetic follows the picture because several channels contribute simultaneously. One strand can support many conversations when sharing does not destroy their identities. That is the useful idea to keep when the long name fades away.
+Sharing only helps if we can recover the separate information. At the far end, another optical device sorts different wavelength regions toward different outputs. It is called a demultiplexer: the separating partner of the combining box. Follow blue to its matching output. Green goes to another. The receivers can now detect changes in their selected channels. Four messages entered the system, traveled together, and came out as four separately readable streams. The wavelength difference survived the journey.
+
+
+## 10. Listen to just one conversation — 00:05:16
+
+Let us follow only the green channel. Dim the others so your eye can stay with one bit pattern. Green enters, travels alongside the other light, and reaches the green output. Its receiver reads those changes. It does not need the blue message to stop talking first. This is the central trick: the shared fiber carries several distinguishable channels at once. Our labels track their identities; the actual separation is performed by optical equipment designed for their wavelengths.
+
+
+## 11. Count the information per second — 00:05:53
+
+Now the numbers have a picture to attach to. A bit rate tells us how many bits a channel carries each second. Suppose each of our four channels carries one hundred billion bits per second. We shorten that to one hundred gigabits per second, written Gb/s. Add the channels one at a time: one hundred, two hundred, three hundred, four hundred. Four equal channels provide four hundred gigabits per second of combined raw capacity in this example.
+
+
+## 12. Bits and bytes are different — 00:06:29
+
+There is one small trap in that impressive number. File sizes often use bytes, while link rates often use bits. A byte is a group of eight bits. Watch eight little boxes become one group. To turn four hundred gigabits per second into gigabytes per second, divide by eight. The answer is fifty. That is a raw capacity conversion, not a promise that a download reaches fifty gigabytes every second. The rest of the system also takes time and capacity.
+
+
+## 13. Why not add colors forever? — 00:07:06
+
+If four channels help, why not squeeze in endlessly more? Look at the spaces between the channels. The equipment has a usable range, and the signals need enough room to remain distinguishable. Add too many into the same space and separation becomes harder. Noise and other physical effects matter too. Engineers must match the fiber, light sources, amplifiers, and receivers. More channels can increase capacity, but the drawing cannot create unlimited room that real equipment does not have.
+
+
+## 14. Different channels can have different rates — 00:07:43
+
+Our channels do not have to carry equal amounts. Keep blue and green at one hundred gigabits per second, but let yellow and purple carry fifty each. Add what each contributes: one hundred plus one hundred plus fifty plus fifty gives three hundred. The rule is still simple addition of the usable channel rates in our example. Counting colors alone is not enough. Four channels can have different total capacity depending on how much information each channel carries.
+
+
+## 15. Predict one missing channel — 00:08:19
+
+Try a quick prediction. Return to four channels carrying one hundred gigabits per second each. Now switch off the green transmitter while keeping the rest of our model unchanged. Does all the light stop? No. The other three channels still travel. The combined raw rate drops from four hundred to three hundred gigabits per second. Green has gone quiet; it has not taken the whole fiber with it. Distinct channels give us a useful way to understand the result.
+
+
+## 16. One strand, several readable streams — 00:08:56
+
+We can now rebuild the whole idea from the beginning. A message becomes a changing signal. Different wavelength channels give several signals identities the equipment can distinguish. One device combines them, one glass strand carries them, and another device separates them. Adding the channel rates tells us the combined raw capacity. That is WDM. The fiber did not become four separate cables. We learned how to let several conversations share the same physical path while keeping them readable.

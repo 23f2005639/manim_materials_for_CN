@@ -1,732 +1,737 @@
 {
   "fps": 30,
-  "frames": 16981,
+  "frames": 17208,
   "sections": [
     {
-      "name": "The tempting shortcut",
+      "name": "First, send one message",
       "frame": 0,
       "type": "default.normal",
-      "notes": "Which route would you choose for this packet? The one with three connections looks shorter than the winding one with five. But a network does not pay for how tidy a route looks on a drawing. It pays the cost of every connection it uses. In a moment, that longer-looking path will beat the shortcut. The interesting question is how to discover it without trying every possible journey. That is the puzzle Dijkstra's algorithm solves.",
+      "notes": "Imagine sending a photo to a friend. Your computer cannot jump straight into their computer. The photo travels through connected machines. We draw each machine as a dot and each connection as a line. A small piece of the photo, called a packet, moves along those lines. Some machines pass it onward; these are routers. For now, forget the big internet. We only need a starting dot, an ending dot, and a path between them.",
       "id": "05-01",
-      "chapter": "The puzzle",
-      "animation_end_frame": 429
+      "chapter": "Start from zero",
+      "animation_end_frame": 276
     },
     {
-      "name": "Give the links a cost",
+      "name": "Give each step a price",
       "frame": 1056,
       "type": "default.normal",
-      "notes": "Here is our small world: six points, nine connections, and a positive number on each connection. A point could represent a router, but the algorithm only needs the graph. The numbers are illustrative costs, not automatically seconds or kilometers. We choose what they mean before asking for the cheapest route. Keep your eye on A, our starting point, and F, our destination. Everything else is a possible intermediate step in their journey.",
+      "notes": "Now give each connection a price. These numbers are made-up points, so a four costs twice as much as a two. Going straight from A to B costs four. But watch the other way: A to C costs two, then C to B costs one. Two plus one is three. Taking two steps was cheaper than taking one! That is our whole puzzle: find the route with the smallest total, rather than the fewest lines.",
       "id": "05-02",
-      "chapter": "The puzzle",
-      "animation_end_frame": 1184
+      "chapter": "Start from zero",
+      "animation_end_frame": 1392
     },
     {
-      "name": "Count costs, not connections",
-      "frame": 2072,
+      "name": "Grow a small map",
+      "frame": 2112,
       "type": "default.normal",
-      "notes": "Follow A to B, B to D, then D to F. The costs are four, five, and six, totaling fifteen. Now take A to C to B to D to E to F. Two, one, five, two, three: thirteen. More connections, smaller bill. Try predicting the winner from the picture alone and it is easy to get fooled. The numbers describe our objective, so the complete sum must decide which route is better.",
+      "notes": "Let's add a few more machines. Our starting point is still A, but now we want to reach F. The red route costs four, then five, then six: fifteen altogether. The green route takes more steps, yet its prices add to thirteen. You can compare these two by eye. On a huge map, guessing every route would get messy. We need a repeatable recipe. That recipe has a name: Dijkstra's shortest-path algorithm.",
       "id": "05-03",
-      "chapter": "The puzzle",
-      "animation_end_frame": 2690
+      "chapter": "Start from zero",
+      "animation_end_frame": 2834
     },
     {
-      "name": "Start with what is known",
-      "frame": 3102,
+      "name": "Keep a little scorecard",
+      "frame": 3128,
       "type": "default.normal",
-      "notes": "Instead of guessing a complete route, we will grow a region of known shortest distances. A starts at zero because reaching the place where we already are costs nothing. Every other point begins at infinity, our shorthand for no route discovered yet. These are distance estimates, not numbers written on the links. The central rule is simple: choose the smallest unfinished estimate, settle it, and check whether going through it improves any neighbor.",
+      "notes": "Start with a fresh scorecard beside our map. Each score means the cheapest total we have found so far from A. A starts at zero because we are already there. Everywhere else gets a question mark: we have not found a route yet. Books often use this sideways eight, called infinity, for those unknown scores. It does not mean the machines are impossibly far away. It means we still need to discover how to reach them.",
       "id": "05-04",
-      "chapter": "Build the mechanism",
-      "animation_end_frame": 3315
+      "chapter": "Start from zero",
+      "animation_end_frame": 3512
     },
     {
-      "name": "Open the first possibilities",
-      "frame": 4132,
+      "name": "Look one step from home",
+      "frame": 4198,
       "type": "default.normal",
-      "notes": "A is the only point with a finite estimate, so it is settled first. Its connection to B offers a distance of four; its connection to C offers two. Write both as tentative results. Tentative matters: discovering a route to B does not mean we have discovered the cheapest route to B. We have only found the best one so far. Which unfinished point should we explore next? Choose the smallest estimate, not the closest-looking dot.",
+      "notes": "Look at the lines leaving A. We can reach B for four points, so write four beside B. We can reach C for two points, so write two beside C. Which unfinished score is smaller? C, with two. That is where we look next. We always choose the smallest unfinished score, then check its neighboring dots. Green will mean a score is finished. Yellow will mean we have found an improvement worth writing down.",
       "id": "05-05",
-      "chapter": "Build the mechanism",
-      "animation_end_frame": 4459
+      "chapter": "Build the idea",
+      "animation_end_frame": 4525
     },
     {
-      "name": "A cheaper way to B",
-      "frame": 5202,
+      "name": "A better way to B",
+      "frame": 5241,
       "type": "default.normal",
-      "notes": "C wins with distance two. Explore its connections and something useful happens. Through C, reaching B costs two plus one: three. That improves B's earlier four, so replace the estimate and remember C as B's predecessor. Through C, we also discover D at ten and E at twelve. This repeated operation is called relaxation. The word sounds restful, but the job is simply comparing an old estimate with a newly discovered candidate.",
+      "notes": "We have reached C for two points. From here, B costs only one more. Add them: two plus one makes three. Our old score for B was four, so replace it with three. We just found the little shortcut from earlier! Also check C's other connections. D would cost two plus eight, or ten. E would cost two plus ten, or twelve. Write those down as possible routes. A score can improve before it becomes final.",
       "id": "05-06",
-      "chapter": "Build the mechanism",
-      "animation_end_frame": 5622
+      "chapter": "Build the idea",
+      "animation_end_frame": 5661
     },
     {
-      "name": "Improve the route to D",
-      "frame": 6218,
+      "name": "Choose the cheapest unfinished dot",
+      "frame": 6311,
       "type": "default.normal",
-      "notes": "Now B has the smallest unfinished distance: three. Its connection to D costs five. Add that connection to the known cost of reaching B, and the candidate for D becomes eight. Eight beats ten, so update D and save B as its predecessor. Notice what the calculation includes. We are not choosing the cheapest outgoing connection in isolation. Every candidate includes the entire cost already spent getting to the point where this new step begins.",
+      "notes": "Our unfinished scores are now three at B, ten at D, and twelve at E. Choose B because three is the smallest. From B, the connection to D costs five. We have already spent three getting to B, so the whole journey to D costs eight. Eight beats the old ten. Cross out ten and write eight. Notice that we are adding to the journey so far, not choosing a connection only because its own price looks small.",
       "id": "05-07",
-      "chapter": "Build the mechanism",
-      "animation_end_frame": 6431
+      "chapter": "Build the idea",
+      "animation_end_frame": 6524
     },
     {
-      "name": "Finding F is not finishing",
-      "frame": 7274,
+      "name": "Find a first route to F",
+      "frame": 7407,
       "type": "default.normal",
-      "notes": "D is next at eight. Through D, E improves from twelve to ten, and F appears with distance fourteen. We have reached the destination in our search. Should we stop? Hold that thought. Fourteen is still an unfinished estimate, and E is waiting with a smaller distance of ten. If the remaining link from E offers a better total, stopping now would miss it. Discovering the destination is different from proving its distance is final.",
+      "notes": "D now has the smallest unfinished score: eight. Finish D and look outward. Reaching E through D costs eight plus two, which is ten. That improves E's old twelve. Reaching F through D costs eight plus six, which is fourteen. At last, we have found a route to our destination! But wait before celebrating. Fourteen is the best answer we have found so far. Another unfinished dot might still lead us to a cheaper route.",
       "id": "05-08",
-      "chapter": "Build the mechanism",
-      "animation_end_frame": 7601
+      "chapter": "Build the idea",
+      "animation_end_frame": 7734
     },
     {
       "name": "One last improvement",
-      "frame": 8330,
+      "frame": 8463,
       "type": "default.normal",
-      "notes": "Settle E at ten. Its connection to F costs three, making thirteen. That beats F's fourteen, so the estimate changes and its predecessor becomes E. This is the same small operation we have used all along: known distance plus link cost, compared with the current estimate. There is no special clever trick for the destination. The repeated local calculation is enough to uncover a complete route that our first visual guess failed to recognize.",
+      "notes": "The next smallest unfinished score is E at ten. Its connection to F costs three. Ten plus three is thirteen, beating the fourteen we just wrote down. Replace it. This is why finding the destination once was not enough. The first route we noticed was useful, but it was not the winner. Our rule stayed exactly the same: choose the smallest unfinished score, add the next connection's price, and keep the result only when it improves something.",
       "id": "05-09",
-      "chapter": "Build the mechanism",
-      "animation_end_frame": 8522
+      "chapter": "Try it yourself",
+      "animation_end_frame": 8655
     },
     {
-      "name": "The frontier reaches F",
-      "frame": 9373,
+      "name": "Know when the answer is ready",
+      "frame": 9546,
       "type": "default.normal",
-      "notes": "F now has the smallest unfinished estimate, thirteen, so settle it. Our final distances from A are zero for A, three for B, two for C, eight for D, ten for E, and thirteen for F. Watch the green settled region finish growing. Each number was earned by a comparison, rather than copied from a completed answer. The destination's cost is now final because it has crossed the same settled boundary as the earlier points.",
+      "notes": "F now has the smallest unfinished score, thirteen. When we choose it, that score becomes final. We can stop if F was our only destination. If we wanted answers for every machine, we would keep following the same rule until all reachable dots were finished. The changing numbers were not random guesses. Each one described a real route we had found, and each replacement made that route cheaper. Green marks the point where we know it cannot improve.",
       "id": "05-10",
-      "chapter": "Build the mechanism",
-      "animation_end_frame": 9715
+      "chapter": "Try it yourself",
+      "animation_end_frame": 9888
     },
     {
-      "name": "Why the smallest choice works",
-      "frame": 10429,
+      "name": "Why the rule works",
+      "frame": 10642,
       "type": "default.normal",
-      "notes": "Why can that boundary be trusted? Imagine a cheaper undiscovered route to the point we are about to settle. It must leave our settled region somewhere. But our frontier already contains the cheapest available unfinished estimate, and every remaining connection has a nonnegative cost. Continuing farther cannot secretly subtract distance. That is the intuition behind the rule. Negative links would break this argument, which is why the graph's cost assumptions are part of the algorithm, not fine print.",
+      "notes": "Why trust the smallest unfinished score? Every connection in our picture adds a positive cost. Suppose the cheapest unfinished dot costs eight. A route that first goes through an unfinished dot costing ten cannot come back and beat eight; adding more positive prices only makes ten larger. That is the key idea behind the recipe. Zero-cost connections also work. Negative prices would break this reasoning, so this version of the algorithm requires costs that never go below zero.",
       "id": "05-11",
-      "chapter": "Build the mechanism",
-      "animation_end_frame": 10561
+      "chapter": "Try it yourself",
+      "animation_end_frame": 10774
     },
     {
-      "name": "Recover the actual journey",
-      "frame": 11525,
+      "name": "Remember the way back",
+      "frame": 11738,
       "type": "default.normal",
-      "notes": "We have a cost, but a packet needs a route. Each improvement saved a predecessor: the point that gave us the better estimate. Begin at F and follow those clues backward: E, D, B, C, A. Reverse that chain and the forward route appears. The distance number tells us how much the best journey costs; the predecessor chain tells us which journey achieved it. Without those saved clues, the cheapest total alone would not draw the path for us.",
+      "notes": "A score tells us the price, but how do we recover the actual route? Whenever a score improves, remember which dot supplied that improvement. F remembers E. E remembers D. D remembers B. B remembers C, and C remembers A. Follow those reminders backward and you arrive home. Now reverse the list to get the travel directions. There is no need to try all the routes again. We saved just enough information while improving the numbers.",
       "id": "05-12",
-      "chapter": "Test the idea",
-      "animation_end_frame": 11822
+      "chapter": "Try it yourself",
+      "animation_end_frame": 12035
     },
     {
-      "name": "Send a packet along the answer",
-      "frame": 12635,
+      "name": "Walk the winning route",
+      "frame": 12808,
       "type": "default.normal",
-      "notes": "Now let the packet travel from A through C, B, D, E, and finally F. Add each link as it moves: two, three, eight, ten, thirteen. The arithmetic and the picture describe the same thing at different scales. A only needs C as its immediate next step toward this destination. We are showing a route on a small teaching graph; actual routing systems apply their own rules when they turn such calculations into forwarding decisions.",
+      "notes": "Let's take the journey ourselves: A to C, C to B, B to D, D to E, and E to F. The connection prices are two, one, five, two, and three. Keep a running total as the packet moves: two, three, eight, ten, thirteen. Five steps beat the three-step route that cost fifteen. A drawing can make one line look short and another look long. The numbers, rather than the shape of our drawing, decide the winner.",
       "id": "05-13",
-      "chapter": "Test the idea",
-      "animation_end_frame": 13016
+      "chapter": "Try it yourself",
+      "animation_end_frame": 13189
     },
     {
-      "name": "Take away a connection",
-      "frame": 13691,
+      "name": "What if a connection breaks?",
+      "frame": 13891,
       "type": "default.normal",
-      "notes": "Suppose the connection between D and E fails. Our thirteen-cost route no longer exists. Keeping the old answer would be wonderfully efficient right up until the packet reaches the missing connection. So change the graph and ask the same question again. We are not changing the meaning of cheapest, and we do not need a new algorithm. We need to run the calculation against the connections that are actually available now, rather than the ones we remember.",
+      "notes": "Now remove the connection between D and E. The old winning route runs straight into a missing line. We cannot repair it simply by pretending the old answer is still true. Update the map and run the same recipe again. Some scores may stay the same, because their routes never needed that connection. Others will change. This is a useful networking lesson: a good set of directions depends on an accurate picture of which connections are available.",
       "id": "05-14",
-      "chapter": "Test the idea",
-      "animation_end_frame": 13937
+      "chapter": "Try it yourself",
+      "animation_end_frame": 14137
     },
     {
-      "name": "Recalculate against the new graph",
-      "frame": 14774,
+      "name": "Find the new winner",
+      "frame": 14974,
       "type": "default.normal",
-      "notes": "Without that connection, A to C to B to D to F costs two plus one plus five plus six: fourteen. The route through C and E costs two plus ten plus three: fifteen. Fourteen wins. The updated distances keep E at twelve and reach F at fourteen. A failure does not mean every earlier number must change, but none should be trusted merely because it appeared in yesterday's answer. The graph determines what the calculation can justify today.",
+      "notes": "With that line gone, try A to C to B to D to F. Its prices add to two plus one plus five plus six: fourteen. The route through C and E costs two plus ten plus three: fifteen. Fourteen wins. The updated calculation gives E a score of twelve and F a score of fourteen. We did not invent a special rule for broken connections. We changed the map, then let the same small comparisons find the new answer.",
       "id": "05-15",
-      "chapter": "Test the idea",
-      "animation_end_frame": 15245
+      "chapter": "See the whole picture",
+      "animation_end_frame": 15445
     },
     {
-      "name": "Answer the opening question",
-      "frame": 15884,
+      "name": "A big answer from small steps",
+      "frame": 16097,
       "type": "default.normal",
-      "notes": "Return to the two routes we started with. The shortest-looking line was never the right test. The useful question was which complete journey had the lowest sum, and Dijkstra answered by growing a trustworthy boundary of distances. Small comparisons produced a global result, then the same method adapted to a changed connection. That is the satisfying idea to keep: we did not need to guess the whole winning route. We built enough correct local knowledge to reveal it.",
+      "notes": "We began with one message and a few connected dots. A line had a price, a route added those prices, and a score remembered the best total found so far. Dijkstra's method chose the cheapest unfinished score and improved its neighbors, one step at a time. That simple routine revealed a whole route. So next time a winding path beats a tidy shortcut, it will not feel mysterious. More steps can cost less when the steps themselves are cheaper.",
       "id": "05-16",
-      "chapter": "The answer",
-      "animation_end_frame": 16199
+      "chapter": "See the whole picture",
+      "animation_end_frame": 16412
     }
   ],
   "captions": [
     [
       0.0,
       5.028571428571429,
-      "Which route would you choose for this packet?\nThe one with"
+      "Imagine sending a photo to a friend. Your\ncomputer cannot jump"
     ],
     [
       5.028571428571429,
       10.057142857142859,
-      "three connections looks shorter than the\nwinding one with five. But"
+      "straight into their computer. The photo\ntravels through connected machines. We"
     ],
     [
       10.057142857142859,
       15.085714285714287,
-      "a network does not pay for how tidy a route\nlooks"
+      "draw each machine as a dot and each connection\nas a"
     ],
     [
       15.085714285714287,
       20.114285714285717,
-      "on a drawing. It pays the cost of every\nconnection it"
+      "line. A small piece of the photo, called a\npacket, moves"
     ],
     [
       20.114285714285717,
       25.142857142857142,
-      "uses. In a moment, that longer-looking path\nwill beat the shortcut."
+      "along those lines. Some machines pass it\nonward; these are routers."
     ],
     [
       25.142857142857142,
       30.171428571428574,
-      "The interesting question is how to discover it\nwithout trying every"
+      "For now, forget the big internet. We only need\na starting"
     ],
     [
       30.171428571428574,
       35.2,
-      "possible journey. That is the puzzle\nDijkstra's algorithm solves."
+      "dot, an ending dot, and a path between them."
     ],
     [
       35.2,
-      40.03809523809524,
-      "Here is our small world: six points, nine\nconnections, and a"
+      40.228571428571435,
+      "Now give each connection a price. These\nnumbers are made-up points,"
     ],
     [
-      40.03809523809524,
-      44.87619047619047,
-      "positive number on each connection. A point\ncould represent a router,"
+      40.228571428571435,
+      45.25714285714286,
+      "so a four costs twice as much as a two. Going"
     ],
     [
-      44.87619047619047,
-      49.714285714285715,
-      "but the algorithm only needs the graph. The\nnumbers are illustrative"
+      45.25714285714286,
+      50.28571428571429,
+      "straight from A to B costs four. But watch the\nother"
     ],
     [
-      49.714285714285715,
-      54.55238095238095,
-      "costs, not automatically seconds or\nkilometers. We choose what they mean"
+      50.28571428571429,
+      55.31428571428572,
+      "way: A to C costs two, then C to B costs"
     ],
     [
-      54.55238095238095,
-      59.39047619047619,
-      "before asking for the cheapest route. Keep\nyour eye on A,"
+      55.31428571428572,
+      60.34285714285714,
+      "one. Two plus one is three. Taking two steps\nwas cheaper"
     ],
     [
-      59.39047619047619,
-      64.22857142857143,
-      "our starting point, and F, our destination.\nEverything else is a"
+      60.34285714285714,
+      65.37142857142858,
+      "than taking one! That is our whole puzzle:\nfind the route"
     ],
     [
-      64.22857142857143,
-      69.06666666666666,
-      "possible intermediate step in their journey."
+      65.37142857142858,
+      70.4,
+      "with the smallest total, rather than the\nfewest lines."
     ],
     [
-      69.06666666666666,
-      73.97142857142858,
-      "Follow A to B, B to D, then D to F."
+      70.4,
+      75.23809523809524,
+      "Let's add a few more machines. Our starting\npoint is still"
     ],
     [
-      73.97142857142858,
-      78.87619047619047,
-      "The costs are four, five, and six, totaling\nfifteen. Now take"
+      75.23809523809524,
+      80.07619047619048,
+      "A, but now we want to reach F. The red route"
     ],
     [
-      78.87619047619047,
-      83.78095238095239,
-      "A to C to B to D to E to F."
+      80.07619047619048,
+      84.91428571428571,
+      "costs four, then five, then six: fifteen\naltogether. The green route"
     ],
     [
-      83.78095238095239,
-      88.68571428571428,
-      "Two, one, five, two, three: thirteen. More\nconnections, smaller bill. Try"
+      84.91428571428571,
+      89.75238095238095,
+      "takes more steps, yet its prices add to\nthirteen. You can"
     ],
     [
-      88.68571428571428,
-      93.5904761904762,
-      "predicting the winner from the picture alone\nand it is easy"
+      89.75238095238095,
+      94.5904761904762,
+      "compare these two by eye. On a huge map,\nguessing every"
     ],
     [
-      93.5904761904762,
-      98.49523809523811,
-      "to get fooled. The numbers describe our\nobjective, so the complete"
+      94.5904761904762,
+      99.42857142857143,
+      "route would get messy. We need a repeatable\nrecipe. That recipe"
     ],
     [
-      98.49523809523811,
-      103.4,
-      "sum must decide which route is better."
+      99.42857142857143,
+      104.26666666666667,
+      "has a name: Dijkstra's shortest-path\nalgorithm."
     ],
     [
-      103.4,
-      108.3047619047619,
-      "Instead of guessing a complete route, we will\ngrow a region"
+      104.26666666666667,
+      109.36190476190477,
+      "Start with a fresh scorecard beside our map.\nEach score means"
     ],
     [
-      108.3047619047619,
-      113.20952380952382,
-      "of known shortest distances. A starts at zero\nbecause reaching the"
+      109.36190476190477,
+      114.45714285714286,
+      "the cheapest total we have found so far from\nA. A"
     ],
     [
-      113.20952380952382,
-      118.11428571428571,
-      "place where we already are costs nothing.\nEvery other point begins"
+      114.45714285714286,
+      119.55238095238096,
+      "starts at zero because we are already there.\nEverywhere else gets"
     ],
     [
-      118.11428571428571,
-      123.01904761904761,
-      "at infinity, our shorthand for no route\ndiscovered yet. These are"
+      119.55238095238096,
+      124.64761904761905,
+      "a question mark: we have not found a route\nyet. Books"
     ],
     [
-      123.01904761904761,
-      127.92380952380952,
-      "distance estimates, not numbers written on the\nlinks. The central rule"
+      124.64761904761905,
+      129.74285714285713,
+      "often use this sideways eight, called\ninfinity, for those unknown scores."
     ],
     [
-      127.92380952380952,
-      132.82857142857142,
-      "is simple: choose the smallest unfinished\nestimate, settle it, and check"
+      129.74285714285713,
+      134.83809523809524,
+      "It does not mean the machines are impossibly\nfar away. It"
     ],
     [
-      132.82857142857142,
-      137.73333333333332,
-      "whether going through it improves any\nneighbor."
+      134.83809523809524,
+      139.93333333333334,
+      "means we still need to discover how to reach\nthem."
     ],
     [
-      137.73333333333332,
-      142.82857142857142,
-      "A is the only point with a finite estimate, so\nit"
+      139.93333333333334,
+      144.9,
+      "Look at the lines leaving A. We can reach B\nfor"
     ],
     [
-      142.82857142857142,
-      147.92380952380952,
-      "is settled first. Its connection to B offers a\ndistance of"
+      144.9,
+      149.86666666666667,
+      "four points, so write four beside B. We can\nreach C"
     ],
     [
-      147.92380952380952,
-      153.01904761904763,
-      "four; its connection to C offers two. Write\nboth as tentative"
+      149.86666666666667,
+      154.83333333333334,
+      "for two points, so write two beside C. Which\nunfinished score"
     ],
     [
-      153.01904761904763,
-      158.1142857142857,
-      "results. Tentative matters: discovering a\nroute to B does not mean"
+      154.83333333333334,
+      159.79999999999998,
+      "is smaller? C, with two. That is where we look\nnext."
     ],
     [
-      158.1142857142857,
-      163.2095238095238,
-      "we have discovered the cheapest route to B. We\nhave only"
+      159.79999999999998,
+      164.76666666666665,
+      "We always choose the smallest unfinished\nscore, then check its neighboring"
     ],
     [
-      163.2095238095238,
-      168.3047619047619,
-      "found the best one so far. Which unfinished\npoint should we"
+      164.76666666666665,
+      169.73333333333332,
+      "dots. Green will mean a score is finished.\nYellow will mean"
     ],
     [
-      168.3047619047619,
-      173.4,
-      "explore next? Choose the smallest estimate,\nnot the closest-looking dot."
+      169.73333333333332,
+      174.7,
+      "we have found an improvement worth writing\ndown."
     ],
     [
-      173.4,
-      178.23809523809524,
-      "C wins with distance two. Explore its\nconnections and something useful"
+      174.7,
+      179.7952380952381,
+      "We have reached C for two points. From here, B\ncosts"
     ],
     [
-      178.23809523809524,
-      183.07619047619048,
-      "happens. Through C, reaching B costs two plus\none: three. That"
+      179.7952380952381,
+      184.8904761904762,
+      "only one more. Add them: two plus one makes\nthree. Our"
     ],
     [
-      183.07619047619048,
-      187.9142857142857,
-      "improves B's earlier four, so replace the\nestimate and remember C"
+      184.8904761904762,
+      189.9857142857143,
+      "old score for B was four, so replace it with\nthree."
     ],
     [
-      187.9142857142857,
-      192.75238095238097,
-      "as B's predecessor. Through C, we also\ndiscover D at ten"
+      189.9857142857143,
+      195.08095238095237,
+      "We just found the little shortcut from\nearlier! Also check C's"
     ],
     [
-      192.75238095238097,
-      197.5904761904762,
-      "and E at twelve. This repeated operation is\ncalled relaxation. The"
+      195.08095238095237,
+      200.17619047619047,
+      "other connections. D would cost two plus\neight, or ten. E"
     ],
     [
-      197.5904761904762,
-      202.42857142857144,
-      "word sounds restful, but the job is simply\ncomparing an old"
+      200.17619047619047,
+      205.27142857142857,
+      "would cost two plus ten, or twelve. Write\nthose down as"
     ],
     [
-      202.42857142857144,
-      207.26666666666668,
-      "estimate with a newly discovered candidate."
+      205.27142857142857,
+      210.36666666666667,
+      "possible routes. A score can improve before it\nbecomes final."
     ],
     [
-      207.26666666666668,
-      212.29523809523812,
-      "Now B has the smallest unfinished distance:\nthree. Its connection to"
+      210.36666666666667,
+      214.93333333333334,
+      "Our unfinished scores are now three at B, ten\nat D,"
     ],
     [
-      212.29523809523812,
-      217.32380952380953,
-      "D costs five. Add that connection to the known\ncost of"
+      214.93333333333334,
+      219.5,
+      "and twelve at E. Choose B because three is the\nsmallest."
     ],
     [
-      217.32380952380953,
-      222.35238095238097,
-      "reaching B, and the candidate for D becomes\neight. Eight beats"
+      219.5,
+      224.06666666666666,
+      "From B, the connection to D costs five. We\nhave already"
     ],
     [
-      222.35238095238097,
-      227.38095238095238,
-      "ten, so update D and save B as its\npredecessor. Notice"
+      224.06666666666666,
+      228.63333333333333,
+      "spent three getting to B, so the whole journey\nto D"
     ],
     [
-      227.38095238095238,
-      232.40952380952382,
-      "what the calculation includes. We are not\nchoosing the cheapest outgoing"
+      228.63333333333333,
+      233.20000000000002,
+      "costs eight. Eight beats the old ten. Cross\nout ten and"
     ],
     [
-      232.40952380952382,
-      237.43809523809523,
-      "connection in isolation. Every candidate\nincludes the entire cost already spent"
+      233.20000000000002,
+      237.76666666666668,
+      "write eight. Notice that we are adding to the\njourney so"
     ],
     [
-      237.43809523809523,
-      242.46666666666667,
-      "getting to the point where this new step\nbegins."
+      237.76666666666668,
+      242.33333333333334,
+      "far, not choosing a connection only because\nits own price looks"
     ],
     [
-      242.46666666666667,
-      247.4952380952381,
-      "D is next at eight. Through D, E improves from\ntwelve"
+      242.33333333333334,
+      246.9,
+      "small."
     ],
     [
-      247.4952380952381,
-      252.52380952380952,
-      "to ten, and F appears with distance fourteen.\nWe have reached"
+      246.9,
+      251.92857142857144,
+      "D now has the smallest unfinished score:\neight. Finish D and"
     ],
     [
-      252.52380952380952,
-      257.552380952381,
-      "the destination in our search. Should we stop?\nHold that thought."
+      251.92857142857144,
+      256.95714285714286,
+      "look outward. Reaching E through D costs eight\nplus two, which"
     ],
     [
-      257.552380952381,
-      262.5809523809524,
-      "Fourteen is still an unfinished estimate, and\nE is waiting with"
+      256.95714285714286,
+      261.9857142857143,
+      "is ten. That improves E's old twelve. Reaching\nF through D"
     ],
     [
-      262.5809523809524,
-      267.6095238095238,
-      "a smaller distance of ten. If the remaining\nlink from E"
+      261.9857142857143,
+      267.01428571428573,
+      "costs eight plus six, which is fourteen. At\nlast, we have"
     ],
     [
-      267.6095238095238,
-      272.6380952380953,
-      "offers a better total, stopping now would miss\nit. Discovering the"
+      267.01428571428573,
+      272.04285714285714,
+      "found a route to our destination! But wait\nbefore celebrating. Fourteen"
     ],
     [
-      272.6380952380953,
-      277.6666666666667,
-      "destination is different from proving its\ndistance is final."
+      272.04285714285714,
+      277.0714285714286,
+      "is the best answer we have found so far.\nAnother unfinished"
     ],
     [
-      277.6666666666667,
-      282.6333333333333,
-      "Settle E at ten. Its connection to F costs\nthree, making"
+      277.0714285714286,
+      282.1,
+      "dot might still lead us to a cheaper route."
     ],
     [
-      282.6333333333333,
-      287.6,
-      "thirteen. That beats F's fourteen, so the\nestimate changes and its"
+      282.1,
+      287.25714285714287,
+      "The next smallest unfinished score is E at\nten. Its connection"
     ],
     [
-      287.6,
-      292.56666666666666,
-      "predecessor becomes E. This is the same small\noperation we have"
+      287.25714285714287,
+      292.4142857142857,
+      "to F costs three. Ten plus three is thirteen,\nbeating the"
     ],
     [
-      292.56666666666666,
-      297.53333333333336,
-      "used all along: known distance plus link cost,\ncompared with the"
+      292.4142857142857,
+      297.57142857142856,
+      "fourteen we just wrote down. Replace it. This\nis why finding"
     ],
     [
-      297.53333333333336,
-      302.5,
-      "current estimate. There is no special clever\ntrick for the destination."
+      297.57142857142856,
+      302.72857142857146,
+      "the destination once was not enough. The first\nroute we noticed"
     ],
     [
-      302.5,
-      307.4666666666667,
-      "The repeated local calculation is enough to\nuncover a complete route"
+      302.72857142857146,
+      307.8857142857143,
+      "was useful, but it was not the winner. Our\nrule stayed"
     ],
     [
-      307.4666666666667,
-      312.43333333333334,
-      "that our first visual guess failed to\nrecognize."
+      307.8857142857143,
+      313.04285714285714,
+      "exactly the same: choose the smallest\nunfinished score, add the next"
     ],
     [
-      312.43333333333334,
-      317.46190476190475,
-      "F now has the smallest unfinished estimate,\nthirteen, so settle it."
+      313.04285714285714,
+      318.2,
+      "connection's price, and keep the result only\nwhen it improves something."
     ],
     [
-      317.46190476190475,
-      322.4904761904762,
-      "Our final distances from A are zero for A,\nthree for"
+      318.2,
+      322.76666666666665,
+      "F now has the smallest unfinished score,\nthirteen. When we choose"
     ],
     [
-      322.4904761904762,
-      327.5190476190476,
-      "B, two for C, eight for D, ten for E, and"
+      322.76666666666665,
+      327.3333333333333,
+      "it, that score becomes final. We can stop if F\nwas"
     ],
     [
-      327.5190476190476,
-      332.54761904761904,
-      "thirteen for F. Watch the green settled region\nfinish growing. Each"
+      327.3333333333333,
+      331.9,
+      "our only destination. If we wanted answers for\nevery machine, we"
     ],
     [
-      332.54761904761904,
-      337.57619047619045,
-      "number was earned by a comparison, rather than\ncopied from a"
+      331.9,
+      336.4666666666667,
+      "would keep following the same rule until all\nreachable dots were"
     ],
     [
-      337.57619047619045,
-      342.6047619047619,
-      "completed answer. The destination's cost is\nnow final because it has"
+      336.4666666666667,
+      341.03333333333336,
+      "finished. The changing numbers were not random\nguesses. Each one described"
     ],
     [
-      342.6047619047619,
-      347.6333333333333,
-      "crossed the same settled boundary as the\nearlier points."
+      341.03333333333336,
+      345.6,
+      "a real route we had found, and each\nreplacement made that"
     ],
     [
-      347.6333333333333,
-      352.2,
-      "Why can that boundary be trusted? Imagine a\ncheaper undiscovered route"
+      345.6,
+      350.1666666666667,
+      "route cheaper. Green marks the point where we\nknow it cannot"
     ],
     [
-      352.2,
-      356.76666666666665,
-      "to the point we are about to settle. It must\nleave"
+      350.1666666666667,
+      354.73333333333335,
+      "improve."
     ],
     [
-      356.76666666666665,
-      361.3333333333333,
-      "our settled region somewhere. But our frontier\nalready contains the cheapest"
+      354.73333333333335,
+      359.3,
+      "Why trust the smallest unfinished score? Every\nconnection in our picture"
     ],
     [
-      361.3333333333333,
-      365.9,
-      "available unfinished estimate, and every\nremaining connection has a nonnegative cost."
+      359.3,
+      363.8666666666667,
+      "adds a positive cost. Suppose the cheapest\nunfinished dot costs eight."
     ],
     [
-      365.9,
-      370.4666666666667,
-      "Continuing farther cannot secretly subtract\ndistance. That is the intuition behind"
+      363.8666666666667,
+      368.43333333333334,
+      "A route that first goes through an unfinished\ndot costing ten"
     ],
     [
-      370.4666666666667,
-      375.03333333333336,
-      "the rule. Negative links would break this\nargument, which is why"
+      368.43333333333334,
+      373.0,
+      "cannot come back and beat eight; adding more\npositive prices only"
     ],
     [
-      375.03333333333336,
-      379.6,
-      "the graph's cost assumptions are part of the\nalgorithm, not fine"
+      373.0,
+      377.56666666666666,
+      "makes ten larger. That is the key idea behind\nthe recipe."
     ],
     [
-      379.6,
-      384.1666666666667,
-      "print."
+      377.56666666666666,
+      382.1333333333333,
+      "Zero-cost connections also work. Negative\nprices would break this reasoning, so"
     ],
     [
-      384.1666666666667,
-      388.7916666666667,
-      "We have a cost, but a packet needs a route.\nEach"
+      382.1333333333333,
+      386.7,
+      "this version of the algorithm requires costs\nthat never go below"
     ],
     [
-      388.7916666666667,
-      393.4166666666667,
-      "improvement saved a predecessor: the point\nthat gave us the better"
+      386.7,
+      391.26666666666665,
+      "zero."
     ],
     [
-      393.4166666666667,
-      398.0416666666667,
-      "estimate. Begin at F and follow those clues\nbackward: E, D,"
+      391.26666666666665,
+      396.3619047619047,
+      "A score tells us the price, but how do we\nrecover"
     ],
     [
-      398.0416666666667,
-      402.6666666666667,
-      "B, C, A. Reverse that chain and the forward\nroute appears."
+      396.3619047619047,
+      401.45714285714286,
+      "the actual route? Whenever a score improves,\nremember which dot supplied"
     ],
     [
-      402.6666666666667,
-      407.2916666666667,
-      "The distance number tells us how much the best\njourney costs;"
+      401.45714285714286,
+      406.55238095238093,
+      "that improvement. F remembers E. E remembers\nD. D remembers B."
     ],
     [
-      407.2916666666667,
-      411.9166666666667,
-      "the predecessor chain tells us which journey\nachieved it. Without those"
+      406.55238095238093,
+      411.64761904761906,
+      "B remembers C, and C remembers A. Follow those\nreminders backward"
     ],
     [
-      411.9166666666667,
-      416.5416666666667,
-      "saved clues, the cheapest total alone would\nnot draw the path"
+      411.64761904761906,
+      416.74285714285713,
+      "and you arrive home. Now reverse the list to\nget the"
     ],
     [
-      416.5416666666667,
-      421.1666666666667,
-      "for us."
+      416.74285714285713,
+      421.83809523809526,
+      "travel directions. There is no need to try all\nthe routes"
     ],
     [
-      421.1666666666667,
-      426.1952380952381,
-      "Now let the packet travel from A through C, B,\nD,"
+      421.83809523809526,
+      426.93333333333334,
+      "again. We saved just enough information while\nimproving the numbers."
     ],
     [
-      426.1952380952381,
-      431.22380952380956,
-      "E, and finally F. Add each link as it moves:\ntwo,"
+      426.93333333333334,
+      432.0904761904762,
+      "Let's take the journey ourselves: A to C, C to\nB,"
     ],
     [
-      431.22380952380956,
-      436.252380952381,
-      "three, eight, ten, thirteen. The arithmetic\nand the picture describe the"
+      432.0904761904762,
+      437.2476190476191,
+      "B to D, D to E, and E to F. The"
     ],
     [
-      436.252380952381,
-      441.2809523809524,
-      "same thing at different scales. A only needs C\nas its"
+      437.2476190476191,
+      442.4047619047619,
+      "connection prices are two, one, five, two, and\nthree. Keep a"
     ],
     [
-      441.2809523809524,
-      446.3095238095238,
-      "immediate next step toward this destination.\nWe are showing a route"
+      442.4047619047619,
+      447.56190476190477,
+      "running total as the packet moves: two, three,\neight, ten, thirteen."
     ],
     [
-      446.3095238095238,
-      451.33809523809526,
-      "on a small teaching graph; actual routing\nsystems apply their own"
+      447.56190476190477,
+      452.7190476190476,
+      "Five steps beat the three-step route that cost\nfifteen. A drawing"
     ],
     [
-      451.33809523809526,
-      456.3666666666667,
-      "rules when they turn such calculations into\nforwarding decisions."
+      452.7190476190476,
+      457.8761904761905,
+      "can make one line look short and another look\nlong. The"
     ],
     [
-      456.3666666666667,
-      461.5238095238095,
-      "Suppose the connection between D and E fails.\nOur thirteen-cost route"
+      457.8761904761905,
+      463.03333333333336,
+      "numbers, rather than the shape of our drawing,\ndecide the winner."
     ],
     [
-      461.5238095238095,
-      466.68095238095236,
-      "no longer exists. Keeping the old answer would\nbe wonderfully efficient"
+      463.03333333333336,
+      468.1904761904762,
+      "Now remove the connection between D and E. The\nold winning"
     ],
     [
-      466.68095238095236,
-      471.8380952380952,
-      "right up until the packet reaches the missing\nconnection. So change"
+      468.1904761904762,
+      473.34761904761905,
+      "route runs straight into a missing line. We\ncannot repair it"
     ],
     [
-      471.8380952380952,
-      476.9952380952381,
-      "the graph and ask the same question again. We\nare not"
+      473.34761904761905,
+      478.5047619047619,
+      "simply by pretending the old answer is still\ntrue. Update the"
     ],
     [
-      476.9952380952381,
-      482.15238095238095,
-      "changing the meaning of cheapest, and we do\nnot need a"
+      478.5047619047619,
+      483.6619047619048,
+      "map and run the same recipe again. Some scores\nmay stay"
     ],
     [
-      482.15238095238095,
-      487.3095238095238,
-      "new algorithm. We need to run the calculation\nagainst the connections"
+      483.6619047619048,
+      488.81904761904764,
+      "the same, because their routes never needed\nthat connection. Others will"
     ],
     [
-      487.3095238095238,
-      492.46666666666664,
-      "that are actually available now, rather than\nthe ones we remember."
+      488.81904761904764,
+      493.9761904761905,
+      "change. This is a useful networking lesson: a\ngood set of"
     ],
     [
-      492.46666666666664,
-      497.09166666666664,
-      "Without that connection, A to C to B to D to"
+      493.9761904761905,
+      499.1333333333333,
+      "directions depends on an accurate picture of\nwhich connections are available."
     ],
     [
-      497.09166666666664,
-      501.71666666666664,
-      "F costs two plus one plus five plus six:\nfourteen. The"
+      499.1333333333333,
+      503.8125,
+      "With that line gone, try A to C to B to"
     ],
     [
-      501.71666666666664,
-      506.34166666666664,
-      "route through C and E costs two plus ten plus\nthree:"
+      503.8125,
+      508.4916666666667,
+      "D to F. Its prices add to two plus one plus"
     ],
     [
-      506.34166666666664,
-      510.9666666666667,
-      "fifteen. Fourteen wins. The updated distances\nkeep E at twelve and"
+      508.4916666666667,
+      513.1708333333333,
+      "five plus six: fourteen. The route through C\nand E costs"
     ],
     [
-      510.9666666666667,
-      515.5916666666667,
-      "reach F at fourteen. A failure does not mean\nevery earlier"
+      513.1708333333333,
+      517.85,
+      "two plus ten plus three: fifteen. Fourteen\nwins. The updated calculation"
     ],
     [
-      515.5916666666667,
-      520.2166666666667,
-      "number must change, but none should be trusted\nmerely because it"
+      517.85,
+      522.5291666666667,
+      "gives E a score of twelve and F a score of"
     ],
     [
-      520.2166666666667,
-      524.8416666666667,
-      "appeared in yesterday's answer. The graph\ndetermines what the calculation can"
+      522.5291666666667,
+      527.2083333333334,
+      "fourteen. We did not invent a special rule for\nbroken connections."
     ],
     [
-      524.8416666666667,
-      529.4666666666667,
-      "justify today."
+      527.2083333333334,
+      531.8875,
+      "We changed the map, then let the same small\ncomparisons find"
     ],
     [
-      529.4666666666667,
-      534.0333333333333,
-      "Return to the two routes we started with. The\nshortest-looking line"
+      531.8875,
+      536.5666666666667,
+      "the new answer."
     ],
     [
-      534.0333333333333,
-      538.6,
-      "was never the right test. The useful question\nwas which complete"
+      536.5666666666667,
+      541.1916666666667,
+      "We began with one message and a few connected\ndots. A"
     ],
     [
-      538.6,
-      543.1666666666667,
-      "journey had the lowest sum, and Dijkstra\nanswered by growing a"
+      541.1916666666667,
+      545.8166666666667,
+      "line had a price, a route added those prices,\nand a"
     ],
     [
-      543.1666666666667,
-      547.7333333333333,
-      "trustworthy boundary of distances. Small\ncomparisons produced a global result, then"
+      545.8166666666667,
+      550.4416666666667,
+      "score remembered the best total found so far.\nDijkstra's method chose"
     ],
     [
-      547.7333333333333,
-      552.3,
-      "the same method adapted to a changed\nconnection. That is the"
+      550.4416666666667,
+      555.0666666666667,
+      "the cheapest unfinished score and improved its\nneighbors, one step at"
     ],
     [
-      552.3,
-      556.8666666666667,
-      "satisfying idea to keep: we did not need to\nguess the"
+      555.0666666666667,
+      559.6916666666667,
+      "a time. That simple routine revealed a whole\nroute. So next"
     ],
     [
-      556.8666666666667,
-      561.4333333333334,
-      "whole winning route. We built enough correct\nlocal knowledge to reveal"
+      559.6916666666667,
+      564.3166666666667,
+      "time a winding path beats a tidy shortcut, it\nwill not"
     ],
     [
-      561.4333333333334,
-      566.0,
-      "it."
+      564.3166666666667,
+      568.9416666666667,
+      "feel mysterious. More steps can cost less when\nthe steps themselves"
+    ],
+    [
+      568.9416666666667,
+      573.5666666666667,
+      "are cheaper."
     ]
   ],
   "title": "The Shortest Route Can Have More Steps"

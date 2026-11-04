@@ -6,19 +6,19 @@ Guide subtitles use planned timing. Match final subtitles to your recording afte
 
 | Section | Start | Length | What to show | Recording cue |
 |---|---|---|---|---|
-| 01 | 00:00:00 | 34.33s | A crowd inside one strand | A crowd inside one strand |
-| 02 | 00:00:34 | 35.20s | Keep four conversations separate | Keep four conversations separate |
-| 03 | 00:01:09 | 33.87s | Measure the spacing of crests | Measure the spacing of crests |
-| 04 | 00:01:43 | 33.00s | Put data onto the light | Put data onto the light |
-| 05 | 00:02:16 | 34.33s | Why identity matters | Why identity matters |
-| 06 | 00:02:50 | 34.33s | Give each channel a wavelength | Give each channel a wavelength |
-| 07 | 00:03:25 | 33.43s | Combine at the multiplexer | Combine at the multiplexer |
-| 08 | 00:03:58 | 33.87s | Travel together | Travel together |
-| 09 | 00:04:32 | 31.67s | Separate at the destination | Separate at the destination |
-| 10 | 00:05:04 | 32.53s | Try selecting only one channel | Try selecting only one channel |
-| 11 | 00:05:36 | 32.53s | Add the channel rates | Add the channel rates |
-| 12 | 00:06:09 | 33.87s | Keep the units honest | Keep the units honest |
-| 13 | 00:06:42 | 35.67s | More channels need more room | More channels need more room |
-| 14 | 00:07:18 | 33.87s | Unequal channels still add | Unequal channels still add |
-| 15 | 00:07:52 | 34.33s | Connect the picture to research | Connect the picture to research |
-| 16 | 00:08:26 | 34.80s | Return to the single strand | Return to the single strand |
+| 01 | 00:00:00 | 34.33s | A message needs a path | A message needs a path |
+| 02 | 00:00:34 | 35.67s | Two choices can carry information | Two choices can carry information |
+| 03 | 00:01:10 | 35.20s | Meet the shape of light | Meet the shape of light |
+| 04 | 00:01:45 | 34.77s | Four senders want to talk | Four senders want to talk |
+| 05 | 00:02:19 | 36.10s | What if they look identical? | What if they look identical? |
+| 06 | 00:02:56 | 34.33s | Give each channel its own spacing | Give each channel its own spacing |
+| 07 | 00:03:30 | 34.77s | Combine the light | Combine the light |
+| 08 | 00:04:05 | 35.20s | Travel together through one fiber | Travel together through one fiber |
+| 09 | 00:04:40 | 36.10s | Sort the light at the end | Sort the light at the end |
+| 10 | 00:05:16 | 36.53s | Listen to just one conversation | Listen to just one conversation |
+| 11 | 00:05:53 | 36.10s | Count the information per second | Count the information per second |
+| 12 | 00:06:29 | 37.43s | Bits and bytes are different | Bits and bytes are different |
+| 13 | 00:07:06 | 36.53s | Why not add colors forever? | Why not add colors forever? |
+| 14 | 00:07:43 | 36.53s | Different channels can have different rates | Different channels can have different rates |
+| 15 | 00:08:19 | 37.00s | Predict one missing channel | Predict one missing channel |
+| 16 | 00:08:56 | 36.57s | One strand, several readable streams | One strand, several readable streams |

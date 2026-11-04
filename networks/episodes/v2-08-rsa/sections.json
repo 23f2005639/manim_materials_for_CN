@@ -1,717 +1,762 @@
 {
   "fps": 30,
-  "frames": 16889,
+  "frames": 17542,
   "sections": [
     {
-      "name": "The public lock puzzle",
+      "name": "Who can read this message?",
       "frame": 0,
       "type": "default.normal",
-      "notes": "Imagine publishing a lock that anyone can use to protect a message for you, while keeping the ability to open it to yourself. That sounds backwards if locking and unlocking require exactly the same secret. RSA makes the two operations different. We will build a tiny numerical example, watch a message change, and then recover it. The numbers are deliberately small enough to see; they are a teaching model, not a secure encryption system.",
+      "notes": "Suppose you send a friend a private message: meet at seven. On its journey, someone else might see the data. If the message is readable, that person can read it too. So we want to change it into something they cannot understand, then let our friend change it back. That process is encryption. A simple approach uses a shared secret. But here is a puzzle: how do we send privately to someone before we have shared that secret?",
       "id": "08-01",
-      "chapter": "The puzzle",
-      "animation_end_frame": 264
+      "chapter": "Start with the basics",
+      "animation_end_frame": 342
     },
     {
-      "name": "Easy forward, difficult backward",
-      "frame": 1043,
+      "name": "A lock with two different jobs",
+      "frame": 1096,
       "type": "default.normal",
-      "notes": "The public-key idea begins with an imbalance. Some calculations are easy to perform when you have the inputs, while reversing the result can be much harder without extra information. Multiplying two large primes is straightforward compared with recovering those primes from their product. RSA connects that hidden structure to a reversible message transformation. We will not pretend that multiplying numbers alone encrypts a message. The important part is how the product supports two related exponent operations.",
+      "notes": "Picture your friend handing out open padlocks while keeping the opening key. Anyone can put a message in a box and snap a lock shut. Only your friend can open it. RSA uses a mathematical version of two different jobs: a public rule for encrypting and a private rule for recovering the message. Computers represent messages as numbers, so our tiny demonstration will protect the number seven. The padlock is an analogy; the real work will be arithmetic.",
       "id": "08-02",
-      "chapter": "The puzzle",
-      "animation_end_frame": 1184
+      "chapter": "Start with the basics",
+      "animation_end_frame": 1300
     },
     {
-      "name": "Numbers that wrap around",
-      "frame": 2113,
+      "name": "Keep what is left over",
+      "frame": 2192,
       "type": "default.normal",
-      "notes": "Before the keys, meet the arithmetic. On this circle, counting past the final position wraps back to zero. Modulo fifty-five means keeping the remainder after division by fifty-five. Fifty-six lands at one, and one hundred and eleven also lands at one. Very different ordinary numbers can occupy the same position after wrapping. RSA uses this kind of modular arithmetic, so enormous powers can be handled through their remainders rather than written out in full.",
+      "notes": "Before any keys, we need one easy operation: a remainder. Put eleven counters into groups of five. Two full groups use ten counters, leaving one. Eleven divided by five has remainder one. The short mathematical name is modulo: eleven mod five equals one. We will later use groups of fifty-five, but the idea is identical. Keep what is left after removing complete groups. No mysterious new kind of number, just the leftover amount.",
       "id": "08-03",
-      "chapter": "The puzzle",
-      "animation_end_frame": 2430
+      "chapter": "Start with the basics",
+      "animation_end_frame": 2412
     },
     {
-      "name": "Choose two small primes",
-      "frame": 3156,
+      "name": "Build the number fifty-five",
+      "frame": 3222,
       "type": "default.normal",
-      "notes": "Choose five and eleven as our two primes. Their product is fifty-five, which becomes the modulus, n. That number is public. The prime factors are the extra structure we keep private when constructing a real key. Our example is intentionally easy to factor, so do not confuse visible small numbers with actual security. They let us inspect the mechanism. Larger keys make the underlying problem harder, but correct schemes need more than large numbers alone.",
+      "notes": "Choose five and eleven. Both are prime numbers: whole numbers greater than one that divide evenly only by one and themselves. Primes act like building blocks for multiplication. Multiply our two choices and we get fifty-five. That becomes the number we will use when keeping remainders. We call it n, simply a short label. Our public instructions will include fifty-five. The two factors, five and eleven, help us build the private instructions. These tiny numbers are for seeing the idea.",
       "id": "08-04",
-      "chapter": "The puzzle",
-      "animation_end_frame": 3261
+      "chapter": "Start with the basics",
+      "animation_end_frame": 3408
     },
     {
-      "name": "Count the useful positions",
-      "frame": 4212,
+      "name": "Find a useful repeating structure",
+      "frame": 4345,
       "type": "default.normal",
-      "notes": "Between zero and fifty-four, some positions share a factor with fifty-five. Highlight multiples of five, then multiples of eleven. The positions left over are relatively prime to fifty-five: their greatest common divisor with it is one. There are forty such positions. For distinct primes, that count is five minus one, multiplied by eleven minus one: four times ten. This count, called phi of n, helps us choose the relationship between the two exponents.",
+      "notes": "Why did we keep those two factors? They help describe a repeating pattern in the remainder arithmetic. Look at the numbers from zero through fifty-four. Cross out multiples of five and multiples of eleven. Forty positions remain. None of those shares a factor with fifty-five except one. For these primes, we can count them as four times ten: forty. Keep that number nearby. We will use its repeating structure to choose two operations that work together, rather than guessing a secret.",
       "id": "08-05",
-      "chapter": "Build the mechanism",
-      "animation_end_frame": 4398
+      "chapter": "Build the idea",
+      "animation_end_frame": 4531
     },
     {
-      "name": "Choose the public exponent",
-      "frame": 5242,
+      "name": "The public rule repeats a multiplication",
+      "frame": 5481,
       "type": "default.normal",
-      "notes": "Let the public exponent e be three. It must have a suitable inverse modulo our count of forty; three and forty are relatively prime, so that inverse exists. Publishing n and e gives the pair fifty-five and three. Someone protecting a message uses the public exponent operation with this modulus. Knowing the public numbers is expected. The system's intended security does not depend on keeping the public algorithm or the public key out of view.",
+      "notes": "Let our public instruction be: multiply three copies of the message number together, then keep the remainder after dividing by fifty-five. Three copies multiplied together is called the third power, or cubing. We label that power e, and choose e equal to three. The public key is just the pair fifty-five and three. Why this choice? Three and our count of forty share no factor above one, which lets us find a matching private power next.",
       "id": "08-06",
-      "chapter": "Build the mechanism",
-      "animation_end_frame": 5374
+      "chapter": "Build the idea",
+      "animation_end_frame": 5634
     },
     {
-      "name": "Find the matching private exponent",
-      "frame": 6298,
+      "name": "Choose a matching private rule",
+      "frame": 6551,
       "type": "default.normal",
-      "notes": "We need a private exponent d whose product with three leaves remainder one when divided by forty. Twenty-seven works: three times twenty-seven equals eighty-one, and eighty-one is one plus two times forty. So d is twenty-seven. Keep that relationship in view. The private operation is not an ordinary division by three. These exponents cooperate through modular arithmetic and the structure established by the prime factors, which is why the wrapping picture matters.",
+      "notes": "Now find a number which, when multiplied by three, leaves one after removing complete groups of forty. Twenty-seven works. Three times twenty-seven is eighty-one, and eighty-one is forty plus forty plus one. We label the matching private power d, so d is twenty-seven. Notice the important part: this number was chosen to fit the public operation. It is not an unrelated password. The relationship between three, twenty-seven, and forty is what will let the two operations cooperate.",
       "id": "08-07",
-      "chapter": "Build the mechanism",
-      "animation_end_frame": 6436
+      "chapter": "Build the idea",
+      "animation_end_frame": 6689
     },
     {
-      "name": "Encrypt the message seven",
-      "frame": 7314,
+      "name": "Turn seven into thirteen",
+      "frame": 7634,
       "type": "default.normal",
-      "notes": "Represent our message by the number seven. Raise it to the public exponent three: seven cubed is three hundred and forty-three. Divide by fifty-five and keep the remainder. Six lots of fifty-five make three hundred and thirty, leaving thirteen. That thirteen is our ciphertext in this toy example. Anyone with the public pair can perform this calculation. The interesting question is how the private exponent will recover seven from thirteen without ordinary cube-root arithmetic.",
+      "notes": "Time to send our tiny message, seven. Follow the public rule: seven times seven times seven is three hundred and forty-three. Remove complete groups of fifty-five. Six groups account for three hundred and thirty, leaving thirteen. That leftover number is the encrypted result, also called ciphertext. Seven has become thirteen. Anyone with the public pair fifty-five and three can perform this forward calculation. We have now watched encryption happen, using only multiplication and keeping a remainder.",
       "id": "08-08",
-      "chapter": "Build the mechanism",
-      "animation_end_frame": 7458
+      "chapter": "Build the idea",
+      "animation_end_frame": 7778
     },
     {
-      "name": "Keep the remainder as you go",
-      "frame": 8357,
+      "name": "Keep the numbers manageable",
+      "frame": 8704,
       "type": "default.normal",
-      "notes": "Huge exponents look intimidating if we imagine writing the entire power first. We do not have to. After a multiplication, keeping the remainder preserves what matters for subsequent modular multiplication. Follow the moving number around the fifty-five-position circle. It wraps, returns, and wraps again, while the remainder stays small. This is the intuition behind efficient modular exponentiation: repeatedly calculate with manageable remainders instead of carrying a giant ordinary integer all the way to the end.",
+      "notes": "The private rule asks us to use a much bigger power. Must we write an enormous number first? Happily, no. We can keep remainders while calculating. Start with thirteen. Square it, meaning multiply it by itself: one hundred and sixty-nine leaves four after division by fifty-five. Square that four to get sixteen. Square sixteen and keep its remainder, thirty-six. Each step keeps the same useful remainder information while preventing the working numbers from growing without limit.",
       "id": "08-09",
-      "chapter": "Make the math visible",
-      "animation_end_frame": 8561
+      "chapter": "Build the idea",
+      "animation_end_frame": 8908
     },
     {
-      "name": "Decrypt using twenty-seven",
-      "frame": 9413,
+      "name": "Bring the message back",
+      "frame": 9774,
       "type": "default.normal",
-      "notes": "Now apply the private exponent: thirteen to the power of twenty-seven, modulo fifty-five. The calculation returns seven. We have recovered the original message using a different exponent from the one that protected it. The public side used three; the private side used twenty-seven. Watch the ciphertext marker return to the message position. That reversal is the behavior our key construction was designed to produce, rather than an accidental property of one unconnected formula.",
+      "notes": "Now use the private power, twenty-seven. We can split it into sixteen plus eight plus two plus one. The boxes show the remainders of thirteen raised to those powers. Multiply those values together, keeping the remainder after each step. Watch the result settle on seven. We recovered the original message. Written compactly, thirteen to the power twenty-seven, mod fifty-five, equals seven. The arithmetic looks longer than encryption, but it uses the same two actions: multiply and keep a remainder.",
       "id": "08-10",
-      "chapter": "Make the math visible",
-      "animation_end_frame": 9680
+      "chapter": "Build the idea",
+      "animation_end_frame": 10041
     },
     {
-      "name": "Why those exponents cooperate",
-      "frame": 10443,
+      "name": "Why the pair fits together",
+      "frame": 10884,
       "type": "default.normal",
-      "notes": "For our message, which is relatively prime to fifty-five, the modular powers follow a repeating structure tied to the forty valid positions. Because the two exponents multiply to one plus a multiple of forty, applying them together returns the starting message. The animation shows that return, while the equation summarizes it. This is intuition for the mechanism, not a full number-theory proof. Our choice of message seven lets the relationship appear cleanly in the small example.",
+      "notes": "The interesting question is why seven returns. For numbers such as seven, which share no factor with fifty-five except one, these powers have a repeating structure linked to our count of forty. Encrypting with power three and decrypting with power twenty-seven combines into power eighty-one. That is one plus two times forty. The matching construction brings us back to the original value. The circle illustrates repetition; it is not a claim that every message takes exactly forty steps to repeat.",
       "id": "08-11",
-      "chapter": "Make the math visible",
-      "animation_end_frame": 10686
+      "chapter": "Test and understand",
+      "animation_end_frame": 11127
     },
     {
-      "name": "Test the wrong exponent",
-      "frame": 11513,
+      "name": "Try the wrong private number",
+      "frame": 12007,
       "type": "default.normal",
-      "notes": "Replace the private exponent with a guess. The same ciphertext generally lands somewhere else, rather than returning to seven. This makes the relationship between the exponents visible: the private operation is carefully chosen, not simply any different calculation. In this tiny example someone could quickly try all the possibilities, which is another reason it offers no security. The drawing demonstrates a mathematical construction. It does not demonstrate resistance to a determined attacker using realistic equipment.",
+      "notes": "What if we replace twenty-seven with a guess? Use five instead. The same encrypted number thirteen now produces forty-three, not seven. The right side uses twenty-seven and recovers seven. So the private rule is not simply any large number or any secret number. It must fit the public construction. This small experiment does not prove security. It shows what correctness requires: the intended pair must undo the message transformation, while an arbitrary guess generally does not.",
       "id": "08-12",
-      "chapter": "Make the math visible",
-      "animation_end_frame": 11690
+      "chapter": "Test and understand",
+      "animation_end_frame": 12184
     },
     {
-      "name": "What the hidden factors reveal",
-      "frame": 12569,
+      "name": "What must remain hard?",
+      "frame": 13077,
       "type": "default.normal",
-      "notes": "If someone factors fifty-five into five and eleven, they can calculate our count of forty and find a matching private exponent. That is why the factorization matters. In real RSA, the public modulus is vastly larger, and recovering its factors is intended to be computationally difficult for classical attackers using appropriate parameters. Factoring is a known way to recover the private information; we are not claiming every imaginable RSA attack must literally follow this exact route.",
+      "notes": "Our public key contains fifty-five, but not its two prime factors. If someone discovers five and eleven, they can repeat our private-key construction: calculate forty, then find the matching power twenty-seven. For fifty-five that is easy, which is why this example protects nothing. Real RSA uses far larger carefully generated primes. Multiplying them is practical, while recovering their factors from the product is intended to be difficult. The security depends on such mathematical assumptions and on correct implementation.",
       "id": "08-13",
-      "chapter": "Resolve the story",
-      "animation_end_frame": 12743
+      "chapter": "Test and understand",
+      "animation_end_frame": 13251
     },
     {
-      "name": "Textbook numbers are not enough",
-      "frame": 13639,
+      "name": "The tiny example needs boundaries",
+      "frame": 14173,
       "type": "default.normal",
-      "notes": "Our calculation directly transformed a small message number. Real encryption requires a suitable, carefully specified encoding and padding scheme, along with correct implementations and secure key handling. Repeating these tiny textbook operations is not a recipe for protecting personal messages. Keep the mathematical insight without mistaking the demonstration for deployable cryptography. Publishing a pair of numbers safely depends on the complete scheme, not only on whether a cube followed by another power returns the expected remainder.",
+      "notes": "There is another reason not to use our little calculation directly as real encryption. Encrypt seven twice with this bare rule and thirteen appears twice. That visible repetition can leak information. Practical encryption needs a complete, carefully designed encoding scheme that adds the right structure and randomness before the RSA operation. We are looking inside one mathematical mechanism, not building a safe messaging app. The small numbers let us understand the moving parts without pretending that understanding alone makes them secure.",
       "id": "08-14",
-      "chapter": "Resolve the story",
-      "animation_end_frame": 13795
+      "chapter": "Test and understand",
+      "animation_end_frame": 14329
     },
     {
-      "name": "Why this mathematics still matters",
-      "frame": 14709,
+      "name": "Connect the two kinds of rules",
+      "frame": 15309,
       "type": "default.normal",
-      "notes": "Interest in quantum-resistant cryptography makes these assumptions worth understanding. A sufficiently capable future quantum computer could threaten RSA's underlying problem, which is one reason organizations are preparing transitions. That does not mean our video has shown such a computer breaking a deployed key today. The lesson here remains RSA itself: identify what the public operation reveals, what the private structure enables, and which assumptions make the difference between an easy demonstration and a security claim.",
+      "notes": "Step back from the arithmetic. With a shared-secret method, the people communicating must have a suitable secret in common. With this public-key arrangement, the receiving person can publish the encrypting instructions and keep the recovery instructions private. The private key is related to the public key, but should be impractical to derive from it. That last condition matters. Publishing an operation is useful only if seeing how to perform it does not make recovering the private operation easy.",
       "id": "08-15",
-      "chapter": "Resolve the story",
-      "animation_end_frame": 14868
+      "chapter": "Test and understand",
+      "animation_end_frame": 15516
     },
     {
-      "name": "Return to the public lock",
-      "frame": 15765,
+      "name": "Rebuild the idea from the start",
+      "frame": 16405,
       "type": "default.normal",
-      "notes": "We can now replace the lock metaphor with something precise. The public pair fifty-five and three transformed seven into thirteen. The private exponent twenty-seven transformed thirteen back into seven. Prime factors helped construct the exponent relationship, and modular arithmetic made the two operations fit together. Anyone can perform the public calculation, while the intended private capability depends on information we keep. The remarkable idea is not hiding the instructions. It is publishing one useful operation without publishing its intended inverse.",
+      "notes": "We wanted to send a private message without first handing the sender our opening secret. The lock picture suggested separate public and private jobs. Our tiny RSA example made those jobs concrete: seven became thirteen using the public pair fifty-five and three; thirteen returned to seven using the private power twenty-seven. Remainders kept the arithmetic inside a limited set of values. The carefully chosen relationship made recovery work. That is the idea beneath RSA: shared public instructions, paired with private recovery.",
       "id": "08-16",
-      "chapter": "Resolve the story",
-      "animation_end_frame": 15963
+      "chapter": "Test and understand",
+      "animation_end_frame": 16603
     }
   ],
   "captions": [
     [
       0.0,
-      4.966666666666667,
-      "Imagine publishing a lock that anyone can use\nto protect a"
+      4.566666666666666,
+      "Suppose you send a friend a private message:\nmeet at seven."
     ],
     [
-      4.966666666666667,
-      9.933333333333334,
-      "message for you, while keeping the ability to\nopen it to"
+      4.566666666666666,
+      9.133333333333333,
+      "On its journey, someone else might see the\ndata. If the"
     ],
     [
-      9.933333333333334,
-      14.9,
-      "yourself. That sounds backwards if locking and\nunlocking require exactly the"
+      9.133333333333333,
+      13.7,
+      "message is readable, that person can read it\ntoo. So we"
     ],
     [
-      14.9,
-      19.866666666666667,
-      "same secret. RSA makes the two operations\ndifferent. We will build"
+      13.7,
+      18.266666666666666,
+      "want to change it into something they cannot\nunderstand, then let"
     ],
     [
-      19.866666666666667,
-      24.833333333333332,
-      "a tiny numerical example, watch a message\nchange, and then recover"
+      18.266666666666666,
+      22.833333333333332,
+      "our friend change it back. That process is\nencryption. A simple"
     ],
     [
-      24.833333333333332,
-      29.8,
-      "it. The numbers are deliberately small enough\nto see; they are"
+      22.833333333333332,
+      27.4,
+      "approach uses a shared secret. But here is a\npuzzle: how"
     ],
     [
-      29.8,
-      34.766666666666666,
-      "a teaching model, not a secure encryption\nsystem."
+      27.4,
+      31.966666666666665,
+      "do we send privately to someone before we have\nshared that"
     ],
     [
-      34.766666666666666,
-      39.86190476190476,
-      "The public-key idea begins with an imbalance.\nSome calculations are easy"
+      31.966666666666665,
+      36.53333333333333,
+      "secret?"
     ],
     [
-      39.86190476190476,
-      44.957142857142856,
-      "to perform when you have the inputs, while\nreversing the result"
+      36.53333333333333,
+      41.099999999999994,
+      "Picture your friend handing out open padlocks\nwhile keeping the opening"
     ],
     [
-      44.957142857142856,
-      50.05238095238096,
-      "can be much harder without extra information.\nMultiplying two large primes"
+      41.099999999999994,
+      45.666666666666664,
+      "key. Anyone can put a message in a box and\nsnap"
     ],
     [
-      50.05238095238096,
-      55.147619047619045,
-      "is straightforward compared with recovering\nthose primes from their product. RSA"
+      45.666666666666664,
+      50.233333333333334,
+      "a lock shut. Only your friend can open it. RSA\nuses"
     ],
     [
-      55.147619047619045,
-      60.24285714285715,
-      "connects that hidden structure to a reversible\nmessage transformation. We will"
+      50.233333333333334,
+      54.8,
+      "a mathematical version of two different jobs:\na public rule for"
     ],
     [
-      60.24285714285715,
-      65.33809523809524,
-      "not pretend that multiplying numbers alone\nencrypts a message. The important"
+      54.8,
+      59.36666666666666,
+      "encrypting and a private rule for recovering\nthe message. Computers represent"
     ],
     [
-      65.33809523809524,
-      70.43333333333334,
-      "part is how the product supports two related\nexponent operations."
+      59.36666666666666,
+      63.93333333333333,
+      "messages as numbers, so our tiny demonstration\nwill protect the number"
     ],
     [
-      70.43333333333334,
-      75.4,
-      "Before the keys, meet the arithmetic. On this\ncircle, counting past"
+      63.93333333333333,
+      68.5,
+      "seven. The padlock is an analogy; the real\nwork will be"
     ],
     [
-      75.4,
-      80.36666666666667,
-      "the final position wraps back to zero. Modulo\nfifty-five means keeping"
+      68.5,
+      73.06666666666666,
+      "arithmetic."
     ],
     [
-      80.36666666666667,
-      85.33333333333334,
-      "the remainder after division by fifty-five.\nFifty-six lands at one, and"
+      73.06666666666666,
+      77.97142857142858,
+      "Before any keys, we need one easy operation: a\nremainder. Put"
     ],
     [
-      85.33333333333334,
-      90.30000000000001,
-      "one hundred and eleven also lands at one. Very\ndifferent ordinary"
+      77.97142857142858,
+      82.87619047619047,
+      "eleven counters into groups of five. Two full\ngroups use ten"
     ],
     [
-      90.30000000000001,
-      95.26666666666667,
-      "numbers can occupy the same position after\nwrapping. RSA uses this"
+      82.87619047619047,
+      87.78095238095239,
+      "counters, leaving one. Eleven divided by five\nhas remainder one. The"
     ],
     [
-      95.26666666666667,
-      100.23333333333333,
-      "kind of modular arithmetic, so enormous powers\ncan be handled through"
+      87.78095238095239,
+      92.68571428571428,
+      "short mathematical name is modulo: eleven mod\nfive equals one. We"
     ],
     [
-      100.23333333333333,
-      105.2,
-      "their remainders rather than written out in\nfull."
+      92.68571428571428,
+      97.5904761904762,
+      "will later use groups of fifty-five, but the\nidea is identical."
     ],
     [
-      105.2,
-      110.22857142857143,
-      "Choose five and eleven as our two primes.\nTheir product is"
+      97.5904761904762,
+      102.49523809523811,
+      "Keep what is left after removing complete\ngroups. No mysterious new"
     ],
     [
-      110.22857142857143,
-      115.25714285714287,
-      "fifty-five, which becomes the modulus, n. That\nnumber is public. The"
+      102.49523809523811,
+      107.4,
+      "kind of number, just the leftover amount."
     ],
     [
-      115.25714285714287,
-      120.28571428571429,
-      "prime factors are the extra structure we keep\nprivate when constructing"
+      107.4,
+      112.07916666666668,
+      "Choose five and eleven. Both are prime\nnumbers: whole numbers greater"
     ],
     [
-      120.28571428571429,
-      125.31428571428572,
-      "a real key. Our example is intentionally easy\nto factor, so"
+      112.07916666666668,
+      116.75833333333334,
+      "than one that divide evenly only by one and\nthemselves. Primes"
     ],
     [
-      125.31428571428572,
-      130.34285714285716,
-      "do not confuse visible small numbers with\nactual security. They let"
+      116.75833333333334,
+      121.4375,
+      "act like building blocks for multiplication.\nMultiply our two choices and"
     ],
     [
-      130.34285714285716,
-      135.37142857142857,
-      "us inspect the mechanism. Larger keys make the\nunderlying problem harder,"
+      121.4375,
+      126.11666666666667,
+      "we get fifty-five. That becomes the number we\nwill use when"
     ],
     [
-      135.37142857142857,
-      140.4,
-      "but correct schemes need more than large\nnumbers alone."
+      126.11666666666667,
+      130.79583333333335,
+      "keeping remainders. We call it n, simply a\nshort label. Our"
     ],
     [
-      140.4,
-      145.3047619047619,
-      "Between zero and fifty-four, some positions\nshare a factor with fifty-five."
+      130.79583333333335,
+      135.47500000000002,
+      "public instructions will include fifty-five.\nThe two factors, five and eleven,"
     ],
     [
-      145.3047619047619,
-      150.2095238095238,
-      "Highlight multiples of five, then multiples of\neleven. The positions left"
+      135.47500000000002,
+      140.15416666666667,
+      "help us build the private instructions. These\ntiny numbers are for"
     ],
     [
-      150.2095238095238,
-      155.1142857142857,
-      "over are relatively prime to fifty-five: their\ngreatest common divisor with"
+      140.15416666666667,
+      144.83333333333334,
+      "seeing the idea."
     ],
     [
-      155.1142857142857,
-      160.01904761904763,
-      "it is one. There are forty such positions. For\ndistinct primes,"
+      144.83333333333334,
+      149.56666666666666,
+      "Why did we keep those two factors? They help\ndescribe a"
     ],
     [
-      160.01904761904763,
-      164.92380952380952,
-      "that count is five minus one, multiplied by\neleven minus one:"
+      149.56666666666666,
+      154.3,
+      "repeating pattern in the remainder arithmetic.\nLook at the numbers from"
     ],
     [
-      164.92380952380952,
-      169.82857142857142,
-      "four times ten. This count, called phi of n,\nhelps us"
+      154.3,
+      159.03333333333333,
+      "zero through fifty-four. Cross out multiples\nof five and multiples of"
     ],
     [
-      169.82857142857142,
-      174.73333333333332,
-      "choose the relationship between the two\nexponents."
+      159.03333333333333,
+      163.76666666666665,
+      "eleven. Forty positions remain. None of those\nshares a factor with"
     ],
     [
-      174.73333333333332,
-      179.76190476190476,
-      "Let the public exponent e be three. It must\nhave a"
+      163.76666666666665,
+      168.5,
+      "fifty-five except one. For these primes, we\ncan count them as"
     ],
     [
-      179.76190476190476,
-      184.79047619047617,
-      "suitable inverse modulo our count of forty;\nthree and forty are"
+      168.5,
+      173.23333333333332,
+      "four times ten: forty. Keep that number\nnearby. We will use"
     ],
     [
-      184.79047619047617,
-      189.8190476190476,
-      "relatively prime, so that inverse exists.\nPublishing n and e gives"
+      173.23333333333332,
+      177.96666666666664,
+      "its repeating structure to choose two\noperations that work together, rather"
     ],
     [
-      189.8190476190476,
-      194.84761904761905,
-      "the pair fifty-five and three. Someone\nprotecting a message uses the"
+      177.96666666666664,
+      182.7,
+      "than guessing a secret."
     ],
     [
-      194.84761904761905,
-      199.8761904761905,
-      "public exponent operation with this modulus.\nKnowing the public numbers is"
+      182.7,
+      187.7952380952381,
+      "Let our public instruction be: multiply three\ncopies of the message"
     ],
     [
-      199.8761904761905,
-      204.9047619047619,
-      "expected. The system's intended security does\nnot depend on keeping the"
+      187.7952380952381,
+      192.8904761904762,
+      "number together, then keep the remainder after\ndividing by fifty-five. Three"
     ],
     [
-      204.9047619047619,
-      209.93333333333334,
-      "public algorithm or the public key out of\nview."
+      192.8904761904762,
+      197.9857142857143,
+      "copies multiplied together is called the third\npower, or cubing. We"
     ],
     [
-      209.93333333333334,
-      214.77142857142857,
-      "We need a private exponent d whose product\nwith three leaves"
+      197.9857142857143,
+      203.08095238095237,
+      "label that power e, and choose e equal to\nthree. The"
     ],
     [
-      214.77142857142857,
-      219.6095238095238,
-      "remainder one when divided by forty. Twenty-\nseven works: three times twenty-seven"
+      203.08095238095237,
+      208.17619047619047,
+      "public key is just the pair fifty-five and\nthree. Why this"
     ],
     [
-      219.6095238095238,
-      224.44761904761904,
-      "equals eighty-one, and eighty-one is one plus\ntwo times forty. So"
+      208.17619047619047,
+      213.27142857142857,
+      "choice? Three and our count of forty share no\nfactor above"
     ],
     [
-      224.44761904761904,
-      229.2857142857143,
-      "d is twenty-seven. Keep that relationship in\nview. The private operation"
+      213.27142857142857,
+      218.36666666666667,
+      "one, which lets us find a matching private\npower next."
     ],
     [
-      229.2857142857143,
-      234.12380952380954,
-      "is not an ordinary division by three. These\nexponents cooperate through"
+      218.36666666666667,
+      223.52380952380952,
+      "Now find a number which, when multiplied by\nthree, leaves one"
     ],
     [
-      234.12380952380954,
-      238.96190476190478,
-      "modular arithmetic and the structure\nestablished by the prime factors, which"
+      223.52380952380952,
+      228.6809523809524,
+      "after removing complete groups of forty.\nTwenty-seven works. Three times twenty-seven"
     ],
     [
-      238.96190476190478,
-      243.8,
-      "is why the wrapping picture matters."
+      228.6809523809524,
+      233.83809523809524,
+      "is eighty-one, and eighty-one is forty plus\nforty plus one. We"
     ],
     [
-      243.8,
-      248.76666666666668,
-      "Represent our message by the number seven.\nRaise it to the"
+      233.83809523809524,
+      238.9952380952381,
+      "label the matching private power d, so d is\ntwenty-seven. Notice"
     ],
     [
-      248.76666666666668,
-      253.73333333333335,
-      "public exponent three: seven cubed is three\nhundred and forty-three. Divide"
+      238.9952380952381,
+      244.15238095238095,
+      "the important part: this number was chosen to\nfit the public"
     ],
     [
-      253.73333333333335,
-      258.7,
-      "by fifty-five and keep the remainder. Six lots\nof fifty-five make"
+      244.15238095238095,
+      249.30952380952382,
+      "operation. It is not an unrelated password.\nThe relationship between three,"
     ],
     [
-      258.7,
-      263.6666666666667,
-      "three hundred and thirty, leaving thirteen.\nThat thirteen is our ciphertext"
+      249.30952380952382,
+      254.46666666666667,
+      "twenty-seven, and forty is what will let the\ntwo operations cooperate."
     ],
     [
-      263.6666666666667,
-      268.6333333333333,
-      "in this toy example. Anyone with the public\npair can perform"
+      254.46666666666667,
+      259.56190476190477,
+      "Time to send our tiny message, seven. Follow\nthe public rule:"
     ],
     [
-      268.6333333333333,
-      273.6,
-      "this calculation. The interesting question is\nhow the private exponent will"
+      259.56190476190477,
+      264.65714285714284,
+      "seven times seven times seven is three hundred\nand forty-three. Remove"
     ],
     [
-      273.6,
-      278.56666666666666,
-      "recover seven from thirteen without ordinary\ncube-root arithmetic."
+      264.65714285714284,
+      269.752380952381,
+      "complete groups of fifty-five. Six groups\naccount for three hundred and"
     ],
     [
-      278.56666666666666,
-      283.5952380952381,
-      "Huge exponents look intimidating if we imagine\nwriting the entire power"
+      269.752380952381,
+      274.84761904761905,
+      "thirty, leaving thirteen. That leftover number\nis the encrypted result, also"
     ],
     [
-      283.5952380952381,
-      288.62380952380954,
-      "first. We do not have to. After a\nmultiplication, keeping the"
+      274.84761904761905,
+      279.9428571428571,
+      "called ciphertext. Seven has become thirteen.\nAnyone with the public pair"
     ],
     [
-      288.62380952380954,
-      293.65238095238095,
-      "remainder preserves what matters for\nsubsequent modular multiplication. Follow the\nmoving"
+      279.9428571428571,
+      285.03809523809525,
+      "fifty-five and three can perform this forward\ncalculation. We have now"
     ],
     [
-      293.65238095238095,
-      298.68095238095236,
-      "number around the fifty-five-position circle.\nIt wraps, returns, and wraps again,"
+      285.03809523809525,
+      290.1333333333333,
+      "watched encryption happen, using only\nmultiplication and keeping a remainder."
     ],
     [
-      298.68095238095236,
-      303.7095238095238,
-      "while the remainder stays small. This is the\nintuition behind efficient"
+      290.1333333333333,
+      295.2285714285714,
+      "The private rule asks us to use a much bigger\npower."
     ],
     [
-      303.7095238095238,
-      308.73809523809524,
-      "modular exponentiation: repeatedly calculate\nwith manageable remainders instead of carrying\na"
+      295.2285714285714,
+      300.32380952380953,
+      "Must we write an enormous number first?\nHappily, no. We can"
     ],
     [
-      308.73809523809524,
-      313.76666666666665,
-      "giant ordinary integer all the way to the end."
+      300.32380952380953,
+      305.4190476190476,
+      "keep remainders while calculating. Start with\nthirteen. Square it, meaning multiply"
     ],
     [
-      313.76666666666665,
-      318.6714285714286,
-      "Now apply the private exponent: thirteen to\nthe power of twenty-seven,"
+      305.4190476190476,
+      310.51428571428573,
+      "it by itself: one hundred and sixty-nine\nleaves four after division"
     ],
     [
-      318.6714285714286,
-      323.57619047619045,
-      "modulo fifty-five. The calculation returns\nseven. We have recovered the original"
+      310.51428571428573,
+      315.6095238095238,
+      "by fifty-five. Square that four to get\nsixteen. Square sixteen and"
     ],
     [
-      323.57619047619045,
-      328.4809523809524,
-      "message using a different exponent from the\none that protected it."
+      315.6095238095238,
+      320.70476190476194,
+      "keep its remainder, thirty-six. Each step\nkeeps the same useful remainder"
     ],
     [
-      328.4809523809524,
-      333.3857142857143,
-      "The public side used three; the private side\nused twenty-seven. Watch"
+      320.70476190476194,
+      325.8,
+      "information while preventing the working\nnumbers from growing without limit."
     ],
     [
-      333.3857142857143,
-      338.2904761904762,
-      "the ciphertext marker return to the message\nposition. That reversal is"
+      325.8,
+      330.425,
+      "Now use the private power, twenty-seven. We\ncan split it into"
     ],
     [
-      338.2904761904762,
-      343.1952380952381,
-      "the behavior our key construction was designed\nto produce, rather than"
+      330.425,
+      335.05,
+      "sixteen plus eight plus two plus one. The\nboxes show the"
     ],
     [
-      343.1952380952381,
-      348.1,
-      "an accidental property of one unconnected\nformula."
+      335.05,
+      339.675,
+      "remainders of thirteen raised to those powers.\nMultiply those values together,"
     ],
     [
-      348.1,
-      353.1952380952381,
-      "For our message, which is relatively prime to\nfifty-five, the modular"
+      339.675,
+      344.3,
+      "keeping the remainder after each step. Watch\nthe result settle on"
     ],
     [
-      353.1952380952381,
-      358.2904761904762,
-      "powers follow a repeating structure tied to\nthe forty valid positions."
+      344.3,
+      348.925,
+      "seven. We recovered the original message.\nWritten compactly, thirteen to the"
     ],
     [
-      358.2904761904762,
-      363.3857142857143,
-      "Because the two exponents multiply to one plus\na multiple of"
+      348.925,
+      353.55,
+      "power twenty-seven, mod fifty-five, equals\nseven. The arithmetic looks longer than"
     ],
     [
-      363.3857142857143,
-      368.4809523809524,
-      "forty, applying them together returns the\nstarting message. The animation shows"
+      353.55,
+      358.175,
+      "encryption, but it uses the same two actions:\nmultiply and keep"
     ],
     [
-      368.4809523809524,
-      373.57619047619045,
-      "that return, while the equation summarizes it.\nThis is intuition for"
+      358.175,
+      362.8,
+      "a remainder."
     ],
     [
-      373.57619047619045,
-      378.6714285714286,
-      "the mechanism, not a full number-theory proof.\nOur choice of message"
+      362.8,
+      367.4791666666667,
+      "The interesting question is why seven returns.\nFor numbers such as"
     ],
     [
-      378.6714285714286,
-      383.76666666666665,
-      "seven lets the relationship appear cleanly in\nthe small example."
+      367.4791666666667,
+      372.15833333333336,
+      "seven, which share no factor with fifty-five\nexcept one, these powers"
     ],
     [
-      383.76666666666665,
-      388.79523809523806,
-      "Replace the private exponent with a guess. The\nsame ciphertext generally"
+      372.15833333333336,
+      376.83750000000003,
+      "have a repeating structure linked to our count\nof forty. Encrypting"
     ],
     [
-      388.79523809523806,
-      393.82380952380953,
-      "lands somewhere else, rather than returning to\nseven. This makes the"
+      376.83750000000003,
+      381.51666666666665,
+      "with power three and decrypting with power\ntwenty-seven combines into power"
     ],
     [
-      393.82380952380953,
-      398.85238095238094,
-      "relationship between the exponents visible:\nthe private operation is carefully chosen,"
+      381.51666666666665,
+      386.1958333333333,
+      "eighty-one. That is one plus two times forty.\nThe matching construction"
     ],
     [
-      398.85238095238094,
-      403.88095238095235,
-      "not simply any different calculation. In this\ntiny example someone could"
+      386.1958333333333,
+      390.875,
+      "brings us back to the original value. The\ncircle illustrates repetition;"
     ],
     [
-      403.88095238095235,
-      408.90952380952376,
-      "quickly try all the possibilities, which is\nanother reason it offers"
+      390.875,
+      395.5541666666667,
+      "it is not a claim that every message takes\nexactly forty"
     ],
     [
-      408.90952380952376,
-      413.93809523809523,
-      "no security. The drawing demonstrates a\nmathematical construction. It does not"
+      395.5541666666667,
+      400.23333333333335,
+      "steps to repeat."
     ],
     [
-      413.93809523809523,
-      418.96666666666664,
-      "demonstrate resistance to a determined\nattacker using realistic equipment."
+      400.23333333333335,
+      405.3285714285714,
+      "What if we replace twenty-seven with a guess?\nUse five instead."
     ],
     [
-      418.96666666666664,
-      424.0619047619047,
-      "If someone factors fifty-five into five and\neleven, they can calculate"
+      405.3285714285714,
+      410.42380952380955,
+      "The same encrypted number thirteen now\nproduces forty-three, not seven. The"
     ],
     [
-      424.0619047619047,
-      429.15714285714284,
-      "our count of forty and find a matching private\nexponent. That"
+      410.42380952380955,
+      415.5190476190476,
+      "right side uses twenty-seven and recovers\nseven. So the private rule"
     ],
     [
-      429.15714285714284,
-      434.2523809523809,
-      "is why the factorization matters. In real RSA,\nthe public modulus"
+      415.5190476190476,
+      420.6142857142857,
+      "is not simply any large number or any secret\nnumber. It"
     ],
     [
-      434.2523809523809,
-      439.34761904761905,
-      "is vastly larger, and recovering its factors\nis intended to be"
+      420.6142857142857,
+      425.7095238095238,
+      "must fit the public construction. This small\nexperiment does not prove"
     ],
     [
-      439.34761904761905,
-      444.4428571428571,
-      "computationally difficult for classical\nattackers using appropriate parameters.\nFactoring is a"
+      425.7095238095238,
+      430.8047619047619,
+      "security. It shows what correctness requires:\nthe intended pair must undo"
     ],
     [
-      444.4428571428571,
-      449.53809523809525,
-      "known way to recover the private information;\nwe are not claiming"
+      430.8047619047619,
+      435.9,
+      "the message transformation, while an arbitrary\nguess generally does not."
     ],
     [
-      449.53809523809525,
-      454.6333333333333,
-      "every imaginable RSA attack must literally\nfollow this exact route."
+      435.9,
+      440.46666666666664,
+      "Our public key contains fifty-five, but not\nits two prime factors."
     ],
     [
-      454.6333333333333,
-      459.7285714285714,
-      "Our calculation directly transformed a small\nmessage number. Real encryption requires"
+      440.46666666666664,
+      445.0333333333333,
+      "If someone discovers five and eleven, they can\nrepeat our private-key"
     ],
     [
-      459.7285714285714,
-      464.82380952380953,
-      "a suitable, carefully specified encoding and\npadding scheme, along with correct"
+      445.0333333333333,
+      449.59999999999997,
+      "construction: calculate forty, then find the\nmatching power twenty-seven. For fifty-five"
     ],
     [
-      464.82380952380953,
-      469.9190476190476,
-      "implementations and secure key handling.\nRepeating these tiny textbook operations is"
+      449.59999999999997,
+      454.16666666666663,
+      "that is easy, which is why this example\nprotects nothing. Real"
     ],
     [
-      469.9190476190476,
-      475.01428571428573,
-      "not a recipe for protecting personal messages.\nKeep the mathematical insight"
+      454.16666666666663,
+      458.73333333333335,
+      "RSA uses far larger carefully generated\nprimes. Multiplying them is practical,"
     ],
     [
-      475.01428571428573,
-      480.1095238095238,
-      "without mistaking the demonstration for\ndeployable cryptography. Publishing a pair of"
+      458.73333333333335,
+      463.3,
+      "while recovering their factors from the\nproduct is intended to be"
     ],
     [
-      480.1095238095238,
-      485.20476190476194,
-      "numbers safely depends on the complete scheme,\nnot only on whether"
+      463.3,
+      467.8666666666667,
+      "difficult. The security depends on such\nmathematical assumptions and on correct"
     ],
     [
-      485.20476190476194,
-      490.3,
-      "a cube followed by another power returns the\nexpected remainder."
+      467.8666666666667,
+      472.43333333333334,
+      "implementation."
     ],
     [
-      490.3,
-      495.3285714285714,
-      "Interest in quantum-resistant cryptography\nmakes these assumptions worth understanding. A\nsufficiently"
+      472.43333333333334,
+      477.1666666666667,
+      "There is another reason not to use our little\ncalculation directly"
     ],
     [
-      495.3285714285714,
-      500.3571428571429,
-      "capable future quantum computer could threaten\nRSA's underlying problem, which is"
+      477.1666666666667,
+      481.9,
+      "as real encryption. Encrypt seven twice with\nthis bare rule and"
     ],
     [
-      500.3571428571429,
-      505.3857142857143,
-      "one reason organizations are preparing\ntransitions. That does not mean our"
+      481.9,
+      486.6333333333333,
+      "thirteen appears twice. That visible\nrepetition can leak information. Practical\nencryption"
     ],
     [
-      505.3857142857143,
-      510.4142857142857,
-      "video has shown such a computer breaking a\ndeployed key today."
+      486.6333333333333,
+      491.3666666666667,
+      "needs a complete, carefully designed encoding\nscheme that adds the right"
     ],
     [
-      510.4142857142857,
-      515.4428571428572,
-      "The lesson here remains RSA itself: identify\nwhat the public operation"
+      491.3666666666667,
+      496.1,
+      "structure and randomness before the RSA\noperation. We are looking inside"
     ],
     [
-      515.4428571428572,
-      520.4714285714285,
-      "reveals, what the private structure enables,\nand which assumptions make the"
+      496.1,
+      500.83333333333337,
+      "one mathematical mechanism, not building a\nsafe messaging app. The small"
     ],
     [
-      520.4714285714285,
-      525.5,
-      "difference between an easy demonstration and a\nsecurity claim."
+      500.83333333333337,
+      505.56666666666666,
+      "numbers let us understand the moving parts\nwithout pretending that understanding"
     ],
     [
-      525.5,
-      530.1791666666667,
-      "We can now replace the lock metaphor with\nsomething precise. The"
+      505.56666666666666,
+      510.3,
+      "alone makes them secure."
     ],
     [
-      530.1791666666667,
-      534.8583333333333,
-      "public pair fifty-five and three transformed\nseven into thirteen. The private"
+      510.3,
+      514.8666666666667,
+      "Step back from the arithmetic. With a shared-\nsecret method, the people"
     ],
     [
-      534.8583333333333,
-      539.5375,
-      "exponent twenty-seven transformed thirteen\nback into seven. Prime factors helped\nconstruct"
+      514.8666666666667,
+      519.4333333333334,
+      "communicating must have a suitable secret in\ncommon. With this public-key"
     ],
     [
-      539.5375,
-      544.2166666666667,
-      "the exponent relationship, and modular\narithmetic made the two operations fit"
+      519.4333333333334,
+      524.0,
+      "arrangement, the receiving person can publish\nthe encrypting instructions and keep"
     ],
     [
-      544.2166666666667,
-      548.8958333333333,
-      "together. Anyone can perform the public\ncalculation, while the intended private"
+      524.0,
+      528.5666666666667,
+      "the recovery instructions private. The private\nkey is related to the"
     ],
     [
-      548.8958333333333,
-      553.5749999999999,
-      "capability depends on information we keep. The\nremarkable idea is not"
+      528.5666666666667,
+      533.1333333333333,
+      "public key, but should be impractical to\nderive from it. That"
     ],
     [
-      553.5749999999999,
-      558.2541666666666,
-      "hiding the instructions. It is publishing one\nuseful operation without publishing"
+      533.1333333333333,
+      537.7,
+      "last condition matters. Publishing an\noperation is useful only if seeing"
     ],
     [
-      558.2541666666666,
-      562.9333333333333,
-      "its intended inverse."
+      537.7,
+      542.2666666666667,
+      "how to perform it does not make recovering the\nprivate operation"
+    ],
+    [
+      542.2666666666667,
+      546.8333333333334,
+      "easy."
+    ],
+    [
+      546.8333333333334,
+      551.5666666666667,
+      "We wanted to send a private message without\nfirst handing the"
+    ],
+    [
+      551.5666666666667,
+      556.3000000000001,
+      "sender our opening secret. The lock picture\nsuggested separate public and"
+    ],
+    [
+      556.3000000000001,
+      561.0333333333334,
+      "private jobs. Our tiny RSA example made those\njobs concrete: seven"
+    ],
+    [
+      561.0333333333334,
+      565.7666666666667,
+      "became thirteen using the public pair fifty-\nfive and three; thirteen returned"
+    ],
+    [
+      565.7666666666667,
+      570.5,
+      "to seven using the private power twenty-seven.\nRemainders kept the arithmetic"
+    ],
+    [
+      570.5,
+      575.2333333333333,
+      "inside a limited set of values. The carefully\nchosen relationship made"
+    ],
+    [
+      575.2333333333333,
+      579.9666666666667,
+      "recovery work. That is the idea beneath RSA:\nshared public instructions,"
+    ],
+    [
+      579.9666666666667,
+      584.7,
+      "paired with private recovery."
     ]
   ],
   "title": "A Lock Anyone Can Close, but Only You Can Open"

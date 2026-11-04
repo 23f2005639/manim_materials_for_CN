@@ -2,118 +2,118 @@
   "fps": 30.0,
   "sections": [
     {
-      "name": "Connected, but not found",
-      "animation_end_frame": 354,
-      "section_seconds": 32.533,
-      "visual_seconds": 11.4,
-      "visual_fraction": 0.35
+      "name": "A photo lives somewhere",
+      "animation_end_frame": 216,
+      "section_seconds": 35.667,
+      "visual_seconds": 6.8,
+      "visual_fraction": 0.191
     },
     {
-      "name": "A name is not an address",
-      "animation_end_frame": 1276,
-      "section_seconds": 33.433,
-      "visual_seconds": 9.6,
-      "visual_fraction": 0.287
+      "name": "Names are easier to remember",
+      "animation_end_frame": 1304,
+      "section_seconds": 34.767,
+      "visual_seconds": 7.4,
+      "visual_fraction": 0.213
     },
     {
-      "name": "Read the name backward",
-      "animation_end_frame": 2222,
-      "section_seconds": 33.867,
-      "visual_seconds": 7.7,
-      "visual_fraction": 0.227
+      "name": "Ask a helper",
+      "animation_end_frame": 2318,
+      "section_seconds": 35.2,
+      "visual_seconds": 6.45,
+      "visual_fraction": 0.183
     },
     {
-      "name": "Meet the resolver",
-      "animation_end_frame": 3217,
-      "section_seconds": 33.433,
-      "visual_seconds": 7.0,
-      "visual_fraction": 0.209
+      "name": "A name has smaller parts",
+      "animation_end_frame": 3414,
+      "section_seconds": 34.767,
+      "visual_seconds": 7.75,
+      "visual_fraction": 0.223
     },
     {
-      "name": "The root gives a direction",
-      "animation_end_frame": 4284,
-      "section_seconds": 33.867,
+      "name": "Start at the directory",
+      "animation_end_frame": 4498,
+      "section_seconds": 36.1,
       "visual_seconds": 9.15,
-      "visual_fraction": 0.27
+      "visual_fraction": 0.253
     },
     {
-      "name": "A smaller branch",
-      "animation_end_frame": 5300,
-      "section_seconds": 33.867,
+      "name": "Follow one useful clue",
+      "animation_end_frame": 5582,
+      "section_seconds": 35.2,
       "visual_seconds": 9.15,
-      "visual_fraction": 0.27
+      "visual_fraction": 0.26
     },
     {
-      "name": "The authority answers",
-      "animation_end_frame": 6316,
-      "section_seconds": 34.333,
+      "name": "Find the address keeper",
+      "animation_end_frame": 6638,
+      "section_seconds": 35.2,
       "visual_seconds": 9.15,
-      "visual_fraction": 0.267
+      "visual_fraction": 0.26
     },
     {
-      "name": "Return the useful result",
-      "animation_end_frame": 7314,
-      "section_seconds": 33.867,
+      "name": "Bring the answer home",
+      "animation_end_frame": 7660,
+      "section_seconds": 35.667,
       "visual_seconds": 8.05,
-      "visual_fraction": 0.238
+      "visual_fraction": 0.226
     },
     {
-      "name": "Where the waiting comes from",
-      "animation_end_frame": 8589,
+      "name": "Put a clock on it",
+      "animation_end_frame": 8990,
       "section_seconds": 35.2,
       "visual_seconds": 16.7,
       "visual_fraction": 0.474
     },
     {
-      "name": "Repeat the same question",
-      "animation_end_frame": 9362,
-      "section_seconds": 34.333,
+      "name": "Remember the answer",
+      "animation_end_frame": 9762,
+      "section_seconds": 35.667,
       "visual_seconds": 7.25,
-      "visual_fraction": 0.211
+      "visual_fraction": 0.203
     },
     {
-      "name": "Give the memory a lifetime",
-      "animation_end_frame": 10548,
-      "section_seconds": 34.333,
+      "name": "Memory needs an expiry date",
+      "animation_end_frame": 10988,
+      "section_seconds": 35.667,
       "visual_seconds": 12.45,
-      "visual_fraction": 0.363
+      "visual_fraction": 0.349
     },
     {
-      "name": "Change the address",
-      "animation_end_frame": 11519,
-      "section_seconds": 34.767,
+      "name": "What if the address changes?",
+      "animation_end_frame": 12000,
+      "section_seconds": 35.667,
       "visual_seconds": 10.5,
-      "visual_fraction": 0.302
+      "visual_fraction": 0.294
     },
     {
-      "name": "Expiration causes new work",
-      "animation_end_frame": 12730,
-      "section_seconds": 35.2,
+      "name": "Look again when time runs out",
+      "animation_end_frame": 13238,
+      "section_seconds": 36.533,
       "visual_seconds": 16.1,
-      "visual_fraction": 0.457
+      "visual_fraction": 0.441
     },
     {
-      "name": "Break only the naming step",
-      "animation_end_frame": 13566,
-      "section_seconds": 34.333,
+      "name": "Connected, but missing directions",
+      "animation_end_frame": 14114,
+      "section_seconds": 36.533,
       "visual_seconds": 8.75,
-      "visual_fraction": 0.255
+      "visual_fraction": 0.24
     },
     {
-      "name": "Responsibility, time, and memory",
-      "animation_end_frame": 14636,
-      "section_seconds": 34.767,
+      "name": "Three jobs, one simple search",
+      "animation_end_frame": 15250,
+      "section_seconds": 36.1,
       "visual_seconds": 10.1,
-      "visual_fraction": 0.291
+      "visual_fraction": 0.28
     },
     {
-      "name": "Resolve the opening contradiction",
-      "animation_end_frame": 15604,
+      "name": "From a name to an address",
+      "animation_end_frame": 16258,
       "section_seconds": 35.667,
       "visual_seconds": 7.6,
       "visual_fraction": 0.213
     }
   ],
-  "duration": 547.8,
+  "duration": 569.6,
   "edition": "focused-v2"
 }

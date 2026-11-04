@@ -1,4 +1,4 @@
-# References — Why Can Your Internet Work While Your Apps Don’t?
+# References — DNS: How a Website Name Finds Its Address
 
 Sources checked while writing the teaching script; narration is original.
 

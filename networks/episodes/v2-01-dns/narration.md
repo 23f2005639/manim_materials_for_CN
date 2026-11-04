@@ -1,85 +1,85 @@
-# Why Can Your Internet Work While Your Apps Don’t?
+# DNS: How a Website Name Finds Its Address
 
-English narration for your own voice. Planned runtime: 00:09:07.
+English narration for your own voice. Planned runtime: 00:09:29.
 
 The browser pauses after each section. The timestamps below refer to the continuous MP4.
 
 
-## 01. Connected, but not found — 00:00:00
+## 01. A photo lives somewhere — 00:00:00
 
-Your connection says online. A download is still moving. Yet one app refuses to open. That sounds impossible until you separate two questions: can your computer reach the network, and does it know where this service lives? The second question belongs to DNS. Let's follow one name through a small imagined network, then break just the naming part. By the end, an apparently contradictory failure will make perfect sense.
-
-
-## 02. A name is not an address — 00:00:32
-
-We want photos.orbit.example. That name is convenient for a person, but the network needs an address. Imagine a contact name and its phone number: changing the number doesn't require changing what you call the person. DNS provides a structured way to find information associated with a name. Our made-up domain and addresses are teaching examples. The blue label is the question; the green address is the answer we hope to receive.
+You type a website name and a photo appears. Let's slow that tiny moment down. Your computer does not already have the photo. Another computer stores it and can send it back. A computer doing that job is called a server. The line between them represents a way to exchange messages. But there are countless possible destinations. Before asking for the photo, your computer needs to know which address to contact. How does it find that?
 
 
-## 03. Read the name backward — 00:01:05
+## 02. Names are easier to remember — 00:00:35
 
-The dots have a job. Read the name from the right: the root, example, orbit, then photos. Each level belongs beneath a larger part of the naming tree. This organization lets responsibility be divided. One organization can manage its own branch without maintaining every other branch. Watch the address-like string become a tree. We haven't located a machine yet; we've uncovered the structure that will tell our search where to go next.
-
-
-## 04. Meet the resolver — 00:01:39
-
-Your computer usually asks a recursive resolver to do the search. Recursive describes the service being offered: please obtain an answer for me. The resolver may already know something useful. For our first pass, assume its relevant caches are empty. That deliberately removes the shortcuts so we can see the work. The resolver becomes our moving point of view, asking more specific questions while your application waits for one useful result.
+Think about calling a friend. You remember their name; your phone uses a number. Websites have a similar split. We type a name, while the network uses a number called an IP address to help deliver messages. Watch the name turn into an address. DNS, short for Domain Name System, helps make that lookup. Our pretend website is photos.orbit.example. The address is made up for teaching too. You don't need to memorize either one.
 
 
-## 05. The root gives a direction — 00:02:13
+## 03. Ask a helper — 00:01:10
 
-The resolver first asks a root service about the name. It doesn't receive the final photo-server address. Instead, it receives a referral toward the service responsible for the next branch. Watch the yellow arrow: it points to where the resolver should ask next. A referral is useful knowledge, even though it isn't the final answer. Think of each step as reducing the remaining search, rather than each server holding the entire directory.
-
-
-## 06. A smaller branch — 00:02:47
-
-The next service handles our example top-level branch. It directs the resolver toward the authoritative servers for orbit.example. The search is getting narrower. Notice who is doing the asking: the resolver contacts these services, rather than your browser personally visiting every box. The drawing shows logical roles, not one special physical computer per role. Real DNS infrastructure can distribute each role across many machines and locations while preserving this hierarchy of responsibility.
+Your computer could ask, where is this website? But who should answer? Meet one helper, shown in green. Its job is to find the address and bring it back. The technical name for this helper is a resolver. That's all the word means here: it resolves our question. Start with just these two characters, your computer and its helper. Assume the helper hasn't saved an answer yet. We are going to follow its search together.
 
 
-## 07. The authority answers — 00:03:21
+## 04. A name has smaller parts — 00:01:45
 
-Now the resolver reaches an authoritative server for our imagined zone. This is where the relevant record is maintained. In our example, the answer associates the photos name with 192.0.2.10. The green address finally appears. It's tempting to call every earlier server unhelpful because it didn't know this number. But their referrals made this last step possible. DNS scales by sharing responsibility and directions, instead of requiring every participant to know every answer.
-
-
-## 08. Return the useful result — 00:03:55
-
-The resolver returns the address to your computer. Keep the jobs separate: finding this address doesn't download the photos, prove the application is healthy, or promise that the destination will respond. It supplies information the application needs for its next action. Our story stops at that boundary. The original blue question has become a green result, and the rest of the network can now be used with a specific destination in mind.
+A single helper cannot keep a fresh list of every website. Instead, responsibility is split into smaller parts. Look at the dots in photos.orbit.example. Read from the right: example, then orbit.example, then the full name. It's like opening a large folder, then a smaller folder inside it. This nested arrangement is called a hierarchy. The dots tell the helper how to narrow its search. No address yet; first we are learning where to ask.
 
 
-## 09. Where the waiting comes from — 00:04:29
+## 05. Start at the directory — 00:02:20
 
-Let's attach clocks to the lookup. Suppose the local resolver exchange takes two milliseconds, and the three upstream round trips take twenty, thirty, and forty milliseconds. These are illustrative values, not Internet constants. Since each referral tells us where to ask next, these particular steps happen in sequence. Add the waits: two plus twenty plus thirty plus forty equals ninety-two milliseconds. The equation simply records the journey we just watched, one dependent step after another.
-
-
-## 10. Repeat the same question — 00:05:04
-
-Now ask the same question again while the answer is cached. The resolver can reply without repeating our three upstream exchanges. In this simplified example, only the two-millisecond local exchange remains. Ninety-two divided by two is forty-six: this lookup is forty-six times quicker. That doesn't mean the entire application becomes forty-six times faster. We measured one task. Still, reusing a valid answer can remove a surprising amount of repeated work from that task.
+The helper begins at a starting directory called the root. Imagine a reception desk that says, for names ending in example, ask over there. It gives a useful direction, not the website's final address. That direction is called a referral. Follow the question going out and the clue coming back. The helper now knows its next stop. In this drawing, each circle is a job performed by DNS servers, not one unique machine for the whole world.
 
 
-## 11. Give the memory a lifetime — 00:05:38
+## 06. Follow one useful clue — 00:02:56
 
-A saved answer needs an expiration rule. Our record's time to live, or TTL, is sixty seconds when this cache receives it. Watch the countdown shrink as the answer gets older. Reusing it doesn't restart the clock. If every hit renewed its lifetime indefinitely, a popular old address could remain around forever. The TTL limits how long this cached copy may normally be reused before the resolver needs fresh information for another query.
-
-
-## 12. Change the address — 00:06:13
-
-Now the authoritative record changes to 203.0.113.20. Does every cache change instantly? Predict the next reply before the colors move. Our cache still holds the earlier answer with thirty seconds remaining, so it may keep returning that old address until its permitted lifetime ends. The authority and cache can temporarily disagree without either ignoring its rules. Changing an authoritative record and replacing every cached copy are different events, separated here by a visible countdown.
+The next directory handles the last part of our name: example. That part is called a top-level domain, or TLD. You have seen real ones such as com and org. Our teaching name uses example. This directory points toward the people responsible for orbit.example. Notice the pattern: ask a broad directory, receive a narrower direction, ask again. The helper is doing this work for us. Your browser doesn't need you to visit these directories yourself.
 
 
-## 13. Expiration causes new work — 00:06:47
+## 07. Find the address keeper — 00:03:31
 
-At zero, the saved answer is no longer fresh. For our normal example, the next query triggers a new lookup and retrieves the changed record. We replay the referrals to make the refresh visible; real resolvers may retain other cached information and take a shorter route. The important change is the answer's freshness. The cache wasn't useless because it eventually expired. Its temporary nature is what lets yesterday's useful shortcut give way to today's information.
-
-
-## 14. Break only the naming step — 00:07:23
-
-Return to the opening puzzle. The network path is available, but this resolver cannot obtain the answer it needs. The app may fail before it even knows a destination address. Another task can continue because it already has a destination or a still-useful cached answer. That's how online and unable to open this service can coexist. Real outages can have additional causes; here, we deliberately broke only name resolution to isolate its contribution.
+Now we reach the keeper of the website's DNS information. This is called an authoritative server because it holds the relevant official record. In our example, that record pairs the photo website's name with 192.0.2.10. Finally, a number! The earlier stops were useful even though they didn't know it. They guided our helper here. Watch the green answer travel back. We found the address by following responsibility from a broad directory to a specific record.
 
 
-## 15. Responsibility, time, and memory — 00:07:57
+## 08. Bring the answer home — 00:04:06
 
-Three ideas now fit together. Hierarchy divides responsibility, referrals lead the search, and caches save work for a limited time. Remove hierarchy and the directory becomes harder to distribute. Remove caching and repeat questions repeat the journey. Remove expiration and changes become harder to discover reliably. Follow the colored answer rather than memorizing the box names. Its movement, reuse, and replacement explain the mechanism much more clearly than calling DNS a mysterious Internet switch.
+The helper gives that address to your computer. Now your computer can try to contact the photo server. The name lookup has finished; asking for the actual photo is a separate step. Think of finding a friend's phone number: you still have to make the call. DNS hasn't delivered the picture itself, and an address doesn't promise the server will answer. It has solved one smaller problem: turning the name you recognize into useful contact information.
 
 
-## 16. Resolve the opening contradiction — 00:08:32
+## 09. Put a clock on it — 00:04:42
 
-A working connection and a successful name lookup are separate requirements. DNS turns a readable question into useful location information through a hierarchy, a resolver, and temporary memory. The small clocks explain why that answer can be fast, slow, or briefly old. So when one app stops while another keeps working, the situation isn't logically impossible. One journey may be missing a piece that another already has. The connection is alive; the directions may be missing.
+How long did that search take? A millisecond is one thousandth of a second. Let's give our example four small waits: two milliseconds for the helper exchange, then twenty, thirty, and forty for its three directory exchanges. Watch each colored piece extend the time bar. Add them: two plus twenty plus thirty plus forty makes ninety-two milliseconds. These are chosen numbers, not promised Internet timings. We add because each step needs the previous step's answer.
+
+
+## 10. Remember the answer — 00:05:17
+
+What happens when someone asks the same question again? The helper can keep a temporary copy of the answer. That saved copy is called a cache. Now the long trip disappears: in our example the reply needs only two milliseconds. Ninety-two divided by two is forty-six, so this lookup is forty-six times quicker. Only the lookup! We haven't made the photo download forty-six times faster. Saving a useful answer simply avoids repeating work we already did.
+
+
+## 11. Memory needs an expiry date — 00:05:53
+
+But websites can move. If our helper remembers an address forever, it might keep sending people to an old place. So the saved answer comes with a time limit. Here it is sixty seconds. Its name is time to live, or TTL. Watch the timer count down. Reading the saved answer does not restart that timer. Think of a note with an expiry time printed on it: using the note doesn't make the information new again.
+
+
+## 12. What if the address changes? — 00:06:29
+
+Let's move the website while the timer still has thirty seconds left. The official record changes to a new address, 203.0.113.20. Does our helper magically know? No. It still has the old saved copy and may reply with that address until its allowed time runs out. The two boxes now show different numbers. This explains why changing a website's DNS record can take time to be noticed everywhere. Copies don't all update at the same instant.
+
+
+## 13. Look again when time runs out — 00:07:04
+
+The countdown reaches zero. For this example, the next request makes the helper look again. This time it finds the new address and replaces its old copy. We show the directory trip again so the refresh is easy to follow; real helpers may remember some directions and skip steps. Our useful rule is simple: reuse an answer for a while, then check again. A temporary memory gives us speed without pretending that yesterday's information must stay true forever.
+
+
+## 14. Connected, but missing directions — 00:07:41
+
+Now we can try a little mystery. Leave the network connection working, but stop our helper from finding the address. An app may fail before it knows where to send its request. Meanwhile, another task that already knows its destination can keep going. So online does not always mean every website name can be found. We have broken only the naming step in this experiment. Real failures can have other causes, but this picture explains one possible reason.
+
+
+## 15. Three jobs, one simple search — 00:08:17
+
+Let's shrink the whole journey into three pictures. First, split the directory into smaller branches. Second, follow directions until the right record answers. Third, remember that answer briefly. The formal words are hierarchy, referrals, and caching. You already know what those words describe because you've watched them happen. The countdown adds one more detail: remembered answers need a time limit. These jobs work together so no single directory has to hold every fresh answer to every question.
+
+
+## 16. From a name to an address — 00:08:53
+
+Return to the photo. A name you can remember becomes an address the network can use. A helper finds it, directories guide the helper, and temporary memory saves repeat trips. That's the core of DNS. Next time you type a website name, imagine that small search taking place before the page begins to arrive. It may finish almost instantly because somebody remembered the answer. The website name looked like a destination; first, it was a question.

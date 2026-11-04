@@ -1,5 +1,5 @@
 {
-  "native_changing_frame_fraction": 0.28,
-  "minimum_section_visual_fraction": 0.083,
-  "longest_final_hold_seconds": 33.933
+  "native_changing_frame_fraction": 0.2937,
+  "minimum_section_visual_fraction": 0.151,
+  "longest_final_hold_seconds": 31.0
 }

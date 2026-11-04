@@ -2,118 +2,118 @@
   "fps": 30.0,
   "sections": [
     {
-      "name": "The public lock puzzle",
-      "animation_end_frame": 264,
-      "section_seconds": 34.767,
-      "visual_seconds": 8.4,
-      "visual_fraction": 0.242
+      "name": "Who can read this message?",
+      "animation_end_frame": 342,
+      "section_seconds": 36.533,
+      "visual_seconds": 11.0,
+      "visual_fraction": 0.301
     },
     {
-      "name": "Easy forward, difficult backward",
-      "animation_end_frame": 1184,
-      "section_seconds": 35.667,
-      "visual_seconds": 4.3,
-      "visual_fraction": 0.121
+      "name": "A lock with two different jobs",
+      "animation_end_frame": 1300,
+      "section_seconds": 36.533,
+      "visual_seconds": 6.4,
+      "visual_fraction": 0.175
     },
     {
-      "name": "Numbers that wrap around",
-      "animation_end_frame": 2430,
-      "section_seconds": 34.767,
-      "visual_seconds": 10.15,
-      "visual_fraction": 0.292
-    },
-    {
-      "name": "Choose two small primes",
-      "animation_end_frame": 3261,
-      "section_seconds": 35.2,
-      "visual_seconds": 3.1,
-      "visual_fraction": 0.088
-    },
-    {
-      "name": "Count the useful positions",
-      "animation_end_frame": 4398,
+      "name": "Keep what is left over",
+      "animation_end_frame": 2412,
       "section_seconds": 34.333,
+      "visual_seconds": 6.92,
+      "visual_fraction": 0.202
+    },
+    {
+      "name": "Build the number fifty-five",
+      "animation_end_frame": 3408,
+      "section_seconds": 37.433,
       "visual_seconds": 5.8,
-      "visual_fraction": 0.169
+      "visual_fraction": 0.155
     },
     {
-      "name": "Choose the public exponent",
-      "animation_end_frame": 5374,
-      "section_seconds": 35.2,
-      "visual_seconds": 4.0,
-      "visual_fraction": 0.114
+      "name": "Find a useful repeating structure",
+      "animation_end_frame": 4531,
+      "section_seconds": 37.867,
+      "visual_seconds": 5.8,
+      "visual_fraction": 0.153
     },
     {
-      "name": "Find the matching private exponent",
-      "animation_end_frame": 6436,
-      "section_seconds": 33.867,
+      "name": "The public rule repeats a multiplication",
+      "animation_end_frame": 5634,
+      "section_seconds": 35.667,
+      "visual_seconds": 4.7,
+      "visual_fraction": 0.132
+    },
+    {
+      "name": "Choose a matching private rule",
+      "animation_end_frame": 6689,
+      "section_seconds": 36.1,
       "visual_seconds": 4.2,
-      "visual_fraction": 0.124
+      "visual_fraction": 0.116
     },
     {
-      "name": "Encrypt the message seven",
-      "animation_end_frame": 7458,
-      "section_seconds": 34.767,
+      "name": "Turn seven into thirteen",
+      "animation_end_frame": 7778,
+      "section_seconds": 35.667,
       "visual_seconds": 4.4,
+      "visual_fraction": 0.123
+    },
+    {
+      "name": "Keep the numbers manageable",
+      "animation_end_frame": 8908,
+      "section_seconds": 35.667,
+      "visual_seconds": 6.4,
+      "visual_fraction": 0.179
+    },
+    {
+      "name": "Bring the message back",
+      "animation_end_frame": 10041,
+      "section_seconds": 37.0,
+      "visual_seconds": 8.5,
+      "visual_fraction": 0.23
+    },
+    {
+      "name": "Why the pair fits together",
+      "animation_end_frame": 11127,
+      "section_seconds": 37.433,
+      "visual_seconds": 7.7,
+      "visual_fraction": 0.206
+    },
+    {
+      "name": "Try the wrong private number",
+      "animation_end_frame": 12184,
+      "section_seconds": 35.667,
+      "visual_seconds": 5.5,
+      "visual_fraction": 0.154
+    },
+    {
+      "name": "What must remain hard?",
+      "animation_end_frame": 13251,
+      "section_seconds": 36.533,
+      "visual_seconds": 5.4,
+      "visual_fraction": 0.148
+    },
+    {
+      "name": "The tiny example needs boundaries",
+      "animation_end_frame": 14329,
+      "section_seconds": 37.867,
+      "visual_seconds": 4.8,
       "visual_fraction": 0.127
     },
     {
-      "name": "Keep the remainder as you go",
-      "animation_end_frame": 8561,
-      "section_seconds": 35.2,
-      "visual_seconds": 6.4,
-      "visual_fraction": 0.182
+      "name": "Connect the two kinds of rules",
+      "animation_end_frame": 15516,
+      "section_seconds": 36.533,
+      "visual_seconds": 6.5,
+      "visual_fraction": 0.178
     },
     {
-      "name": "Decrypt using twenty-seven",
-      "animation_end_frame": 9680,
-      "section_seconds": 34.333,
-      "visual_seconds": 8.5,
-      "visual_fraction": 0.248
-    },
-    {
-      "name": "Why those exponents cooperate",
-      "animation_end_frame": 10686,
-      "section_seconds": 35.667,
-      "visual_seconds": 7.7,
-      "visual_fraction": 0.216
-    },
-    {
-      "name": "Test the wrong exponent",
-      "animation_end_frame": 11690,
-      "section_seconds": 35.2,
-      "visual_seconds": 5.5,
-      "visual_fraction": 0.156
-    },
-    {
-      "name": "What the hidden factors reveal",
-      "animation_end_frame": 12743,
-      "section_seconds": 35.667,
-      "visual_seconds": 5.4,
-      "visual_fraction": 0.151
-    },
-    {
-      "name": "Textbook numbers are not enough",
-      "animation_end_frame": 13795,
-      "section_seconds": 35.667,
-      "visual_seconds": 4.8,
-      "visual_fraction": 0.135
-    },
-    {
-      "name": "Why this mathematics still matters",
-      "animation_end_frame": 14868,
-      "section_seconds": 35.2,
-      "visual_seconds": 4.9,
-      "visual_fraction": 0.139
-    },
-    {
-      "name": "Return to the public lock",
-      "animation_end_frame": 15963,
-      "section_seconds": 37.433,
+      "name": "Rebuild the idea from the start",
+      "animation_end_frame": 16603,
+      "section_seconds": 37.867,
       "visual_seconds": 6.2,
-      "visual_fraction": 0.166
+      "visual_fraction": 0.164
     }
   ],
-  "duration": 562.9333333333333,
+  "duration": 584.7,
   "edition": "focused-v2"
 }
