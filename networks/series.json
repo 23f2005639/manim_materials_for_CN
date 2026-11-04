@@ -1,0 +1,46 @@
+{
+  "edition": "focused-v2",
+  "title": "One question. One discovery.",
+  "episodes": [
+    {
+      "id": "01",
+      "topic": "dns",
+      "folder": "episodes/v2-01-dns"
+    },
+    {
+      "id": "02",
+      "topic": "bufferbloat",
+      "folder": "episodes/v2-02-bufferbloat"
+    },
+    {
+      "id": "03",
+      "topic": "wdm",
+      "folder": "episodes/v2-03-wdm"
+    },
+    {
+      "id": "04",
+      "topic": "packet-switching",
+      "folder": "episodes/v2-04-packet-switching"
+    },
+    {
+      "id": "05",
+      "topic": "dijkstra",
+      "folder": "episodes/v2-05-dijkstra"
+    },
+    {
+      "id": "06",
+      "topic": "subnetting",
+      "folder": "episodes/v2-06-subnetting"
+    },
+    {
+      "id": "07",
+      "topic": "tcp-slow-start",
+      "folder": "episodes/v2-07-tcp-slow-start"
+    },
+    {
+      "id": "08",
+      "topic": "rsa",
+      "folder": "episodes/v2-08-rsa"
+    }
+  ]
+}

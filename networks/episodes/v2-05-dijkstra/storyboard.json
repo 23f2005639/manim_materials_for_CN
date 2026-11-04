@@ -1,0 +1,1014 @@
+{
+  "id": "05",
+  "topic": "dijkstra",
+  "edition": "focused-v2",
+  "slug": "dijkstra",
+  "title": "The Shortest Route Can Have More Steps",
+  "duration": 566.0,
+  "sources": [
+    {
+      "title": "Dijkstra: A Note on Two Problems in Connexion with Graphs",
+      "url": "https://doi.org/10.1007/BF01386390",
+      "notes": "Original shortest-path algorithm; the episode uses nonnegative illustrative link costs."
+    },
+    {
+      "title": "RFC 2328: OSPF Version 2, shortest-path calculation",
+      "url": "https://www.rfc-editor.org/rfc/rfc2328",
+      "notes": "Primary networking context for building a shortest-path tree; the episode does not teach the OSPF protocol."
+    }
+  ],
+  "sections": [
+    {
+      "id": "05-01",
+      "title": "The tempting shortcut",
+      "short_title": "The tempting shortcut",
+      "chapter": "The puzzle",
+      "duration": 35.2,
+      "narration": "Which route would you choose for this packet? The one with three connections looks shorter than the winding one with five. But a network does not pay for how tidy a route looks on a drawing. It pays the cost of every connection it uses. In a moment, that longer-looking path will beat the shortcut. The interesting question is how to discover it without trying every possible journey. That is the puzzle Dijkstra's algorithm solves.",
+      "bullets": [
+        "The tempting shortcut"
+      ],
+      "takeaway": "The tempting shortcut",
+      "visual": {
+        "phase": 0,
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "id": "05-02",
+      "title": "Give the links a cost",
+      "short_title": "Give the links a cost",
+      "chapter": "The puzzle",
+      "duration": 33.86666666666667,
+      "narration": "Here is our small world: six points, nine connections, and a positive number on each connection. A point could represent a router, but the algorithm only needs the graph. The numbers are illustrative costs, not automatically seconds or kilometers. We choose what they mean before asking for the cheapest route. Keep your eye on A, our starting point, and F, our destination. Everything else is a possible intermediate step in their journey.",
+      "bullets": [
+        "Give the links a cost"
+      ],
+      "takeaway": "Give the links a cost",
+      "visual": {
+        "phase": 1,
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "id": "05-03",
+      "title": "Count costs, not connections",
+      "short_title": "Count costs, not connections",
+      "chapter": "The puzzle",
+      "duration": 34.333333333333336,
+      "narration": "Follow A to B, B to D, then D to F. The costs are four, five, and six, totaling fifteen. Now take A to C to B to D to E to F. Two, one, five, two, three: thirteen. More connections, smaller bill. Try predicting the winner from the picture alone and it is easy to get fooled. The numbers describe our objective, so the complete sum must decide which route is better.",
+      "bullets": [
+        "Count costs, not connections"
+      ],
+      "takeaway": "Count costs, not connections",
+      "visual": {
+        "phase": 2,
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "id": "05-04",
+      "title": "Start with what is known",
+      "short_title": "Start with what is known",
+      "chapter": "Build the mechanism",
+      "duration": 34.333333333333336,
+      "narration": "Instead of guessing a complete route, we will grow a region of known shortest distances. A starts at zero because reaching the place where we already are costs nothing. Every other point begins at infinity, our shorthand for no route discovered yet. These are distance estimates, not numbers written on the links. The central rule is simple: choose the smallest unfinished estimate, settle it, and check whether going through it improves any neighbor.",
+      "bullets": [
+        "Start with what is known"
+      ],
+      "takeaway": "Start with what is known",
+      "visual": {
+        "phase": 3,
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "id": "05-05",
+      "title": "Open the first possibilities",
+      "short_title": "Open the first possibilities",
+      "chapter": "Build the mechanism",
+      "duration": 35.666666666666664,
+      "narration": "A is the only point with a finite estimate, so it is settled first. Its connection to B offers a distance of four; its connection to C offers two. Write both as tentative results. Tentative matters: discovering a route to B does not mean we have discovered the cheapest route to B. We have only found the best one so far. Which unfinished point should we explore next? Choose the smallest estimate, not the closest-looking dot.",
+      "bullets": [
+        "Open the first possibilities"
+      ],
+      "takeaway": "Open the first possibilities",
+      "visual": {
+        "phase": 4,
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "id": "05-06",
+      "title": "A cheaper way to B",
+      "short_title": "A cheaper way to B",
+      "chapter": "Build the mechanism",
+      "duration": 33.86666666666667,
+      "narration": "C wins with distance two. Explore its connections and something useful happens. Through C, reaching B costs two plus one: three. That improves B's earlier four, so replace the estimate and remember C as B's predecessor. Through C, we also discover D at ten and E at twelve. This repeated operation is called relaxation. The word sounds restful, but the job is simply comparing an old estimate with a newly discovered candidate.",
+      "bullets": [
+        "A cheaper way to B"
+      ],
+      "takeaway": "A cheaper way to B",
+      "visual": {
+        "phase": 5,
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "id": "05-07",
+      "title": "Improve the route to D",
+      "short_title": "Improve the route to D",
+      "chapter": "Build the mechanism",
+      "duration": 35.2,
+      "narration": "Now B has the smallest unfinished distance: three. Its connection to D costs five. Add that connection to the known cost of reaching B, and the candidate for D becomes eight. Eight beats ten, so update D and save B as its predecessor. Notice what the calculation includes. We are not choosing the cheapest outgoing connection in isolation. Every candidate includes the entire cost already spent getting to the point where this new step begins.",
+      "bullets": [
+        "Improve the route to D"
+      ],
+      "takeaway": "Improve the route to D",
+      "visual": {
+        "phase": 6,
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "id": "05-08",
+      "title": "Finding F is not finishing",
+      "short_title": "Finding F is not finishing",
+      "chapter": "Build the mechanism",
+      "duration": 35.2,
+      "narration": "D is next at eight. Through D, E improves from twelve to ten, and F appears with distance fourteen. We have reached the destination in our search. Should we stop? Hold that thought. Fourteen is still an unfinished estimate, and E is waiting with a smaller distance of ten. If the remaining link from E offers a better total, stopping now would miss it. Discovering the destination is different from proving its distance is final.",
+      "bullets": [
+        "Finding F is not finishing"
+      ],
+      "takeaway": "Finding F is not finishing",
+      "visual": {
+        "phase": 7,
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "id": "05-09",
+      "title": "One last improvement",
+      "short_title": "One last improvement",
+      "chapter": "Build the mechanism",
+      "duration": 34.766666666666666,
+      "narration": "Settle E at ten. Its connection to F costs three, making thirteen. That beats F's fourteen, so the estimate changes and its predecessor becomes E. This is the same small operation we have used all along: known distance plus link cost, compared with the current estimate. There is no special clever trick for the destination. The repeated local calculation is enough to uncover a complete route that our first visual guess failed to recognize.",
+      "bullets": [
+        "One last improvement"
+      ],
+      "takeaway": "One last improvement",
+      "visual": {
+        "phase": 8,
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "id": "05-10",
+      "title": "The frontier reaches F",
+      "short_title": "The frontier reaches F",
+      "chapter": "Build the mechanism",
+      "duration": 35.2,
+      "narration": "F now has the smallest unfinished estimate, thirteen, so settle it. Our final distances from A are zero for A, three for B, two for C, eight for D, ten for E, and thirteen for F. Watch the green settled region finish growing. Each number was earned by a comparison, rather than copied from a completed answer. The destination's cost is now final because it has crossed the same settled boundary as the earlier points.",
+      "bullets": [
+        "The frontier reaches F"
+      ],
+      "takeaway": "The frontier reaches F",
+      "visual": {
+        "phase": 9,
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "id": "05-11",
+      "title": "Why the smallest choice works",
+      "short_title": "Why the smallest choice works",
+      "chapter": "Build the mechanism",
+      "duration": 36.53333333333333,
+      "narration": "Why can that boundary be trusted? Imagine a cheaper undiscovered route to the point we are about to settle. It must leave our settled region somewhere. But our frontier already contains the cheapest available unfinished estimate, and every remaining connection has a nonnegative cost. Continuing farther cannot secretly subtract distance. That is the intuition behind the rule. Negative links would break this argument, which is why the graph's cost assumptions are part of the algorithm, not fine print.",
+      "bullets": [
+        "Why the smallest choice works"
+      ],
+      "takeaway": "Why the smallest choice works",
+      "visual": {
+        "phase": 10,
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "id": "05-12",
+      "title": "Recover the actual journey",
+      "short_title": "Recover the actual journey",
+      "chapter": "Test the idea",
+      "duration": 37.0,
+      "narration": "We have a cost, but a packet needs a route. Each improvement saved a predecessor: the point that gave us the better estimate. Begin at F and follow those clues backward: E, D, B, C, A. Reverse that chain and the forward route appears. The distance number tells us how much the best journey costs; the predecessor chain tells us which journey achieved it. Without those saved clues, the cheapest total alone would not draw the path for us.",
+      "bullets": [
+        "Recover the actual journey"
+      ],
+      "takeaway": "Recover the actual journey",
+      "visual": {
+        "phase": 11,
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "id": "05-13",
+      "title": "Send a packet along the answer",
+      "short_title": "Send a packet along the answer",
+      "chapter": "Test the idea",
+      "duration": 35.2,
+      "narration": "Now let the packet travel from A through C, B, D, E, and finally F. Add each link as it moves: two, three, eight, ten, thirteen. The arithmetic and the picture describe the same thing at different scales. A only needs C as its immediate next step toward this destination. We are showing a route on a small teaching graph; actual routing systems apply their own rules when they turn such calculations into forwarding decisions.",
+      "bullets": [
+        "Send a packet along the answer"
+      ],
+      "takeaway": "Send a packet along the answer",
+      "visual": {
+        "phase": 12,
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "id": "05-14",
+      "title": "Take away a connection",
+      "short_title": "Take away a connection",
+      "chapter": "Test the idea",
+      "duration": 36.1,
+      "narration": "Suppose the connection between D and E fails. Our thirteen-cost route no longer exists. Keeping the old answer would be wonderfully efficient right up until the packet reaches the missing connection. So change the graph and ask the same question again. We are not changing the meaning of cheapest, and we do not need a new algorithm. We need to run the calculation against the connections that are actually available now, rather than the ones we remember.",
+      "bullets": [
+        "Take away a connection"
+      ],
+      "takeaway": "Take away a connection",
+      "visual": {
+        "phase": 13,
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "id": "05-15",
+      "title": "Recalculate against the new graph",
+      "short_title": "Recalculate against the new graph",
+      "chapter": "Test the idea",
+      "duration": 37.0,
+      "narration": "Without that connection, A to C to B to D to F costs two plus one plus five plus six: fourteen. The route through C and E costs two plus ten plus three: fifteen. Fourteen wins. The updated distances keep E at twelve and reach F at fourteen. A failure does not mean every earlier number must change, but none should be trusted merely because it appeared in yesterday's answer. The graph determines what the calculation can justify today.",
+      "bullets": [
+        "Recalculate against the new graph"
+      ],
+      "takeaway": "Recalculate against the new graph",
+      "visual": {
+        "phase": 14,
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "id": "05-16",
+      "title": "Answer the opening question",
+      "short_title": "Answer the opening question",
+      "chapter": "The answer",
+      "duration": 36.53333333333333,
+      "narration": "Return to the two routes we started with. The shortest-looking line was never the right test. The useful question was which complete journey had the lowest sum, and Dijkstra answered by growing a trustworthy boundary of distances. Small comparisons produced a global result, then the same method adapted to a changed connection. That is the satisfying idea to keep: we did not need to guess the whole winning route. We built enough correct local knowledge to reveal it.",
+      "bullets": [
+        "Answer the opening question"
+      ],
+      "takeaway": "Answer the opening question",
+      "visual": {
+        "phase": 15,
+        "edges": [
+          [
+            "A",
+            "B",
+            4
+          ],
+          [
+            "A",
+            "C",
+            2
+          ],
+          [
+            "B",
+            "C",
+            1
+          ],
+          [
+            "B",
+            "D",
+            5
+          ],
+          [
+            "C",
+            "D",
+            8
+          ],
+          [
+            "C",
+            "E",
+            10
+          ],
+          [
+            "D",
+            "E",
+            2
+          ],
+          [
+            "D",
+            "F",
+            6
+          ],
+          [
+            "E",
+            "F",
+            3
+          ]
+        ]
+      }
+    }
+  ]
+}

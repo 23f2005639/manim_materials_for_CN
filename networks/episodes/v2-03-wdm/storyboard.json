@@ -1,0 +1,262 @@
+{
+  "id": "03",
+  "topic": "wdm",
+  "edition": "focused-v2",
+  "slug": "wdm",
+  "title": "How One Fiber Carries So Many Conversations",
+  "duration": 541.6,
+  "sources": [
+    {
+      "title": "NICT: 450 Tb/s over a metropolitan link",
+      "url": "https://www.nict.go.jp/en/press/2026/06/01-1.html",
+      "notes": "Current research motivation; multiple technologies contribute to the result."
+    },
+    {
+      "title": "ITU-T G.694.1: DWDM frequency grid",
+      "url": "https://www.itu.int/rec/T-REC-G.694.1",
+      "notes": "Channel grid and optical spectrum reference; display colors are illustrative."
+    }
+  ],
+  "sections": [
+    {
+      "id": "03-01",
+      "title": "A crowd inside one strand",
+      "short_title": "A crowd inside one strand",
+      "chapter": "The puzzle",
+      "duration": 34.333333333333336,
+      "narration": "This thin strand carries light, yet an enormous number of conversations can cross it together. How can the receiver tell them apart? Imagine four senders all insisting on using the same fiber at the same time. We could build four separate paths, but the more interesting solution is to give each signal a property that survives the journey. Today, that property is wavelength. Watch the four colors; each represents a separate optical channel.",
+      "bullets": [
+        "A crowd inside one strand"
+      ],
+      "takeaway": "A crowd inside one strand",
+      "visual": {
+        "phase": 0
+      }
+    },
+    {
+      "id": "03-02",
+      "title": "Keep four conversations separate",
+      "short_title": "Keep four conversations separate",
+      "chapter": "The puzzle",
+      "duration": 35.2,
+      "narration": "Each sender has its own changing stream of bits. For now, we draw four separate paths so their identities are obvious. The blue signal might carry one stream of data while the green signal carries another. They needn't contain the same pattern, begin together, or tell the same story. The problem is to combine them physically while leaving the receiver enough information to reconstruct each stream. Simply remembering that there were four senders isn't enough.",
+      "bullets": [
+        "Keep four conversations separate"
+      ],
+      "takeaway": "Keep four conversations separate",
+      "visual": {
+        "phase": 1
+      }
+    },
+    {
+      "id": "03-03",
+      "title": "Measure the spacing of crests",
+      "short_title": "Measure the spacing of crests",
+      "chapter": "The puzzle",
+      "duration": 33.86666666666667,
+      "narration": "First look at a wave rather than its data. Wavelength is the distance between repeating points, such as neighboring crests. Compress the spacing and the wavelength gets shorter; spread the crests and it gets longer. Our colors make that difference easy to follow. Real communication systems commonly use infrared light, so these display colors are labels for our eyes. They are not a promise that the fiber contains these exact visible colors.",
+      "bullets": [
+        "Measure the spacing of crests"
+      ],
+      "takeaway": "Measure the spacing of crests",
+      "visual": {
+        "phase": 2
+      }
+    },
+    {
+      "id": "03-04",
+      "title": "Put data onto the light",
+      "short_title": "Put data onto the light",
+      "chapter": "The puzzle",
+      "duration": 33.0,
+      "narration": "A channel needs to carry something more interesting than a perfectly unchanging wave. A transmitter varies properties of its optical signal to represent information. Here, brightness changes illustrate that idea: the pattern changes while the channel keeps its wavelength identity. Real modulation can be more sophisticated. Keep those two jobs separate in your mind: modulation carries the information, while the wavelength helps identify which optical channel we are looking at.",
+      "bullets": [
+        "Put data onto the light"
+      ],
+      "takeaway": "Put data onto the light",
+      "visual": {
+        "phase": 3
+      }
+    },
+    {
+      "id": "03-05",
+      "title": "Why identity matters",
+      "short_title": "Why identity matters",
+      "chapter": "Build the mechanism",
+      "duration": 34.333333333333336,
+      "narration": "Suppose we deliberately remove the difference between the channels. Now the receiver cannot separate them merely by choosing a wavelength, because they occupy the same wavelength region. Combining signals only helps when there is a usable separation rule. The problem isn't that two messages dislike each other. The receiver has lost the clue that distinguished them. Give the channels different wavelength allocations again, and that clue returns without adding another strand of fiber.",
+      "bullets": [
+        "Why identity matters"
+      ],
+      "takeaway": "Why identity matters",
+      "visual": {
+        "phase": 4
+      }
+    },
+    {
+      "id": "03-06",
+      "title": "Give each channel a wavelength",
+      "short_title": "Give each channel a wavelength",
+      "chapter": "Build the mechanism",
+      "duration": 34.333333333333336,
+      "narration": "Place the four channels at separate positions on this wavelength axis. Each position stands for a narrow optical channel with room for its modulated signal. The spaces between them matter: actual signals and optical filters don't have infinitely sharp boundaries. If we pack channels too closely for the equipment, separating them becomes harder. Wavelength division is organized sharing of optical spectrum, not permission to place an unlimited number of channels wherever we like.",
+      "bullets": [
+        "Give each channel a wavelength"
+      ],
+      "takeaway": "Give each channel a wavelength",
+      "visual": {
+        "phase": 5
+      }
+    },
+    {
+      "id": "03-07",
+      "title": "Combine at the multiplexer",
+      "short_title": "Combine at the multiplexer",
+      "chapter": "Build the mechanism",
+      "duration": 33.43333333333333,
+      "narration": "Now watch the multiplexer. Separate optical inputs enter; a combined optical signal leaves through one path. None of our four conversations has been turned into the others. They coexist in the outgoing light because they occupy different wavelength channels. This is the central move in wavelength-division multiplexing, usually shortened to WDM. The name sounds elaborate, but the drawing has already done most of the explaining: different wavelengths, together in one fiber.",
+      "bullets": [
+        "Combine at the multiplexer"
+      ],
+      "takeaway": "Combine at the multiplexer",
+      "visual": {
+        "phase": 6
+      }
+    },
+    {
+      "id": "03-08",
+      "title": "Travel together",
+      "short_title": "Travel together",
+      "chapter": "Build the mechanism",
+      "duration": 33.86666666666667,
+      "narration": "Inside the shared link, all four channels propagate together. Follow one pulse from each input and notice that they can occupy the fiber at the same time. They are not taking four long turns. The colored paths are a visual aid showing channel identity, rather than separate colored tubes hidden inside the strand. One physical optical path is carrying several distinguishable optical channels, and each channel can carry its own changing information.",
+      "bullets": [
+        "Travel together"
+      ],
+      "takeaway": "Travel together",
+      "visual": {
+        "phase": 7
+      }
+    },
+    {
+      "id": "03-09",
+      "title": "Separate at the destination",
+      "short_title": "Separate at the destination",
+      "chapter": "Make the math visible",
+      "duration": 31.666666666666668,
+      "narration": "At the far end, the demultiplexer reverses the arrangement. Optical components direct different wavelength regions toward their corresponding receivers. Blue returns to blue's output; green returns to green's output. The useful achievement is not just that light reached the destination. The receiver recovered the right stream at the right output. Keep an eye on the pulse pattern: separation preserves the identity needed to interpret the original data.",
+      "bullets": [
+        "Separate at the destination"
+      ],
+      "takeaway": "Separate at the destination",
+      "visual": {
+        "phase": 8
+      }
+    },
+    {
+      "id": "03-10",
+      "title": "Try selecting only one channel",
+      "short_title": "Try selecting only one channel",
+      "chapter": "Make the math visible",
+      "duration": 32.53333333333333,
+      "narration": "Cover three outputs and inspect the remaining one. Its receiver is interested in the selected wavelength channel while the others continue through their own outputs. This is why the wavelength allocation matters at both ends. The transmitter alone can't invent a private rule and hope the receiver guesses it. Multiplexing and demultiplexing form a coordinated system: combine according to an agreed arrangement, then use that arrangement to separate again.",
+      "bullets": [
+        "Try selecting only one channel"
+      ],
+      "takeaway": "Try selecting only one channel",
+      "visual": {
+        "phase": 9
+      }
+    },
+    {
+      "id": "03-11",
+      "title": "Add the channel rates",
+      "short_title": "Add the channel rates",
+      "chapter": "Make the math visible",
+      "duration": 32.53333333333333,
+      "narration": "Let's attach numbers to the picture. Suppose each of our four channels carries one hundred gigabits per second. One channel contributes one hundred; two contribute two hundred; four contribute four hundred gigabits per second of combined raw rate. The sum comes from parallel channel capacity. We haven't made each individual channel four times faster. We've arranged four channels so their rates contribute to the total at the same time.",
+      "bullets": [
+        "Add the channel rates"
+      ],
+      "takeaway": "Add the channel rates",
+      "visual": {
+        "phase": 10
+      }
+    },
+    {
+      "id": "03-12",
+      "title": "Keep the units honest",
+      "short_title": "Keep the units honest",
+      "chapter": "Make the math visible",
+      "duration": 33.86666666666667,
+      "narration": "Four hundred gigabits per second is not four hundred gigabytes per second. Eight bits make a byte, so dividing by eight gives fifty gigabytes per second as the corresponding raw byte rate. Even that is not a promised file-download speed. Coding, framing, and other overhead consume part of the transmitted information, and the rest of the system may impose limits. The multiplication describes our optical channel model, not every application's measured throughput.",
+      "bullets": [
+        "Keep the units honest"
+      ],
+      "takeaway": "Keep the units honest",
+      "visual": {
+        "phase": 11
+      }
+    },
+    {
+      "id": "03-13",
+      "title": "More channels need more room",
+      "short_title": "More channels need more room",
+      "chapter": "Resolve the story",
+      "duration": 35.666666666666664,
+      "narration": "It is tempting to keep adding channels and declare victory over physics. But the available spectrum, channel spacing, amplification, noise, and receiver equipment constrain the arrangement. In the picture, adding another channel means finding a usable place for its signal and a way to recover it. More wavelength channels can increase total capacity, but the equipment must support the whole transmission. An extra colored line on a diagram is much easier than a working optical link.",
+      "bullets": [
+        "More channels need more room"
+      ],
+      "takeaway": "More channels need more room",
+      "visual": {
+        "phase": 12
+      }
+    },
+    {
+      "id": "03-14",
+      "title": "Unequal channels still add",
+      "short_title": "Unequal channels still add",
+      "chapter": "Resolve the story",
+      "duration": 33.86666666666667,
+      "narration": "Our equal-rate example was convenient, not compulsory. Let two channels carry one hundred gigabits per second each and two carry fifty each. The combined raw rate is now three hundred gigabits per second. Nothing about the word multiplexing requires equal contributions. This is the same sum written more generally: add the individual channel rates. The diagram changes one channel's contribution at a time, so the arithmetic stays attached to the physical arrangement.",
+      "bullets": [
+        "Unequal channels still add"
+      ],
+      "takeaway": "Unequal channels still add",
+      "visual": {
+        "phase": 13
+      }
+    },
+    {
+      "id": "03-15",
+      "title": "Connect the picture to research",
+      "short_title": "Connect the picture to research",
+      "chapter": "Resolve the story",
+      "duration": 34.333333333333336,
+      "narration": "The scale becomes striking in real optical research. In June twenty twenty-six, NICT reported a wideband transmission demonstration over installed fiber using more than a thousand wavelength channels. That achievement also depended on amplification, modulation, and receiver techniques; WDM did not produce the entire result by itself. Our four-channel drawing isolates one essential idea inside that much richer system. The same separation principle can operate at a scale far beyond four colored inputs.",
+      "bullets": [
+        "Connect the picture to research"
+      ],
+      "takeaway": "Connect the picture to research",
+      "visual": {
+        "phase": 14
+      }
+    },
+    {
+      "id": "03-16",
+      "title": "Return to the single strand",
+      "short_title": "Return to the single strand",
+      "chapter": "Resolve the story",
+      "duration": 34.766666666666666,
+      "narration": "We began with four senders competing for one fiber. The solution was to preserve a distinction the receiver could use: wavelength. Give each channel a suitable optical allocation, combine them, carry them together, and separate them again. The capacity arithmetic follows the picture because several channels contribute simultaneously. One strand can support many conversations when sharing does not destroy their identities. That is the useful idea to keep when the long name fades away.",
+      "bullets": [
+        "Return to the single strand"
+      ],
+      "takeaway": "Return to the single strand",
+      "visual": {
+        "phase": 15
+      }
+    }
+  ]
+}
