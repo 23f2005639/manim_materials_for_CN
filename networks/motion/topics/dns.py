@@ -1,5 +1,6 @@
 """One name lookup, its reusable answer, and the cost of freshness."""
 from .common import *
+from .foundation import computer, photo
 
 
 class Director(VisualDirector):
@@ -16,11 +17,11 @@ class Director(VisualDirector):
         self.play(m.FadeOut(q),run_time=.4)
         return path
 
-    def network(self):
+    def network(self,count=5):
         xs=(-5.5,-2.75,0,2.75,5.5)
-        names=('Computer','Resolver','Root','TLD','Authority')
+        names=('Computer','Resolver','Root','TLD directory','Record keeper')
         colors=(BLUE,GREEN,YELLOW,PURPLE,BLUE)
-        nodes=[self.own(host(n,x,1,c)) for n,x,c in zip(names,xs,colors)]
+        nodes=[self.own(host(n,x,1,c)) for n,x,c in list(zip(names,xs,colors))[:count]]
         self.play(*(m.FadeIn(n) for n in nodes),run_time=1)
         return xs,nodes
 
@@ -36,41 +37,46 @@ class Director(VisualDirector):
     def animate(self,index,section,budget):
         self.reset()
         if index==0:
-            self.show(host('Computer',-4,1,BLUE));self.show(host('Service',4,1,GREEN))
-            self.show(text('Connection available',0,2.15,28,GREEN))
-            for _ in range(2):self.fly('data',(-3.5,1),(3.5,1),GREEN,2)
-            self.fly('name?',(-4,-1),(0,-1),BLUE)
-            cross=self.own(m.VGroup(line((-.2,-1.2),(.2,-.8),RED,4),line((-.2,-.8),(.2,-1.2),RED,4)))
-            self.play(m.Create(cross),run_time=.7)
-            self.show(text('Address unknown',0,-2.1,30,RED))
+            self.show(computer('Your computer',-4,.5))
+            self.show(computer('Photo server',4,.5,GREEN))
+            picture=self.show(photo(4,.5))
+            self.show(text('A server stores and sends information',0,-1.3,28))
+            path=self.own(line((-3,.5),(3,.5)))
+            self.play(m.Create(path),run_time=1.5)
+            self.show(text('Which address should we contact?',0,-2.4,30,YELLOW))
+            question=self.show(packet('?',BLUE).move_to([-4,.5,0]))
+            self.play(m.Indicate(question),m.Indicate(picture),run_time=1.4)
         elif index==1:
-            name=self.show(packet('photos.orbit.example',BLUE,4.6,.9).move_to([-3.3,.6,0]))
-            addr=self.show(packet('192.0.2.10',GREEN,3.6,.9).move_to([3.4,.6,0]))
-            arrow=self.own(m.Arrow([-.8,.6,0],[1.4,.6,0],buff=.05,color=YELLOW))
-            self.play(m.Create(arrow),run_time=2)
-            self.show(text('DNS',.3,1.5,32,YELLOW))
-            self.play(m.Indicate(name),run_time=1.5);self.play(m.Indicate(addr),run_time=1.5)
-            self.show(text('Name stays useful when an address changes',0,-1.2,27,WHITE,11))
-            new=packet('203.0.113.20',GREEN,3.6,.9).move_to([3.4,.6,0])
-            self.play(m.Transform(addr,new),run_time=2)
+            name=self.show(packet('Friend',BLUE,3.7,.8).move_to([-3.2,.6,0]))
+            addr=self.show(packet('Phone number',GREEN,3.7,.8).move_to([3.2,.6,0]))
+            arrow=self.own(m.Arrow([-1.2,.6,0],[1.2,.6,0],buff=.05,color=YELLOW))
+            self.play(m.Create(arrow),run_time=1.5)
+            self.play(m.Transform(name,packet('photos.orbit.example',BLUE,4.6,.9).move_to([-3.3,.6,0])),
+                      m.Transform(addr,packet('192.0.2.10',GREEN,3.6,.9).move_to([3.4,.6,0])),run_time=2)
+            self.show(text('Website name',-3.3,1.7,27,BLUE,5))
+            self.show(text('IP address',3.4,1.7,27,GREEN,4))
+            self.show(text('DNS finds information for a name',0,-1.3,30,YELLOW))
+            self.show(text('Domain Name System',0,-2.3,26,MUTED))
         elif index==2:
-            pieces=[('Root (.)',YELLOW),('example',PURPLE),('orbit.example',GREEN),('photos.orbit.example',BLUE)]
+            self.show(computer('Your computer',-4,.5))
+            helper=self.show(computer('Helper',3.5,.5,GREEN))
+            self.fly('name?',(-3,-.8),(2.5,-.8),BLUE,2.5)
+            self.show(text('Resolver = the helper that finds an answer',0,-2,28,GREEN))
+            self.play(m.Indicate(helper),run_time=1.3)
+        elif index==3:
+            pieces=[('Root: the starting directory',YELLOW),('example',PURPLE),('orbit.example',GREEN),('photos.orbit.example',BLUE)]
             prev=None
             for j,(label,c) in enumerate(pieces):
                 y=1.9-j*1.15
-                q=self.show(packet(label,c,4,.65).move_to([0,y,0]))
+                self.show(packet(label,c,5.4,.65).move_to([0,y,0]))
                 if prev is not None:
                     a=self.own(m.Arrow([0,prev-.4,0],[0,y+.4,0],buff=.02,color=MUTED))
-                    self.play(m.Create(a),run_time=1.7)
+                    self.play(m.Create(a),run_time=1.5)
                 prev=y
-        elif index in (3,4,5,6,7,12,13):
-            xs,nodes=self.network()
-            if index==3:
-                self.fly('name?',(xs[0],-.25),(xs[1],-.25))
-                self.show(text('Search on my behalf',-2.75,-1.3,28,GREEN,6))
-                self.play(m.Indicate(nodes[1]),run_time=2)
-                self.show(text('Relevant caches empty',0,-2.25,26,MUTED))
-            elif index in (4,5,6):
+            self.show(text('Smaller parts inside larger parts',0,-2.6,26,WHITE))
+        elif index in (4,5,6,7,12,13):
+            xs,nodes=self.network(index-1 if index in (4,5,6) else 5)
+            if index in (4,5,6):
                 target=index-2
                 self.fly('name?',(xs[1],-.1),(xs[target],-.1))
                 label='TLD referral' if index==4 else 'Zone referral' if index==5 else '192.0.2.10'

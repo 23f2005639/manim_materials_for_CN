@@ -74,3 +74,9 @@ class LessonScene(m.Scene):
         self.storyboard_path.with_name("animation-timing.json").write_text(json.dumps({
             "fps": fps, "sections": motion, "duration": self.time, "edition": "visual",
         }, indent=2) + "\n")
+
+
+class Lesson3DScene(m.ThreeDScene):
+    """Opt into perspective only for a lesson that contains physical 3D geometry."""
+    storyboard_path: Path
+    construct = LessonScene.construct

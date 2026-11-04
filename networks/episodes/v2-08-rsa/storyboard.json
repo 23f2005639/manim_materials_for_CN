@@ -4,7 +4,7 @@
   "edition": "focused-v2",
   "slug": "rsa",
   "title": "A Lock Anyone Can Close, but Only You Can Open",
-  "duration": 562.9333333333334,
+  "duration": 584.7,
   "sources": [
     {
       "title": "RFC 8017: PKCS #1 RSA Cryptography Specifications",
@@ -12,251 +12,252 @@
       "notes": "RSA primitives, exponent relations, and the need for a complete encoding scheme."
     },
     {
-      "title": "NIST: What Is Post-Quantum Cryptography?",
-      "url": "https://www.nist.gov/cybersecurity-and-privacy/what-post-quantum-cryptography",
-      "notes": "Brief motivation for understanding RSA assumptions; no present-day break claimed."
+      "title": "Rivest, Shamir and Adleman: original RSA paper",
+      "url": "https://people.csail.mit.edu/rivest/Rsapaper.pdf",
+      "notes": "Original public/private construction and remainder arithmetic; RFC 8017 supplies modern encoding requirements."
     }
   ],
   "sections": [
     {
       "id": "08-01",
-      "title": "The public lock puzzle",
-      "short_title": "The public lock puzzle",
-      "chapter": "The puzzle",
-      "duration": 34.766666666666666,
-      "narration": "Imagine publishing a lock that anyone can use to protect a message for you, while keeping the ability to open it to yourself. That sounds backwards if locking and unlocking require exactly the same secret. RSA makes the two operations different. We will build a tiny numerical example, watch a message change, and then recover it. The numbers are deliberately small enough to see; they are a teaching model, not a secure encryption system.",
+      "title": "Who can read this message?",
+      "short_title": "Who can read this message?",
+      "chapter": "Start with the basics",
+      "duration": 36.53333333333333,
+      "narration": "Suppose you send a friend a private message: meet at seven. On its journey, someone else might see the data. If the message is readable, that person can read it too. So we want to change it into something they cannot understand, then let our friend change it back. That process is encryption. A simple approach uses a shared secret. But here is a puzzle: how do we send privately to someone before we have shared that secret?",
       "bullets": [
-        "The public lock puzzle"
+        "Who can read this message?"
       ],
-      "takeaway": "The public lock puzzle",
+      "takeaway": "Who can read this message?",
       "visual": {
         "phase": 0
       }
     },
     {
       "id": "08-02",
-      "title": "Easy forward, difficult backward",
-      "short_title": "Easy forward, difficult backward",
-      "chapter": "The puzzle",
-      "duration": 35.666666666666664,
-      "narration": "The public-key idea begins with an imbalance. Some calculations are easy to perform when you have the inputs, while reversing the result can be much harder without extra information. Multiplying two large primes is straightforward compared with recovering those primes from their product. RSA connects that hidden structure to a reversible message transformation. We will not pretend that multiplying numbers alone encrypts a message. The important part is how the product supports two related exponent operations.",
+      "title": "A lock with two different jobs",
+      "short_title": "A lock with two different jobs",
+      "chapter": "Start with the basics",
+      "duration": 36.53333333333333,
+      "narration": "Picture your friend handing out open padlocks while keeping the opening key. Anyone can put a message in a box and snap a lock shut. Only your friend can open it. RSA uses a mathematical version of two different jobs: a public rule for encrypting and a private rule for recovering the message. Computers represent messages as numbers, so our tiny demonstration will protect the number seven. The padlock is an analogy; the real work will be arithmetic.",
       "bullets": [
-        "Easy forward, difficult backward"
+        "A lock with two different jobs"
       ],
-      "takeaway": "Easy forward, difficult backward",
+      "takeaway": "A lock with two different jobs",
       "visual": {
         "phase": 1
       }
     },
     {
       "id": "08-03",
-      "title": "Numbers that wrap around",
-      "short_title": "Numbers that wrap around",
-      "chapter": "The puzzle",
-      "duration": 34.766666666666666,
-      "narration": "Before the keys, meet the arithmetic. On this circle, counting past the final position wraps back to zero. Modulo fifty-five means keeping the remainder after division by fifty-five. Fifty-six lands at one, and one hundred and eleven also lands at one. Very different ordinary numbers can occupy the same position after wrapping. RSA uses this kind of modular arithmetic, so enormous powers can be handled through their remainders rather than written out in full.",
+      "title": "Keep what is left over",
+      "short_title": "Keep what is left over",
+      "chapter": "Start with the basics",
+      "duration": 34.333333333333336,
+      "narration": "Before any keys, we need one easy operation: a remainder. Put eleven counters into groups of five. Two full groups use ten counters, leaving one. Eleven divided by five has remainder one. The short mathematical name is modulo: eleven mod five equals one. We will later use groups of fifty-five, but the idea is identical. Keep what is left after removing complete groups. No mysterious new kind of number, just the leftover amount.",
       "bullets": [
-        "Numbers that wrap around"
+        "Keep what is left over"
       ],
-      "takeaway": "Numbers that wrap around",
+      "takeaway": "Keep what is left over",
       "visual": {
         "phase": 2
       }
     },
     {
       "id": "08-04",
-      "title": "Choose two small primes",
-      "short_title": "Choose two small primes",
-      "chapter": "The puzzle",
-      "duration": 35.2,
-      "narration": "Choose five and eleven as our two primes. Their product is fifty-five, which becomes the modulus, n. That number is public. The prime factors are the extra structure we keep private when constructing a real key. Our example is intentionally easy to factor, so do not confuse visible small numbers with actual security. They let us inspect the mechanism. Larger keys make the underlying problem harder, but correct schemes need more than large numbers alone.",
+      "title": "Build the number fifty-five",
+      "short_title": "Build the number fifty-five",
+      "chapter": "Start with the basics",
+      "duration": 37.43333333333333,
+      "narration": "Choose five and eleven. Both are prime numbers: whole numbers greater than one that divide evenly only by one and themselves. Primes act like building blocks for multiplication. Multiply our two choices and we get fifty-five. That becomes the number we will use when keeping remainders. We call it n, simply a short label. Our public instructions will include fifty-five. The two factors, five and eleven, help us build the private instructions. These tiny numbers are for seeing the idea.",
       "bullets": [
-        "Choose two small primes"
+        "Build the number fifty-five"
       ],
-      "takeaway": "Choose two small primes",
+      "takeaway": "Build the number fifty-five",
       "visual": {
         "phase": 3
       }
     },
     {
       "id": "08-05",
-      "title": "Count the useful positions",
-      "short_title": "Count the useful positions",
-      "chapter": "Build the mechanism",
-      "duration": 34.333333333333336,
-      "narration": "Between zero and fifty-four, some positions share a factor with fifty-five. Highlight multiples of five, then multiples of eleven. The positions left over are relatively prime to fifty-five: their greatest common divisor with it is one. There are forty such positions. For distinct primes, that count is five minus one, multiplied by eleven minus one: four times ten. This count, called phi of n, helps us choose the relationship between the two exponents.",
+      "title": "Find a useful repeating structure",
+      "short_title": "Find a useful repeating structure",
+      "chapter": "Build the idea",
+      "duration": 37.86666666666667,
+      "narration": "Why did we keep those two factors? They help describe a repeating pattern in the remainder arithmetic. Look at the numbers from zero through fifty-four. Cross out multiples of five and multiples of eleven. Forty positions remain. None of those shares a factor with fifty-five except one. For these primes, we can count them as four times ten: forty. Keep that number nearby. We will use its repeating structure to choose two operations that work together, rather than guessing a secret.",
       "bullets": [
-        "Count the useful positions"
+        "Find a useful repeating structure"
       ],
-      "takeaway": "Count the useful positions",
+      "takeaway": "Find a useful repeating structure",
       "visual": {
         "phase": 4
       }
     },
     {
       "id": "08-06",
-      "title": "Choose the public exponent",
-      "short_title": "Choose the public exponent",
-      "chapter": "Build the mechanism",
-      "duration": 35.2,
-      "narration": "Let the public exponent e be three. It must have a suitable inverse modulo our count of forty; three and forty are relatively prime, so that inverse exists. Publishing n and e gives the pair fifty-five and three. Someone protecting a message uses the public exponent operation with this modulus. Knowing the public numbers is expected. The system's intended security does not depend on keeping the public algorithm or the public key out of view.",
+      "title": "The public rule repeats a multiplication",
+      "short_title": "The public rule repeats a multiplication",
+      "chapter": "Build the idea",
+      "duration": 35.666666666666664,
+      "narration": "Let our public instruction be: multiply the message number by itself three times, then keep the remainder after dividing by fifty-five. Three copies multiplied together is called the third power, or cubing. We label that power e, and choose e equal to three. The public key is just the pair fifty-five and three. Why this choice? Three and our count of forty share no factor above one, which lets us find a matching private power next.",
       "bullets": [
-        "Choose the public exponent"
+        "The public rule repeats a multiplication"
       ],
-      "takeaway": "Choose the public exponent",
+      "takeaway": "The public rule repeats a multiplication",
       "visual": {
         "phase": 5
       }
     },
     {
       "id": "08-07",
-      "title": "Find the matching private exponent",
-      "short_title": "Find the matching private exponent",
-      "chapter": "Build the mechanism",
-      "duration": 33.86666666666667,
-      "narration": "We need a private exponent d whose product with three leaves remainder one when divided by forty. Twenty-seven works: three times twenty-seven equals eighty-one, and eighty-one is one plus two times forty. So d is twenty-seven. Keep that relationship in view. The private operation is not an ordinary division by three. These exponents cooperate through modular arithmetic and the structure established by the prime factors, which is why the wrapping picture matters.",
+      "title": "Choose a matching private rule",
+      "short_title": "Choose a matching private rule",
+      "chapter": "Build the idea",
+      "duration": 36.1,
+      "narration": "Now find a number which, when multiplied by three, leaves one after removing complete groups of forty. Twenty-seven works. Three times twenty-seven is eighty-one, and eighty-one is forty plus forty plus one. We label the matching private power d, so d is twenty-seven. Notice the important part: this number was chosen to fit the public operation. It is not an unrelated password. The relationship between three, twenty-seven, and forty is what will let the two operations cooperate.",
       "bullets": [
-        "Find the matching private exponent"
+        "Choose a matching private rule"
       ],
-      "takeaway": "Find the matching private exponent",
+      "takeaway": "Choose a matching private rule",
       "visual": {
         "phase": 6
       }
     },
     {
       "id": "08-08",
-      "title": "Encrypt the message seven",
-      "short_title": "Encrypt the message seven",
-      "chapter": "Build the mechanism",
-      "duration": 34.766666666666666,
-      "narration": "Represent our message by the number seven. Raise it to the public exponent three: seven cubed is three hundred and forty-three. Divide by fifty-five and keep the remainder. Six lots of fifty-five make three hundred and thirty, leaving thirteen. That thirteen is our ciphertext in this toy example. Anyone with the public pair can perform this calculation. The interesting question is how the private exponent will recover seven from thirteen without ordinary cube-root arithmetic.",
+      "title": "Turn seven into thirteen",
+      "short_title": "Turn seven into thirteen",
+      "chapter": "Build the idea",
+      "duration": 35.666666666666664,
+      "narration": "Time to send our tiny message, seven. Follow the public rule: seven times seven times seven is three hundred and forty-three. Remove complete groups of fifty-five. Six groups account for three hundred and thirty, leaving thirteen. That leftover number is the encrypted result, also called ciphertext. Seven has become thirteen. Anyone with the public pair fifty-five and three can perform this forward calculation. We have now watched encryption happen, using only multiplication and keeping a remainder.",
       "bullets": [
-        "Encrypt the message seven"
+        "Turn seven into thirteen"
       ],
-      "takeaway": "Encrypt the message seven",
+      "takeaway": "Turn seven into thirteen",
       "visual": {
         "phase": 7
       }
     },
     {
       "id": "08-09",
-      "title": "Keep the remainder as you go",
-      "short_title": "Keep the remainder as you go",
-      "chapter": "Make the math visible",
-      "duration": 35.2,
-      "narration": "Huge exponents look intimidating if we imagine writing the entire power first. We do not have to. After a multiplication, keeping the remainder preserves what matters for subsequent modular multiplication. Follow the moving number around the fifty-five-position circle. It wraps, returns, and wraps again, while the remainder stays small. This is the intuition behind efficient modular exponentiation: repeatedly calculate with manageable remainders instead of carrying a giant ordinary integer all the way to the end.",
+      "title": "Keep the numbers manageable",
+      "short_title": "Keep the numbers manageable",
+      "chapter": "Build the idea",
+      "duration": 35.666666666666664,
+      "narration": "The private rule asks us to use a much bigger power. Must we write an enormous number first? Happily, no. We can keep remainders while calculating. Start with thirteen. Square it, meaning multiply it by itself: one hundred and sixty-nine leaves four after division by fifty-five. Square that four to get sixteen. Square sixteen and keep its remainder, thirty-six. Each step keeps the same useful remainder information while preventing the working numbers from growing without limit.",
       "bullets": [
-        "Keep the remainder as you go"
+        "Keep the numbers manageable"
       ],
-      "takeaway": "Keep the remainder as you go",
+      "takeaway": "Keep the numbers manageable",
       "visual": {
         "phase": 8
       }
     },
     {
       "id": "08-10",
-      "title": "Decrypt using twenty-seven",
-      "short_title": "Decrypt using twenty-seven",
-      "chapter": "Make the math visible",
-      "duration": 34.333333333333336,
-      "narration": "Now apply the private exponent: thirteen to the power of twenty-seven, modulo fifty-five. The calculation returns seven. We have recovered the original message using a different exponent from the one that protected it. The public side used three; the private side used twenty-seven. Watch the ciphertext marker return to the message position. That reversal is the behavior our key construction was designed to produce, rather than an accidental property of one unconnected formula.",
+      "title": "Bring the message back",
+      "short_title": "Bring the message back",
+      "chapter": "Build the idea",
+      "duration": 37.0,
+      "narration": "Now use the private power, twenty-seven. We can split it into sixteen plus eight plus two plus one. The boxes show the remainders of thirteen raised to those powers. Multiply those values together, keeping the remainder after each step. Watch the result settle on seven. We recovered the original message. Written compactly, thirteen to the power twenty-seven, mod fifty-five, equals seven. The arithmetic looks longer than encryption, but it uses the same two actions: multiply and keep a remainder.",
       "bullets": [
-        "Decrypt using twenty-seven"
+        "Bring the message back"
       ],
-      "takeaway": "Decrypt using twenty-seven",
+      "takeaway": "Bring the message back",
       "visual": {
         "phase": 9
       }
     },
     {
       "id": "08-11",
-      "title": "Why those exponents cooperate",
-      "short_title": "Why those exponents cooperate",
-      "chapter": "Make the math visible",
-      "duration": 35.666666666666664,
-      "narration": "For our message, which is relatively prime to fifty-five, the modular powers follow a repeating structure tied to the forty valid positions. Because the two exponents multiply to one plus a multiple of forty, applying them together returns the starting message. The animation shows that return, while the equation summarizes it. This is intuition for the mechanism, not a full number-theory proof. Our choice of message seven lets the relationship appear cleanly in the small example.",
+      "title": "Why the pair fits together",
+      "short_title": "Why the pair fits together",
+      "chapter": "Test and understand",
+      "duration": 37.43333333333333,
+      "narration": "The interesting question is why seven returns. For numbers such as seven, which share no factor with fifty-five except one, these powers have a repeating structure linked to our count of forty. Encrypting with power three and decrypting with power twenty-seven combines into power eighty-one. That is one plus two times forty. The matching construction brings us back to the original value. The circle illustrates repetition; it is not a claim that every message takes exactly forty steps to repeat.",
       "bullets": [
-        "Why those exponents cooperate"
+        "Why the pair fits together"
       ],
-      "takeaway": "Why those exponents cooperate",
+      "takeaway": "Why the pair fits together",
       "visual": {
         "phase": 10
       }
     },
     {
       "id": "08-12",
-      "title": "Test the wrong exponent",
-      "short_title": "Test the wrong exponent",
-      "chapter": "Make the math visible",
-      "duration": 35.2,
-      "narration": "Replace the private exponent with a guess. The same ciphertext generally lands somewhere else, rather than returning to seven. This makes the relationship between the exponents visible: the private operation is carefully chosen, not simply any different calculation. In this tiny example someone could quickly try all the possibilities, which is another reason it offers no security. The drawing demonstrates a mathematical construction. It does not demonstrate resistance to a determined attacker using realistic equipment.",
+      "title": "Try the wrong private number",
+      "short_title": "Try the wrong private number",
+      "chapter": "Test and understand",
+      "duration": 35.666666666666664,
+      "narration": "What if we replace twenty-seven with a guess? Use five instead. The same encrypted number thirteen now produces forty-three, not seven. The right side uses twenty-seven and recovers seven. So the private rule is not simply any large number or any secret number. It must fit the public construction. This small experiment does not prove security. It shows what correctness requires: the intended pair must undo the message transformation, while an arbitrary guess generally does not.",
       "bullets": [
-        "Test the wrong exponent"
+        "Try the wrong private number"
       ],
-      "takeaway": "Test the wrong exponent",
+      "takeaway": "Try the wrong private number",
       "visual": {
         "phase": 11
       }
     },
     {
       "id": "08-13",
-      "title": "What the hidden factors reveal",
-      "short_title": "What the hidden factors reveal",
-      "chapter": "Resolve the story",
-      "duration": 35.666666666666664,
-      "narration": "If someone factors fifty-five into five and eleven, they can calculate our count of forty and find a matching private exponent. That is why the factorization matters. In real RSA, the public modulus is vastly larger, and recovering its factors is intended to be computationally difficult for classical attackers using appropriate parameters. Factoring is a known way to recover the private information; we are not claiming every imaginable RSA attack must literally follow this exact route.",
+      "title": "What must remain hard?",
+      "short_title": "What must remain hard?",
+      "chapter": "Test and understand",
+      "duration": 36.53333333333333,
+      "narration": "Our public key contains fifty-five, but not its two prime factors. If someone discovers five and eleven, they can repeat our private-key construction: calculate forty, then find the matching power twenty-seven. For fifty-five that is easy, which is why this example protects nothing. Real RSA uses far larger carefully generated primes. Multiplying them is practical, while recovering their factors from the product is intended to be difficult. The security depends on such mathematical assumptions and on correct implementation.",
       "bullets": [
-        "What the hidden factors reveal"
+        "What must remain hard?"
       ],
-      "takeaway": "What the hidden factors reveal",
+      "takeaway": "What must remain hard?",
       "visual": {
         "phase": 12
       }
     },
     {
       "id": "08-14",
-      "title": "Textbook numbers are not enough",
-      "short_title": "Textbook numbers are not enough",
-      "chapter": "Resolve the story",
-      "duration": 35.666666666666664,
-      "narration": "Our calculation directly transformed a small message number. Real encryption requires a suitable, carefully specified encoding and padding scheme, along with correct implementations and secure key handling. Repeating these tiny textbook operations is not a recipe for protecting personal messages. Keep the mathematical insight without mistaking the demonstration for deployable cryptography. Publishing a pair of numbers safely depends on the complete scheme, not only on whether a cube followed by another power returns the expected remainder.",
+      "title": "The tiny example needs boundaries",
+      "short_title": "The tiny example needs boundaries",
+      "chapter": "Test and understand",
+      "duration": 37.86666666666667,
+      "narration": "There is another reason not to use our little calculation directly as real encryption. Encrypt seven twice with this bare rule and thirteen appears twice. That visible repetition can leak information. Practical encryption needs a complete, carefully designed encoding scheme that adds the right structure and randomness before the RSA operation. We are looking inside one mathematical mechanism, not building a safe messaging app. The small numbers let us understand the moving parts without pretending that understanding alone makes them secure.",
       "bullets": [
-        "Textbook numbers are not enough"
+        "The tiny example needs boundaries"
       ],
-      "takeaway": "Textbook numbers are not enough",
+      "takeaway": "The tiny example needs boundaries",
       "visual": {
         "phase": 13
       }
     },
     {
       "id": "08-15",
-      "title": "Why this mathematics still matters",
-      "short_title": "Why this mathematics still matters",
-      "chapter": "Resolve the story",
-      "duration": 35.2,
-      "narration": "Interest in quantum-resistant cryptography makes these assumptions worth understanding. A sufficiently capable future quantum computer could threaten RSA's underlying problem, which is one reason organizations are preparing transitions. That does not mean our video has shown such a computer breaking a deployed key today. The lesson here remains RSA itself: identify what the public operation reveals, what the private structure enables, and which assumptions make the difference between an easy demonstration and a security claim.",
+      "title": "Connect the two kinds of rules",
+      "short_title": "Connect the two kinds of rules",
+      "chapter": "Test and understand",
+      "duration": 36.53333333333333,
+      "narration": "Step back from the arithmetic. With a shared-secret method, the people communicating must have a suitable secret in common. With this public-key arrangement, the receiving person can publish the encrypting instructions and keep the recovery instructions private. The private key is related to the public key, but should be impractical to derive from it. That last condition matters. Publishing an operation is useful only if seeing how to perform it does not make recovering the private operation easy.",
       "bullets": [
-        "Why this mathematics still matters"
+        "Connect the two kinds of rules"
       ],
-      "takeaway": "Why this mathematics still matters",
+      "takeaway": "Connect the two kinds of rules",
       "visual": {
         "phase": 14
       }
     },
     {
       "id": "08-16",
-      "title": "Return to the public lock",
-      "short_title": "Return to the public lock",
-      "chapter": "Resolve the story",
-      "duration": 37.43333333333333,
-      "narration": "We can now replace the lock metaphor with something precise. The public pair fifty-five and three transformed seven into thirteen. The private exponent twenty-seven transformed thirteen back into seven. Prime factors helped construct the exponent relationship, and modular arithmetic made the two operations fit together. Anyone can perform the public calculation, while the intended private capability depends on information we keep. The remarkable idea is not hiding the instructions. It is publishing one useful operation without publishing its intended inverse.",
+      "title": "Rebuild the idea from the start",
+      "short_title": "Rebuild the idea from the start",
+      "chapter": "Test and understand",
+      "duration": 37.86666666666667,
+      "narration": "We wanted to send a private message without first handing the sender our opening secret. The lock picture suggested separate public and private jobs. Our tiny RSA example made those jobs concrete: seven became thirteen using the public pair fifty-five and three; thirteen returned to seven using the private power twenty-seven. Remainders kept the arithmetic inside a limited set of values. The carefully chosen relationship made recovery work. That is the idea beneath RSA: shared public instructions, paired with private recovery.",
       "bullets": [
-        "Return to the public lock"
+        "Rebuild the idea from the start"
       ],
-      "takeaway": "Return to the public lock",
+      "takeaway": "Rebuild the idea from the start",
       "visual": {
         "phase": 15
       }
     }
-  ]
+  ],
+  "learning_approach": "Concrete example → visual meaning → plain definition → guided experiment → simple math → recap"
 }

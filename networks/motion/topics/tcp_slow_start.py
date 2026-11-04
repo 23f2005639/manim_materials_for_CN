@@ -1,17 +1,19 @@
 """ACK-clocked slow start, with explicit illustrative round-trip assumptions."""
 from .common import *
+from .foundation import computer, photo
 
 
 class Director(VisualDirector):
     def equation(self,value,color=YELLOW,y=-2.8):
         obj=self.own(text(value,0,y,29,color,12.6));self.play(m.FadeIn(obj),run_time=.7);return obj
 
-    def network(self):
+    def network(self,bottleneck=False):
         nodes=self.own(m.VGroup(host('Sender',-5,.9),host('Receiver',5,.9,GREEN)))
         road=self.own(line((-4.6,.9),(4.6,.9),MUTED,2))
         neck=self.own(m.Rectangle(width=.75,height=.5,color=MUTED,stroke_width=2).move_to([0,.9,0]))
         name=self.own(text('bottleneck',0,1.65,23,MUTED,3))
-        self.s.add(road,nodes,neck,name)
+        self.play(m.Create(road),m.FadeIn(nodes),run_time=.8)
+        if bottleneck:self.play(m.FadeIn(neck),m.FadeIn(name),run_time=.7)
 
     def flight(self,value,direction='right',color=BLUE,seconds=1.4):
         y=.05 if direction=='right' else -.8
@@ -37,10 +39,10 @@ class Director(VisualDirector):
         return cells
 
     def count(self,value,y=2.35,color=BLUE):
-        label=self.own(text(f'cwnd = {value} segments',0,y,29,color,8));self.play(m.FadeIn(label),run_time=.6);return label
+        label=self.own(text(f'Allowance: {value} pieces',0,y,29,color,8));self.play(m.FadeIn(label),run_time=.6);return label
 
     def change_count(self,label,value):
-        self.play(m.Transform(label,text(f'cwnd = {value} segments',0,2.35,29,BLUE,8)),run_time=.65)
+        self.play(m.Transform(label,text(f'Allowance: {value} pieces',0,2.35,29,BLUE,8)),run_time=.65)
 
     def plot(self,values=(4,8,16,32),color=BLUE,axes=True,labels=True):
         if axes:
@@ -64,20 +66,31 @@ class Director(VisualDirector):
     def animate(self,index,section,budget):
         self.reset()
         if index==0:
-            self.network();label=self.count(4)
-            for i in range(4):self.flight(str(i+1),seconds=1.2)
-            self.flight('ACK','left',GREEN,1.5)
-            self.change_count(label,5)
-            self.equation('How much data should be in flight?')
+            sender=self.own(computer('Your computer',-4.8,.8))
+            receiver=self.own(computer('Your friend',4.8,.8,GREEN))
+            self.play(m.FadeIn(sender),run_time=.8)
+            picture=self.own(photo(-4.8,.8));self.play(m.FadeIn(picture),run_time=.7)
+            self.play(m.FadeIn(receiver),run_time=.8)
+            wire=self.own(line((-3.8,.8),(3.8,.8)))
+            self.play(m.Create(wire),run_time=1.3)
+            self.play(m.FadeOut(picture),run_time=.4)
+            pieces=[self.own(packet(str(i+1),BLUE,.65,.5).move_to([-5.8+i*.7,-.8,0])) for i in range(4)]
+            self.play(*(m.FadeIn(q) for q in pieces),run_time=1)
+            self.equation('A photo travels as smaller pieces',WHITE,y=-2)
+            self.play(pieces[0].animate.move_to([4.8,-.8,0]),run_time=2.5)
+            self.equation('TCP calls a data piece a segment',BLUE,y=-2.9)
         elif index==1:
-            self.network();self.count(4);self.window(4)
-            receiver=self.own(m.VGroup(*[m.Rectangle(width=.45,height=.3,color=GREEN,fill_color=GREEN,fill_opacity=.3).move_to([4.3+j*.55,-1.7,0]) for j in range(3)]))
-            self.play(m.FadeIn(receiver),run_time=1)
-            self.equation('cwnd limits outstanding bytes')
+            for obj in (computer('Sender',-5,.9),computer('Receiver',5,.9,GREEN)):
+                self.play(m.FadeIn(self.own(obj)),run_time=.7)
+            self.flight('1',seconds=2.3)
+            meaning=self.equation('Received it!',GREEN,y=2.2)
+            self.flight('ACK','left',GREEN,2.3)
+            self.equation('ACK = acknowledgment = a receipt for data',GREEN)
         elif index==2:
-            self.network();self.count(4);self.window(4)
-            self.equation('Illustration: 4 segments; one ACK per segment',WHITE)
-            for i in range(4):self.flight(str(i+1),seconds=.8)
+            self.network();cells=self.window(4,active=0)
+            self.equation('Room for 4 unconfirmed pieces',WHITE,y=2.35)
+            for cell in cells:self.play(m.Indicate(cell),run_time=.65)
+            self.equation('Congestion window (cwnd) = sending allowance',YELLOW)
         elif index==3:
             self.network();self.count(4);cells=self.window(4,active=0)
             for i,c in enumerate(cells):
@@ -130,7 +143,7 @@ class Director(VisualDirector):
                           m.Transform(bits,text('× 8 = 0.64 Mb/s',1.5,-1.55,29,YELLOW,6.5)),run_time=2)
             self.equation('Window-limited rate ≈ bytes / RTT',WHITE)
         elif index==11:
-            self.network();self.count(32)
+            self.network(bottleneck=True);self.count(32)
             queue=[]
             for j in range(8):
                 q=self.own(packet(str(j+1),YELLOW,.43,.38).move_to([-4.6,.05,0]))

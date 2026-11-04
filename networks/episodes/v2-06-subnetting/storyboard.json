@@ -4,7 +4,7 @@
   "edition": "focused-v2",
   "slug": "subnetting",
   "title": "Move Two Bits, Create Four Networks",
-  "duration": 525.1666666666666,
+  "duration": 578.5,
   "sources": [
     {
       "title": "RFC 4632: Classless Inter-domain Routing",
@@ -20,243 +20,244 @@
   "sections": [
     {
       "id": "06-01",
-      "title": "One block, four networks",
-      "short_title": "One block, four networks",
-      "chapter": "The puzzle",
-      "duration": 33.43333333333333,
-      "narration": "Here is a block of two hundred and fifty-six addresses. We want four equal networks, with every address accounted for exactly once. Where should the boundaries go? Guessing decimal numbers makes this feel like a memorization exercise. But the boundaries come from a much simpler picture: some address bits stay fixed, and the others are free to change. We are going to move that dividing line and watch four networks appear.",
+      "title": "A device needs an address",
+      "short_title": "A device needs an address",
+      "chapter": "Start from zero",
+      "duration": 34.766666666666666,
+      "narration": "Imagine a small office with several computers. When one computer sends a message, how do the others know who it is for? Each needs an address, a little like a house number. Here we use IPv4 addresses, written as four numbers with dots between them. Watch a message go to the computer marked 192.168.1.20. Our question today is how to divide one collection of these addresses into smaller groups. That division is called subnetting.",
       "bullets": [
-        "One block, four networks"
+        "A device needs an address"
       ],
-      "takeaway": "One block, four networks",
+      "takeaway": "A device needs an address",
       "visual": {
         "phase": 0
       }
     },
     {
       "id": "06-02",
-      "title": "Expose the thirty-two bits",
-      "short_title": "Expose the thirty-two bits",
-      "chapter": "The puzzle",
-      "duration": 33.0,
-      "narration": "An IPv4 address contains thirty-two bits. We normally display them as four decimal numbers separated by dots, with eight bits represented by each number. Those eight-bit groups are called octets. Expand the final octet and the familiar address becomes a row of switches, each either zero or one. The dotted format is useful for reading. The bit view is useful for seeing which combinations belong to the same address block.",
+      "title": "Start with one tiny choice",
+      "short_title": "Start with one tiny choice",
+      "chapter": "Start from zero",
+      "duration": 35.666666666666664,
+      "narration": "Before dividing anything, meet the smallest building block: a bit. A bit can be zero or one. Think of a switch with just two positions. Put eight bits side by side and they can represent one of the numbers in our address. All four numbers together use thirty-two bits. The dots make the address easier for people to read; underneath, it is a row of zeros and ones. We will mostly watch the final eight positions.",
       "bullets": [
-        "Expose the thirty-two bits"
+        "Start with one tiny choice"
       ],
-      "takeaway": "Expose the thirty-two bits",
+      "takeaway": "Start with one tiny choice",
       "visual": {
         "phase": 1
       }
     },
     {
       "id": "06-03",
-      "title": "Fix the shared beginning",
-      "short_title": "Fix the shared beginning",
-      "chapter": "The puzzle",
-      "duration": 33.0,
-      "narration": "In our example, the block is 192.168.1.0 slash twenty-four. Slash twenty-four says that the first twenty-four bit positions are fixed. Every address in the block shares that beginning. The final eight positions can change, giving us different addresses within the block. This boundary is what the prefix describes. It does not mean the address contains a slash bit; the slash is our way of stating how many positions are shared.",
+      "title": "Keep the beginning the same",
+      "short_title": "Keep the beginning the same",
+      "chapter": "Start from zero",
+      "duration": 35.2,
+      "narration": "Look at these addresses: they all start with 192.168.1, while the last number changes. Those first three numbers use twenty-four bits. If we keep those bits fixed, we get one group with eight positions left to change. We write the group as 192.168.1.0 slash twenty-four. The slash tells us how many beginning bits stay fixed. That shared beginning is called a prefix. It is simply the part every address in this group has in common.",
       "bullets": [
-        "Fix the shared beginning"
+        "Keep the beginning the same"
       ],
-      "takeaway": "Fix the shared beginning",
+      "takeaway": "Keep the beginning the same",
       "visual": {
         "phase": 2
       }
     },
     {
       "id": "06-04",
-      "title": "Count the free combinations",
-      "short_title": "Count the free combinations",
-      "chapter": "The puzzle",
-      "duration": 33.43333333333333,
-      "narration": "Each free bit has two choices. Two free bits make four combinations; three make eight. Keep doubling until eight free bits give two to the power of eight, or two hundred and fifty-six combinations. In the final octet, they run from zero through two hundred and fifty-five. We have counted the entire block, including addresses with special roles. We will assign those roles after dividing the block into its smaller networks.",
+      "title": "Count the possible endings",
+      "short_title": "Count the possible endings",
+      "chapter": "Start from zero",
+      "duration": 36.53333333333333,
+      "narration": "One free bit has two choices: zero or one. Two free bits have four: zero-zero, zero-one, one-zero, one-one. Every extra free bit doubles the choices. Keep doubling until eight bits give two hundred and fifty-six possibilities. We write that as two to the power of eight. The final number can therefore run from zero through two hundred and fifty-five. Zero counts as a possibility too. Now we know the size of the group we are about to divide.",
       "bullets": [
-        "Count the free combinations"
+        "Count the possible endings"
       ],
-      "takeaway": "Count the free combinations",
+      "takeaway": "Count the possible endings",
       "visual": {
         "phase": 3
       }
     },
     {
       "id": "06-05",
-      "title": "One new bit creates halves",
-      "short_title": "One new bit creates halves",
-      "chapter": "Build the mechanism",
-      "duration": 31.666666666666668,
-      "narration": "Move the boundary one position right. The first formerly free bit now identifies which half we mean: zero on one side, one on the other. Each half has seven free bits left, so each contains one hundred and twenty-eight addresses. The total has not changed. We have simply described the original space as two smaller blocks. A longer fixed prefix leaves fewer possibilities inside each individual block.",
+      "title": "Split the group in half",
+      "short_title": "Split the group in half",
+      "chapter": "Build the idea",
+      "duration": 36.53333333333333,
+      "narration": "Take the first of those eight free bits and use it to choose a side. Zero means the left half; one means the right half. Seven bits are still free inside each half, giving one hundred and twenty-eight addresses apiece. Each smaller group now shares twenty-five beginning bits, so we call it slash twenty-five. Nothing new has been added. The same addresses have been sorted into two groups, just as one drawer can be divided into two compartments.",
       "bullets": [
-        "One new bit creates halves"
+        "Split the group in half"
       ],
-      "takeaway": "One new bit creates halves",
+      "takeaway": "Split the group in half",
       "visual": {
         "phase": 4
       }
     },
     {
       "id": "06-06",
-      "title": "Two new bits create quarters",
-      "short_title": "Two new bits create quarters",
-      "chapter": "Build the mechanism",
-      "duration": 33.0,
-      "narration": "Move the boundary once more. Each half splits in two, giving four groups identified by zero-zero, zero-one, one-zero, and one-one. Two additional fixed bits create two to the power of two subnets. Starting at slash twenty-four and adding two gives slash twenty-six. The prefix length, the number of groups, and the visible split are three views of the same operation. No address has been created or lost along the way.",
+      "title": "Split each half again",
+      "short_title": "Split each half again",
+      "chapter": "Build the idea",
+      "duration": 35.666666666666664,
+      "narration": "Use one more bit to split each half. Now the group labels are zero-zero, zero-one, one-zero, and one-one. Two choices followed by two choices make four groups. These smaller address groups are our subnets. Each shares twenty-six beginning bits, so each is slash twenty-six. This is why moving the boundary just two places turns one network's address block into four smaller blocks. The labels may look technical, but underneath we have only made two yes-or-no choices.",
       "bullets": [
-        "Two new bits create quarters"
+        "Split each half again"
       ],
-      "takeaway": "Two new bits create quarters",
+      "takeaway": "Split each half again",
       "visual": {
         "phase": 5
       }
     },
     {
       "id": "06-07",
-      "title": "Six bits remain inside each",
-      "short_title": "Six bits remain inside each",
-      "chapter": "Build the mechanism",
-      "duration": 32.1,
-      "narration": "Each new subnet has six free host bits. Two to the power of six gives sixty-four addresses per subnet. Check the accounting: four subnets multiplied by sixty-four addresses equals our original two hundred and fifty-six. This is a useful way to catch a wrong boundary. If the groups overlap, leave gaps, or contain the wrong number of combinations, their totals will stop matching the space we started with.",
+      "title": "Count what each group holds",
+      "short_title": "Count what each group holds",
+      "chapter": "Build the idea",
+      "duration": 35.2,
+      "narration": "We started with eight free positions and used two to choose a group. That leaves six positions to choose addresses inside each group. These are called host bits; a host is a device using an address. Six free bits give sixty-four combinations. Check our work: four groups times sixty-four addresses equals two hundred and fifty-six, exactly where we began. A longer shared beginning makes each individual group smaller, because fewer bits remain free to change.",
       "bullets": [
-        "Six bits remain inside each"
+        "Count what each group holds"
       ],
-      "takeaway": "Six bits remain inside each",
+      "takeaway": "Count what each group holds",
       "visual": {
         "phase": 6
       }
     },
     {
       "id": "06-08",
-      "title": "Read the four starts",
-      "short_title": "Read the four starts",
-      "chapter": "Build the mechanism",
-      "duration": 33.86666666666667,
-      "narration": "Keep the six host bits at zero and change only the two subnet bits. Zero-zero begins at zero. Zero-one begins at sixty-four. One-zero begins at one hundred and twenty-eight. One-one begins at one hundred and ninety-two. Those are the four network starts in the final octet. Their spacing is sixty-four because each block contains sixty-four combinations. The decimal pattern comes directly from the binary positions, rather than a separate shortcut to memorize.",
+      "title": "Find where each group starts",
+      "short_title": "Find where each group starts",
+      "chapter": "Build the idea",
+      "duration": 37.0,
+      "narration": "Put zeros in all six positions inside each group. That gives its first address. Change only the two group bits and watch the starts appear: zero, sixty-four, one hundred and twenty-eight, one hundred and ninety-two. We only show the last number here; 192.168.1 stays the same throughout. Why do the starts jump by sixty-four? Each group occupies sixty-four places. The next group starts immediately after those places finish. We can count the spaces instead of memorizing four special numbers.",
       "bullets": [
-        "Read the four starts"
+        "Find where each group starts"
       ],
-      "takeaway": "Read the four starts",
+      "takeaway": "Find where each group starts",
       "visual": {
         "phase": 7
       }
     },
     {
       "id": "06-09",
-      "title": "Turn the boundary into a mask",
-      "short_title": "Turn the boundary into a mask",
-      "chapter": "Make the math visible",
-      "duration": 32.1,
-      "narration": "A subnet mask marks fixed prefix positions with ones and the remaining positions with zeros. For slash twenty-six, the final octet begins one-one, followed by six zeros. The first two positions have values one hundred and twenty-eight and sixty-four. Add them and the mask's last octet is one hundred and ninety-two. The complete mask is 255.255.255.192. Now the mask and our moving boundary describe exactly the same division.",
+      "title": "Make a stencil for the boundary",
+      "short_title": "Make a stencil for the boundary",
+      "chapter": "Try it yourself",
+      "duration": 37.0,
+      "narration": "A computer needs a way to mark which bits belong to the shared beginning. We use a mask, like a stencil: ones mark the shared positions, zeros mark the changing positions. Our first twenty-four bits are shared, plus two more in the final group of eight. That last pattern is one-one followed by six zeros. The first two positions are worth one hundred and twenty-eight and sixty-four. Add them to get one hundred and ninety-two. Our mask is 255.255.255.192.",
       "bullets": [
-        "Turn the boundary into a mask"
+        "Make a stencil for the boundary"
       ],
-      "takeaway": "Turn the boundary into a mask",
+      "takeaway": "Make a stencil for the boundary",
       "visual": {
         "phase": 8
       }
     },
     {
       "id": "06-10",
-      "title": "Find where seventy belongs",
-      "short_title": "Find where seventy belongs",
-      "chapter": "Make the math visible",
-      "duration": 30.333333333333332,
-      "narration": "Take the address 192.168.1.70. The final octet, seventy, is 01000110 in binary. Apply the mask 11000000 using bitwise AND. A mask one keeps the corresponding address bit; a zero clears it. The result is 01000000, or sixty-four. So this address belongs to 192.168.1.64 slash twenty-six. We did not search four separate lists. We removed the varying host part and exposed the subnet's shared beginning.",
+      "title": "Where does address seventy belong?",
+      "short_title": "Where does address seventy belong?",
+      "chapter": "Try it yourself",
+      "duration": 34.766666666666666,
+      "narration": "Try the address ending in seventy. In bits, seventy is zero-one-zero-zero-zero-one-one-zero. Place our mask underneath it. Keep an address bit where the mask has a one; replace it with zero where the mask has a zero. This operation is called AND. The answer is zero-one followed by six zeros: sixty-four. So seventy belongs to the group starting at sixty-four. The mask has erased the individual device's part and left the group's starting address behind.",
       "bullets": [
-        "Find where seventy belongs"
+        "Where does address seventy belong?"
       ],
-      "takeaway": "Find where seventy belongs",
+      "takeaway": "Where does address seventy belong?",
       "visual": {
         "phase": 9
       }
     },
     {
       "id": "06-11",
-      "title": "Give the endpoints their jobs",
-      "short_title": "Give the endpoints their jobs",
-      "chapter": "Make the math visible",
-      "duration": 35.2,
-      "narration": "On an ordinary LAN subnet, the address with all host bits zero identifies the network, and the address with all host bits one is its broadcast address. In a sixty-four-address block, those two roles leave sixty-two addresses for hosts. This is why total addresses and usable host addresses are different counts. We are applying the ordinary LAN convention in this example, rather than claiming that subtracting two is a universal rule for every possible prefix.",
+      "title": "Two addresses have special jobs",
+      "short_title": "Two addresses have special jobs",
+      "chapter": "Try it yourself",
+      "duration": 37.0,
+      "narration": "Can we give all sixty-four addresses to computers? In this ordinary local network example, two have other jobs. The first address names the whole subnet. The last is the broadcast address, used for a message addressed to everyone in that subnet. That leaves sixty-two device addresses: sixty-four minus two. Remember what we counted before: total addresses, not just device addresses. Some special network arrangements use different rules, so we are applying this subtraction to our ordinary local network example.",
       "bullets": [
-        "Give the endpoints their jobs"
+        "Two addresses have special jobs"
       ],
-      "takeaway": "Give the endpoints their jobs",
+      "takeaway": "Two addresses have special jobs",
       "visual": {
         "phase": 10
       }
     },
     {
       "id": "06-12",
-      "title": "Read the first two ranges",
-      "short_title": "Read the first two ranges",
-      "chapter": "Make the math visible",
-      "duration": 32.1,
-      "narration": "The first block spans zero through sixty-three. Its network is zero, its broadcast is sixty-three, and hosts use one through sixty-two. The second spans sixty-four through one hundred and twenty-seven. Its hosts use sixty-five through one hundred and twenty-six. Notice that this broadcast ends in one hundred and twenty-seven, not two hundred and fifty-five. Broadcast follows the host-bit pattern inside the chosen subnet, not a particular decimal ending.",
+      "title": "Read the first two groups",
+      "short_title": "Read the first two groups",
+      "chapter": "Try it yourself",
+      "duration": 36.53333333333333,
+      "narration": "The first group runs from zero to sixty-three. Reserve zero for the network and sixty-three for broadcast. Computers use one through sixty-two. The next group runs from sixty-four to one hundred and twenty-seven. Reserve those endpoints, leaving sixty-five through one hundred and twenty-six for computers. Follow the colored ends of each bar as we name their jobs. Broadcast does not always end in two hundred and fifty-five. It is the final address of the particular subnet we chose.",
       "bullets": [
-        "Read the first two ranges"
+        "Read the first two groups"
       ],
-      "takeaway": "Read the first two ranges",
+      "takeaway": "Read the first two groups",
       "visual": {
         "phase": 11
       }
     },
     {
       "id": "06-13",
-      "title": "Complete the remaining ranges",
-      "short_title": "Complete the remaining ranges",
-      "chapter": "Resolve the story",
-      "duration": 34.333333333333336,
-      "narration": "The third block spans one hundred and twenty-eight through one hundred and ninety-one, with hosts between one hundred and twenty-nine and one hundred and ninety. The fourth spans one hundred and ninety-two through two hundred and fifty-five, with hosts from one hundred and ninety-three through two hundred and fifty-four. Watch their edges meet. Each block starts immediately after the previous block ends, covering the original parent without an overlap or a missing address.",
+      "title": "Finish the address map",
+      "short_title": "Finish the address map",
+      "chapter": "Try it yourself",
+      "duration": 37.0,
+      "narration": "The third group starts at one hundred and twenty-eight and ends at one hundred and ninety-one. Its device addresses sit between those endpoints. The fourth starts at one hundred and ninety-two and ends at two hundred and fifty-five, again with the middle addresses available for devices. Look across all four bars. They fit together without gaps or overlaps. Every address from our original group has a place, and each smaller group follows the same rule for its two endpoints.",
       "bullets": [
-        "Complete the remaining ranges"
+        "Finish the address map"
       ],
-      "takeaway": "Complete the remaining ranges",
+      "takeaway": "Finish the address map",
       "visual": {
         "phase": 12
       }
     },
     {
       "id": "06-14",
-      "title": "Choose room for fifty hosts",
-      "short_title": "Choose room for fifty hosts",
-      "chapter": "Resolve the story",
-      "duration": 32.53333333333333,
-      "narration": "Suppose a network needs fifty host addresses. Five free bits give thirty-two total addresses, or thirty ordinary LAN host addresses, which is too small. Six free bits give sixty-four total and sixty-two usable, which fits. Thirty-two minus six leaves a slash-twenty-six prefix. Instead of starting with a memorized mask, we started with the required capacity and counted the combinations needed to accommodate it. The mask follows from that decision.",
+      "title": "Choose enough room for devices",
+      "short_title": "Choose enough room for devices",
+      "chapter": "Try it yourself",
+      "duration": 36.1,
+      "narration": "Suppose one group needs fifty computers. How much room should we leave? Five free bits give thirty-two total addresses. After the two special ones, only thirty remain. Too small. Six free bits give sixty-four total and sixty-two for devices. That fits. An IPv4 address has thirty-two bits, so leaving six free means fixing twenty-six: slash twenty-six. We chose the size by counting the room needed. The slash number followed from that choice, rather than appearing from nowhere.",
       "bullets": [
-        "Choose room for fifty hosts"
+        "Choose enough room for devices"
       ],
-      "takeaway": "Choose room for fifty hosts",
+      "takeaway": "Choose enough room for devices",
       "visual": {
         "phase": 13
       }
     },
     {
       "id": "06-15",
-      "title": "Check the boundary, not appearances",
-      "short_title": "Check the boundary, not appearances",
-      "chapter": "Resolve the story",
-      "duration": 32.53333333333333,
-      "narration": "Compare last-octet values seventy and one hundred. Masking each produces sixty-four, so they share this subnet. Now compare seventy with one hundred and thirty. The latter produces one hundred and twenty-eight, placing it in another subnet. Similar-looking decimal addresses are not the deciding evidence. Their fixed prefix bits are. When a result feels suspicious, return to the boundary and ask which bits were allowed to vary inside the block.",
+      "title": "Check whether two devices match",
+      "short_title": "Check whether two devices match",
+      "chapter": "See the whole picture",
+      "duration": 36.53333333333333,
+      "narration": "Do addresses ending in seventy and one hundred belong together? Our mask sends both to the group starting at sixty-four, so yes. What about seventy and one hundred and thirty? The second one belongs to the group starting at one hundred and twenty-eight. They are in different subnets. This is why the mask matters alongside the address. Seeing the same first three dotted numbers is not enough: our smaller groups share two more bits after those first twenty-four.",
       "bullets": [
-        "Check the boundary, not appearances"
+        "Check whether two devices match"
       ],
-      "takeaway": "Check the boundary, not appearances",
+      "takeaway": "Check whether two devices match",
       "visual": {
         "phase": 14
       }
     },
     {
       "id": "06-16",
-      "title": "Four networks from two bits",
-      "short_title": "Four networks from two bits",
-      "chapter": "Resolve the story",
-      "duration": 32.53333333333333,
-      "narration": "Return to the original block. Two borrowed positions created four subnet prefixes, and six remaining positions created sixty-four addresses in each. The starts, mask, broadcast boundaries, and host counts all came from that same division. They are not five unrelated rules. Subnetting becomes easier when the arithmetic stays connected to the picture: fix a longer beginning, count what remains free, and give each resulting address range its correct role.",
+      "title": "One boundary explains the numbers",
+      "short_title": "One boundary explains the numbers",
+      "chapter": "See the whole picture",
+      "duration": 37.0,
+      "narration": "We started with computers needing addresses. Those addresses became rows of bits, and bits gave us simple choices. Keep a beginning fixed, then count the endings that can change. Using two more bits for group labels made four subnets, each with sixty-four addresses. The starts, the mask, and the device counts all came from that one division. Subnetting looks like a page of mysterious numbers until you see the picture underneath: one collection, a movable boundary, and smaller groups.",
       "bullets": [
-        "Four networks from two bits"
+        "One boundary explains the numbers"
       ],
-      "takeaway": "Four networks from two bits",
+      "takeaway": "One boundary explains the numbers",
       "visual": {
         "phase": 15
       }
     }
-  ]
+  ],
+  "learning_approach": "Concrete example → visual meaning → plain definition → guided experiment → simple math → recap"
 }

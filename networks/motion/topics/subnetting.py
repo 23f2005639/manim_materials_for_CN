@@ -1,5 +1,6 @@
 """Subnet boundaries emerge directly from fixed and free binary positions."""
 from .common import *
+from .foundation import computer
 
 
 class Director(VisualDirector):
@@ -30,25 +31,45 @@ class Director(VisualDirector):
     def animate(self,i,section,budget):
         self.reset()
         if i==0:
-            base=self.show(m.Rectangle(width=11,height=2,color=BLUE,fill_color=BLUE,fill_opacity=.08),1)
-            self.show(text('192.168.1.0/24',0,1.65,30,BLUE),.7)
-            for x in (-2.75,0,2.75):self.play(m.Create(self.own(line((x,-1),(x,1),YELLOW,3))),run_time=1)
-            self.show(text('256 addresses → 4 equal networks',0,-1.85,31),.7)
-        elif i in (1,2):
-            row=self.bits('11000000101010000000000100000000',.3,24 if i==2 else 32)
+            for x,label in ((-4.5,'192.168.1.10'),(0,'192.168.1.20'),(4.5,'192.168.1.30')):
+                self.show(computer(label,x,.7),.8)
+            self.show(line((-4.5,-.7),(4.5,-.7)),1)
+            q=self.show(packet('to .20',GREEN,1.4).move_to([-4.5,-.7,0]),.5)
+            self.play(q.animate.move_to([0,-.7,0]),run_time=2)
+            self.show(text('An address identifies where a message goes',0,-1.9,29),.7)
+            self.show(text('Subnetting: divide an address group',0,-2.8,26,YELLOW),.7)
+        elif i==1:
+            bit=self.show(packet('0',BLUE,1,.8).move_to([0,.6,0]),.7)
+            self.show(text('One bit: two possible choices',0,1.9,30),.7)
+            for value in ('1','0','1'):
+                self.play(m.Transform(bit,packet(value,BLUE,1,.8).move_to([0,.6,0])),run_time=.8)
+            self.play(m.FadeOut(bit),run_time=.4)
+            self.bits('00010100',.6)
+            self.show(text('8 bits can represent the number 20',0,-.7,28,GREEN),.7)
+            self.show(text('4 address numbers × 8 bits = 32 bits',0,-2,29),.7)
+        elif i==2:
+            examples=self.show(m.VGroup(*[text('192.168.1.'+n,0,1.8-j*.75,28,BLUE) for j,n in enumerate(('10','20','30'))]),1)
+            self.play(m.Indicate(examples),run_time=1.3)
+            self.play(m.FadeOut(examples),run_time=.6)
+            self.bits('11000000101010000000000100000000',.3,24)
             self.show(text('192       .       168       .        1        .        0',0,1.45,26),.7)
-            self.show(text('32 bits = 4 × 8',0,-1.2,32),.8)
-            if i==2:
-                self.show(text('24 fixed',-2.1,-2.15,29,BLUE),.7)
-                self.show(text('8 free',4.3,-2.15,29,YELLOW,2.5),.7)
-                x=-(31)*11.5/32/2+23.5*11.5/32
-                self.play(m.Create(self.own(line((x,-.3),(x,1),RED,4))),run_time=1)
+            self.show(text('24 fixed',-2.1,-1.1,29,BLUE),.7)
+            self.show(text('8 free',4.3,-1.1,29,YELLOW,2.5),.7)
+            self.show(text('192.168.1.0/24 → keep the first 24 bits',0,-2.3,28),.7)
+            x=-(31)*11.5/32/2+23.5*11.5/32
+            self.play(m.Create(self.own(line((x,-.3),(x,1),RED,4))),run_time=1)
         elif i==3:
-            row=self.bits(0,.5)
-            count=self.show(text('1 combination',0,-1.1,31,YELLOW),.6)
-            for val in (1,3,7,15,31,63,127,255):
-                self.play(m.Transform(row,m.VGroup(*(m.VGroup(m.Rectangle(width=.72,height=.66,color=YELLOW).move_to([-2.94+j*.84,.5,0]),text(c,-2.94+j*.84,.5,25,YELLOW,.65)) for j,c in enumerate(f'{val:08b}')))),m.Transform(count,text(f'{val+1} combinations',0,-1.1,31,YELLOW)),run_time=.8)
-            self.show(text('2⁸ = 256 addresses',0,-2.2,33),.7)
+            self.show(text('1 free bit',-4,2,27,WHITE,3),.5)
+            self.show(text('2 free bits',1.4,2,27,WHITE,3),.5)
+            for j,parent in enumerate(('0','1')):
+                y=1-j*1.6
+                self.show(packet(parent,BLUE,1).move_to([-4,y,0]),.5)
+                for k,child in enumerate(('0','1')):
+                    yy=y+.42-k*.84
+                    self.show(line((-3.4,y),(-.2,yy)),.35)
+                    self.show(packet(parent+child,GREEN,1.1).move_to([.5,yy,0]),.4)
+            self.show(text('2 choices → 4 choices',0,-1.8,30,YELLOW),.6)
+            self.show(text('8 free bits: 2⁸ = 256 choices (0–255)',0,-2.8,28),.7)
         elif i==4:
             self.blocks(2)
             self.show(text('/24 → /25',0,1.7,32),.7)

@@ -3,8 +3,8 @@
   "topic": "dns",
   "edition": "focused-v2",
   "slug": "dns",
-  "title": "Why Can Your Internet Work While Your Apps Don’t?",
-  "duration": 547.8,
+  "title": "DNS: How a Website Name Finds Its Address",
+  "duration": 569.6,
   "sources": [
     {
       "title": "RFC 1034: Domain Names — Concepts and Facilities",
@@ -30,243 +30,244 @@
   "sections": [
     {
       "id": "01-01",
-      "title": "Connected, but not found",
-      "short_title": "Connected, but not found",
-      "chapter": "The puzzle",
-      "duration": 32.53333333333333,
-      "narration": "Your connection says online. A download is still moving. Yet one app refuses to open. That sounds impossible until you separate two questions: can your computer reach the network, and does it know where this service lives? The second question belongs to DNS. Let's follow one name through a small imagined network, then break just the naming part. By the end, an apparently contradictory failure will make perfect sense.",
+      "title": "A photo lives somewhere",
+      "short_title": "A photo lives somewhere",
+      "chapter": "Start here",
+      "duration": 35.666666666666664,
+      "narration": "You type a website name and a photo appears. Let's slow that tiny moment down. Your computer does not already have the photo. Another computer stores it and can send it back. A computer doing that job is called a server. The line between them represents a way to exchange messages. But there are countless possible destinations. Before asking for the photo, your computer needs to know which address to contact. How does it find that?",
       "bullets": [
-        "Connected, but not found"
+        "A photo lives somewhere"
       ],
-      "takeaway": "Connected, but not found.",
+      "takeaway": "Before asking for the photo, your computer needs to know which address to contact.",
       "visual": {
         "phase": 0
       }
     },
     {
       "id": "01-02",
-      "title": "A name is not an address",
-      "short_title": "A name is not an address",
-      "chapter": "The model",
-      "duration": 33.43333333333333,
-      "narration": "We want photos.orbit.example. That name is convenient for a person, but the network needs an address. Imagine a contact name and its phone number: changing the number doesn't require changing what you call the person. DNS provides a structured way to find information associated with a name. Our made-up domain and addresses are teaching examples. The blue label is the question; the green address is the answer we hope to receive.",
+      "title": "Names are easier to remember",
+      "short_title": "Names are easier to remember",
+      "chapter": "Start here",
+      "duration": 34.766666666666666,
+      "narration": "Think about calling a friend. You remember their name; your phone uses a number. Websites have a similar split. We type a name, while the network uses a number called an IP address to help deliver messages. Watch the name turn into an address. DNS, short for Domain Name System, helps make that lookup. Our pretend website is photos.orbit.example. The address is made up for teaching too. You don't need to memorize either one.",
       "bullets": [
-        "A name is not an address"
+        "Names are easier to remember"
       ],
-      "takeaway": "A name is not an address.",
+      "takeaway": "The address is made up for teaching too.",
       "visual": {
         "phase": 1
       }
     },
     {
       "id": "01-03",
-      "title": "Read the name backward",
-      "short_title": "Read the name backward",
-      "chapter": "The model",
-      "duration": 33.86666666666667,
-      "narration": "The dots have a job. Read the name from the right: the root, example, orbit, then photos. Each level belongs beneath a larger part of the naming tree. This organization lets responsibility be divided. One organization can manage its own branch without maintaining every other branch. Watch the address-like string become a tree. We haven't located a machine yet; we've uncovered the structure that will tell our search where to go next.",
+      "title": "Ask a helper",
+      "short_title": "Ask a helper",
+      "chapter": "Start here",
+      "duration": 35.2,
+      "narration": "Your computer could ask, where is this website? But who should answer? Meet one helper, shown in green. Its job is to find the address and bring it back. The technical name for this helper is a resolver. That's all the word means here: it resolves our question. Start with just these two characters, your computer and its helper. Assume the helper hasn't saved an answer yet. We are going to follow its search together.",
       "bullets": [
-        "Read the name backward"
+        "Ask a helper"
       ],
-      "takeaway": "Read the name backward.",
+      "takeaway": "Assume the helper hasn't saved an answer yet.",
       "visual": {
         "phase": 2
       }
     },
     {
       "id": "01-04",
-      "title": "Meet the resolver",
-      "short_title": "Meet the resolver",
-      "chapter": "The lookup",
-      "duration": 33.43333333333333,
-      "narration": "Your computer usually asks a recursive resolver to do the search. Recursive describes the service being offered: please obtain an answer for me. The resolver may already know something useful. For our first pass, assume its relevant caches are empty. That deliberately removes the shortcuts so we can see the work. The resolver becomes our moving point of view, asking more specific questions while your application waits for one useful result.",
+      "title": "A name has smaller parts",
+      "short_title": "A name has smaller parts",
+      "chapter": "Start here",
+      "duration": 34.766666666666666,
+      "narration": "A single helper cannot keep a fresh list of every website. Instead, responsibility is split into smaller parts. Look at the dots in photos.orbit.example. Read from the right: example, then orbit.example, then the full name. It's like opening a large folder, then a smaller folder inside it. This nested arrangement is called a hierarchy. The dots tell the helper how to narrow its search. No address yet; first we are learning where to ask.",
       "bullets": [
-        "Meet the resolver"
+        "A name has smaller parts"
       ],
-      "takeaway": "Meet the resolver.",
+      "takeaway": "The dots tell the helper how to narrow its search.",
       "visual": {
         "phase": 3
       }
     },
     {
       "id": "01-05",
-      "title": "The root gives a direction",
-      "short_title": "The root gives a direction",
-      "chapter": "The lookup",
-      "duration": 33.86666666666667,
-      "narration": "The resolver first asks a root service about the name. It doesn't receive the final photo-server address. Instead, it receives a referral toward the service responsible for the next branch. Watch the yellow arrow: it points to where the resolver should ask next. A referral is useful knowledge, even though it isn't the final answer. Think of each step as reducing the remaining search, rather than each server holding the entire directory.",
+      "title": "Start at the directory",
+      "short_title": "Start at the directory",
+      "chapter": "Follow the idea",
+      "duration": 36.1,
+      "narration": "The helper begins at a starting directory called the root. Imagine a reception desk that says, for names ending in example, ask over there. It gives a useful direction, not the website's final address. That direction is called a referral. Follow the question going out and the clue coming back. The helper now knows its next stop. In this drawing, each circle is a job performed by DNS servers, not one unique machine for the whole world.",
       "bullets": [
-        "The root gives a direction"
+        "Start at the directory"
       ],
-      "takeaway": "The root gives a direction.",
+      "takeaway": "The helper now knows its next stop.",
       "visual": {
         "phase": 4
       }
     },
     {
       "id": "01-06",
-      "title": "A smaller branch",
-      "short_title": "A smaller branch",
-      "chapter": "The lookup",
-      "duration": 33.86666666666667,
-      "narration": "The next service handles our example top-level branch. It directs the resolver toward the authoritative servers for orbit.example. The search is getting narrower. Notice who is doing the asking: the resolver contacts these services, rather than your browser personally visiting every box. The drawing shows logical roles, not one special physical computer per role. Real DNS infrastructure can distribute each role across many machines and locations while preserving this hierarchy of responsibility.",
+      "title": "Follow one useful clue",
+      "short_title": "Follow one useful clue",
+      "chapter": "Follow the idea",
+      "duration": 35.2,
+      "narration": "The next directory handles the last part of our name: example. That part is called a top-level domain, or TLD. You have seen real ones such as com and org. Our teaching name uses example. This directory points toward the people responsible for orbit.example. Notice the pattern: ask a broad directory, receive a narrower direction, ask again. The helper is doing this work for us. Your browser doesn't need you to visit these directories yourself.",
       "bullets": [
-        "A smaller branch"
+        "Follow one useful clue"
       ],
-      "takeaway": "A smaller branch.",
+      "takeaway": "The helper is doing this work for us.",
       "visual": {
         "phase": 5
       }
     },
     {
       "id": "01-07",
-      "title": "The authority answers",
-      "short_title": "The authority answers",
-      "chapter": "The lookup",
-      "duration": 34.333333333333336,
-      "narration": "Now the resolver reaches an authoritative server for our imagined zone. This is where the relevant record is maintained. In our example, the answer associates the photos name with 192.0.2.10. The green address finally appears. It's tempting to call every earlier server unhelpful because it didn't know this number. But their referrals made this last step possible. DNS scales by sharing responsibility and directions, instead of requiring every participant to know every answer.",
+      "title": "Find the address keeper",
+      "short_title": "Find the address keeper",
+      "chapter": "Follow the idea",
+      "duration": 35.2,
+      "narration": "Now we reach the keeper of the website's DNS information. This is called an authoritative server because it holds the relevant official record. In our example, that record pairs the photo website's name with 192.0.2.10. Finally, a number! The earlier stops were useful even though they didn't know it. They guided our helper here. Watch the green answer travel back. We found the address by following responsibility from a broad directory to a specific record.",
       "bullets": [
-        "The authority answers"
+        "Find the address keeper"
       ],
-      "takeaway": "The authority answers.",
+      "takeaway": "Watch the green answer travel back.",
       "visual": {
         "phase": 6
       }
     },
     {
       "id": "01-08",
-      "title": "Return the useful result",
-      "short_title": "Return the useful result",
-      "chapter": "The lookup",
-      "duration": 33.86666666666667,
-      "narration": "The resolver returns the address to your computer. Keep the jobs separate: finding this address doesn't download the photos, prove the application is healthy, or promise that the destination will respond. It supplies information the application needs for its next action. Our story stops at that boundary. The original blue question has become a green result, and the rest of the network can now be used with a specific destination in mind.",
+      "title": "Bring the answer home",
+      "short_title": "Bring the answer home",
+      "chapter": "Follow the idea",
+      "duration": 35.666666666666664,
+      "narration": "The helper gives that address to your computer. Now your computer can try to contact the photo server. The name lookup has finished; asking for the actual photo is a separate step. Think of finding a friend's phone number: you still have to make the call. DNS hasn't delivered the picture itself, and an address doesn't promise the server will answer. It has solved one smaller problem: turning the name you recognize into useful contact information.",
       "bullets": [
-        "Return the useful result"
+        "Bring the answer home"
       ],
-      "takeaway": "Return the useful result.",
+      "takeaway": "DNS hasn't delivered the picture itself, and an address doesn't promise the server will answer.",
       "visual": {
         "phase": 7
       }
     },
     {
       "id": "01-09",
-      "title": "Where the waiting comes from",
-      "short_title": "Where the waiting comes from",
-      "chapter": "The mathematics",
+      "title": "Put a clock on it",
+      "short_title": "Put a clock on it",
+      "chapter": "Make it measurable",
       "duration": 35.2,
-      "narration": "Let's attach clocks to the lookup. Suppose the local resolver exchange takes two milliseconds, and the three upstream round trips take twenty, thirty, and forty milliseconds. These are illustrative values, not Internet constants. Since each referral tells us where to ask next, these particular steps happen in sequence. Add the waits: two plus twenty plus thirty plus forty equals ninety-two milliseconds. The equation simply records the journey we just watched, one dependent step after another.",
+      "narration": "How long did that search take? A millisecond is one thousandth of a second. Let's give our example four small waits: two milliseconds for the helper exchange, then twenty, thirty, and forty for its three directory exchanges. Watch each colored piece extend the time bar. Add them: two plus twenty plus thirty plus forty makes ninety-two milliseconds. These are chosen numbers, not promised Internet timings. We add because each step needs the previous step's answer.",
       "bullets": [
-        "Where the waiting comes from"
+        "Put a clock on it"
       ],
-      "takeaway": "Where the waiting comes from.",
+      "takeaway": "These are chosen numbers, not promised Internet timings.",
       "visual": {
         "phase": 8
       }
     },
     {
       "id": "01-10",
-      "title": "Repeat the same question",
-      "short_title": "Repeat the same question",
-      "chapter": "The mathematics",
-      "duration": 34.333333333333336,
-      "narration": "Now ask the same question again while the answer is cached. The resolver can reply without repeating our three upstream exchanges. In this simplified example, only the two-millisecond local exchange remains. Ninety-two divided by two is forty-six: this lookup is forty-six times quicker. That doesn't mean the entire application becomes forty-six times faster. We measured one task. Still, reusing a valid answer can remove a surprising amount of repeated work from that task.",
+      "title": "Remember the answer",
+      "short_title": "Remember the answer",
+      "chapter": "Make it measurable",
+      "duration": 35.666666666666664,
+      "narration": "What happens when someone asks the same question again? The helper can keep a temporary copy of the answer. That saved copy is called a cache. Now the long trip disappears: in our example the reply needs only two milliseconds. Ninety-two divided by two is forty-six, so this lookup is forty-six times quicker. Only the lookup! We haven't made the photo download forty-six times faster. Saving a useful answer simply avoids repeating work we already did.",
       "bullets": [
-        "Repeat the same question"
+        "Remember the answer"
       ],
-      "takeaway": "Repeat the same question.",
+      "takeaway": "Only the lookup! We haven't made the photo download forty-six times faster.",
       "visual": {
         "phase": 9
       }
     },
     {
       "id": "01-11",
-      "title": "Give the memory a lifetime",
-      "short_title": "Give the memory a lifetime",
-      "chapter": "The cache",
-      "duration": 34.333333333333336,
-      "narration": "A saved answer needs an expiration rule. Our record's time to live, or TTL, is sixty seconds when this cache receives it. Watch the countdown shrink as the answer gets older. Reusing it doesn't restart the clock. If every hit renewed its lifetime indefinitely, a popular old address could remain around forever. The TTL limits how long this cached copy may normally be reused before the resolver needs fresh information for another query.",
+      "title": "Memory needs an expiry date",
+      "short_title": "Memory needs an expiry date",
+      "chapter": "Try a change",
+      "duration": 35.666666666666664,
+      "narration": "But websites can move. If our helper remembers an address forever, it might keep sending people to an old place. So the saved answer comes with a time limit. Here it is sixty seconds. Its name is time to live, or TTL. Watch the timer count down. Reading the saved answer does not restart that timer. Think of a note with an expiry time printed on it: using the note doesn't make the information new again.",
       "bullets": [
-        "Give the memory a lifetime"
+        "Memory needs an expiry date"
       ],
-      "takeaway": "Give the memory a lifetime.",
+      "takeaway": "Reading the saved answer does not restart that timer.",
       "visual": {
         "phase": 10
       }
     },
     {
       "id": "01-12",
-      "title": "Change the address",
-      "short_title": "Change the address",
-      "chapter": "The cache",
-      "duration": 34.766666666666666,
-      "narration": "Now the authoritative record changes to 203.0.113.20. Does every cache change instantly? Predict the next reply before the colors move. Our cache still holds the earlier answer with thirty seconds remaining, so it may keep returning that old address until its permitted lifetime ends. The authority and cache can temporarily disagree without either ignoring its rules. Changing an authoritative record and replacing every cached copy are different events, separated here by a visible countdown.",
+      "title": "What if the address changes?",
+      "short_title": "What if the address changes?",
+      "chapter": "Try a change",
+      "duration": 35.666666666666664,
+      "narration": "Let's move the website while the timer still has thirty seconds left. The official record changes to a new address, 203.0.113.20. Does our helper magically know? No. It still has the old saved copy and may reply with that address until its allowed time runs out. The two boxes now show different numbers. This explains why changing a website's DNS record can take time to be noticed everywhere. Copies don't all update at the same instant.",
       "bullets": [
-        "Change the address"
+        "What if the address changes?"
       ],
-      "takeaway": "Change the address.",
+      "takeaway": "This explains why changing a website's DNS record can take time to be noticed everywhere.",
       "visual": {
         "phase": 11
       }
     },
     {
       "id": "01-13",
-      "title": "Expiration causes new work",
-      "short_title": "Expiration causes new work",
-      "chapter": "The cache",
-      "duration": 35.2,
-      "narration": "At zero, the saved answer is no longer fresh. For our normal example, the next query triggers a new lookup and retrieves the changed record. We replay the referrals to make the refresh visible; real resolvers may retain other cached information and take a shorter route. The important change is the answer's freshness. The cache wasn't useless because it eventually expired. Its temporary nature is what lets yesterday's useful shortcut give way to today's information.",
+      "title": "Look again when time runs out",
+      "short_title": "Look again when time runs out",
+      "chapter": "Try a change",
+      "duration": 36.53333333333333,
+      "narration": "The countdown reaches zero. For this example, the next request makes the helper look again. This time it finds the new address and replaces its old copy. We show the directory trip again so the refresh is easy to follow; real helpers may remember some directions and skip steps. Our useful rule is simple: reuse an answer for a while, then check again. A temporary memory gives us speed without pretending that yesterday's information must stay true forever.",
       "bullets": [
-        "Expiration causes new work"
+        "Look again when time runs out"
       ],
-      "takeaway": "Expiration causes new work.",
+      "takeaway": "Our useful rule is simple: reuse an answer for a while, then check again.",
       "visual": {
         "phase": 12
       }
     },
     {
       "id": "01-14",
-      "title": "Break only the naming step",
-      "short_title": "Break only the naming step",
-      "chapter": "The failure",
-      "duration": 34.333333333333336,
-      "narration": "Return to the opening puzzle. The network path is available, but this resolver cannot obtain the answer it needs. The app may fail before it even knows a destination address. Another task can continue because it already has a destination or a still-useful cached answer. That's how online and unable to open this service can coexist. Real outages can have additional causes; here, we deliberately broke only name resolution to isolate its contribution.",
+      "title": "Connected, but missing directions",
+      "short_title": "Connected, but missing directions",
+      "chapter": "Try a change",
+      "duration": 36.53333333333333,
+      "narration": "Now we can try a little mystery. Leave the network connection working, but stop our helper from finding the address. An app may fail before it knows where to send its request. Meanwhile, another task that already knows its destination can keep going. So online does not always mean every website name can be found. We have broken only the naming step in this experiment. Real failures can have other causes, but this picture explains one possible reason.",
       "bullets": [
-        "Break only the naming step"
+        "Connected, but missing directions"
       ],
-      "takeaway": "Break only the naming step.",
+      "takeaway": "We have broken only the naming step in this experiment.",
       "visual": {
         "phase": 13
       }
     },
     {
       "id": "01-15",
-      "title": "Responsibility, time, and memory",
-      "short_title": "Responsibility, time, and memory",
-      "chapter": "The reveal",
-      "duration": 34.766666666666666,
-      "narration": "Three ideas now fit together. Hierarchy divides responsibility, referrals lead the search, and caches save work for a limited time. Remove hierarchy and the directory becomes harder to distribute. Remove caching and repeat questions repeat the journey. Remove expiration and changes become harder to discover reliably. Follow the colored answer rather than memorizing the box names. Its movement, reuse, and replacement explain the mechanism much more clearly than calling DNS a mysterious Internet switch.",
+      "title": "Three jobs, one simple search",
+      "short_title": "Three jobs, one simple search",
+      "chapter": "The idea comes together",
+      "duration": 36.1,
+      "narration": "Let's shrink the whole journey into three pictures. First, split the directory into smaller branches. Second, follow directions until the right record answers. Third, remember that answer briefly. The formal words are hierarchy, referrals, and caching. You already know what those words describe because you've watched them happen. The countdown adds one more detail: remembered answers need a time limit. These jobs work together so no single directory has to hold every fresh answer to every question.",
       "bullets": [
-        "Responsibility, time, and memory"
+        "Three jobs, one simple search"
       ],
-      "takeaway": "Responsibility, time, and memory.",
+      "takeaway": "The countdown adds one more detail: remembered answers need a time limit.",
       "visual": {
         "phase": 14
       }
     },
     {
       "id": "01-16",
-      "title": "Resolve the opening contradiction",
-      "short_title": "Resolve the opening contradiction",
-      "chapter": "The answer",
+      "title": "From a name to an address",
+      "short_title": "From a name to an address",
+      "chapter": "The idea comes together",
       "duration": 35.666666666666664,
-      "narration": "A working connection and a successful name lookup are separate requirements. DNS turns a readable question into useful location information through a hierarchy, a resolver, and temporary memory. The small clocks explain why that answer can be fast, slow, or briefly old. So when one app stops while another keeps working, the situation isn't logically impossible. One journey may be missing a piece that another already has. The connection is alive; the directions may be missing.",
+      "narration": "Return to the photo. A name you can remember becomes an address the network can use. A helper finds it, directories guide the helper, and temporary memory saves repeat trips. That's the core of DNS. Next time you type a website name, imagine that small search taking place before the page begins to arrive. It may finish almost instantly because somebody remembered the answer. The website name looked like a destination; first, it was a question.",
       "bullets": [
-        "Resolve the opening contradiction"
+        "From a name to an address"
       ],
-      "takeaway": "Resolve the opening contradiction.",
+      "takeaway": "It may finish almost instantly because somebody remembered the answer.",
       "visual": {
         "phase": 15
       }
     }
-  ]
+  ],
+  "learning_approach": "Concrete example → visual meaning → plain definition → guided experiment → simple math → recap"
 }

@@ -1,5 +1,6 @@
 """Packet boundaries, shared turns, and a measurable store-and-forward pipeline."""
 from .common import *
+from .foundation import computer, photo
 
 
 class Director(VisualDirector):
@@ -42,21 +43,28 @@ class Director(VisualDirector):
     def animate(self,index,section,budget):
         self.reset()
         if index==0:
-            wire=self.show(line((-5.8,.7),(5.8,.7)))
-            giant=self.show(self.box('large transfer',-1,.7,BLUE,6.4,.8))
-            green=self.show(self.box('small',-5,.7,GREEN,1.1,.6))
-            self.label('One enormous turn blocks the small message',0,-.8)
-            self.fly(giant,2.3,seconds=3.5)
-            self.label('Could smaller turns change the wait?',0,-2.1,YELLOW)
+            self.show(computer('Your computer',-4.5,.7),.8)
+            self.show(computer('Your friend',4.5,.7,GREEN),.8)
+            picture=self.show(photo(-4.5,.7),.7)
+            self.play(m.Create(self.own(line((-3.5,.7),(3.5,.7)))),run_time=1.3)
+            self.label('A link is a connection',0,2.1,YELLOW)
+            block=self.show(self.box('picture data',0,-.8,BLUE,5.5,.9),.8)
+            self.play(m.Indicate(picture),m.Indicate(block),run_time=1.5)
+            self.label('How should this data take its turn?',0,-2.3)
         elif index==1:
-            giant=self.show(m.Rectangle(width=9.5,height=.7,color=BLUE,fill_color=BLUE,fill_opacity=.35).move_to([0,.9,0]))
-            self.label('One application message',0,2,BLUE)
-            for i in range(7):
-                marker=self.own(line((-4.75+i*1.35,.4),(-4.75+i*1.35,1.4),YELLOW,3));self.play(m.Create(marker),run_time=.45)
-            self.vanish(giant)
-            for i in range(7):self.show(self.box(str(i+1),-4.35+i*1.45,.9,BLUE,1.15,.7),.25)
-            self.label('Packets are individually handled units',0,-.7)
-            self.label('Fixed path in this example',0,-2.2,MUTED,24)
+            giant=self.show(m.Rectangle(width=9.5,height=.8,color=BLUE,fill_color=BLUE,fill_opacity=.25).move_to([0,.5,0]))
+            self.label('One picture',0,1.8,BLUE)
+            markers=[]
+            for x in (-2.375,0,2.375):
+                marker=self.own(line((x,-.05),(x,1.05),YELLOW,3));markers.append(marker)
+                self.play(m.Create(marker),run_time=.6)
+            self.play(m.FadeOut(giant),*(m.FadeOut(q) for q in markers),run_time=.5)
+            for i in range(4):
+                x=-3.75+i*2.5
+                self.show(self.box(str(i+1),x,.5,BLUE,1.5,.7),.4)
+                self.show(m.Rectangle(width=.3,height=.7,color=YELLOW,fill_color=YELLOW,fill_opacity=.65).move_to([x-.95,.5,0]),.3)
+            self.label('Handling information + data = a packet',0,-1.1)
+            self.label('Numbers help us follow the pieces',0,-2.3,MUTED,24)
         elif index==2:
             self.show(line((-5.8,.5),(5.8,.5)))
             self.label('One shared link, shorter turns',0,1.75)
@@ -65,13 +73,14 @@ class Director(VisualDirector):
                 self.show(self.box(value,-3.6+j*2.4,-1.1,col,1),.3)
             self.label('Possible interleaving, not guaranteed fairness',0,-2.5,MUTED,24)
         elif index==3:
-            self.show(line((-5.6,.2),(5.6,.2)))
-            q=self.show(self.box('packet',-3.5,.9,BLUE,2,.6))
-            timebar=self.show(m.Rectangle(width=.1,height=.55,color=YELLOW,fill_color=YELLOW,fill_opacity=.4).move_to([-5,-1,0]))
-            target=m.Rectangle(width=6,height=.55,color=YELLOW,fill_color=YELLOW,fill_opacity=.4).move_to([-2,-1,0])
-            self.play(m.Transform(timebar,target),q.animate.move_to([2.5,.9,0]),run_time=3)
-            self.label('L bits transmitted at R bits/s',0,2)
-            self.label('Time occupied depends on both',0,-2.3,YELLOW)
+            self.label('Inside a packet: bits',0,2,BLUE)
+            cells=[self.show(self.box(value,-3.5+j*.9,.7,BLUE,.65),.3) for j,value in enumerate('10110010')]
+            self.show(line((-5,-.3),(5,-.3)),.5)
+            for bit in cells[:4]:
+                self.play(bit.animate.move_to([4.5,-.3,0]),run_time=.8)
+                self.vanish(bit)
+            self.label('More bits → a longer turn',0,-1.4,WHITE)
+            self.label('More bits each second → a shorter turn',0,-2.4,YELLOW)
         elif index==4:
             self.label('1,500 bytes × 8 = 12,000 bits',0,1.6,BLUE,31)
             for i in range(8):self.show(m.Rectangle(width=.65,height=.65,color=BLUE,fill_color=BLUE,fill_opacity=.45).move_to([-2.7+i*.78,.4,0]),.3)

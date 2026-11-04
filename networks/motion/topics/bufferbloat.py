@@ -1,5 +1,6 @@
 """The queue itself explains throughput, delay, and the Q/R calculation."""
 from .common import *
+from .foundation import computer
 
 
 class Director(VisualDirector):
@@ -41,31 +42,36 @@ class Director(VisualDirector):
     def animate(self,index,section,budget):
         self.reset()
         if index==0:
-            self.track();qs=self.queue(6)
-            speed=self.label('Lots of data leaves',0,-1.4,BLUE)
-            for q in qs[:3]:self.depart(q,1.2)
-            green=self.show(self.box('ping',-4.7,color=GREEN,width=1.05))
-            self.play(green.animate.move_to([-2.5,.35,0]),run_time=2)
-            self.vanish(speed);self.label('A tiny packet can still wait',0,-1.5,GREEN)
+            self.show(computer('You',-4.5,.7),.8)
+            self.show(computer('Your friend',4.5,.7,GREEN),.8)
+            self.play(m.Create(self.own(line((-3.5,.7),(3.5,.7)))),run_time=1.5)
+            q=self.show(self.box('message',-4.5,-.8,GREEN,1.8))
+            self.play(q.animate.move_to([4.5,-.8,0]),run_time=3)
+            self.label('A network connects devices',0,-1.9)
+            self.label('A packet is a small piece of data',0,-2.8,GREEN)
         elif index==1:
-            self.track();qs=self.queue(4)
-            g=self.show(self.box('small',-5,color=GREEN,width=1.05))
-            self.play(g.animate.move_to([-1,.35,0]),run_time=2)
-            self.label('First in → first out',0,-1.1)
-            for q in qs:self.depart(q,1.5)
-            self.depart(g,2)
+            room=self.show(m.RoundedRectangle(width=7,height=1.7,corner_radius=.15,color=MUTED).move_to([-.8,.3,0]))
+            self.label('Router: passes data onward',0,1.9)
+            self.show(m.VGroup(line((3.3,-.3),(3.3,1.0),YELLOW,4),text('exit',4.3,1.2,26,YELLOW,2)),.8)
+            for j in range(3):
+                q=self.show(self.box(str(j+1),-5,.3,BLUE),.3)
+                self.play(q.animate.move_to([1.9-j*1.1,.3,0]),run_time=1.2)
+            self.label('Buffer = space for waiting data',0,-1.4,WHITE)
+            self.label('Queue = the waiting line',0,-2.4,GREEN)
         elif index==2:
-            self.track();self.label('One output, one departure rhythm',0,-1.35)
-            for i in range(5):
-                q=self.show(self.box(str(i+1),2.9),.25)
-                self.depart(q,1.65)
-                tick=self.own(line((-3.8+i*1.8,-1.9),(-3.8+i*1.8,-2.2),BLUE,3))
-                self.play(m.Create(tick),run_time=.4)
-            self.label('Each turn occupies transmission time',0,-2.7,MUTED,24)
+            self.show(line((-5,.7),(5,.7)),.7)
+            self.label('0 or 1 is one bit',0,2,WHITE)
+            counter=self.show(text('0 bits sent',0,-1,32,GREEN))
+            for j,value in enumerate('1010'):
+                bit=self.show(packet(value,BLUE,.65).move_to([-4,.7,0]),.3)
+                self.play(bit.animate.move_to([4,.7,0]),run_time=1.2,rate_func=m.linear)
+                self.vanish(bit)
+                self.play(m.Transform(counter,text(f'{j+1} bits sent',0,-1,32,GREEN)),run_time=.35)
+            self.label('Rate = how many bits each second',0,-2.3,YELLOW)
         elif index==3:
             self.track();self.label('No data waiting ahead',0,-1.4,GREEN)
             for i in range(3):
-                q=self.show(self.box('ping',-5,color=GREEN,width=1.05))
+                q=self.show(self.box('msg',-5,color=GREEN,width=1.05))
                 self.play(q.animate.move_to([3,.35,0]),run_time=2)
                 self.depart(q,1.1)
             self.label('Baseline delay still exists',0,-2.4,MUTED,24)
@@ -80,7 +86,7 @@ class Director(VisualDirector):
             self.label('Busy link ≠ short delay',0,-2.5,YELLOW)
         elif index==5:
             self.track();qs=self.queue(6)
-            g=self.show(self.box('ping',-5,color=GREEN,width=1.05));self.play(g.animate.move_to([-2.5,.35,0]),run_time=1.5)
+            g=self.show(self.box('msg',-5,color=GREEN,width=1.05));self.play(g.animate.move_to([-2.5,.35,0]),run_time=1.5)
             self.label('Small packet, large amount ahead',0,-1.4,GREEN)
             for q in qs[:4]:self.depart(q,1.5)
             self.label('Its own size did not change',0,-2.4,MUTED,24)
@@ -139,7 +145,7 @@ class Director(VisualDirector):
             self.track();self.label('One burst, then quiet',0,-1.2,GREEN)
             qs=self.queue(5)
             for q in qs:self.depart(q,1.15)
-            g=self.show(self.box('ping',-4.8,color=GREEN,width=1.05));self.play(g.animate.move_to([5.2,.35,0]),run_time=2)
+            g=self.show(self.box('msg',-4.8,color=GREEN,width=1.05));self.play(g.animate.move_to([5.2,.35,0]),run_time=2)
             self.vanish(g);self.label('Temporary buffer ≠ persistent delay',0,-2.3,YELLOW,26)
         elif index==13:
             self.track();self.queue(7)
@@ -154,7 +160,7 @@ class Director(VisualDirector):
             rows=[]
             for y,count,col in ((1,8,BLUE),(-1.2,2,GREEN)):
                 qs=[self.show(self.box('',2.7-j*.78,y,BLUE,.6),.17) for j in range(count)]
-                g=self.show(self.box('ping',-4.5,y,GREEN,1.0))
+                g=self.show(self.box('msg',-4.5,y,GREEN,1.0))
                 self.play(g.animate.move_to([2.7-count*.78-.7,y,0]),run_time=1.6)
                 rows.append({'y':y,'queue':qs,'ping':g})
             # Both exits serve one queued item per turn; the shorter line clears first.
@@ -170,7 +176,7 @@ class Director(VisualDirector):
                 if movers:self.play(*(q.animate.shift(.78*m.RIGHT) for q in movers),run_time=.5)
             self.label('Same outgoing rate; different waiting',0,-2.65,WHITE,27)
         elif index==15:
-            self.track();qs=self.queue(5);g=self.show(self.box('ping',-4.8,color=GREEN,width=1.05))
+            self.track();qs=self.queue(5);g=self.show(self.box('msg',-4.8,color=GREEN,width=1.05))
             self.play(g.animate.move_to([-1.7,.35,0]),run_time=1.5)
             self.label('Throughput: how much gets through',0,-1.2,BLUE)
             self.label('Delay: how long this packet waits',0,-2.1,GREEN)

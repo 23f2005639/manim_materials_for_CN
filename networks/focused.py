@@ -18,6 +18,8 @@ def construct(scene,data):
         heading=m.Text(section['short_title'],font='Noto Sans',font_size=34,color='#F2F2F2')
         if heading.width>12.5:heading.scale(12.5/heading.width)
         heading.move_to([0,3.27,0])
+        if isinstance(scene,m.ThreeDScene):
+            scene.camera.add_fixed_in_frame_mobjects(heading)
         if title is None:
             title=heading;scene.play(m.FadeIn(title),run_time=.4)
         else:scene.play(m.Transform(title,heading),run_time=.4)

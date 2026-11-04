@@ -15,11 +15,13 @@ class Director(VisualDirector):
             parts.append(m.VGroup(m.Rectangle(width=.9,height=.5,color=BG,stroke_width=0,fill_color=BG,fill_opacity=1).move_to([x,y+.65,0]),text(str(distance),x,y+.65,30,color,.8)))
         return m.VGroup(*parts).set_z_index(4)
 
-    def graph(self,dist=None,settled=(),failed=False,weights=True):
+    def graph(self,dist=None,settled=(),failed=False,weights=True,reveal=False):
         self.nodes={};self.edges={};self.values=dict(dist or {})
         for a,b,cost in EDGES:
             color=RED if failed and {a,b}=={'D','E'} else MUTED
-            edge=self.own(line(POSITIONS[a],POSITIONS[b],color,2));self.edges[frozenset((a,b))]=edge;self.s.add(edge)
+            edge=self.own(line(POSITIONS[a],POSITIONS[b],color,2));self.edges[frozenset((a,b))]=edge
+            if reveal:self.play(m.Create(edge),run_time=.22)
+            else:self.s.add(edge)
             if weights:
                 x=(POSITIONS[a][0]+POSITIONS[b][0])/2;y=(POSITIONS[a][1]+POSITIONS[b][1])/2
                 if (a,b) in (('B','C'),('D','E')):x+=.43
@@ -28,7 +30,9 @@ class Director(VisualDirector):
                 label=packet(str(cost),WHITE,.52,.38).move_to([x,y,0]);self.own(label);self.s.add(label)
         for name in POSITIONS:
             obj=self.own(self.node(name,None if dist is None else dist.get(name,'∞'),GREEN if name in settled else BLUE))
-            self.nodes[name]=obj;self.s.add(obj)
+            self.nodes[name]=obj
+            if reveal:self.play(m.FadeIn(obj),run_time=.25)
+            else:self.s.add(obj)
         if failed:
             x,y=POSITIONS['D'][0],.05
             cross=self.own(m.VGroup(line((x-.18,y-.18),(x+.18,y+.18),RED,4),line((x-.18,y+.18),(x+.18,y-.18),RED,4)).set_z_index(6));self.s.add(cross)
@@ -79,25 +83,43 @@ class Director(VisualDirector):
             8:({'A':0,'B':3,'C':2,'D':8,'E':10,'F':14},('A','C','B','D')),
             9: (FINAL,('A','C','B','D','E')),
         }
-        if index<3:
-            self.graph(weights=index>0)
-            if index==0:
-                self.travel(['A','B','D','F'],RED)
-                self.equation('Three links: the tempting shortcut',RED)
-                self.travel(BEST,GREEN)
-            elif index==1:
-                for key,e in self.edges.items():
-                    self.play(e.animate.set_stroke(BLUE,width=3.5),run_time=.35)
-                self.equation('Cost belongs to each connection')
-            else:
-                self.travel(['A','B','D','F'],RED,True)
-                self.equation('4 + 5 + 6 = 15',RED)
-                self.travel(BEST,GREEN,True)
-                self.equation('2 + 1 + 5 + 2 + 3 = 13',GREEN)
+        if index==0:
+            self.eq=None
+            a=self.own(host('Your computer',-4.5,0,BLUE));b=self.own(host('Friend',4.5,0,GREEN))
+            self.play(m.FadeIn(a),run_time=.7);self.play(m.FadeIn(b),run_time=.7)
+            router=self.own(host('Router',0,0,YELLOW));self.play(m.FadeIn(router),run_time=.8)
+            for left,right in ((-4.1,-.4),(.4,4.1)):
+                self.play(m.Create(self.own(line((left,0),(right,0)))),run_time=1)
+            self.equation('Dots are devices. Lines are connections.',WHITE)
+            q=self.own(packet('data',BLUE,1.2).move_to([-4.5,-1.2,0]))
+            self.play(m.FadeIn(q),run_time=.5)
+            self.play(q.animate.move_to([0,-1.2,0]),run_time=1.7)
+            self.play(q.animate.move_to([4.5,-1.2,0]),run_time=1.7)
+        elif index==1:
+            self.eq=None
+            points={'A':(-4,1),'B':(4,1),'C':(0,-1)}
+            for n,(x,y) in points.items():
+                self.play(m.FadeIn(self.own(host(n,x,y))),run_time=.5)
+            for left,right,cost,pos in (('A','B',4,(0,1.4)),('A','C',2,(-2,-.35)),('C','B',1,(2,-.35))):
+                self.play(m.Create(self.own(line(points[left],points[right]))),run_time=.8)
+                self.play(m.FadeIn(self.own(packet(str(cost),YELLOW,.6).move_to([*pos,0]))),run_time=.5)
+            self.equation('One step costs 4',RED)
+            dot=self.own(m.Dot([-4,1,0],radius=.12,color=GREEN))
+            self.play(m.FadeIn(dot),run_time=.4)
+            for n in ('C','B'):self.play(dot.animate.move_to([*points[n],0]),run_time=1.8)
+            self.equation('Two steps cost 2 + 1 = 3',GREEN)
+        elif index==2:
+            self.graph(reveal=True)
+            self.travel(['A','B','D','F'],RED,True)
+            self.equation('4 + 5 + 6 = 15',RED)
+            self.travel(BEST,GREEN,True)
+            self.equation('2 + 1 + 5 + 2 + 3 = 13',GREEN)
         elif index in stages:
             dist,settled=stages[index];self.graph(dist,settled)
             if index==3:
-                for n in 'ABCDEF':self.change(n,0 if n=='A' else '∞',BLUE)
+                for n in 'ABCDEF':self.change(n,0 if n=='A' else '?',BLUE)
+                self.equation('? means no route found yet',WHITE)
+                for n in 'BCDEF':self.change(n,'∞',BLUE)
                 self.equation('Known distance: 0      Undiscovered: ∞')
             elif index==4:
                 self.settle('A');self.relax('A','B',4,4,'∞');self.relax('A','C',2,2,'∞')
