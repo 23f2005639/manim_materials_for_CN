@@ -1,0 +1,604 @@
+1
+00:00:00,000 --> 00:00:04,625
+A download is ready to send millions of bytes.
+Somewhere ahead
+
+2
+00:00:04,625 --> 00:00:09,250
+is a connection that limits how quickly they
+can pass, but
+
+3
+00:00:09,250 --> 00:00:13,875
+the sender does not begin with a map of its
+available
+
+4
+00:00:13,875 --> 00:00:18,500
+capacity. Sending everything immediately could
+overwhelm it. Sending painfully little forever
+
+5
+00:00:18,500 --> 00:00:23,125
+wastes an opportunity. So how does a sender
+start? Watch the
+
+6
+00:00:23,125 --> 00:00:27,750
+first packets and their returning
+acknowledgments. They will do more than
+
+7
+00:00:27,750 --> 00:00:32,375
+confirm delivery: they will help pace a
+growing experiment called TCP
+
+8
+00:00:32,375 --> 00:00:37,000
+slow start.
+
+9
+00:00:37,000 --> 00:00:41,679
+Our picture has a sender, a receiver, and a
+bottleneck along
+
+10
+00:00:41,679 --> 00:00:46,358
+the path. Assume the receiver has plenty of
+free buffer space,
+
+11
+00:00:46,358 --> 00:00:51,038
+so its advertised window is not the limit in
+this story.
+
+12
+00:00:51,038 --> 00:00:55,717
+We are focusing on the sender's congestion
+window, usually called cwnd.
+
+13
+00:00:55,717 --> 00:01:00,396
+It bounds how many bytes may be outstanding
+without acknowledgment. That
+
+14
+00:01:00,396 --> 00:01:05,075
+is a quantity of data, not a transmission
+speed printed on
+
+15
+00:01:05,075 --> 00:01:09,754
+the cable. Keeping those two meanings separate
+will make the later
+
+16
+00:01:09,754 --> 00:01:14,433
+equation much easier.
+
+17
+00:01:14,433 --> 00:01:19,000
+For our illustration, begin with room for four
+full-size segments. Four
+
+18
+00:01:19,000 --> 00:01:23,567
+is a teaching choice, not a claim that every
+TCP connection
+
+19
+00:01:23,567 --> 00:01:28,133
+starts there. Initial-window choices have
+changed across specifications and
+implementations. We
+
+20
+00:01:28,133 --> 00:01:32,700
+are also assuming one useful acknowledgment
+for each new segment and
+
+21
+00:01:32,700 --> 00:01:37,267
+steady round-trip timing. These clean
+assumptions let us see the mechanism
+
+22
+00:01:37,267 --> 00:01:41,833
+before real network variation blurs it. The
+sender has more data
+
+23
+00:01:41,833 --> 00:01:46,400
+ready, but only these first four segments are
+allowed into the
+
+24
+00:01:46,400 --> 00:01:50,967
+experiment.
+
+25
+00:01:50,967 --> 00:01:55,533
+One, two, three, four. The sender puts those
+segments onto the
+
+26
+00:01:55,533 --> 00:02:00,100
+path, then waits for progress to be confirmed.
+At this point,
+
+27
+00:02:00,100 --> 00:02:04,667
+there can be four segments of unacknowledged
+data in flight. They
+
+28
+00:02:04,667 --> 00:02:09,233
+are not travelling on four new cables. They
+are sharing the
+
+29
+00:02:09,233 --> 00:02:13,800
+same path at different positions. If the
+sender released its whole
+
+30
+00:02:13,800 --> 00:02:18,367
+file just because the first segment had left
+its machine, it
+
+31
+00:02:18,367 --> 00:02:22,933
+would be ignoring the very uncertainty slow
+start is trying to
+
+32
+00:02:22,933 --> 00:02:27,500
+manage.
+
+33
+00:02:27,500 --> 00:02:32,233
+The first acknowledgment comes back. Part of
+its effect is straightforward:
+
+34
+00:02:32,233 --> 00:02:36,967
+the confirmed data no longer counts as
+outstanding. There is now
+
+35
+00:02:36,967 --> 00:02:41,700
+room to send a replacement segment within the
+old window. But
+
+36
+00:02:41,700 --> 00:02:46,433
+slow start also increases the congestion
+window when new data is
+
+37
+00:02:46,433 --> 00:02:51,167
+acknowledged, subject to its rules. In our
+simplified full-segment example, it
+
+38
+00:02:51,167 --> 00:02:55,900
+adds one more segment of allowance. One
+acknowledgment therefore frees old
+
+39
+00:02:55,900 --> 00:03:00,633
+space and helps create new space. That
+combination is what makes
+
+40
+00:03:00,633 --> 00:03:05,367
+the next round grow.
+
+41
+00:03:05,367 --> 00:03:10,100
+Repeat that process for the four initial
+segments. Each acknowledgment confirms
+
+42
+00:03:10,100 --> 00:03:14,833
+progress and contributes one segment to our
+illustrative window growth. By
+
+43
+00:03:14,833 --> 00:03:19,567
+the end of this round, cwnd has increased from
+four segments
+
+44
+00:03:19,567 --> 00:03:24,300
+to eight. The sender can now have twice as
+much unacknowledged
+
+45
+00:03:24,300 --> 00:03:29,033
+data outstanding. It did not ask a router for
+an exact
+
+46
+00:03:29,033 --> 00:03:33,767
+bandwidth number. It used successful delivery
+feedback to expand cautiously from
+
+47
+00:03:33,767 --> 00:03:38,500
+its starting point. The growth is emerging
+from the acknowledgment rule,
+
+48
+00:03:38,500 --> 00:03:43,233
+not a stopwatch alone.
+
+49
+00:03:43,233 --> 00:03:48,200
+Look closely at the returning arrows.
+Acknowledgments do not just arrive
+
+50
+00:03:48,200 --> 00:03:53,167
+after an abstract round has finished; each one
+can permit new
+
+51
+00:03:53,167 --> 00:03:58,133
+sending as it arrives. That is an ACK clock.
+The flow
+
+52
+00:03:58,133 --> 00:04:03,100
+of feedback helps pace the outgoing flow of
+data. Our round-by-round
+
+53
+00:04:03,100 --> 00:04:08,067
+grouping makes the count easier to follow, but
+a real sender
+
+54
+00:04:08,067 --> 00:04:13,033
+does not have to wait for all acknowledgments
+in a batch
+
+55
+00:04:13,033 --> 00:04:18,000
+before doing anything. It reacts as progress
+arrives.
+
+56
+00:04:18,000 --> 00:04:22,567
+After eight segments are acknowledged under
+our assumptions, the window grows
+
+57
+00:04:22,567 --> 00:04:27,133
+by another eight, reaching sixteen. Then
+sixteen successful segment acknowledgments can
+
+58
+00:04:27,133 --> 00:04:31,700
+take it to thirty-two. Why doubling? Start
+with W segments of
+
+59
+00:04:31,700 --> 00:04:36,267
+allowance, add roughly W more over a round
+trip, and the
+
+60
+00:04:36,267 --> 00:04:40,833
+next round has about two W. The exponential-
+looking graph is the
+
+61
+00:04:40,833 --> 00:04:45,400
+accumulated result of many small increases.
+The name slow start sounds
+
+62
+00:04:45,400 --> 00:04:49,967
+modest, but its early growth can become
+surprisingly quick across several
+
+63
+00:04:49,967 --> 00:04:54,533
+rounds.
+
+64
+00:04:54,533 --> 00:04:59,267
+We can now write the pattern instead of
+memorizing it. Starting
+
+65
+00:04:59,267 --> 00:05:04,000
+from four, the idealized window after k
+complete growth rounds is
+
+66
+00:05:04,000 --> 00:05:08,733
+four times two to the power k. Zero rounds
+gives four;
+
+67
+00:05:08,733 --> 00:05:13,467
+one gives eight; two gives sixteen; three
+gives thirty-two. The equation
+
+68
+00:05:13,467 --> 00:05:18,200
+describes the clean picture we just built.
+Delayed acknowledgments, different growth
+
+69
+00:05:18,200 --> 00:05:22,933
+rules, losses, and application limits can
+change the actual trace. So
+
+70
+00:05:22,933 --> 00:05:27,667
+use this model to understand the mechanism,
+rather than as a
+
+71
+00:05:27,667 --> 00:05:32,400
+prediction for every download.
+
+72
+00:05:32,400 --> 00:05:37,367
+Suppose each segment carries one thousand
+bytes, to keep the arithmetic
+
+73
+00:05:37,367 --> 00:05:42,333
+visible. A sixteen-segment window holds
+sixteen thousand bytes of outstanding data.
+
+74
+00:05:42,333 --> 00:05:47,300
+If that much data can be acknowledged every
+hundred milliseconds, the
+
+75
+00:05:47,300 --> 00:05:52,267
+window supports an average of one hundred
+sixty thousand bytes per
+
+76
+00:05:52,267 --> 00:05:57,233
+second. Multiply by eight and that is about
+one point two
+
+77
+00:05:57,233 --> 00:06:02,200
+eight megabits per second. This is a window-
+limited approximation, not a
+
+78
+00:06:02,200 --> 00:06:07,167
+promise that the path can deliver that rate.
+
+79
+00:06:07,167 --> 00:06:12,195
+Keep the same sixteen thousand bytes, but
+double the round-trip time
+
+80
+00:06:12,195 --> 00:06:17,224
+to two hundred milliseconds. The approximate
+rate halves, because replenishing the
+
+81
+00:06:17,224 --> 00:06:22,252
+same allowance takes twice as long. Now the
+expression window divided
+
+82
+00:06:22,252 --> 00:06:27,281
+by round-trip time has a visible meaning: an
+amount of outstanding
+
+83
+00:06:27,281 --> 00:06:32,310
+data, renewed over a period of time. A larger
+window can
+
+84
+00:06:32,310 --> 00:06:37,338
+help keep a longer path busy, but it cannot
+force more
+
+85
+00:06:37,338 --> 00:06:42,367
+through a bottleneck than that connection can
+actually transmit.
+
+86
+00:06:42,367 --> 00:06:46,992
+Our growing train eventually reaches a point
+where the bottleneck cannot
+
+87
+00:06:46,992 --> 00:06:51,617
+serve arrivals as quickly as they build up.
+Packets wait, and
+
+88
+00:06:51,617 --> 00:06:56,242
+the feedback reaches the sender later.
+Congestion may also lead to
+
+89
+00:06:56,242 --> 00:07:00,867
+packet loss or explicit signals. Successful
+earlier rounds did not prove
+
+90
+00:07:00,867 --> 00:07:05,492
+that unlimited growth would remain safe. They
+only justified increasing from
+
+91
+00:07:05,492 --> 00:07:10,117
+the earlier operating point. Slow start
+explores available capacity through feedback;
+
+92
+00:07:10,117 --> 00:07:14,742
+it does not receive advance permission to
+overfill every buffer on
+
+93
+00:07:14,742 --> 00:07:19,367
+the path.
+
+94
+00:07:19,367 --> 00:07:24,395
+TCP has a slow-start threshold, commonly
+called ssthresh. While the congestion
+
+95
+00:07:24,395 --> 00:07:29,424
+window is below that threshold, slow-start
+growth can continue. Reaching the
+
+96
+00:07:29,424 --> 00:07:34,452
+threshold or observing congestion changes what
+happens next. We will stop
+
+97
+00:07:34,452 --> 00:07:39,481
+our explanation at that boundary, because slow
+start is one part
+
+98
+00:07:39,481 --> 00:07:44,510
+of a larger congestion-control process. The
+point is that doubling is
+
+99
+00:07:44,510 --> 00:07:49,538
+not meant to continue forever. The same graph
+that explains its
+
+100
+00:07:49,538 --> 00:07:54,567
+speed also explains why it needs a stopping
+condition.
+
+101
+00:07:54,567 --> 00:07:59,662
+Try starting with eight segments instead of
+four in the same
+
+102
+00:07:59,662 --> 00:08:04,757
+idealized example. The growth sequence becomes
+eight, sixteen, thirty-two. That reaches
+
+103
+00:08:04,757 --> 00:08:09,852
+the thirty-two-segment level one round
+earlier. A larger initial window can
+
+104
+00:08:09,852 --> 00:08:14,948
+save an early round, but it also begins by
+placing more
+
+105
+00:08:14,948 --> 00:08:20,043
+unconfirmed data on an unknown path. This is a
+trade-off, not
+
+106
+00:08:20,043 --> 00:08:25,138
+free speed. Standards and implementations make
+practical initial-window choices; our
+animation
+
+107
+00:08:25,138 --> 00:08:30,233
+isolates how that starting choice changes the
+first few rounds.
+
+108
+00:08:30,233 --> 00:08:34,800
+Before turning this tidy curve into a
+universal rule, check the
+
+109
+00:08:34,800 --> 00:08:39,367
+assumptions. Does the sender have enough data
+ready? Does the receiver
+
+110
+00:08:39,367 --> 00:08:43,933
+have room? Are acknowledgments delayed or
+grouped? Is another bottleneck already
+
+111
+00:08:43,933 --> 00:08:48,500
+limiting the flow? Each can alter what you
+observe. The congestion
+
+112
+00:08:48,500 --> 00:08:53,067
+window is permission to have data outstanding,
+rather than an order
+
+113
+00:08:53,067 --> 00:08:57,633
+to send at a smooth rate. The useful
+explanation survives those
+
+114
+00:08:57,633 --> 00:09:02,200
+complications: confirmed progress helps the
+sender grow and pace its early
+
+115
+00:09:02,200 --> 00:09:06,767
+traffic.
+
+116
+00:09:06,767 --> 00:09:11,558
+So the sender did not discover a perfect speed
+setting written
+
+117
+00:09:11,558 --> 00:09:16,350
+somewhere inside the network. It began with
+limited outstanding data, used
+
+118
+00:09:16,350 --> 00:09:21,142
+acknowledgments to make room and grow that
+allowance, and stopped the
+
+119
+00:09:21,142 --> 00:09:25,933
+rapid growth when its rules required a
+transition. The math, the
+
+120
+00:09:25,933 --> 00:09:30,725
+window, and the moving packets were three
+views of that same
+
+121
+00:09:30,725 --> 00:09:35,517
+feedback process. Slow start is how a
+connection can begin exploring
+
+122
+00:09:35,517 --> 00:09:40,308
+an uncertain path without treating either
+permanent caution or an immediate
+
+123
+00:09:40,308 --> 00:09:45,100
+flood as its only option.

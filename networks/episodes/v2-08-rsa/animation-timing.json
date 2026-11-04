@@ -1,0 +1,119 @@
+{
+  "fps": 30.0,
+  "sections": [
+    {
+      "name": "The public lock puzzle",
+      "animation_end_frame": 264,
+      "section_seconds": 34.767,
+      "visual_seconds": 8.4,
+      "visual_fraction": 0.242
+    },
+    {
+      "name": "Easy forward, difficult backward",
+      "animation_end_frame": 1184,
+      "section_seconds": 35.667,
+      "visual_seconds": 4.3,
+      "visual_fraction": 0.121
+    },
+    {
+      "name": "Numbers that wrap around",
+      "animation_end_frame": 2430,
+      "section_seconds": 34.767,
+      "visual_seconds": 10.15,
+      "visual_fraction": 0.292
+    },
+    {
+      "name": "Choose two small primes",
+      "animation_end_frame": 3261,
+      "section_seconds": 35.2,
+      "visual_seconds": 3.1,
+      "visual_fraction": 0.088
+    },
+    {
+      "name": "Count the useful positions",
+      "animation_end_frame": 4398,
+      "section_seconds": 34.333,
+      "visual_seconds": 5.8,
+      "visual_fraction": 0.169
+    },
+    {
+      "name": "Choose the public exponent",
+      "animation_end_frame": 5374,
+      "section_seconds": 35.2,
+      "visual_seconds": 4.0,
+      "visual_fraction": 0.114
+    },
+    {
+      "name": "Find the matching private exponent",
+      "animation_end_frame": 6436,
+      "section_seconds": 33.867,
+      "visual_seconds": 4.2,
+      "visual_fraction": 0.124
+    },
+    {
+      "name": "Encrypt the message seven",
+      "animation_end_frame": 7458,
+      "section_seconds": 34.767,
+      "visual_seconds": 4.4,
+      "visual_fraction": 0.127
+    },
+    {
+      "name": "Keep the remainder as you go",
+      "animation_end_frame": 8561,
+      "section_seconds": 35.2,
+      "visual_seconds": 6.4,
+      "visual_fraction": 0.182
+    },
+    {
+      "name": "Decrypt using twenty-seven",
+      "animation_end_frame": 9680,
+      "section_seconds": 34.333,
+      "visual_seconds": 8.5,
+      "visual_fraction": 0.248
+    },
+    {
+      "name": "Why those exponents cooperate",
+      "animation_end_frame": 10686,
+      "section_seconds": 35.667,
+      "visual_seconds": 7.7,
+      "visual_fraction": 0.216
+    },
+    {
+      "name": "Test the wrong exponent",
+      "animation_end_frame": 11690,
+      "section_seconds": 35.2,
+      "visual_seconds": 5.5,
+      "visual_fraction": 0.156
+    },
+    {
+      "name": "What the hidden factors reveal",
+      "animation_end_frame": 12743,
+      "section_seconds": 35.667,
+      "visual_seconds": 5.4,
+      "visual_fraction": 0.151
+    },
+    {
+      "name": "Textbook numbers are not enough",
+      "animation_end_frame": 13795,
+      "section_seconds": 35.667,
+      "visual_seconds": 4.8,
+      "visual_fraction": 0.135
+    },
+    {
+      "name": "Why this mathematics still matters",
+      "animation_end_frame": 14868,
+      "section_seconds": 35.2,
+      "visual_seconds": 4.9,
+      "visual_fraction": 0.139
+    },
+    {
+      "name": "Return to the public lock",
+      "animation_end_frame": 15963,
+      "section_seconds": 37.433,
+      "visual_seconds": 6.2,
+      "visual_fraction": 0.166
+    }
+  ],
+  "duration": 562.9333333333333,
+  "edition": "focused-v2"
+}

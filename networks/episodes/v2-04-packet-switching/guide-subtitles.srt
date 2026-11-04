@@ -1,0 +1,603 @@
+1
+00:00:00,000 --> 00:00:04,567
+A huge transfer reaches a shared connection
+just before a tiny
+
+2
+00:00:04,567 --> 00:00:09,133
+message. If the huge transfer holds the
+connection until its whole
+
+3
+00:00:09,133 --> 00:00:13,700
+message finishes, the small one gets a very
+long wait. Yet
+
+4
+00:00:13,700 --> 00:00:18,267
+the Internet carries enormous transfers and
+tiny interactions together. How does
+
+5
+00:00:18,267 --> 00:00:22,833
+it divide their turns? Watch us replace one
+giant uninterrupted shape
+
+6
+00:00:22,833 --> 00:00:27,400
+with smaller pieces. Those boundaries are not
+just a drawing choice.
+
+7
+00:00:27,400 --> 00:00:31,967
+They create opportunities for other traffic to
+use the same physical
+
+8
+00:00:31,967 --> 00:00:36,533
+link.
+
+9
+00:00:36,533 --> 00:00:41,690
+Call each piece a packet. It carries a limited
+portion of
+
+10
+00:00:41,690 --> 00:00:46,848
+the data, along with information needed to
+handle that piece. The
+
+11
+00:00:46,848 --> 00:00:52,005
+receiver eventually needs the right content,
+but the network can now
+
+12
+00:00:52,005 --> 00:00:57,162
+work with individual units instead of waiting
+for one entire application
+
+13
+00:00:57,162 --> 00:01:02,319
+message. Our path stays fixed. We will not
+decide how that
+
+14
+00:01:02,319 --> 00:01:07,476
+path was chosen or how an application recovers
+missing data. Our
+
+15
+00:01:07,476 --> 00:01:12,633
+question is what dividing the transfer changes
+about sharing and timing.
+
+16
+00:01:12,633 --> 00:01:17,312
+Let blue represent the large transfer and
+green the small message.
+
+17
+00:01:17,312 --> 00:01:21,992
+Blue sends one packet, then green gets a turn
+before another
+
+18
+00:01:21,992 --> 00:01:26,671
+blue packet. The link is still transmitting
+one sequence of bits.
+
+19
+00:01:26,671 --> 00:01:31,350
+We did not create two simultaneous exits. What
+changed is the
+
+20
+00:01:31,350 --> 00:01:36,029
+size of the indivisible turn: the waiting
+green data no longer
+
+21
+00:01:36,029 --> 00:01:40,708
+needs the entire blue message to finish first.
+This interleaving is
+
+22
+00:01:40,708 --> 00:01:45,387
+possible sharing, not a promise that every
+real queue always schedules
+
+23
+00:01:45,387 --> 00:01:50,067
+these colors fairly.
+
+24
+00:01:50,067 --> 00:01:54,746
+A packet is smaller than the complete
+transfer, but it is
+
+25
+00:01:54,746 --> 00:01:59,425
+not instantaneous. Its bits must enter the
+outgoing link one after
+
+26
+00:01:59,425 --> 00:02:04,104
+another. Imagine the packet as a rectangle
+whose width is its
+
+27
+00:02:04,104 --> 00:02:08,783
+transmission time. Making a smaller rectangle
+means finishing that turn sooner;
+
+28
+00:02:08,783 --> 00:02:13,462
+making the link faster also makes the
+rectangle narrower. These are
+
+29
+00:02:13,462 --> 00:02:18,142
+two different ways to reduce the time taken by
+one transmission.
+
+30
+00:02:18,142 --> 00:02:22,821
+To calculate either change, we need the
+packet's length and the
+
+31
+00:02:22,821 --> 00:02:27,500
+link's bit rate.
+
+32
+00:02:27,500 --> 00:02:32,276
+Let L be the number of bits in a packet and
+
+33
+00:02:32,276 --> 00:02:37,052
+R the number of bits the link can transmit
+each second.
+
+34
+00:02:37,052 --> 00:02:41,829
+Sending L bits takes L divided by R seconds.
+Our example
+
+35
+00:02:41,829 --> 00:02:46,605
+packet contains fifteen hundred bytes, or
+twelve thousand bits. On a
+
+36
+00:02:46,605 --> 00:02:51,381
+ten-million-bit-per-second link, that occupies
+one point two milliseconds. We are calculating
+
+37
+00:02:51,381 --> 00:02:56,157
+transmission time only. Signal travel adds
+delay, and it is left
+
+38
+00:02:56,157 --> 00:03:00,933
+out of this particular arithmetic.
+
+39
+00:03:00,933 --> 00:03:05,500
+Now add an intermediate switch in our model.
+It receives the
+
+40
+00:03:05,500 --> 00:03:10,067
+complete packet before starting to send that
+packet on the next
+
+41
+00:03:10,067 --> 00:03:14,633
+link. This is store-and-forward operation.
+Follow the blue rectangle: first it
+
+42
+00:03:14,633 --> 00:03:19,200
+finishes arriving, then it begins leaving. The
+switch can use other
+
+43
+00:03:19,200 --> 00:03:23,767
+forwarding methods in other settings, but
+keeping this rule explicit lets
+
+44
+00:03:23,767 --> 00:03:28,333
+us reason clearly. A packet's boundary gives
+this switch a complete
+
+45
+00:03:28,333 --> 00:03:32,900
+unit to receive, hold briefly, and forward
+toward the next fixed
+
+46
+00:03:32,900 --> 00:03:37,467
+stop.
+
+47
+00:03:37,467 --> 00:03:42,033
+Place three equal-rate links in a row. Our one
+packet occupies
+
+48
+00:03:42,033 --> 00:03:46,600
+the first link for one point two milliseconds,
+then the second,
+
+49
+00:03:46,600 --> 00:03:51,167
+then the third. Ignoring propagation,
+processing, and competing traffic, its final
+
+50
+00:03:51,167 --> 00:03:55,733
+bit reaches the end after three point six
+milliseconds. Three links
+
+51
+00:03:55,733 --> 00:04:00,300
+multiplied by one transmission time gives this
+result because our single
+
+52
+00:04:00,300 --> 00:04:04,867
+packet must finish one store-and-forward step
+before beginning the next. There
+
+53
+00:04:04,867 --> 00:04:09,433
+is not yet another packet available to overlap
+any of those
+
+54
+00:04:09,433 --> 00:04:14,000
+steps.
+
+55
+00:04:14,000 --> 00:04:18,733
+Now prepare four packets. After the first
+leaves the source, must
+
+56
+00:04:18,733 --> 00:04:23,467
+the source remain idle until that packet
+reaches the destination? It
+
+57
+00:04:23,467 --> 00:04:28,200
+does not. The first link is free for packet
+two while
+
+58
+00:04:28,200 --> 00:04:32,933
+the first packet uses link two. This is the
+next opportunity
+
+59
+00:04:32,933 --> 00:04:37,667
+created by dividing the message. Different
+links can handle different packets
+
+60
+00:04:37,667 --> 00:04:42,400
+at the same time. The network becomes a
+pipeline, with several
+
+61
+00:04:42,400 --> 00:04:47,133
+stages doing useful work during the same
+interval instead of waiting
+
+62
+00:04:47,133 --> 00:04:51,867
+for one complete journey.
+
+63
+00:04:51,867 --> 00:04:56,895
+Watch the first three slots. At first, only
+the first link
+
+64
+00:04:56,895 --> 00:05:01,924
+works. Next, links one and two work on
+different packets. Then
+
+65
+00:05:01,924 --> 00:05:06,952
+all three links are occupied. Follow the
+packet colors: simultaneous work
+
+66
+00:05:06,952 --> 00:05:11,981
+does not mean the same packet magically
+appears everywhere. Each packet
+
+67
+00:05:11,981 --> 00:05:17,010
+still follows the store-and-forward rule. The
+overlap happens between different packets
+
+68
+00:05:17,010 --> 00:05:22,038
+on different links, just as several items can
+occupy different stages
+
+69
+00:05:22,038 --> 00:05:27,067
+of a process without any item skipping a
+stage.
+
+70
+00:05:27,067 --> 00:05:31,967
+For one packet, the journey needs three
+transmission slots. Once the
+
+71
+00:05:31,967 --> 00:05:36,867
+pipeline is filled, each additional packet can
+finish one slot after
+
+72
+00:05:36,867 --> 00:05:41,767
+the previous one. Four packets therefore need
+three slots for the
+
+73
+00:05:41,767 --> 00:05:46,667
+first, then three more for the remaining
+packets: six slots total.
+
+74
+00:05:46,667 --> 00:05:51,567
+At one point two milliseconds per slot, that
+is seven point
+
+75
+00:05:51,567 --> 00:05:56,467
+two milliseconds. Sending each packet through
+the entire path before starting
+
+76
+00:05:56,467 --> 00:06:01,367
+another would need twelve slots. The
+improvement comes from overlap, while
+
+77
+00:06:01,367 --> 00:06:06,267
+the individual links keep the same rate.
+
+78
+00:06:06,267 --> 00:06:11,105
+With N equal packets and H equal-rate links,
+this ideal pipeline
+
+79
+00:06:11,105 --> 00:06:15,943
+takes N plus H minus one transmission slots.
+Multiply that count
+
+80
+00:06:15,943 --> 00:06:20,781
+by L divided by R to obtain the total time.
+The
+
+81
+00:06:20,781 --> 00:06:25,619
+minus one is not a mysterious correction: the
+first packet is
+
+82
+00:06:25,619 --> 00:06:30,457
+already included when we count the H slots
+that fill its
+
+83
+00:06:30,457 --> 00:06:35,295
+journey. Unequal rates, propagation,
+processing, and other traffic change the
+timing.
+
+84
+00:06:35,295 --> 00:06:40,133
+The formula describes our clean model.
+
+85
+00:06:40,133 --> 00:06:44,758
+Bring back the green message. Sources do not
+always take neat
+
+86
+00:06:44,758 --> 00:06:49,383
+repeating turns. Some are quiet, some send
+bursts, and several can
+
+87
+00:06:49,383 --> 00:06:54,008
+suddenly want the same output. Packet
+switching lets a link carry
+
+88
+00:06:54,008 --> 00:06:58,633
+whichever packets are selected when capacity
+becomes available, instead of requiring
+
+89
+00:06:58,633 --> 00:07:03,258
+each source to occupy a fixed turn
+continuously. That flexibility helps
+
+90
+00:07:03,258 --> 00:07:07,883
+share a connection among uneven conversations.
+It also means we must
+
+91
+00:07:07,883 --> 00:07:12,508
+examine what happens when several ready
+packets want the same next
+
+92
+00:07:12,508 --> 00:07:17,133
+transmission opportunity.
+
+93
+00:07:17,133 --> 00:07:21,812
+When arrivals reach an output faster than it
+can transmit, packets
+
+94
+00:07:21,812 --> 00:07:26,492
+wait. Notice the green packet can still be
+delayed behind blue
+
+95
+00:07:26,492 --> 00:07:31,171
+packets. Packet boundaries create chances for
+interleaving, but they do not
+
+96
+00:07:31,171 --> 00:07:35,850
+guarantee a perfectly fair schedule, zero
+waiting, or unlimited capacity. If
+
+97
+00:07:35,850 --> 00:07:40,529
+a finite queue fills, packets can be dropped.
+Those details limit
+
+98
+00:07:40,529 --> 00:07:45,208
+our opening promise: breaking data into pieces
+makes flexible sharing possible,
+
+99
+00:07:45,208 --> 00:07:49,888
+but the particular scheduling and available
+resources determine the experience each
+
+100
+00:07:49,888 --> 00:07:54,567
+packet actually gets.
+
+101
+00:07:54,567 --> 00:07:59,133
+Making packets tiny seems tempting. Each turn
+would finish quickly, so
+
+102
+00:07:59,133 --> 00:08:03,700
+perhaps we should use the smallest pieces
+imaginable. But each packet
+
+103
+00:08:03,700 --> 00:08:08,267
+also carries handling information, and
+equipment must process those packets. More
+
+104
+00:08:08,267 --> 00:08:12,833
+pieces can mean more overhead for the same
+useful content. The
+
+105
+00:08:12,833 --> 00:08:17,400
+picture shows that trade-off by keeping the
+useful blue payload separate
+
+106
+00:08:17,400 --> 00:08:21,967
+from the small header. Packetization is a
+design choice balancing useful
+
+107
+00:08:21,967 --> 00:08:26,533
+sharing opportunities, transmission
+efficiency, and the work required to handle
+individual
+
+108
+00:08:26,533 --> 00:08:31,100
+units.
+
+109
+00:08:31,100 --> 00:08:36,129
+At the far end, follow the pieces belonging to
+the blue
+
+110
+00:08:36,129 --> 00:08:41,157
+transfer and the green message. Their journeys
+shared resources, but their
+
+111
+00:08:41,157 --> 00:08:46,186
+identities remain distinguishable. Recovering
+the complete application meaning requires the
+appropriate
+
+112
+00:08:46,186 --> 00:08:51,214
+endpoint mechanisms, which sit outside our
+timing model. Our network's contribution
+
+113
+00:08:51,214 --> 00:08:56,243
+was to move manageable units between
+successive links. It never needed
+
+114
+00:08:56,243 --> 00:09:01,271
+the whole blue application message to occupy
+one continuous end-to-end turn
+
+115
+00:09:01,271 --> 00:09:06,300
+before allowing green data onto the same
+shared infrastructure.
+
+116
+00:09:06,300 --> 00:09:11,092
+The tiny message escaped the elephant's full
+turn because the elephant
+
+117
+00:09:11,092 --> 00:09:15,883
+was divided into packets. That created shorter
+opportunities for sharing. It
+
+118
+00:09:15,883 --> 00:09:20,675
+also let different packets occupy successive
+links at once, turning a
+
+119
+00:09:20,675 --> 00:09:25,467
+chain of transmissions into a pipeline.
+Queues, overhead, and finite rates
+
+120
+00:09:25,467 --> 00:09:30,258
+still matter, so packet switching is not a
+trick for unlimited
+
+121
+00:09:30,258 --> 00:09:35,050
+speed. Its power is more practical: many
+uneven conversations can share
+
+122
+00:09:35,050 --> 00:09:39,842
+links in small units, while each link keeps
+doing one clear
+
+123
+00:09:39,842 --> 00:09:44,633
+transmission job at a time.

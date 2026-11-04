@@ -17,6 +17,10 @@ class LessonScene(m.Scene):
     def construct(self) -> None:
         # Import only the selected director so topics can be authored independently.
         data = json.loads(self.storyboard_path.read_text())
+        if data.get("edition") == "focused-v2":
+            from networks.focused import construct
+            construct(self, data)
+            return
         if data["id"] in ("01", "03", "07"):
             from networks.motion.packets import PacketDirector
             director = PacketDirector(self, data["id"])

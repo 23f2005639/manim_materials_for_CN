@@ -1,0 +1,593 @@
+1
+00:00:00,000 --> 00:00:04,567
+Your download counter is flying. The
+connection looks healthy. Then a
+
+2
+00:00:04,567 --> 00:00:09,133
+tiny action in a game takes forever to reach
+the other
+
+3
+00:00:09,133 --> 00:00:13,700
+side. How can a fast connection also feel
+slow? Watch the
+
+4
+00:00:13,700 --> 00:00:18,267
+small green packet. It contains almost nothing
+compared with the blue
+
+5
+00:00:18,267 --> 00:00:22,833
+transfer, but it has arrived at exactly the
+wrong moment. The
+
+6
+00:00:22,833 --> 00:00:27,400
+mystery is not how fast bits can leave. It is
+how
+
+7
+00:00:27,400 --> 00:00:31,967
+long this particular packet must wait before
+they can leave at
+
+8
+00:00:31,967 --> 00:00:36,533
+all.
+
+9
+00:00:36,533 --> 00:00:41,267
+Here is our entire model: arrivals on the
+left, a waiting
+
+10
+00:00:41,267 --> 00:00:46,000
+area in the middle, and one outgoing link on
+the right.
+
+11
+00:00:46,000 --> 00:00:50,733
+Everything that needs that exit must share it.
+Blue packets carry
+
+12
+00:00:50,733 --> 00:00:55,467
+a large transfer; green packets represent a
+small interactive exchange. Their
+
+13
+00:00:55,467 --> 00:01:00,200
+colors help us follow them, but this queue
+gives neither color
+
+14
+00:01:00,200 --> 00:01:04,933
+special treatment. For now, the rule is first
+in, first out.
+
+15
+00:01:04,933 --> 00:01:09,667
+Earlier arrivals stand ahead of later
+arrivals, regardless of how urgently
+
+16
+00:01:09,667 --> 00:01:14,400
+someone wants a reply.
+
+17
+00:01:14,400 --> 00:01:19,495
+Watch the departure marks. The outgoing link
+can put only a
+
+18
+00:01:19,495 --> 00:01:24,590
+certain number of bits onto the wire each
+second. Even when
+
+19
+00:01:24,590 --> 00:01:29,686
+several packets arrive together, they cannot
+all occupy the same transmission
+
+20
+00:01:29,686 --> 00:01:34,781
+time. They leave in a sequence. The waiting
+area absorbs that
+
+21
+00:01:34,781 --> 00:01:39,876
+difference between arrivals and departures.
+This is useful: a short burst
+
+22
+00:01:39,876 --> 00:01:44,971
+does not have to disappear simply because its
+packets arrived close
+
+23
+00:01:44,971 --> 00:01:50,067
+together. Persistent waiting is the part we
+need to understand.
+
+24
+00:01:50,067 --> 00:01:54,590
+Start with very little traffic. The green
+packet arrives, finds no
+
+25
+00:01:54,590 --> 00:01:59,114
+blue line ahead of it, and moves toward the
+exit almost
+
+26
+00:01:59,114 --> 00:02:03,638
+immediately. The complete exchange still takes
+time: signals travel, equipment processes
+
+27
+00:02:03,638 --> 00:02:08,162
+data, and the other endpoint responds. But our
+queue adds almost
+
+28
+00:02:08,162 --> 00:02:12,686
+no extra delay in this case. We are about to
+change
+
+29
+00:02:12,686 --> 00:02:17,210
+the amount waiting, while leaving the outgoing
+link itself exactly the
+
+30
+00:02:17,210 --> 00:02:21,733
+same.
+
+31
+00:02:21,733 --> 00:02:26,358
+Now bring in the bulk transfer. For a while,
+arrivals outrun
+
+32
+00:02:26,358 --> 00:02:30,983
+the exit. Blue packets accumulate faster than
+the link can remove
+
+33
+00:02:30,983 --> 00:02:35,608
+them, so the line grows backward. The outgoing
+link stays busy
+
+34
+00:02:35,608 --> 00:02:40,233
+throughout. A throughput display can therefore
+look impressive even as waiting
+
+35
+00:02:40,233 --> 00:02:44,858
+gets worse. These measurements differ:
+throughput counts how much data gets
+
+36
+00:02:44,858 --> 00:02:49,483
+through over time; delay measures how long an
+individual piece takes.
+
+37
+00:02:49,483 --> 00:02:54,108
+A busy exit can produce plenty of throughput
+and plenty of
+
+38
+00:02:54,108 --> 00:02:58,733
+delay together.
+
+39
+00:02:58,733 --> 00:03:03,412
+Here comes the green packet again. Predict
+what happens before it
+
+40
+00:03:03,412 --> 00:03:08,092
+reaches the line. Its small size will make its
+own transmission
+
+41
+00:03:08,092 --> 00:03:12,771
+brief, but that does not move it past earlier
+packets. In
+
+42
+00:03:12,771 --> 00:03:17,450
+our first-in, first-out queue, it waits behind
+all the blue data
+
+43
+00:03:17,450 --> 00:03:22,129
+already present. The green packet has not
+become larger. The physical
+
+44
+00:03:22,129 --> 00:03:26,808
+route has not become longer. Yet the
+interaction now feels late
+
+45
+00:03:26,808 --> 00:03:31,487
+because a new kind of distance has appeared: a
+distance measured
+
+46
+00:03:31,487 --> 00:03:36,167
+in waiting bits.
+
+47
+00:03:36,167 --> 00:03:41,262
+Suppose we make the waiting area twice as
+large. Does the
+
+48
+00:03:41,262 --> 00:03:46,357
+green packet escape sooner? The larger buffer
+can hold more arrivals,
+
+49
+00:03:46,357 --> 00:03:51,452
+but the outgoing link still removes bits at
+the same rate.
+
+50
+00:03:51,452 --> 00:03:56,548
+Under sustained load, the longer space can
+become a longer line.
+
+51
+00:03:56,548 --> 00:04:01,643
+That is the trap behind bufferbloat: oversized
+or poorly managed queues
+
+52
+00:04:01,643 --> 00:04:06,738
+can hold a great deal of delay. Extra storage
+helps absorb
+
+53
+00:04:06,738 --> 00:04:11,833
+bursts, but storage alone cannot increase the
+exit's transmission capacity.
+
+54
+00:04:11,833 --> 00:04:16,990
+Let's replace our drawn packets with an amount
+of data. Call
+
+55
+00:04:16,990 --> 00:04:22,148
+the bits waiting ahead of the green packet Q.
+Call the
+
+56
+00:04:22,148 --> 00:04:27,305
+outgoing bit rate R. Each second, the exit
+removes approximately R
+
+57
+00:04:27,305 --> 00:04:32,462
+of those bits, assuming it remains available
+to this queue. So
+
+58
+00:04:32,462 --> 00:04:37,619
+how many seconds clear Q? Divide the amount to
+be removed
+
+59
+00:04:37,619 --> 00:04:42,776
+by the amount removed each second. The picture
+is already doing
+
+60
+00:04:42,776 --> 00:04:47,933
+the division; the equation simply gives that
+movement a compact name.
+
+61
+00:04:47,933 --> 00:04:52,900
+Our example has one megabyte waiting ahead of
+the green packet.
+
+62
+00:04:52,900 --> 00:04:57,867
+Here mega means one million, so that is one
+million bytes.
+
+63
+00:04:57,867 --> 00:05:02,833
+The link rate, however, is measured in bits
+per second. Eight
+
+64
+00:05:02,833 --> 00:05:07,800
+bits make a byte, which turns our waiting
+amount into eight
+
+65
+00:05:07,800 --> 00:05:12,767
+million bits. Dividing a byte count directly
+by a bit rate
+
+66
+00:05:12,767 --> 00:05:17,733
+would quietly make the answer eight times too
+small. The units
+
+67
+00:05:17,733 --> 00:05:22,700
+tell us which quantities are allowed to meet.
+
+68
+00:05:22,700 --> 00:05:27,795
+The exit runs at twenty million bits per
+second. Eight million
+
+69
+00:05:27,795 --> 00:05:32,890
+waiting bits divided by twenty million bits
+per second gives zero
+
+70
+00:05:32,890 --> 00:05:37,986
+point four seconds: four hundred milliseconds.
+Notice what disappeared in the
+
+71
+00:05:37,986 --> 00:05:43,081
+division: bits cancel, leaving seconds. That
+is the time needed to
+
+72
+00:05:43,081 --> 00:05:48,176
+clear the data ahead, before our green packet
+gets its turn.
+
+73
+00:05:48,176 --> 00:05:53,271
+It is an illustrative queueing calculation,
+not a claim that every
+
+74
+00:05:53,271 --> 00:05:58,367
+twenty-megabit connection always adds four
+hundred milliseconds to every interaction.
+
+75
+00:05:58,367 --> 00:06:02,992
+Now place that waiting beside the rest of the
+journey. Propagation,
+
+76
+00:06:02,992 --> 00:06:07,617
+processing, transmission, and any other queues
+still contribute. A request and
+
+77
+00:06:07,617 --> 00:06:12,242
+its response can also face different
+conditions in different directions. Our
+
+78
+00:06:12,242 --> 00:06:16,867
+four hundred milliseconds is one added waiting
+component, not a complete
+
+79
+00:06:16,867 --> 00:06:21,492
+prediction of a ping measurement. This is why
+a speed-test result
+
+80
+00:06:21,492 --> 00:06:26,117
+cannot describe the whole experience. It tells
+us something useful about
+
+81
+00:06:26,117 --> 00:06:30,742
+transfer capacity, but it does not reveal
+where every packet spends
+
+82
+00:06:30,742 --> 00:06:35,367
+its time.
+
+83
+00:06:35,367 --> 00:06:40,014
+The line grows when arrivals exceed
+departures. It shrinks when departures
+
+84
+00:06:40,014 --> 00:06:44,662
+exceed arrivals. And if those amounts balance
+while the line is
+
+85
+00:06:44,662 --> 00:06:49,310
+already long, the line can remain long. a
+steady queue does
+
+86
+00:06:49,310 --> 00:06:53,957
+not mean zero delay. Watch the height stop
+growing while the
+
+87
+00:06:53,957 --> 00:06:58,605
+green packets still wait behind a large amount
+of blue data.
+
+88
+00:06:58,605 --> 00:07:03,252
+The problem can persist without an endlessly
+rising graph or an
+
+89
+00:07:03,252 --> 00:07:07,900
+ever-increasing memory requirement.
+
+90
+00:07:07,900 --> 00:07:12,467
+Compare two bursts. In the first, a short rush
+creates a
+
+91
+00:07:12,467 --> 00:07:17,033
+queue, then quiet time lets it drain. Later
+interactive traffic finds
+
+92
+00:07:17,033 --> 00:07:21,600
+an empty path again. In the second, new data
+keeps replacing
+
+93
+00:07:21,600 --> 00:07:26,167
+what leaves, maintaining the queue. Both
+pictures contain buffering, but their
+
+94
+00:07:26,167 --> 00:07:30,733
+delay experience is different. The goal is not
+to declare every
+
+95
+00:07:30,733 --> 00:07:35,300
+queued packet a failure. It is to distinguish
+a temporary cushion
+
+96
+00:07:35,300 --> 00:07:39,867
+for uneven arrivals from a standing line that
+repeatedly delays useful
+
+97
+00:07:39,867 --> 00:07:44,433
+interactions.
+
+98
+00:07:44,433 --> 00:07:49,167
+Eventually, a finite buffer can fill. A new
+arrival may then
+
+99
+00:07:49,167 --> 00:07:53,900
+be discarded instead of joining the line. More
+buffer space might
+
+100
+00:07:53,900 --> 00:07:58,633
+postpone that moment, but it can also allow a
+larger standing
+
+101
+00:07:58,633 --> 00:08:03,367
+delay before anything is dropped. Loss and
+delay are different outcomes,
+
+102
+00:08:03,367 --> 00:08:08,100
+and neither should be hidden by looking at
+only one meter.
+
+103
+00:08:08,100 --> 00:08:12,833
+Our model is deliberately simple; real
+equipment can manage queues in
+
+104
+00:08:12,833 --> 00:08:17,567
+more sophisticated ways. The essential issue
+remains the amount kept waiting
+
+105
+00:08:17,567 --> 00:08:22,300
+at a constrained exit.
+
+106
+00:08:22,300 --> 00:08:27,200
+Keep the same outgoing rate, but compare a
+long standing queue
+
+107
+00:08:27,200 --> 00:08:32,100
+with a shorter controlled queue. Useful
+traffic still crosses the link,
+
+108
+00:08:32,100 --> 00:08:37,000
+while the green packet spends less time
+waiting behind old data.
+
+109
+00:08:37,000 --> 00:08:41,900
+The important improvement is visible before
+any product name or configuration
+
+110
+00:08:41,900 --> 00:08:46,800
+screen appears: reduce persistent queueing
+while using the connection well. Real
+
+111
+00:08:46,800 --> 00:08:51,700
+mechanisms have trade-offs, and an empty
+buffer is not a universal
+
+112
+00:08:51,700 --> 00:08:56,600
+goal. We are identifying the behavior a
+solution should improve, rather
+
+113
+00:08:56,600 --> 00:09:01,500
+than promising one setting fixes every
+network.
+
+114
+00:09:01,500 --> 00:09:06,179
+Return to the fast download and the late
+interaction. There was
+
+115
+00:09:06,179 --> 00:09:10,858
+no contradiction. The connection moved many
+bits each second, while our
+
+116
+00:09:10,858 --> 00:09:15,538
+small packet waited behind bits that arrived
+first. Bufferbloat describes that
+
+117
+00:09:15,538 --> 00:09:20,217
+excessive queueing delay under load. It is one
+explanation for lag,
+
+118
+00:09:20,217 --> 00:09:24,896
+not a diagnosis of every slow connection. The
+useful question has
+
+119
+00:09:24,896 --> 00:09:29,575
+changed: instead of asking only how wide the
+exit is, ask
+
+120
+00:09:29,575 --> 00:09:34,254
+how much data stands in front of the packet
+you care
+
+121
+00:09:34,254 --> 00:09:38,933
+about right now.

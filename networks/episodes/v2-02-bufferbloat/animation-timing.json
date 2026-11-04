@@ -1,0 +1,119 @@
+{
+  "fps": 30.0,
+  "sections": [
+    {
+      "name": "The speed-test paradox",
+      "animation_end_frame": 385,
+      "section_seconds": 36.533,
+      "visual_seconds": 12.42,
+      "visual_fraction": 0.34
+    },
+    {
+      "name": "One shared exit",
+      "animation_end_frame": 1590,
+      "section_seconds": 37.867,
+      "visual_seconds": 16.08,
+      "visual_fraction": 0.425
+    },
+    {
+      "name": "The exit has a rhythm",
+      "animation_end_frame": 2745,
+      "section_seconds": 35.667,
+      "visual_seconds": 16.7,
+      "visual_fraction": 0.468
+    },
+    {
+      "name": "An empty queue feels quick",
+      "animation_end_frame": 3788,
+      "section_seconds": 31.667,
+      "visual_seconds": 15.8,
+      "visual_fraction": 0.499
+    },
+    {
+      "name": "A download builds a line",
+      "animation_end_frame": 4627,
+      "section_seconds": 37.0,
+      "visual_seconds": 12.1,
+      "visual_fraction": 0.327
+    },
+    {
+      "name": "The small packet gets trapped",
+      "animation_end_frame": 5804,
+      "section_seconds": 37.433,
+      "visual_seconds": 14.32,
+      "visual_fraction": 0.383
+    },
+    {
+      "name": "More storage is not more speed",
+      "animation_end_frame": 6815,
+      "section_seconds": 35.667,
+      "visual_seconds": 10.6,
+      "visual_fraction": 0.297
+    },
+    {
+      "name": "Turn the line into a quantity",
+      "animation_end_frame": 7754,
+      "section_seconds": 36.1,
+      "visual_seconds": 6.22,
+      "visual_fraction": 0.172
+    },
+    {
+      "name": "Bytes and bits must agree",
+      "animation_end_frame": 8887,
+      "section_seconds": 34.767,
+      "visual_seconds": 7.9,
+      "visual_fraction": 0.227
+    },
+    {
+      "name": "Four hundred milliseconds of waiting",
+      "animation_end_frame": 10367,
+      "section_seconds": 35.667,
+      "visual_seconds": 22.46,
+      "visual_fraction": 0.63
+    },
+    {
+      "name": "The round trip has other parts",
+      "animation_end_frame": 10985,
+      "section_seconds": 37.0,
+      "visual_seconds": 7.4,
+      "visual_fraction": 0.2
+    },
+    {
+      "name": "Watch arrivals and departures",
+      "animation_end_frame": 12331,
+      "section_seconds": 32.533,
+      "visual_seconds": 15.26,
+      "visual_fraction": 0.469
+    },
+    {
+      "name": "A burst can be harmless",
+      "animation_end_frame": 13304,
+      "section_seconds": 36.533,
+      "visual_seconds": 15.15,
+      "visual_fraction": 0.415
+    },
+    {
+      "name": "A full queue can also drop",
+      "animation_end_frame": 14201,
+      "section_seconds": 37.867,
+      "visual_seconds": 8.54,
+      "visual_fraction": 0.226
+    },
+    {
+      "name": "What would a better picture look like?",
+      "animation_end_frame": 15576,
+      "section_seconds": 39.2,
+      "visual_seconds": 16.5,
+      "visual_fraction": 0.421
+    },
+    {
+      "name": "Answer the opening puzzle",
+      "animation_end_frame": 16608,
+      "section_seconds": 37.433,
+      "visual_seconds": 11.7,
+      "visual_fraction": 0.313
+    }
+  ],
+  "duration": 578.9333333333333,
+  "edition": "focused-v2"
+}

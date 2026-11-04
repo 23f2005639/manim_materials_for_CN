@@ -1,0 +1,553 @@
+1
+00:00:00,000 --> 00:00:04,648
+Your connection says online. A download is
+still moving. Yet one
+
+2
+00:00:04,648 --> 00:00:09,295
+app refuses to open. That sounds impossible
+until you separate two
+
+3
+00:00:09,295 --> 00:00:13,943
+questions: can your computer reach the
+network, and does it know
+
+4
+00:00:13,943 --> 00:00:18,590
+where this service lives? The second question
+belongs to DNS. Let's
+
+5
+00:00:18,590 --> 00:00:23,238
+follow one name through a small imagined
+network, then break just
+
+6
+00:00:23,238 --> 00:00:27,886
+the naming part. By the end, an apparently
+contradictory failure will
+
+7
+00:00:27,886 --> 00:00:32,533
+make perfect sense.
+
+8
+00:00:32,533 --> 00:00:37,310
+We want photos.orbit.example. That name is
+convenient for a person, but
+
+9
+00:00:37,310 --> 00:00:42,086
+the network needs an address. Imagine a
+contact name and its
+
+10
+00:00:42,086 --> 00:00:46,862
+phone number: changing the number doesn't
+require changing what you call
+
+11
+00:00:46,862 --> 00:00:51,638
+the person. DNS provides a structured way to
+find information associated
+
+12
+00:00:51,638 --> 00:00:56,414
+with a name. Our made-up domain and addresses
+are teaching examples.
+
+13
+00:00:56,414 --> 00:01:01,190
+The blue label is the question; the green
+address is the
+
+14
+00:01:01,190 --> 00:01:05,967
+answer we hope to receive.
+
+15
+00:01:05,967 --> 00:01:10,805
+The dots have a job. Read the name from the
+right:
+
+16
+00:01:10,805 --> 00:01:15,643
+the root, example, orbit, then photos. Each
+level belongs beneath a
+
+17
+00:01:15,643 --> 00:01:20,481
+larger part of the naming tree. This
+organization lets responsibility be
+
+18
+00:01:20,481 --> 00:01:25,319
+divided. One organization can manage its own
+branch without maintaining every
+
+19
+00:01:25,319 --> 00:01:30,157
+other branch. Watch the address-like string
+become a tree. We haven't
+
+20
+00:01:30,157 --> 00:01:34,995
+located a machine yet; we've uncovered the
+structure that will tell
+
+21
+00:01:34,995 --> 00:01:39,833
+our search where to go next.
+
+22
+00:01:39,833 --> 00:01:44,610
+Your computer usually asks a recursive
+resolver to do the search.
+
+23
+00:01:44,610 --> 00:01:49,386
+Recursive describes the service being offered:
+please obtain an answer for
+
+24
+00:01:49,386 --> 00:01:54,162
+me. The resolver may already know something
+useful. For our first
+
+25
+00:01:54,162 --> 00:01:58,938
+pass, assume its relevant caches are empty.
+That deliberately removes the
+
+26
+00:01:58,938 --> 00:02:03,714
+shortcuts so we can see the work. The resolver
+becomes our
+
+27
+00:02:03,714 --> 00:02:08,490
+moving point of view, asking more specific
+questions while your application
+
+28
+00:02:08,490 --> 00:02:13,267
+waits for one useful result.
+
+29
+00:02:13,267 --> 00:02:18,105
+The resolver first asks a root service about
+the name. It
+
+30
+00:02:18,105 --> 00:02:22,943
+doesn't receive the final photo-server
+address. Instead, it receives a referral
+
+31
+00:02:22,943 --> 00:02:27,781
+toward the service responsible for the next
+branch. Watch the yellow
+
+32
+00:02:27,781 --> 00:02:32,619
+arrow: it points to where the resolver should
+ask next. A
+
+33
+00:02:32,619 --> 00:02:37,457
+referral is useful knowledge, even though it
+isn't the final answer.
+
+34
+00:02:37,457 --> 00:02:42,295
+Think of each step as reducing the remaining
+search, rather than
+
+35
+00:02:42,295 --> 00:02:47,133
+each server holding the entire directory.
+
+36
+00:02:47,133 --> 00:02:51,971
+The next service handles our example top-level
+branch. It directs the
+
+37
+00:02:51,971 --> 00:02:56,810
+resolver toward the authoritative servers for
+orbit.example. The search is getting
+
+38
+00:02:56,810 --> 00:03:01,648
+narrower. Notice who is doing the asking: the
+resolver contacts these
+
+39
+00:03:01,648 --> 00:03:06,486
+services, rather than your browser personally
+visiting every box. The drawing
+
+40
+00:03:06,486 --> 00:03:11,324
+shows logical roles, not one special physical
+computer per role. Real
+
+41
+00:03:11,324 --> 00:03:16,162
+DNS infrastructure can distribute each role
+across many machines and locations
+
+42
+00:03:16,162 --> 00:03:21,000
+while preserving this hierarchy of
+responsibility.
+
+43
+00:03:21,000 --> 00:03:25,905
+Now the resolver reaches an authoritative
+server for our imagined zone.
+
+44
+00:03:25,905 --> 00:03:30,810
+This is where the relevant record is
+maintained. In our example,
+
+45
+00:03:30,810 --> 00:03:35,714
+the answer associates the photos name with
+192.0.2.10. The green address
+
+46
+00:03:35,714 --> 00:03:40,619
+finally appears. It's tempting to call every
+earlier server unhelpful because
+
+47
+00:03:40,619 --> 00:03:45,524
+it didn't know this number. But their
+referrals made this last
+
+48
+00:03:45,524 --> 00:03:50,429
+step possible. DNS scales by sharing
+responsibility and directions, instead of
+
+49
+00:03:50,429 --> 00:03:55,333
+requiring every participant to know every
+answer.
+
+50
+00:03:55,333 --> 00:04:00,171
+The resolver returns the address to your
+computer. Keep the jobs
+
+51
+00:04:00,171 --> 00:04:05,010
+separate: finding this address doesn't
+download the photos, prove the application
+
+52
+00:04:05,010 --> 00:04:09,848
+is healthy, or promise that the destination
+will respond. It supplies
+
+53
+00:04:09,848 --> 00:04:14,686
+information the application needs for its next
+action. Our story stops
+
+54
+00:04:14,686 --> 00:04:19,524
+at that boundary. The original blue question
+has become a green
+
+55
+00:04:19,524 --> 00:04:24,362
+result, and the rest of the network can now be
+used
+
+56
+00:04:24,362 --> 00:04:29,200
+with a specific destination in mind.
+
+57
+00:04:29,200 --> 00:04:34,229
+Let's attach clocks to the lookup. Suppose the
+local resolver exchange
+
+58
+00:04:34,229 --> 00:04:39,257
+takes two milliseconds, and the three upstream
+round trips take twenty,
+
+59
+00:04:39,257 --> 00:04:44,286
+thirty, and forty milliseconds. These are
+illustrative values, not Internet constants.
+
+60
+00:04:44,286 --> 00:04:49,314
+Since each referral tells us where to ask
+next, these particular
+
+61
+00:04:49,314 --> 00:04:54,343
+steps happen in sequence. Add the waits: two
+plus twenty plus
+
+62
+00:04:54,343 --> 00:04:59,371
+thirty plus forty equals ninety-two
+milliseconds. The equation simply records the
+
+63
+00:04:59,371 --> 00:05:04,400
+journey we just watched, one dependent step
+after another.
+
+64
+00:05:04,400 --> 00:05:09,305
+Now ask the same question again while the
+answer is cached.
+
+65
+00:05:09,305 --> 00:05:14,210
+The resolver can reply without repeating our
+three upstream exchanges. In
+
+66
+00:05:14,210 --> 00:05:19,114
+this simplified example, only the two-
+millisecond local exchange remains. Ninety-two
+divided
+
+67
+00:05:19,114 --> 00:05:24,019
+by two is forty-six: this lookup is forty-six
+times quicker. That
+
+68
+00:05:24,019 --> 00:05:28,924
+doesn't mean the entire application becomes
+forty-six times faster. We measured
+
+69
+00:05:28,924 --> 00:05:33,829
+one task. Still, reusing a valid answer can
+remove a surprising
+
+70
+00:05:33,829 --> 00:05:38,733
+amount of repeated work from that task.
+
+71
+00:05:38,733 --> 00:05:43,638
+A saved answer needs an expiration rule. Our
+record's time to
+
+72
+00:05:43,638 --> 00:05:48,543
+live, or TTL, is sixty seconds when this cache
+receives it.
+
+73
+00:05:48,543 --> 00:05:53,448
+Watch the countdown shrink as the answer gets
+older. Reusing it
+
+74
+00:05:53,448 --> 00:05:58,352
+doesn't restart the clock. If every hit
+renewed its lifetime indefinitely,
+
+75
+00:05:58,352 --> 00:06:03,257
+a popular old address could remain around
+forever. The TTL limits
+
+76
+00:06:03,257 --> 00:06:08,162
+how long this cached copy may normally be
+reused before the
+
+77
+00:06:08,162 --> 00:06:13,067
+resolver needs fresh information for another
+query.
+
+78
+00:06:13,067 --> 00:06:18,033
+Now the authoritative record changes to
+203.0.113.20. Does every cache change
+
+79
+00:06:18,033 --> 00:06:23,000
+instantly? Predict the next reply before the
+colors move. Our cache
+
+80
+00:06:23,000 --> 00:06:27,967
+still holds the earlier answer with thirty
+seconds remaining, so it
+
+81
+00:06:27,967 --> 00:06:32,933
+may keep returning that old address until its
+permitted lifetime ends.
+
+82
+00:06:32,933 --> 00:06:37,900
+The authority and cache can temporarily
+disagree without either ignoring its
+
+83
+00:06:37,900 --> 00:06:42,867
+rules. Changing an authoritative record and
+replacing every cached copy are
+
+84
+00:06:42,867 --> 00:06:47,833
+different events, separated here by a visible
+countdown.
+
+85
+00:06:47,833 --> 00:06:52,862
+At zero, the saved answer is no longer fresh.
+For our
+
+86
+00:06:52,862 --> 00:06:57,890
+normal example, the next query triggers a new
+lookup and retrieves
+
+87
+00:06:57,890 --> 00:07:02,919
+the changed record. We replay the referrals to
+make the refresh
+
+88
+00:07:02,919 --> 00:07:07,948
+visible; real resolvers may retain other
+cached information and take a
+
+89
+00:07:07,948 --> 00:07:12,976
+shorter route. The important change is the
+answer's freshness. The cache
+
+90
+00:07:12,976 --> 00:07:18,005
+wasn't useless because it eventually expired.
+Its temporary nature is what
+
+91
+00:07:18,005 --> 00:07:23,033
+lets yesterday's useful shortcut give way to
+today's information.
+
+92
+00:07:23,033 --> 00:07:27,938
+Return to the opening puzzle. The network path
+is available, but
+
+93
+00:07:27,938 --> 00:07:32,843
+this resolver cannot obtain the answer it
+needs. The app may
+
+94
+00:07:32,843 --> 00:07:37,748
+fail before it even knows a destination
+address. Another task can
+
+95
+00:07:37,748 --> 00:07:42,652
+continue because it already has a destination
+or a still-useful cached
+
+96
+00:07:42,652 --> 00:07:47,557
+answer. That's how online and unable to open
+this service can
+
+97
+00:07:47,557 --> 00:07:52,462
+coexist. Real outages can have additional
+causes; here, we deliberately broke
+
+98
+00:07:52,462 --> 00:07:57,367
+only name resolution to isolate its
+contribution.
+
+99
+00:07:57,367 --> 00:08:02,333
+Three ideas now fit together. Hierarchy
+divides responsibility, referrals lead the
+
+100
+00:08:02,333 --> 00:08:07,300
+search, and caches save work for a limited
+time. Remove hierarchy
+
+101
+00:08:07,300 --> 00:08:12,267
+and the directory becomes harder to
+distribute. Remove caching and repeat
+
+102
+00:08:12,267 --> 00:08:17,233
+questions repeat the journey. Remove
+expiration and changes become harder to
+
+103
+00:08:17,233 --> 00:08:22,200
+discover reliably. Follow the colored answer
+rather than memorizing the box
+
+104
+00:08:22,200 --> 00:08:27,167
+names. Its movement, reuse, and replacement
+explain the mechanism much more
+
+105
+00:08:27,167 --> 00:08:32,133
+clearly than calling DNS a mysterious Internet
+switch.
+
+106
+00:08:32,133 --> 00:08:37,229
+A working connection and a successful name
+lookup are separate requirements.
+
+107
+00:08:37,229 --> 00:08:42,324
+DNS turns a readable question into useful
+location information through a
+
+108
+00:08:42,324 --> 00:08:47,419
+hierarchy, a resolver, and temporary memory.
+The small clocks explain why
+
+109
+00:08:47,419 --> 00:08:52,514
+that answer can be fast, slow, or briefly old.
+So when
+
+110
+00:08:52,514 --> 00:08:57,610
+one app stops while another keeps working, the
+situation isn't logically
+
+111
+00:08:57,610 --> 00:09:02,705
+impossible. One journey may be missing a piece
+that another already
+
+112
+00:09:02,705 --> 00:09:07,800
+has. The connection is alive; the directions
+may be missing.

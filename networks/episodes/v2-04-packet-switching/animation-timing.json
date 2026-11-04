@@ -1,0 +1,119 @@
+{
+  "fps": 30.0,
+  "sections": [
+    {
+      "name": "The elephant and the message",
+      "animation_end_frame": 207,
+      "section_seconds": 36.533,
+      "visual_seconds": 6.5,
+      "visual_fraction": 0.178
+    },
+    {
+      "name": "Give each piece an identity",
+      "animation_end_frame": 1338,
+      "section_seconds": 36.1,
+      "visual_seconds": 7.65,
+      "visual_fraction": 0.212
+    },
+    {
+      "name": "Sharing happens between packets",
+      "animation_end_frame": 2611,
+      "section_seconds": 37.433,
+      "visual_seconds": 14.0,
+      "visual_fraction": 0.374
+    },
+    {
+      "name": "Each packet still occupies time",
+      "animation_end_frame": 3494,
+      "section_seconds": 37.433,
+      "visual_seconds": 6.0,
+      "visual_fraction": 0.16
+    },
+    {
+      "name": "Build length divided by rate",
+      "animation_end_frame": 4620,
+      "section_seconds": 33.433,
+      "visual_seconds": 6.1,
+      "visual_fraction": 0.182
+    },
+    {
+      "name": "Store the packet before forwarding",
+      "animation_end_frame": 5800,
+      "section_seconds": 36.533,
+      "visual_seconds": 12.0,
+      "visual_fraction": 0.328
+    },
+    {
+      "name": "One packet crosses three links",
+      "animation_end_frame": 6712,
+      "section_seconds": 36.533,
+      "visual_seconds": 5.85,
+      "visual_fraction": 0.16
+    },
+    {
+      "name": "Can the empty links work?",
+      "animation_end_frame": 7969,
+      "section_seconds": 37.867,
+      "visual_seconds": 11.25,
+      "visual_fraction": 0.297
+    },
+    {
+      "name": "Fill the pipeline together",
+      "animation_end_frame": 8993,
+      "section_seconds": 35.2,
+      "visual_seconds": 7.5,
+      "visual_fraction": 0.213
+    },
+    {
+      "name": "Count six slots instead of twelve",
+      "animation_end_frame": 10157,
+      "section_seconds": 39.2,
+      "visual_seconds": 11.1,
+      "visual_fraction": 0.283
+    },
+    {
+      "name": "Read the formula as a picture",
+      "animation_end_frame": 11144,
+      "section_seconds": 33.867,
+      "visual_seconds": 4.8,
+      "visual_fraction": 0.142
+    },
+    {
+      "name": "Traffic does not arrive on schedule",
+      "animation_end_frame": 12362,
+      "section_seconds": 37.0,
+      "visual_seconds": 11.55,
+      "visual_fraction": 0.312
+    },
+    {
+      "name": "A queue is the waiting part",
+      "animation_end_frame": 13330,
+      "section_seconds": 37.433,
+      "visual_seconds": 6.8,
+      "visual_fraction": 0.182
+    },
+    {
+      "name": "Boundaries have a cost",
+      "animation_end_frame": 14393,
+      "section_seconds": 36.533,
+      "visual_seconds": 4.8,
+      "visual_fraction": 0.131
+    },
+    {
+      "name": "Put the useful pieces back together",
+      "animation_end_frame": 15796,
+      "section_seconds": 35.2,
+      "visual_seconds": 15.05,
+      "visual_fraction": 0.428
+    },
+    {
+      "name": "Answer the opening puzzle",
+      "animation_end_frame": 16628,
+      "section_seconds": 38.333,
+      "visual_seconds": 7.55,
+      "visual_fraction": 0.197
+    }
+  ],
+  "duration": 584.6333333333333,
+  "edition": "focused-v2"
+}

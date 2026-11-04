@@ -1,0 +1,119 @@
+{
+  "fps": 30.0,
+  "sections": [
+    {
+      "name": "A crowd inside one strand",
+      "animation_end_frame": 231,
+      "section_seconds": 34.333,
+      "visual_seconds": 7.3,
+      "visual_fraction": 0.213
+    },
+    {
+      "name": "Keep four conversations separate",
+      "animation_end_frame": 1408,
+      "section_seconds": 35.2,
+      "visual_seconds": 12.2,
+      "visual_fraction": 0.347
+    },
+    {
+      "name": "Measure the spacing of crests",
+      "animation_end_frame": 2362,
+      "section_seconds": 33.867,
+      "visual_seconds": 8.8,
+      "visual_fraction": 0.26
+    },
+    {
+      "name": "Put data onto the light",
+      "animation_end_frame": 3345,
+      "section_seconds": 33.0,
+      "visual_seconds": 7.7,
+      "visual_fraction": 0.233
+    },
+    {
+      "name": "Why identity matters",
+      "animation_end_frame": 4251,
+      "section_seconds": 34.333,
+      "visual_seconds": 4.9,
+      "visual_fraction": 0.143
+    },
+    {
+      "name": "Give each channel a wavelength",
+      "animation_end_frame": 5305,
+      "section_seconds": 34.333,
+      "visual_seconds": 5.7,
+      "visual_fraction": 0.166
+    },
+    {
+      "name": "Combine at the multiplexer",
+      "animation_end_frame": 6695,
+      "section_seconds": 33.433,
+      "visual_seconds": 17.7,
+      "visual_fraction": 0.529
+    },
+    {
+      "name": "Travel together",
+      "animation_end_frame": 7407,
+      "section_seconds": 33.867,
+      "visual_seconds": 8.0,
+      "visual_fraction": 0.236
+    },
+    {
+      "name": "Separate at the destination",
+      "animation_end_frame": 8714,
+      "section_seconds": 31.667,
+      "visual_seconds": 17.7,
+      "visual_fraction": 0.559
+    },
+    {
+      "name": "Try selecting only one channel",
+      "animation_end_frame": 9433,
+      "section_seconds": 32.533,
+      "visual_seconds": 10.0,
+      "visual_fraction": 0.307
+    },
+    {
+      "name": "Add the channel rates",
+      "animation_end_frame": 10379,
+      "section_seconds": 32.533,
+      "visual_seconds": 9.0,
+      "visual_fraction": 0.277
+    },
+    {
+      "name": "Keep the units honest",
+      "animation_end_frame": 11205,
+      "section_seconds": 33.867,
+      "visual_seconds": 4.0,
+      "visual_fraction": 0.118
+    },
+    {
+      "name": "More channels need more room",
+      "animation_end_frame": 12329,
+      "section_seconds": 35.667,
+      "visual_seconds": 7.6,
+      "visual_fraction": 0.213
+    },
+    {
+      "name": "Unequal channels still add",
+      "animation_end_frame": 13441,
+      "section_seconds": 33.867,
+      "visual_seconds": 9.0,
+      "visual_fraction": 0.266
+    },
+    {
+      "name": "Connect the picture to research",
+      "animation_end_frame": 14355,
+      "section_seconds": 34.333,
+      "visual_seconds": 5.6,
+      "visual_fraction": 0.163
+    },
+    {
+      "name": "Return to the single strand",
+      "animation_end_frame": 15769,
+      "section_seconds": 34.767,
+      "visual_seconds": 18.4,
+      "visual_fraction": 0.529
+    }
+  ],
+  "duration": 541.6,
+  "edition": "focused-v2"
+}

@@ -1,0 +1,19 @@
+{
+  "episode": "04",
+  "title": "Why the Internet Breaks Everything Into Pieces",
+  "duration_seconds": 584.666016,
+  "resolution": "1920x1080",
+  "fps": 30,
+  "codec": "h264",
+  "sections": 16,
+  "section_clips_verified": 16,
+  "narration_words": 1248,
+  "automated_media_checks": "passed",
+  "edition": "focused-v2",
+  "voiceover": "User records their own voice",
+  "motion": {
+    "native_changing_frame_fraction": 0.2488,
+    "minimum_section_visual_fraction": 0.131,
+    "longest_final_hold_seconds": 31.333000000000002
+  }
+}

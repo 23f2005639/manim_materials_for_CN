@@ -1,0 +1,758 @@
+{
+  "fps": 30,
+  "frames": 17369,
+  "sections": [
+    {
+      "name": "The speed-test paradox",
+      "frame": 0,
+      "type": "default.normal",
+      "notes": "Your download counter is flying. The connection looks healthy. Then a tiny action in a game takes forever to reach the other side. How can a fast connection also feel slow? Watch the small green packet. It contains almost nothing compared with the blue transfer, but it has arrived at exactly the wrong moment. The mystery is not how fast bits can leave. It is how long this particular packet must wait before they can leave at all.",
+      "id": "02-01",
+      "chapter": "The puzzle",
+      "animation_end_frame": 385
+    },
+    {
+      "name": "One shared exit",
+      "frame": 1096,
+      "type": "default.normal",
+      "notes": "Here is our entire model: arrivals on the left, a waiting area in the middle, and one outgoing link on the right. Everything that needs that exit must share it. Blue packets carry a large transfer; green packets represent a small interactive exchange. Their colors help us follow them, but this queue gives neither color special treatment. For now, the rule is first in, first out. Earlier arrivals stand ahead of later arrivals, regardless of how urgently someone wants a reply.",
+      "id": "02-02",
+      "chapter": "The puzzle",
+      "animation_end_frame": 1590
+    },
+    {
+      "name": "The exit has a rhythm",
+      "frame": 2232,
+      "type": "default.normal",
+      "notes": "Watch the departure marks. The outgoing link can put only a certain number of bits onto the wire each second. Even when several packets arrive together, they cannot all occupy the same transmission time. They leave in a sequence. The waiting area absorbs that difference between arrivals and departures. This is useful: a short burst does not have to disappear simply because its packets arrived close together. Persistent waiting is the part we need to understand.",
+      "id": "02-03",
+      "chapter": "See the mechanism",
+      "animation_end_frame": 2745
+    },
+    {
+      "name": "An empty queue feels quick",
+      "frame": 3302,
+      "type": "default.normal",
+      "notes": "Start with very little traffic. The green packet arrives, finds no blue line ahead of it, and moves toward the exit almost immediately. The complete exchange still takes time: signals travel, equipment processes data, and the other endpoint responds. But our queue adds almost no extra delay in this case. We are about to change the amount waiting, while leaving the outgoing link itself exactly the same.",
+      "id": "02-04",
+      "chapter": "See the mechanism",
+      "animation_end_frame": 3788
+    },
+    {
+      "name": "A download builds a line",
+      "frame": 4252,
+      "type": "default.normal",
+      "notes": "Now bring in the bulk transfer. For a while, arrivals outrun the exit. Blue packets accumulate faster than the link can remove them, so the line grows backward. The outgoing link stays busy throughout. A throughput display can therefore look impressive even as waiting gets worse. These measurements differ: throughput counts how much data gets through over time; delay measures how long an individual piece takes. A busy exit can produce plenty of throughput and plenty of delay together.",
+      "id": "02-05",
+      "chapter": "See the mechanism",
+      "animation_end_frame": 4627
+    },
+    {
+      "name": "The small packet gets trapped",
+      "frame": 5362,
+      "type": "default.normal",
+      "notes": "Here comes the green packet again. Predict what happens before it reaches the line. Its small size will make its own transmission brief, but that does not move it past earlier packets. In our first-in, first-out queue, it waits behind all the blue data already present. The green packet has not become larger. The physical route has not become longer. Yet the interaction now feels late because a new kind of distance has appeared: a distance measured in waiting bits.",
+      "id": "02-06",
+      "chapter": "See the mechanism",
+      "animation_end_frame": 5804
+    },
+    {
+      "name": "More storage is not more speed",
+      "frame": 6485,
+      "type": "default.normal",
+      "notes": "Suppose we make the waiting area twice as large. Does the green packet escape sooner? The larger buffer can hold more arrivals, but the outgoing link still removes bits at the same rate. Under sustained load, the longer space can become a longer line. That is the trap behind bufferbloat: oversized or poorly managed queues can hold a great deal of delay. Extra storage helps absorb bursts, but storage alone cannot increase the exit's transmission capacity.",
+      "id": "02-07",
+      "chapter": "See the mechanism",
+      "animation_end_frame": 6815
+    },
+    {
+      "name": "Turn the line into a quantity",
+      "frame": 7555,
+      "type": "default.normal",
+      "notes": "Let's replace our drawn packets with an amount of data. Call the bits waiting ahead of the green packet Q. Call the outgoing bit rate R. Each second, the exit removes approximately R of those bits, assuming it remains available to this queue. So how many seconds clear Q? Divide the amount to be removed by the amount removed each second. The picture is already doing the division; the equation simply gives that movement a compact name.",
+      "id": "02-08",
+      "chapter": "Understand the mathematics",
+      "animation_end_frame": 7754
+    },
+    {
+      "name": "Bytes and bits must agree",
+      "frame": 8638,
+      "type": "default.normal",
+      "notes": "Our example has one megabyte waiting ahead of the green packet. Here mega means one million, so that is one million bytes. The link rate, however, is measured in bits per second. Eight bits make a byte, which turns our waiting amount into eight million bits. Dividing a byte count directly by a bit rate would quietly make the answer eight times too small. The units tell us which quantities are allowed to meet.",
+      "id": "02-09",
+      "chapter": "Understand the mathematics",
+      "animation_end_frame": 8887
+    },
+    {
+      "name": "Four hundred milliseconds of waiting",
+      "frame": 9681,
+      "type": "default.normal",
+      "notes": "The exit runs at twenty million bits per second. Eight million waiting bits divided by twenty million bits per second gives zero point four seconds: four hundred milliseconds. Notice what disappeared in the division: bits cancel, leaving seconds. That is the time needed to clear the data ahead, before our green packet gets its turn. It is an illustrative queueing calculation, not a claim that every twenty-megabit connection always adds four hundred milliseconds to every interaction.",
+      "id": "02-10",
+      "chapter": "Understand the mathematics",
+      "animation_end_frame": 10367
+    },
+    {
+      "name": "The round trip has other parts",
+      "frame": 10751,
+      "type": "default.normal",
+      "notes": "Now place that waiting beside the rest of the journey. Propagation, processing, transmission, and any other queues still contribute. A request and its response can also face different conditions in different directions. Our four hundred milliseconds is one added waiting component, not a complete prediction of a ping measurement. This is why a speed-test result cannot describe the whole experience. It tells us something useful about transfer capacity, but it does not reveal where every packet spends its time.",
+      "id": "02-11",
+      "chapter": "Understand the mathematics",
+      "animation_end_frame": 10985
+    },
+    {
+      "name": "Watch arrivals and departures",
+      "frame": 11861,
+      "type": "default.normal",
+      "notes": "The line grows when arrivals exceed departures. It shrinks when departures exceed arrivals. And if those amounts balance while the line is already long, the line can remain long. a steady queue does not mean zero delay. Watch the height stop growing while the green packets still wait behind a large amount of blue data. The problem can persist without an endlessly rising graph or an ever-increasing memory requirement.",
+      "id": "02-12",
+      "chapter": "Test the idea",
+      "animation_end_frame": 12331
+    },
+    {
+      "name": "A burst can be harmless",
+      "frame": 12837,
+      "type": "default.normal",
+      "notes": "Compare two bursts. In the first, a short rush creates a queue, then quiet time lets it drain. Later interactive traffic finds an empty path again. In the second, new data keeps replacing what leaves, maintaining the queue. Both pictures contain buffering, but their delay experience is different. The goal is not to declare every queued packet a failure. It is to distinguish a temporary cushion for uneven arrivals from a standing line that repeatedly delays useful interactions.",
+      "id": "02-13",
+      "chapter": "Test the idea",
+      "animation_end_frame": 13304
+    },
+    {
+      "name": "A full queue can also drop",
+      "frame": 13933,
+      "type": "default.normal",
+      "notes": "Eventually, a finite buffer can fill. A new arrival may then be discarded instead of joining the line. More buffer space might postpone that moment, but it can also allow a larger standing delay before anything is dropped. Loss and delay are different outcomes, and neither should be hidden by looking at only one meter. Our model is deliberately simple; real equipment can manage queues in more sophisticated ways. The essential issue remains the amount kept waiting at a constrained exit.",
+      "id": "02-14",
+      "chapter": "Test the idea",
+      "animation_end_frame": 14201
+    },
+    {
+      "name": "What would a better picture look like?",
+      "frame": 15069,
+      "type": "default.normal",
+      "notes": "Keep the same outgoing rate, but compare a long standing queue with a shorter controlled queue. Useful traffic still crosses the link, while the green packet spends less time waiting behind old data. The important improvement is visible before any product name or configuration screen appears: reduce persistent queueing while using the connection well. Real mechanisms have trade-offs, and an empty buffer is not a universal goal. We are identifying the behavior a solution should improve, rather than promising one setting fixes every network.",
+      "id": "02-15",
+      "chapter": "Test the idea",
+      "animation_end_frame": 15576
+    },
+    {
+      "name": "Answer the opening puzzle",
+      "frame": 16245,
+      "type": "default.normal",
+      "notes": "Return to the fast download and the late interaction. There was no contradiction. The connection moved many bits each second, while our small packet waited behind bits that arrived first. Bufferbloat describes that excessive queueing delay under load. It is one explanation for lag, not a diagnosis of every slow connection. The useful question has changed: instead of asking only how wide the exit is, ask how much data stands in front of the packet you care about right now.",
+      "id": "02-16",
+      "chapter": "The answer",
+      "animation_end_frame": 16608
+    }
+  ],
+  "captions": [
+    [
+      0.0,
+      4.566666666666666,
+      "Your download counter is flying. The\nconnection looks healthy. Then a"
+    ],
+    [
+      4.566666666666666,
+      9.133333333333333,
+      "tiny action in a game takes forever to reach\nthe other"
+    ],
+    [
+      9.133333333333333,
+      13.7,
+      "side. How can a fast connection also feel\nslow? Watch the"
+    ],
+    [
+      13.7,
+      18.266666666666666,
+      "small green packet. It contains almost nothing\ncompared with the blue"
+    ],
+    [
+      18.266666666666666,
+      22.833333333333332,
+      "transfer, but it has arrived at exactly the\nwrong moment. The"
+    ],
+    [
+      22.833333333333332,
+      27.4,
+      "mystery is not how fast bits can leave. It is\nhow"
+    ],
+    [
+      27.4,
+      31.966666666666665,
+      "long this particular packet must wait before\nthey can leave at"
+    ],
+    [
+      31.966666666666665,
+      36.53333333333333,
+      "all."
+    ],
+    [
+      36.53333333333333,
+      41.266666666666666,
+      "Here is our entire model: arrivals on the\nleft, a waiting"
+    ],
+    [
+      41.266666666666666,
+      46.0,
+      "area in the middle, and one outgoing link on\nthe right."
+    ],
+    [
+      46.0,
+      50.733333333333334,
+      "Everything that needs that exit must share it.\nBlue packets carry"
+    ],
+    [
+      50.733333333333334,
+      55.46666666666667,
+      "a large transfer; green packets represent a\nsmall interactive exchange. Their"
+    ],
+    [
+      55.46666666666667,
+      60.2,
+      "colors help us follow them, but this queue\ngives neither color"
+    ],
+    [
+      60.2,
+      64.93333333333334,
+      "special treatment. For now, the rule is first\nin, first out."
+    ],
+    [
+      64.93333333333334,
+      69.66666666666667,
+      "Earlier arrivals stand ahead of later\narrivals, regardless of how urgently"
+    ],
+    [
+      69.66666666666667,
+      74.4,
+      "someone wants a reply."
+    ],
+    [
+      74.4,
+      79.4952380952381,
+      "Watch the departure marks. The outgoing link\ncan put only a"
+    ],
+    [
+      79.4952380952381,
+      84.5904761904762,
+      "certain number of bits onto the wire each\nsecond. Even when"
+    ],
+    [
+      84.5904761904762,
+      89.68571428571428,
+      "several packets arrive together, they cannot\nall occupy the same transmission"
+    ],
+    [
+      89.68571428571428,
+      94.78095238095239,
+      "time. They leave in a sequence. The waiting\narea absorbs that"
+    ],
+    [
+      94.78095238095239,
+      99.87619047619047,
+      "difference between arrivals and departures.\nThis is useful: a short burst"
+    ],
+    [
+      99.87619047619047,
+      104.97142857142856,
+      "does not have to disappear simply because its\npackets arrived close"
+    ],
+    [
+      104.97142857142856,
+      110.06666666666666,
+      "together. Persistent waiting is the part we\nneed to understand."
+    ],
+    [
+      110.06666666666666,
+      114.59047619047618,
+      "Start with very little traffic. The green\npacket arrives, finds no"
+    ],
+    [
+      114.59047619047618,
+      119.11428571428571,
+      "blue line ahead of it, and moves toward the\nexit almost"
+    ],
+    [
+      119.11428571428571,
+      123.63809523809523,
+      "immediately. The complete exchange still takes\ntime: signals travel, equipment processes"
+    ],
+    [
+      123.63809523809523,
+      128.16190476190476,
+      "data, and the other endpoint responds. But our\nqueue adds almost"
+    ],
+    [
+      128.16190476190476,
+      132.68571428571428,
+      "no extra delay in this case. We are about to\nchange"
+    ],
+    [
+      132.68571428571428,
+      137.2095238095238,
+      "the amount waiting, while leaving the outgoing\nlink itself exactly the"
+    ],
+    [
+      137.2095238095238,
+      141.73333333333332,
+      "same."
+    ],
+    [
+      141.73333333333332,
+      146.35833333333332,
+      "Now bring in the bulk transfer. For a while,\narrivals outrun"
+    ],
+    [
+      146.35833333333332,
+      150.98333333333332,
+      "the exit. Blue packets accumulate faster than\nthe link can remove"
+    ],
+    [
+      150.98333333333332,
+      155.60833333333332,
+      "them, so the line grows backward. The outgoing\nlink stays busy"
+    ],
+    [
+      155.60833333333332,
+      160.23333333333332,
+      "throughout. A throughput display can therefore\nlook impressive even as waiting"
+    ],
+    [
+      160.23333333333332,
+      164.85833333333332,
+      "gets worse. These measurements differ:\nthroughput counts how much data gets"
+    ],
+    [
+      164.85833333333332,
+      169.48333333333332,
+      "through over time; delay measures how long an\nindividual piece takes."
+    ],
+    [
+      169.48333333333332,
+      174.10833333333332,
+      "A busy exit can produce plenty of throughput\nand plenty of"
+    ],
+    [
+      174.10833333333332,
+      178.73333333333332,
+      "delay together."
+    ],
+    [
+      178.73333333333332,
+      183.4125,
+      "Here comes the green packet again. Predict\nwhat happens before it"
+    ],
+    [
+      183.4125,
+      188.09166666666664,
+      "reaches the line. Its small size will make its\nown transmission"
+    ],
+    [
+      188.09166666666664,
+      192.77083333333331,
+      "brief, but that does not move it past earlier\npackets. In"
+    ],
+    [
+      192.77083333333331,
+      197.45,
+      "our first-in, first-out queue, it waits behind\nall the blue data"
+    ],
+    [
+      197.45,
+      202.12916666666666,
+      "already present. The green packet has not\nbecome larger. The physical"
+    ],
+    [
+      202.12916666666666,
+      206.80833333333334,
+      "route has not become longer. Yet the\ninteraction now feels late"
+    ],
+    [
+      206.80833333333334,
+      211.48749999999998,
+      "because a new kind of distance has appeared: a\ndistance measured"
+    ],
+    [
+      211.48749999999998,
+      216.16666666666666,
+      "in waiting bits."
+    ],
+    [
+      216.16666666666666,
+      221.26190476190476,
+      "Suppose we make the waiting area twice as\nlarge. Does the"
+    ],
+    [
+      221.26190476190476,
+      226.35714285714286,
+      "green packet escape sooner? The larger buffer\ncan hold more arrivals,"
+    ],
+    [
+      226.35714285714286,
+      231.45238095238096,
+      "but the outgoing link still removes bits at\nthe same rate."
+    ],
+    [
+      231.45238095238096,
+      236.54761904761904,
+      "Under sustained load, the longer space can\nbecome a longer line."
+    ],
+    [
+      236.54761904761904,
+      241.64285714285714,
+      "That is the trap behind bufferbloat: oversized\nor poorly managed queues"
+    ],
+    [
+      241.64285714285714,
+      246.73809523809524,
+      "can hold a great deal of delay. Extra storage\nhelps absorb"
+    ],
+    [
+      246.73809523809524,
+      251.83333333333334,
+      "bursts, but storage alone cannot increase the\nexit's transmission capacity."
+    ],
+    [
+      251.83333333333334,
+      256.9904761904762,
+      "Let's replace our drawn packets with an amount\nof data. Call"
+    ],
+    [
+      256.9904761904762,
+      262.14761904761906,
+      "the bits waiting ahead of the green packet Q.\nCall the"
+    ],
+    [
+      262.14761904761906,
+      267.3047619047619,
+      "outgoing bit rate R. Each second, the exit\nremoves approximately R"
+    ],
+    [
+      267.3047619047619,
+      272.46190476190475,
+      "of those bits, assuming it remains available\nto this queue. So"
+    ],
+    [
+      272.46190476190475,
+      277.61904761904765,
+      "how many seconds clear Q? Divide the amount to\nbe removed"
+    ],
+    [
+      277.61904761904765,
+      282.7761904761905,
+      "by the amount removed each second. The picture\nis already doing"
+    ],
+    [
+      282.7761904761905,
+      287.93333333333334,
+      "the division; the equation simply gives that\nmovement a compact name."
+    ],
+    [
+      287.93333333333334,
+      292.9,
+      "Our example has one megabyte waiting ahead of\nthe green packet."
+    ],
+    [
+      292.9,
+      297.8666666666667,
+      "Here mega means one million, so that is one\nmillion bytes."
+    ],
+    [
+      297.8666666666667,
+      302.8333333333333,
+      "The link rate, however, is measured in bits\nper second. Eight"
+    ],
+    [
+      302.8333333333333,
+      307.8,
+      "bits make a byte, which turns our waiting\namount into eight"
+    ],
+    [
+      307.8,
+      312.76666666666665,
+      "million bits. Dividing a byte count directly\nby a bit rate"
+    ],
+    [
+      312.76666666666665,
+      317.73333333333335,
+      "would quietly make the answer eight times too\nsmall. The units"
+    ],
+    [
+      317.73333333333335,
+      322.7,
+      "tell us which quantities are allowed to meet."
+    ],
+    [
+      322.7,
+      327.79523809523806,
+      "The exit runs at twenty million bits per\nsecond. Eight million"
+    ],
+    [
+      327.79523809523806,
+      332.8904761904762,
+      "waiting bits divided by twenty million bits\nper second gives zero"
+    ],
+    [
+      332.8904761904762,
+      337.98571428571427,
+      "point four seconds: four hundred milliseconds.\nNotice what disappeared in the"
+    ],
+    [
+      337.98571428571427,
+      343.0809523809524,
+      "division: bits cancel, leaving seconds. That\nis the time needed to"
+    ],
+    [
+      343.0809523809524,
+      348.17619047619047,
+      "clear the data ahead, before our green packet\ngets its turn."
+    ],
+    [
+      348.17619047619047,
+      353.2714285714286,
+      "It is an illustrative queueing calculation,\nnot a claim that every"
+    ],
+    [
+      353.2714285714286,
+      358.3666666666667,
+      "twenty-megabit connection always adds four\nhundred milliseconds to every interaction."
+    ],
+    [
+      358.3666666666667,
+      362.9916666666667,
+      "Now place that waiting beside the rest of the\njourney. Propagation,"
+    ],
+    [
+      362.9916666666667,
+      367.6166666666667,
+      "processing, transmission, and any other queues\nstill contribute. A request and"
+    ],
+    [
+      367.6166666666667,
+      372.2416666666667,
+      "its response can also face different\nconditions in different directions. Our"
+    ],
+    [
+      372.2416666666667,
+      376.8666666666667,
+      "four hundred milliseconds is one added waiting\ncomponent, not a complete"
+    ],
+    [
+      376.8666666666667,
+      381.4916666666667,
+      "prediction of a ping measurement. This is why\na speed-test result"
+    ],
+    [
+      381.4916666666667,
+      386.1166666666667,
+      "cannot describe the whole experience. It tells\nus something useful about"
+    ],
+    [
+      386.1166666666667,
+      390.7416666666667,
+      "transfer capacity, but it does not reveal\nwhere every packet spends"
+    ],
+    [
+      390.7416666666667,
+      395.3666666666667,
+      "its time."
+    ],
+    [
+      395.3666666666667,
+      400.01428571428573,
+      "The line grows when arrivals exceed\ndepartures. It shrinks when departures"
+    ],
+    [
+      400.01428571428573,
+      404.66190476190474,
+      "exceed arrivals. And if those amounts balance\nwhile the line is"
+    ],
+    [
+      404.66190476190474,
+      409.3095238095238,
+      "already long, the line can remain long. a\nsteady queue does"
+    ],
+    [
+      409.3095238095238,
+      413.95714285714286,
+      "not mean zero delay. Watch the height stop\ngrowing while the"
+    ],
+    [
+      413.95714285714286,
+      418.6047619047619,
+      "green packets still wait behind a large amount\nof blue data."
+    ],
+    [
+      418.6047619047619,
+      423.2523809523809,
+      "The problem can persist without an endlessly\nrising graph or an"
+    ],
+    [
+      423.2523809523809,
+      427.9,
+      "ever-increasing memory requirement."
+    ],
+    [
+      427.9,
+      432.46666666666664,
+      "Compare two bursts. In the first, a short rush\ncreates a"
+    ],
+    [
+      432.46666666666664,
+      437.0333333333333,
+      "queue, then quiet time lets it drain. Later\ninteractive traffic finds"
+    ],
+    [
+      437.0333333333333,
+      441.59999999999997,
+      "an empty path again. In the second, new data\nkeeps replacing"
+    ],
+    [
+      441.59999999999997,
+      446.16666666666663,
+      "what leaves, maintaining the queue. Both\npictures contain buffering, but their"
+    ],
+    [
+      446.16666666666663,
+      450.73333333333335,
+      "delay experience is different. The goal is not\nto declare every"
+    ],
+    [
+      450.73333333333335,
+      455.3,
+      "queued packet a failure. It is to distinguish\na temporary cushion"
+    ],
+    [
+      455.3,
+      459.8666666666667,
+      "for uneven arrivals from a standing line that\nrepeatedly delays useful"
+    ],
+    [
+      459.8666666666667,
+      464.43333333333334,
+      "interactions."
+    ],
+    [
+      464.43333333333334,
+      469.1666666666667,
+      "Eventually, a finite buffer can fill. A new\narrival may then"
+    ],
+    [
+      469.1666666666667,
+      473.9,
+      "be discarded instead of joining the line. More\nbuffer space might"
+    ],
+    [
+      473.9,
+      478.6333333333333,
+      "postpone that moment, but it can also allow a\nlarger standing"
+    ],
+    [
+      478.6333333333333,
+      483.3666666666667,
+      "delay before anything is dropped. Loss and\ndelay are different outcomes,"
+    ],
+    [
+      483.3666666666667,
+      488.1,
+      "and neither should be hidden by looking at\nonly one meter."
+    ],
+    [
+      488.1,
+      492.83333333333337,
+      "Our model is deliberately simple; real\nequipment can manage queues in"
+    ],
+    [
+      492.83333333333337,
+      497.56666666666666,
+      "more sophisticated ways. The essential issue\nremains the amount kept waiting"
+    ],
+    [
+      497.56666666666666,
+      502.3,
+      "at a constrained exit."
+    ],
+    [
+      502.3,
+      507.2,
+      "Keep the same outgoing rate, but compare a\nlong standing queue"
+    ],
+    [
+      507.2,
+      512.1,
+      "with a shorter controlled queue. Useful\ntraffic still crosses the link,"
+    ],
+    [
+      512.1,
+      517.0,
+      "while the green packet spends less time\nwaiting behind old data."
+    ],
+    [
+      517.0,
+      521.9,
+      "The important improvement is visible before\nany product name or configuration"
+    ],
+    [
+      521.9,
+      526.8,
+      "screen appears: reduce persistent queueing\nwhile using the connection well. Real"
+    ],
+    [
+      526.8,
+      531.7,
+      "mechanisms have trade-offs, and an empty\nbuffer is not a universal"
+    ],
+    [
+      531.7,
+      536.6,
+      "goal. We are identifying the behavior a\nsolution should improve, rather"
+    ],
+    [
+      536.6,
+      541.5,
+      "than promising one setting fixes every\nnetwork."
+    ],
+    [
+      541.5,
+      546.1791666666667,
+      "Return to the fast download and the late\ninteraction. There was"
+    ],
+    [
+      546.1791666666667,
+      550.8583333333333,
+      "no contradiction. The connection moved many\nbits each second, while our"
+    ],
+    [
+      550.8583333333333,
+      555.5375,
+      "small packet waited behind bits that arrived\nfirst. Bufferbloat describes that"
+    ],
+    [
+      555.5375,
+      560.2166666666667,
+      "excessive queueing delay under load. It is one\nexplanation for lag,"
+    ],
+    [
+      560.2166666666667,
+      564.8958333333333,
+      "not a diagnosis of every slow connection. The\nuseful question has"
+    ],
+    [
+      564.8958333333333,
+      569.5749999999999,
+      "changed: instead of asking only how wide the\nexit is, ask"
+    ],
+    [
+      569.5749999999999,
+      574.2541666666666,
+      "how much data stands in front of the packet\nyou care"
+    ],
+    [
+      574.2541666666666,
+      578.9333333333333,
+      "about right now."
+    ]
+  ],
+  "title": "Why Fast Internet Can Still Feel Slow"
+}

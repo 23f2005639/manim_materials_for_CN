@@ -1,0 +1,540 @@
+1
+00:00:00,000 --> 00:00:04,776
+Here is a block of two hundred and fifty-six
+addresses. We
+
+2
+00:00:04,776 --> 00:00:09,552
+want four equal networks, with every address
+accounted for exactly once.
+
+3
+00:00:09,552 --> 00:00:14,329
+Where should the boundaries go? Guessing
+decimal numbers makes this feel
+
+4
+00:00:14,329 --> 00:00:19,105
+like a memorization exercise. But the
+boundaries come from a much
+
+5
+00:00:19,105 --> 00:00:23,881
+simpler picture: some address bits stay fixed,
+and the others are
+
+6
+00:00:23,881 --> 00:00:28,657
+free to change. We are going to move that
+dividing line
+
+7
+00:00:28,657 --> 00:00:33,433
+and watch four networks appear.
+
+8
+00:00:33,433 --> 00:00:38,148
+An IPv4 address contains thirty-two bits. We
+normally display them as
+
+9
+00:00:38,148 --> 00:00:42,862
+four decimal numbers separated by dots, with
+eight bits represented by
+
+10
+00:00:42,862 --> 00:00:47,576
+each number. Those eight-bit groups are called
+octets. Expand the final
+
+11
+00:00:47,576 --> 00:00:52,290
+octet and the familiar address becomes a row
+of switches, each
+
+12
+00:00:52,290 --> 00:00:57,005
+either zero or one. The dotted format is
+useful for reading.
+
+13
+00:00:57,005 --> 00:01:01,719
+The bit view is useful for seeing which
+combinations belong to
+
+14
+00:01:01,719 --> 00:01:06,433
+the same address block.
+
+15
+00:01:06,433 --> 00:01:11,148
+In our example, the block is 192.168.1.0 slash
+twenty-four. Slash twenty-four
+
+16
+00:01:11,148 --> 00:01:15,862
+says that the first twenty-four bit positions
+are fixed. Every address
+
+17
+00:01:15,862 --> 00:01:20,576
+in the block shares that beginning. The final
+eight positions can
+
+18
+00:01:20,576 --> 00:01:25,290
+change, giving us different addresses within
+the block. This boundary is
+
+19
+00:01:25,290 --> 00:01:30,005
+what the prefix describes. It does not mean
+the address contains
+
+20
+00:01:30,005 --> 00:01:34,719
+a slash bit; the slash is our way of stating
+how
+
+21
+00:01:34,719 --> 00:01:39,433
+many positions are shared.
+
+22
+00:01:39,433 --> 00:01:44,210
+Each free bit has two choices. Two free bits
+make four
+
+23
+00:01:44,210 --> 00:01:48,986
+combinations; three make eight. Keep doubling
+until eight free bits give
+
+24
+00:01:48,986 --> 00:01:53,762
+two to the power of eight, or two hundred and
+fifty-six
+
+25
+00:01:53,762 --> 00:01:58,538
+combinations. In the final octet, they run
+from zero through two
+
+26
+00:01:58,538 --> 00:02:03,314
+hundred and fifty-five. We have counted the
+entire block, including addresses
+
+27
+00:02:03,314 --> 00:02:08,090
+with special roles. We will assign those roles
+after dividing the
+
+28
+00:02:08,090 --> 00:02:12,867
+block into its smaller networks.
+
+29
+00:02:12,867 --> 00:02:17,390
+Move the boundary one position right. The
+first formerly free bit
+
+30
+00:02:17,390 --> 00:02:21,914
+now identifies which half we mean: zero on one
+side, one
+
+31
+00:02:21,914 --> 00:02:26,438
+on the other. Each half has seven free bits
+left, so
+
+32
+00:02:26,438 --> 00:02:30,962
+each contains one hundred and twenty-eight
+addresses. The total has not
+
+33
+00:02:30,962 --> 00:02:35,486
+changed. We have simply described the original
+space as two smaller
+
+34
+00:02:35,486 --> 00:02:40,010
+blocks. A longer fixed prefix leaves fewer
+possibilities inside each individual
+
+35
+00:02:40,010 --> 00:02:44,533
+block.
+
+36
+00:02:44,533 --> 00:02:49,248
+Move the boundary once more. Each half splits
+in two, giving
+
+37
+00:02:49,248 --> 00:02:53,962
+four groups identified by zero-zero, zero-one,
+one-zero, and one-one. Two additional
+
+38
+00:02:53,962 --> 00:02:58,676
+fixed bits create two to the power of two
+subnets. Starting
+
+39
+00:02:58,676 --> 00:03:03,390
+at slash twenty-four and adding two gives
+slash twenty-six. The prefix
+
+40
+00:03:03,390 --> 00:03:08,105
+length, the number of groups, and the visible
+split are three
+
+41
+00:03:08,105 --> 00:03:12,819
+views of the same operation. No address has
+been created or
+
+42
+00:03:12,819 --> 00:03:17,533
+lost along the way.
+
+43
+00:03:17,533 --> 00:03:22,119
+Each new subnet has six free host bits. Two to
+the
+
+44
+00:03:22,119 --> 00:03:26,705
+power of six gives sixty-four addresses per
+subnet. Check the accounting:
+
+45
+00:03:26,705 --> 00:03:31,290
+four subnets multiplied by sixty-four
+addresses equals our original two hundred
+
+46
+00:03:31,290 --> 00:03:35,876
+and fifty-six. This is a useful way to catch a
+wrong
+
+47
+00:03:35,876 --> 00:03:40,462
+boundary. If the groups overlap, leave gaps,
+or contain the wrong
+
+48
+00:03:40,462 --> 00:03:45,048
+number of combinations, their totals will stop
+matching the space we
+
+49
+00:03:45,048 --> 00:03:49,633
+started with.
+
+50
+00:03:49,633 --> 00:03:54,471
+Keep the six host bits at zero and change only
+the
+
+51
+00:03:54,471 --> 00:03:59,310
+two subnet bits. Zero-zero begins at zero.
+Zero-one begins at sixty-four.
+
+52
+00:03:59,310 --> 00:04:04,148
+One-zero begins at one hundred and twenty-
+eight. One-one begins at one
+
+53
+00:04:04,148 --> 00:04:08,986
+hundred and ninety-two. Those are the four
+network starts in the
+
+54
+00:04:08,986 --> 00:04:13,824
+final octet. Their spacing is sixty-four
+because each block contains sixty-four
+
+55
+00:04:13,824 --> 00:04:18,662
+combinations. The decimal pattern comes
+directly from the binary positions, rather
+
+56
+00:04:18,662 --> 00:04:23,500
+than a separate shortcut to memorize.
+
+57
+00:04:23,500 --> 00:04:28,086
+A subnet mask marks fixed prefix positions
+with ones and the
+
+58
+00:04:28,086 --> 00:04:32,671
+remaining positions with zeros. For slash
+twenty-six, the final octet begins
+
+59
+00:04:32,671 --> 00:04:37,257
+one-one, followed by six zeros. The first two
+positions have values
+
+60
+00:04:37,257 --> 00:04:41,843
+one hundred and twenty-eight and sixty-four.
+Add them and the mask's
+
+61
+00:04:41,843 --> 00:04:46,429
+last octet is one hundred and ninety-two. The
+complete mask is
+
+62
+00:04:46,429 --> 00:04:51,014
+255.255.255.192. Now the mask and our moving
+boundary describe exactly the
+
+63
+00:04:51,014 --> 00:04:55,600
+same division.
+
+64
+00:04:55,600 --> 00:05:00,656
+Take the address 192.168.1.70. The final
+octet, seventy, is 01000110 in
+
+65
+00:05:00,656 --> 00:05:05,711
+binary. Apply the mask 11000000 using bitwise
+AND. A mask one
+
+66
+00:05:05,711 --> 00:05:10,767
+keeps the corresponding address bit; a zero
+clears it. The result
+
+67
+00:05:10,767 --> 00:05:15,822
+is 01000000, or sixty-four. So this address
+belongs to 192.168.1.64 slash
+
+68
+00:05:15,822 --> 00:05:20,878
+twenty-six. We did not search four separate
+lists. We removed the
+
+69
+00:05:20,878 --> 00:05:25,933
+varying host part and exposed the subnet's
+shared beginning.
+
+70
+00:05:25,933 --> 00:05:30,962
+On an ordinary LAN subnet, the address with
+all host bits
+
+71
+00:05:30,962 --> 00:05:35,990
+zero identifies the network, and the address
+with all host bits
+
+72
+00:05:35,990 --> 00:05:41,019
+one is its broadcast address. In a sixty-four-
+address block, those two
+
+73
+00:05:41,019 --> 00:05:46,048
+roles leave sixty-two addresses for hosts.
+This is why total addresses
+
+74
+00:05:46,048 --> 00:05:51,076
+and usable host addresses are different
+counts. We are applying the
+
+75
+00:05:51,076 --> 00:05:56,105
+ordinary LAN convention in this example,
+rather than claiming that subtracting
+
+76
+00:05:56,105 --> 00:06:01,133
+two is a universal rule for every possible
+prefix.
+
+77
+00:06:01,133 --> 00:06:05,719
+The first block spans zero through sixty-
+three. Its network is zero,
+
+78
+00:06:05,719 --> 00:06:10,305
+its broadcast is sixty-three, and hosts use
+one through sixty-two. The
+
+79
+00:06:10,305 --> 00:06:14,890
+second spans sixty-four through one hundred
+and twenty-seven. Its hosts use
+
+80
+00:06:14,890 --> 00:06:19,476
+sixty-five through one hundred and twenty-six.
+Notice that this broadcast ends
+
+81
+00:06:19,476 --> 00:06:24,062
+in one hundred and twenty-seven, not two
+hundred and fifty-five. Broadcast
+
+82
+00:06:24,062 --> 00:06:28,648
+follows the host-bit pattern inside the chosen
+subnet, not a particular
+
+83
+00:06:28,648 --> 00:06:33,233
+decimal ending.
+
+84
+00:06:33,233 --> 00:06:38,138
+The third block spans one hundred and twenty-
+eight through one hundred
+
+85
+00:06:38,138 --> 00:06:43,043
+and ninety-one, with hosts between one hundred
+and twenty-nine and one
+
+86
+00:06:43,043 --> 00:06:47,948
+hundred and ninety. The fourth spans one
+hundred and ninety-two through
+
+87
+00:06:47,948 --> 00:06:52,852
+two hundred and fifty-five, with hosts from
+one hundred and ninety-three
+
+88
+00:06:52,852 --> 00:06:57,757
+through two hundred and fifty-four. Watch
+their edges meet. Each block
+
+89
+00:06:57,757 --> 00:07:02,662
+starts immediately after the previous block
+ends, covering the original parent
+
+90
+00:07:02,662 --> 00:07:07,567
+without an overlap or a missing address.
+
+91
+00:07:07,567 --> 00:07:12,214
+Suppose a network needs fifty host addresses.
+Five free bits give
+
+92
+00:07:12,214 --> 00:07:16,862
+thirty-two total addresses, or thirty ordinary
+LAN host addresses, which is
+
+93
+00:07:16,862 --> 00:07:21,510
+too small. Six free bits give sixty-four total
+and sixty-two usable,
+
+94
+00:07:21,510 --> 00:07:26,157
+which fits. Thirty-two minus six leaves a
+slash-twenty-six prefix. Instead of
+
+95
+00:07:26,157 --> 00:07:30,805
+starting with a memorized mask, we started
+with the required capacity
+
+96
+00:07:30,805 --> 00:07:35,452
+and counted the combinations needed to
+accommodate it. The mask follows
+
+97
+00:07:35,452 --> 00:07:40,100
+from that decision.
+
+98
+00:07:40,100 --> 00:07:44,748
+Compare last-octet values seventy and one
+hundred. Masking each produces sixty-four,
+
+99
+00:07:44,748 --> 00:07:49,395
+so they share this subnet. Now compare seventy
+with one hundred
+
+100
+00:07:49,395 --> 00:07:54,043
+and thirty. The latter produces one hundred
+and twenty-eight, placing it
+
+101
+00:07:54,043 --> 00:07:58,690
+in another subnet. Similar-looking decimal
+addresses are not the deciding evidence.
+
+102
+00:07:58,690 --> 00:08:03,338
+Their fixed prefix bits are. When a result
+feels suspicious, return
+
+103
+00:08:03,338 --> 00:08:07,986
+to the boundary and ask which bits were
+allowed to vary
+
+104
+00:08:07,986 --> 00:08:12,633
+inside the block.
+
+105
+00:08:12,633 --> 00:08:17,281
+Return to the original block. Two borrowed
+positions created four subnet
+
+106
+00:08:17,281 --> 00:08:21,929
+prefixes, and six remaining positions created
+sixty-four addresses in each. The
+
+107
+00:08:21,929 --> 00:08:26,576
+starts, mask, broadcast boundaries, and host
+counts all came from that
+
+108
+00:08:26,576 --> 00:08:31,224
+same division. They are not five unrelated
+rules. Subnetting becomes easier
+
+109
+00:08:31,224 --> 00:08:35,871
+when the arithmetic stays connected to the
+picture: fix a longer
+
+110
+00:08:35,871 --> 00:08:40,519
+beginning, count what remains free, and give
+each resulting address range
+
+111
+00:08:40,519 --> 00:08:45,167
+its correct role.

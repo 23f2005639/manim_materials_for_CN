@@ -1,0 +1,708 @@
+{
+  "fps": 30,
+  "frames": 15756,
+  "sections": [
+    {
+      "name": "One block, four networks",
+      "frame": 0,
+      "type": "default.normal",
+      "notes": "Here is a block of two hundred and fifty-six addresses. We want four equal networks, with every address accounted for exactly once. Where should the boundaries go? Guessing decimal numbers makes this feel like a memorization exercise. But the boundaries come from a much simpler picture: some address bits stay fixed, and the others are free to change. We are going to move that dividing line and watch four networks appear.",
+      "id": "06-01",
+      "chapter": "The puzzle",
+      "animation_end_frame": 174
+    },
+    {
+      "name": "Expose the thirty-two bits",
+      "frame": 1003,
+      "type": "default.normal",
+      "notes": "An IPv4 address contains thirty-two bits. We normally display them as four decimal numbers separated by dots, with eight bits represented by each number. Those eight-bit groups are called octets. Expand the final octet and the familiar address becomes a row of switches, each either zero or one. The dotted format is useful for reading. The bit view is useful for seeing which combinations belong to the same address block.",
+      "id": "06-02",
+      "chapter": "The puzzle",
+      "animation_end_frame": 1090
+    },
+    {
+      "name": "Fix the shared beginning",
+      "frame": 1993,
+      "type": "default.normal",
+      "notes": "In our example, the block is 192.168.1.0 slash twenty-four. Slash twenty-four says that the first twenty-four bit positions are fixed. Every address in the block shares that beginning. The final eight positions can change, giving us different addresses within the block. This boundary is what the prefix describes. It does not mean the address contains a slash bit; the slash is our way of stating how many positions are shared.",
+      "id": "06-03",
+      "chapter": "The puzzle",
+      "animation_end_frame": 2152
+    },
+    {
+      "name": "Count the free combinations",
+      "frame": 2983,
+      "type": "default.normal",
+      "notes": "Each free bit has two choices. Two free bits make four combinations; three make eight. Keep doubling until eight free bits give two to the power of eight, or two hundred and fifty-six combinations. In the final octet, they run from zero through two hundred and fifty-five. We have counted the entire block, including addresses with special roles. We will assign those roles after dividing the block into its smaller networks.",
+      "id": "06-04",
+      "chapter": "The puzzle",
+      "animation_end_frame": 3256
+    },
+    {
+      "name": "One new bit creates halves",
+      "frame": 3986,
+      "type": "default.normal",
+      "notes": "Move the boundary one position right. The first formerly free bit now identifies which half we mean: zero on one side, one on the other. Each half has seven free bits left, so each contains one hundred and twenty-eight addresses. The total has not changed. We have simply described the original space as two smaller blocks. A longer fixed prefix leaves fewer possibilities inside each individual block.",
+      "id": "06-05",
+      "chapter": "Build the mechanism",
+      "animation_end_frame": 4139
+    },
+    {
+      "name": "Two new bits create quarters",
+      "frame": 4936,
+      "type": "default.normal",
+      "notes": "Move the boundary once more. Each half splits in two, giving four groups identified by zero-zero, zero-one, one-zero, and one-one. Two additional fixed bits create two to the power of two subnets. Starting at slash twenty-four and adding two gives slash twenty-six. The prefix length, the number of groups, and the visible split are three views of the same operation. No address has been created or lost along the way.",
+      "id": "06-06",
+      "chapter": "Build the mechanism",
+      "animation_end_frame": 5182
+    },
+    {
+      "name": "Six bits remain inside each",
+      "frame": 5926,
+      "type": "default.normal",
+      "notes": "Each new subnet has six free host bits. Two to the power of six gives sixty-four addresses per subnet. Check the accounting: four subnets multiplied by sixty-four addresses equals our original two hundred and fifty-six. This is a useful way to catch a wrong boundary. If the groups overlap, leave gaps, or contain the wrong number of combinations, their totals will stop matching the space we started with.",
+      "id": "06-07",
+      "chapter": "Build the mechanism",
+      "animation_end_frame": 6034
+    },
+    {
+      "name": "Read the four starts",
+      "frame": 6889,
+      "type": "default.normal",
+      "notes": "Keep the six host bits at zero and change only the two subnet bits. Zero-zero begins at zero. Zero-one begins at sixty-four. One-zero begins at one hundred and twenty-eight. One-one begins at one hundred and ninety-two. Those are the four network starts in the final octet. Their spacing is sixty-four because each block contains sixty-four combinations. The decimal pattern comes directly from the binary positions, rather than a separate shortcut to memorize.",
+      "id": "06-08",
+      "chapter": "Build the mechanism",
+      "animation_end_frame": 7138
+    },
+    {
+      "name": "Turn the boundary into a mask",
+      "frame": 7905,
+      "type": "default.normal",
+      "notes": "A subnet mask marks fixed prefix positions with ones and the remaining positions with zeros. For slash twenty-six, the final octet begins one-one, followed by six zeros. The first two positions have values one hundred and twenty-eight and sixty-four. Add them and the mask's last octet is one hundred and ninety-two. The complete mask is 255.255.255.192. Now the mask and our moving boundary describe exactly the same division.",
+      "id": "06-09",
+      "chapter": "Make the math visible",
+      "animation_end_frame": 8040
+    },
+    {
+      "name": "Find where seventy belongs",
+      "frame": 8868,
+      "type": "default.normal",
+      "notes": "Take the address 192.168.1.70. The final octet, seventy, is 01000110 in binary. Apply the mask 11000000 using bitwise AND. A mask one keeps the corresponding address bit; a zero clears it. The result is 01000000, or sixty-four. So this address belongs to 192.168.1.64 slash twenty-six. We did not search four separate lists. We removed the varying host part and exposed the subnet's shared beginning.",
+      "id": "06-10",
+      "chapter": "Make the math visible",
+      "animation_end_frame": 9084
+    },
+    {
+      "name": "Give the endpoints their jobs",
+      "frame": 9778,
+      "type": "default.normal",
+      "notes": "On an ordinary LAN subnet, the address with all host bits zero identifies the network, and the address with all host bits one is its broadcast address. In a sixty-four-address block, those two roles leave sixty-two addresses for hosts. This is why total addresses and usable host addresses are different counts. We are applying the ordinary LAN convention in this example, rather than claiming that subtracting two is a universal rule for every possible prefix.",
+      "id": "06-11",
+      "chapter": "Make the math visible",
+      "animation_end_frame": 9922
+    },
+    {
+      "name": "Read the first two ranges",
+      "frame": 10834,
+      "type": "default.normal",
+      "notes": "The first block spans zero through sixty-three. Its network is zero, its broadcast is sixty-three, and hosts use one through sixty-two. The second spans sixty-four through one hundred and twenty-seven. Its hosts use sixty-five through one hundred and twenty-six. Notice that this broadcast ends in one hundred and twenty-seven, not two hundred and fifty-five. Broadcast follows the host-bit pattern inside the chosen subnet, not a particular decimal ending.",
+      "id": "06-12",
+      "chapter": "Make the math visible",
+      "animation_end_frame": 10975
+    },
+    {
+      "name": "Complete the remaining ranges",
+      "frame": 11797,
+      "type": "default.normal",
+      "notes": "The third block spans one hundred and twenty-eight through one hundred and ninety-one, with hosts between one hundred and twenty-nine and one hundred and ninety. The fourth spans one hundred and ninety-two through two hundred and fifty-five, with hosts from one hundred and ninety-three through two hundred and fifty-four. Watch their edges meet. Each block starts immediately after the previous block ends, covering the original parent without an overlap or a missing address.",
+      "id": "06-13",
+      "chapter": "Resolve the story",
+      "animation_end_frame": 11938
+    },
+    {
+      "name": "Choose room for fifty hosts",
+      "frame": 12827,
+      "type": "default.normal",
+      "notes": "Suppose a network needs fifty host addresses. Five free bits give thirty-two total addresses, or thirty ordinary LAN host addresses, which is too small. Six free bits give sixty-four total and sixty-two usable, which fits. Thirty-two minus six leaves a slash-twenty-six prefix. Instead of starting with a memorized mask, we started with the required capacity and counted the combinations needed to accommodate it. The mask follows from that decision.",
+      "id": "06-14",
+      "chapter": "Resolve the story",
+      "animation_end_frame": 12971
+    },
+    {
+      "name": "Check the boundary, not appearances",
+      "frame": 13803,
+      "type": "default.normal",
+      "notes": "Compare last-octet values seventy and one hundred. Masking each produces sixty-four, so they share this subnet. Now compare seventy with one hundred and thirty. The latter produces one hundred and twenty-eight, placing it in another subnet. Similar-looking decimal addresses are not the deciding evidence. Their fixed prefix bits are. When a result feels suspicious, return to the boundary and ask which bits were allowed to vary inside the block.",
+      "id": "06-15",
+      "chapter": "Resolve the story",
+      "animation_end_frame": 14097
+    },
+    {
+      "name": "Four networks from two bits",
+      "frame": 14779,
+      "type": "default.normal",
+      "notes": "Return to the original block. Two borrowed positions created four subnet prefixes, and six remaining positions created sixty-four addresses in each. The starts, mask, broadcast boundaries, and host counts all came from that same division. They are not five unrelated rules. Subnetting becomes easier when the arithmetic stays connected to the picture: fix a longer beginning, count what remains free, and give each resulting address range its correct role.",
+      "id": "06-16",
+      "chapter": "Resolve the story",
+      "animation_end_frame": 14989
+    }
+  ],
+  "captions": [
+    [
+      0.0,
+      4.776190476190476,
+      "Here is a block of two hundred and fifty-six\naddresses. We"
+    ],
+    [
+      4.776190476190476,
+      9.552380952380952,
+      "want four equal networks, with every address\naccounted for exactly once."
+    ],
+    [
+      9.552380952380952,
+      14.328571428571426,
+      "Where should the boundaries go? Guessing\ndecimal numbers makes this feel"
+    ],
+    [
+      14.328571428571426,
+      19.104761904761904,
+      "like a memorization exercise. But the\nboundaries come from a much"
+    ],
+    [
+      19.104761904761904,
+      23.88095238095238,
+      "simpler picture: some address bits stay fixed,\nand the others are"
+    ],
+    [
+      23.88095238095238,
+      28.65714285714285,
+      "free to change. We are going to move that\ndividing line"
+    ],
+    [
+      28.65714285714285,
+      33.43333333333333,
+      "and watch four networks appear."
+    ],
+    [
+      33.43333333333333,
+      38.147619047619045,
+      "An IPv4 address contains thirty-two bits. We\nnormally display them as"
+    ],
+    [
+      38.147619047619045,
+      42.86190476190476,
+      "four decimal numbers separated by dots, with\neight bits represented by"
+    ],
+    [
+      42.86190476190476,
+      47.576190476190476,
+      "each number. Those eight-bit groups are called\noctets. Expand the final"
+    ],
+    [
+      47.576190476190476,
+      52.29047619047619,
+      "octet and the familiar address becomes a row\nof switches, each"
+    ],
+    [
+      52.29047619047619,
+      57.00476190476191,
+      "either zero or one. The dotted format is\nuseful for reading."
+    ],
+    [
+      57.00476190476191,
+      61.71904761904763,
+      "The bit view is useful for seeing which\ncombinations belong to"
+    ],
+    [
+      61.71904761904763,
+      66.43333333333334,
+      "the same address block."
+    ],
+    [
+      66.43333333333334,
+      71.14761904761905,
+      "In our example, the block is 192.168.1.0 slash\ntwenty-four. Slash twenty-four"
+    ],
+    [
+      71.14761904761905,
+      75.86190476190477,
+      "says that the first twenty-four bit positions\nare fixed. Every address"
+    ],
+    [
+      75.86190476190477,
+      80.57619047619048,
+      "in the block shares that beginning. The final\neight positions can"
+    ],
+    [
+      80.57619047619048,
+      85.2904761904762,
+      "change, giving us different addresses within\nthe block. This boundary is"
+    ],
+    [
+      85.2904761904762,
+      90.0047619047619,
+      "what the prefix describes. It does not mean\nthe address contains"
+    ],
+    [
+      90.0047619047619,
+      94.71904761904761,
+      "a slash bit; the slash is our way of stating\nhow"
+    ],
+    [
+      94.71904761904761,
+      99.43333333333334,
+      "many positions are shared."
+    ],
+    [
+      99.43333333333334,
+      104.20952380952382,
+      "Each free bit has two choices. Two free bits\nmake four"
+    ],
+    [
+      104.20952380952382,
+      108.9857142857143,
+      "combinations; three make eight. Keep doubling\nuntil eight free bits give"
+    ],
+    [
+      108.9857142857143,
+      113.76190476190477,
+      "two to the power of eight, or two hundred and\nfifty-six"
+    ],
+    [
+      113.76190476190477,
+      118.53809523809525,
+      "combinations. In the final octet, they run\nfrom zero through two"
+    ],
+    [
+      118.53809523809525,
+      123.31428571428572,
+      "hundred and fifty-five. We have counted the\nentire block, including addresses"
+    ],
+    [
+      123.31428571428572,
+      128.0904761904762,
+      "with special roles. We will assign those roles\nafter dividing the"
+    ],
+    [
+      128.0904761904762,
+      132.86666666666667,
+      "block into its smaller networks."
+    ],
+    [
+      132.86666666666667,
+      137.3904761904762,
+      "Move the boundary one position right. The\nfirst formerly free bit"
+    ],
+    [
+      137.3904761904762,
+      141.9142857142857,
+      "now identifies which half we mean: zero on one\nside, one"
+    ],
+    [
+      141.9142857142857,
+      146.43809523809523,
+      "on the other. Each half has seven free bits\nleft, so"
+    ],
+    [
+      146.43809523809523,
+      150.96190476190478,
+      "each contains one hundred and twenty-eight\naddresses. The total has not"
+    ],
+    [
+      150.96190476190478,
+      155.4857142857143,
+      "changed. We have simply described the original\nspace as two smaller"
+    ],
+    [
+      155.4857142857143,
+      160.0095238095238,
+      "blocks. A longer fixed prefix leaves fewer\npossibilities inside each individual"
+    ],
+    [
+      160.0095238095238,
+      164.53333333333333,
+      "block."
+    ],
+    [
+      164.53333333333333,
+      169.24761904761905,
+      "Move the boundary once more. Each half splits\nin two, giving"
+    ],
+    [
+      169.24761904761905,
+      173.96190476190475,
+      "four groups identified by zero-zero, zero-one,\none-zero, and one-one. Two additional"
+    ],
+    [
+      173.96190476190475,
+      178.67619047619047,
+      "fixed bits create two to the power of two\nsubnets. Starting"
+    ],
+    [
+      178.67619047619047,
+      183.3904761904762,
+      "at slash twenty-four and adding two gives\nslash twenty-six. The prefix"
+    ],
+    [
+      183.3904761904762,
+      188.10476190476192,
+      "length, the number of groups, and the visible\nsplit are three"
+    ],
+    [
+      188.10476190476192,
+      192.8190476190476,
+      "views of the same operation. No address has\nbeen created or"
+    ],
+    [
+      192.8190476190476,
+      197.53333333333333,
+      "lost along the way."
+    ],
+    [
+      197.53333333333333,
+      202.11904761904762,
+      "Each new subnet has six free host bits. Two to\nthe"
+    ],
+    [
+      202.11904761904762,
+      206.7047619047619,
+      "power of six gives sixty-four addresses per\nsubnet. Check the accounting:"
+    ],
+    [
+      206.7047619047619,
+      211.2904761904762,
+      "four subnets multiplied by sixty-four\naddresses equals our original two hundred"
+    ],
+    [
+      211.2904761904762,
+      215.87619047619046,
+      "and fifty-six. This is a useful way to catch a\nwrong"
+    ],
+    [
+      215.87619047619046,
+      220.46190476190475,
+      "boundary. If the groups overlap, leave gaps,\nor contain the wrong"
+    ],
+    [
+      220.46190476190475,
+      225.04761904761904,
+      "number of combinations, their totals will stop\nmatching the space we"
+    ],
+    [
+      225.04761904761904,
+      229.63333333333333,
+      "started with."
+    ],
+    [
+      229.63333333333333,
+      234.47142857142856,
+      "Keep the six host bits at zero and change only\nthe"
+    ],
+    [
+      234.47142857142856,
+      239.3095238095238,
+      "two subnet bits. Zero-zero begins at zero.\nZero-one begins at sixty-four."
+    ],
+    [
+      239.3095238095238,
+      244.14761904761903,
+      "One-zero begins at one hundred and twenty-\neight. One-one begins at one"
+    ],
+    [
+      244.14761904761903,
+      248.9857142857143,
+      "hundred and ninety-two. Those are the four\nnetwork starts in the"
+    ],
+    [
+      248.9857142857143,
+      253.82380952380953,
+      "final octet. Their spacing is sixty-four\nbecause each block contains sixty-four"
+    ],
+    [
+      253.82380952380953,
+      258.66190476190474,
+      "combinations. The decimal pattern comes\ndirectly from the binary positions, rather"
+    ],
+    [
+      258.66190476190474,
+      263.5,
+      "than a separate shortcut to memorize."
+    ],
+    [
+      263.5,
+      268.0857142857143,
+      "A subnet mask marks fixed prefix positions\nwith ones and the"
+    ],
+    [
+      268.0857142857143,
+      272.6714285714286,
+      "remaining positions with zeros. For slash\ntwenty-six, the final octet begins"
+    ],
+    [
+      272.6714285714286,
+      277.25714285714287,
+      "one-one, followed by six zeros. The first two\npositions have values"
+    ],
+    [
+      277.25714285714287,
+      281.84285714285716,
+      "one hundred and twenty-eight and sixty-four.\nAdd them and the mask's"
+    ],
+    [
+      281.84285714285716,
+      286.42857142857144,
+      "last octet is one hundred and ninety-two. The\ncomplete mask is"
+    ],
+    [
+      286.42857142857144,
+      291.01428571428573,
+      "255.255.255.192. Now the mask and our moving\nboundary describe exactly the"
+    ],
+    [
+      291.01428571428573,
+      295.6,
+      "same division."
+    ],
+    [
+      295.6,
+      300.65555555555557,
+      "Take the address 192.168.1.70. The final\noctet, seventy, is 01000110 in"
+    ],
+    [
+      300.65555555555557,
+      305.7111111111111,
+      "binary. Apply the mask 11000000 using bitwise\nAND. A mask one"
+    ],
+    [
+      305.7111111111111,
+      310.76666666666665,
+      "keeps the corresponding address bit; a zero\nclears it. The result"
+    ],
+    [
+      310.76666666666665,
+      315.82222222222225,
+      "is 01000000, or sixty-four. So this address\nbelongs to 192.168.1.64 slash"
+    ],
+    [
+      315.82222222222225,
+      320.8777777777778,
+      "twenty-six. We did not search four separate\nlists. We removed the"
+    ],
+    [
+      320.8777777777778,
+      325.93333333333334,
+      "varying host part and exposed the subnet's\nshared beginning."
+    ],
+    [
+      325.93333333333334,
+      330.96190476190475,
+      "On an ordinary LAN subnet, the address with\nall host bits"
+    ],
+    [
+      330.96190476190475,
+      335.9904761904762,
+      "zero identifies the network, and the address\nwith all host bits"
+    ],
+    [
+      335.9904761904762,
+      341.0190476190476,
+      "one is its broadcast address. In a sixty-four-\naddress block, those two"
+    ],
+    [
+      341.0190476190476,
+      346.04761904761904,
+      "roles leave sixty-two addresses for hosts.\nThis is why total addresses"
+    ],
+    [
+      346.04761904761904,
+      351.07619047619045,
+      "and usable host addresses are different\ncounts. We are applying the"
+    ],
+    [
+      351.07619047619045,
+      356.1047619047619,
+      "ordinary LAN convention in this example,\nrather than claiming that subtracting"
+    ],
+    [
+      356.1047619047619,
+      361.1333333333333,
+      "two is a universal rule for every possible\nprefix."
+    ],
+    [
+      361.1333333333333,
+      365.7190476190476,
+      "The first block spans zero through sixty-\nthree. Its network is zero,"
+    ],
+    [
+      365.7190476190476,
+      370.3047619047619,
+      "its broadcast is sixty-three, and hosts use\none through sixty-two. The"
+    ],
+    [
+      370.3047619047619,
+      374.8904761904762,
+      "second spans sixty-four through one hundred\nand twenty-seven. Its hosts use"
+    ],
+    [
+      374.8904761904762,
+      379.4761904761905,
+      "sixty-five through one hundred and twenty-six.\nNotice that this broadcast ends"
+    ],
+    [
+      379.4761904761905,
+      384.06190476190477,
+      "in one hundred and twenty-seven, not two\nhundred and fifty-five. Broadcast"
+    ],
+    [
+      384.06190476190477,
+      388.64761904761906,
+      "follows the host-bit pattern inside the chosen\nsubnet, not a particular"
+    ],
+    [
+      388.64761904761906,
+      393.23333333333335,
+      "decimal ending."
+    ],
+    [
+      393.23333333333335,
+      398.1380952380953,
+      "The third block spans one hundred and twenty-\neight through one hundred"
+    ],
+    [
+      398.1380952380953,
+      403.04285714285714,
+      "and ninety-one, with hosts between one hundred\nand twenty-nine and one"
+    ],
+    [
+      403.04285714285714,
+      407.94761904761907,
+      "hundred and ninety. The fourth spans one\nhundred and ninety-two through"
+    ],
+    [
+      407.94761904761907,
+      412.85238095238094,
+      "two hundred and fifty-five, with hosts from\none hundred and ninety-three"
+    ],
+    [
+      412.85238095238094,
+      417.75714285714287,
+      "through two hundred and fifty-four. Watch\ntheir edges meet. Each block"
+    ],
+    [
+      417.75714285714287,
+      422.66190476190474,
+      "starts immediately after the previous block\nends, covering the original parent"
+    ],
+    [
+      422.66190476190474,
+      427.56666666666666,
+      "without an overlap or a missing address."
+    ],
+    [
+      427.56666666666666,
+      432.2142857142857,
+      "Suppose a network needs fifty host addresses.\nFive free bits give"
+    ],
+    [
+      432.2142857142857,
+      436.8619047619048,
+      "thirty-two total addresses, or thirty ordinary\nLAN host addresses, which is"
+    ],
+    [
+      436.8619047619048,
+      441.50952380952384,
+      "too small. Six free bits give sixty-four total\nand sixty-two usable,"
+    ],
+    [
+      441.50952380952384,
+      446.15714285714284,
+      "which fits. Thirty-two minus six leaves a\nslash-twenty-six prefix. Instead of"
+    ],
+    [
+      446.15714285714284,
+      450.8047619047619,
+      "starting with a memorized mask, we started\nwith the required capacity"
+    ],
+    [
+      450.8047619047619,
+      455.45238095238096,
+      "and counted the combinations needed to\naccommodate it. The mask follows"
+    ],
+    [
+      455.45238095238096,
+      460.1,
+      "from that decision."
+    ],
+    [
+      460.1,
+      464.7476190476191,
+      "Compare last-octet values seventy and one\nhundred. Masking each produces sixty-four,"
+    ],
+    [
+      464.7476190476191,
+      469.3952380952381,
+      "so they share this subnet. Now compare seventy\nwith one hundred"
+    ],
+    [
+      469.3952380952381,
+      474.04285714285714,
+      "and thirty. The latter produces one hundred\nand twenty-eight, placing it"
+    ],
+    [
+      474.04285714285714,
+      478.6904761904762,
+      "in another subnet. Similar-looking decimal\naddresses are not the deciding evidence."
+    ],
+    [
+      478.6904761904762,
+      483.33809523809526,
+      "Their fixed prefix bits are. When a result\nfeels suspicious, return"
+    ],
+    [
+      483.33809523809526,
+      487.98571428571427,
+      "to the boundary and ask which bits were\nallowed to vary"
+    ],
+    [
+      487.98571428571427,
+      492.6333333333333,
+      "inside the block."
+    ],
+    [
+      492.6333333333333,
+      497.2809523809524,
+      "Return to the original block. Two borrowed\npositions created four subnet"
+    ],
+    [
+      497.2809523809524,
+      501.9285714285714,
+      "prefixes, and six remaining positions created\nsixty-four addresses in each. The"
+    ],
+    [
+      501.9285714285714,
+      506.57619047619045,
+      "starts, mask, broadcast boundaries, and host\ncounts all came from that"
+    ],
+    [
+      506.57619047619045,
+      511.2238095238095,
+      "same division. They are not five unrelated\nrules. Subnetting becomes easier"
+    ],
+    [
+      511.2238095238095,
+      515.8714285714285,
+      "when the arithmetic stays connected to the\npicture: fix a longer"
+    ],
+    [
+      515.8714285714285,
+      520.5190476190476,
+      "beginning, count what remains free, and give\neach resulting address range"
+    ],
+    [
+      520.5190476190476,
+      525.1666666666666,
+      "its correct role."
+    ]
+  ],
+  "title": "Move Two Bits, Create Four Networks"
+}

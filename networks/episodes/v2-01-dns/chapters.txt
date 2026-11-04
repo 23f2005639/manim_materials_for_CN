@@ -1,0 +1,8 @@
+00:00 The puzzle
+00:32 The model
+01:39 The lookup
+04:29 The mathematics
+05:38 The cache
+07:23 The failure
+07:57 The reveal
+08:32 The answer

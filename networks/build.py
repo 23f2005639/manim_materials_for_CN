@@ -19,15 +19,26 @@ FPS = 30
 
 def read(path: Path) -> dict:
     data = json.loads(path.read_text())
-    assert len(data["sections"]) == 24, path
+    count = len(data["sections"])
+    assert 12 <= count <= (18 if data.get("edition") == "focused-v2" else 24), path
     assert abs(sum(s["duration"] for s in data["sections"]) - data["duration"]) < 0.01
     assert 300 <= data["duration"] <= 600
-    assert len({s["id"] for s in data["sections"]}) == 24
+    assert len({s["id"] for s in data["sections"]}) == count
     for s in data["sections"]:
         assert s["narration"] and s["title"] and s["takeaway"] and s["visual"]
-        assert 10 <= s["duration"] <= 35
+        assert 10 <= s["duration"] <= (90 if data.get("edition") == "focused-v2" else 35)
         assert len(s["bullets"]) >= 1
     return data
+
+
+def episode_paths() -> list[Path]:
+    manifest = ROOT / "series.json"
+    if not manifest.exists():
+        return sorted((ROOT / "episodes").glob("*/storyboard.json"))
+    series = json.loads(manifest.read_text())
+    paths = [ROOT / e["folder"] / "storyboard.json" for e in series["episodes"]]
+    assert len(paths) == len(set(paths)) == 8
+    return paths
 
 
 def stamp(seconds: float, milliseconds: bool = False) -> str:
@@ -206,7 +217,7 @@ def verify(folder: Path, data: dict, deck: dict, clips: bool = True) -> dict:
     clip_count = 0
     if clips:
         files = sorted((folder / "clips").glob("*.mp4"))
-        assert len(files) == len(deck["sections"]) == 24
+        assert len(files) == len(deck["sections"])
         for i, file in enumerate(files):
             clip_info = probe(file)
             v = next(s for s in clip_info["streams"] if s["codec_type"] == "video")
@@ -218,11 +229,11 @@ def verify(folder: Path, data: dict, deck: dict, clips: bool = True) -> dict:
             assert (v["width"], v["height"]) == (1920, 1080)
         clip_count = len(files)
     words = sum(len(s["narration"].split()) for s in data["sections"])
-    assert 500 <= words <= 900
+    assert (1100 <= words <= 1250) if data.get("edition") == "focused-v2" else (500 <= words <= 900)
     report = {"episode": data["id"], "title": data["title"], "duration_seconds": duration,
-              "resolution": "1920x1080", "fps": 30, "codec": "h264", "sections": 24,
+              "resolution": "1920x1080", "fps": 30, "codec": "h264", "sections": len(data["sections"]),
               "section_clips_verified": clip_count, "narration_words": words,
-              "automated_media_checks": "passed", "edition": "visual",
+              "automated_media_checks": "passed", "edition": data.get("edition", "visual"),
               "voiceover": "User records their own voice"}
     motion_path = folder / "motion-verification.json"
     if motion_path.exists():
@@ -234,7 +245,7 @@ def verify(folder: Path, data: dict, deck: dict, clips: bool = True) -> dict:
 def write_index() -> None:
     cards = []
     scripts = ["# YouTube narration scripts\n\nOriginal narration for eight visual networking explainers. Scene headings and timestamps are recording cues, not spoken lines. The scripts follow the existing animations; record in your own voice and use the scene holds for pauses.\n"]
-    for path in sorted((ROOT / "episodes").glob("*/storyboard.json")):
+    for path in episode_paths():
         data = read(path)
         folder = path.parent
         rel = folder.relative_to(ROOT).as_posix()
@@ -243,8 +254,8 @@ def write_index() -> None:
         if narration.exists():
             scripts.append(narration.read_text())
         chapter_count = len({s["chapter"] for s in data["sections"]})
-        cards.append(f'''<a class="card" href="{rel}/presentation.html"><span class="n">{data['id']}</span><div class="meta">{stamp(data['duration'])[3:]} · 24 click-through sections · {chapter_count} chapters</div><h2>{html.escape(data['title'])}</h2><p>{html.escape(data['sections'][0]['takeaway'])}</p><span class="open">{'Open lesson →' if available else 'Preparing lesson…'}</span></a>''')
-    page = '''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Networks Studio — 8 self-paced lessons</title><style>:root{color-scheme:dark;font-family:system-ui,sans-serif;background:#07111f;color:#edf4ff}*{box-sizing:border-box}body{margin:0}.wrap{max-width:1280px;margin:auto;padding:56px 28px}.eyebrow{color:#64d8eb;font-size:13px;letter-spacing:.18em}h1{font-size:clamp(36px,6vw,64px);line-height:1.04;letter-spacing:-.04em;max-width:950px;margin:18px 0}header p{font-size:18px;line-height:1.7;color:#a6bbd3;max-width:780px}.pill{display:inline-block;background:#112c38;border:1px solid #285369;color:#98e7ee;border-radius:25px;padding:8px 15px;font-size:13px;margin:12px 10px 24px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:24px 0}.card{position:relative;text-decoration:none;color:inherit;border:1px solid #263d56;border-radius:18px;background:linear-gradient(135deg,#11253b,#0b192b);padding:28px;min-height:245px;transition:border-color .15s,transform .15s}.card:hover{border-color:#64d8eb;transform:translateY(-3px)}.card:focus-visible{outline:3px solid #64d8eb}.n{position:absolute;right:25px;top:18px;font-size:60px;font-weight:800;color:#29435c}.meta{font-size:12px;color:#a4bed6;max-width:80%;line-height:1.6}h2{position:relative;font-size:25px;max-width:85%;margin:20px 0 10px}.card p{color:#a6bbd3;line-height:1.5;max-width:85%;font-size:14px}.open{display:inline-block;margin-top:12px;color:#64d8eb;font-weight:700}footer{border-top:1px solid #263d56;padding-top:20px;color:#9db3cc;line-height:1.8;font-size:14px}footer a{color:#64d8eb}@media(max-width:720px){.grid{grid-template-columns:1fr}.wrap{padding:30px 18px}h2{font-size:23px}.n{font-size:48px}}</style><main class="wrap"><header><div class="eyebrow">COMPUTER NETWORKS / VISUAL EDITION</div><h1>See it move.<br>Then understand it.</h1><p>Full-frame animated explanations: packets travel, signals combine, routes evolve, and address blocks split. Short scripts stay in presenter notes. Play one section, then explain at your own pace.</p><span class="pill">8 topics · 192 animated sections</span><span class="pill">Visual edition · 1080p</span><span class="pill">Offline · no sign-in · no voiceover</span></header><section class="grid">__CARDS__</section><footer><strong>How it works:</strong> Open a topic and click the video or press → to start fullscreen. The lesson shows only the video. Press →/← for scenes, ↑/↓ to change speed (0.25×–4×), P to pause, R to replay, F to toggle fullscreen, and Shift+P for a separate presenter window. Each scene holds its final frame until you continue. Each lesson also includes its full MP4, script, guide subtitles, and individual clips.<br>Record at your own pace; continuous video timings are a guide. Read <a href="youtube-scripts.md">all eight YouTube scripts</a>, <a href="README.md">production instructions</a>, and <a href="QA.md">quality checks</a>.</footer></main></html>'''
+        cards.append(f'''<a class="card" href="{rel}/presentation.html"><span class="n">{data['id']}</span><div class="meta">{stamp(data['duration'])[3:]} · {len(data['sections'])} click-through phases · {chapter_count} chapters</div><h2>{html.escape(data['title'])}</h2><p>{html.escape(data['sections'][0]['takeaway'])}</p><span class="open">{'Open lesson →' if available else 'Preparing lesson…'}</span></a>''')
+    page = '''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Networks Studio — 8 self-paced lessons</title><style>:root{color-scheme:dark;font-family:system-ui,sans-serif;background:#07111f;color:#edf4ff}*{box-sizing:border-box}body{margin:0}.wrap{max-width:1280px;margin:auto;padding:56px 28px}.eyebrow{color:#64d8eb;font-size:13px;letter-spacing:.18em}h1{font-size:clamp(36px,6vw,64px);line-height:1.04;letter-spacing:-.04em;max-width:950px;margin:18px 0}header p{font-size:18px;line-height:1.7;color:#a6bbd3;max-width:780px}.pill{display:inline-block;background:#112c38;border:1px solid #285369;color:#98e7ee;border-radius:25px;padding:8px 15px;font-size:13px;margin:12px 10px 24px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:24px 0}.card{position:relative;text-decoration:none;color:inherit;border:1px solid #263d56;border-radius:18px;background:linear-gradient(135deg,#11253b,#0b192b);padding:28px;min-height:245px;transition:border-color .15s,transform .15s}.card:hover{border-color:#64d8eb;transform:translateY(-3px)}.card:focus-visible{outline:3px solid #64d8eb}.n{position:absolute;right:25px;top:18px;font-size:60px;font-weight:800;color:#29435c}.meta{font-size:12px;color:#a4bed6;max-width:80%;line-height:1.6}h2{position:relative;font-size:25px;max-width:85%;margin:20px 0 10px}.card p{color:#a6bbd3;line-height:1.5;max-width:85%;font-size:14px}.open{display:inline-block;margin-top:12px;color:#64d8eb;font-weight:700}footer{border-top:1px solid #263d56;padding-top:20px;color:#9db3cc;line-height:1.8;font-size:14px}footer a{color:#64d8eb}@media(max-width:720px){.grid{grid-template-columns:1fr}.wrap{padding:30px 18px}h2{font-size:23px}.n{font-size:48px}}</style><main class="wrap"><header><div class="eyebrow">COMPUTER NETWORKS / FOCUSED STORIES</div><h1>One question.<br>One discovery.</h1><p>Eight standalone visual stories. Watch the puzzle unfold, predict what happens, then discover the mathematics behind it. Full recording scripts stay in a separate presenter window.</p><span class="pill">8 topics · one idea per video</span><span class="pill">Focused edition · 1080p</span><span class="pill">Offline · no sign-in · no voiceover</span></header><section class="grid">__CARDS__</section><footer><strong>How it works:</strong> Open a topic and click the video or press → to start fullscreen. The lesson shows only the video. Press →/← for scenes, ↑/↓ to change speed (0.25×–4×), P to pause, R to replay, F to toggle fullscreen, and Shift+P for a separate presenter window. Each scene holds its final frame until you continue. Each lesson also includes its full MP4, script, guide subtitles, and individual clips.<br>Record at your own pace; continuous video timings are a guide. Read <a href="youtube-scripts.md">all eight YouTube scripts</a>, <a href="README.md">production instructions</a>, and <a href="QA.md">quality checks</a>. Earlier videos remain in <a href="legacy-index.html">the previous series</a>.</footer></main></html>'''
     (ROOT / "index.html").write_text(page.replace("__CARDS__", "".join(cards)))
     combined = "\n\n---\n\n".join(scripts)
     (ROOT / "youtube-scripts.md").write_text(combined)
@@ -256,14 +267,15 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("episode", nargs="?", default="all", help="01 through 08, or all")
     parser.add_argument("--prepare-only", action="store_true")
+    parser.add_argument("--no-index", action="store_true", help="Keep the current landing page and combined script unchanged")
     parser.add_argument("--inspect-only", action="store_true")
     parser.add_argument("--draft", action="store_true", help="720p draft; no final export")
     parser.add_argument("--exports-only", action="store_true", help="Use an already rendered final MP4")
     parser.add_argument("--no-clips", action="store_true")
     args = parser.parse_args()
-    paths = sorted((ROOT / "episodes").glob("*/storyboard.json"))
+    paths = episode_paths()
     if args.episode != "all":
-        paths = [p for p in paths if p.parent.name.startswith(args.episode.zfill(2) + "-")]
+        paths = [p for p in paths if read(p)["id"] == args.episode.zfill(2) or read(p).get("topic") == args.episode]
     if not paths:
         parser.error("No matching storyboards")
     for path in paths:
@@ -295,7 +307,7 @@ def main() -> None:
             native = (folder / "episode.html").read_text()
             marker = "const deck = "
             actual, _ = json.JSONDecoder().raw_decode(native.split(marker, 1)[1])
-            assert len(actual["sections"]) == 24
+            assert len(actual["sections"]) == len(deck["sections"])
             for planned, recorded in zip(deck["sections"], actual["sections"]):
                 assert abs(planned["frame"] - recorded["frame"]) <= 1, (planned, recorded)
             # Store actual frame boundaries; narration/caption chunks remain storyboard-derived.
@@ -304,10 +316,13 @@ def main() -> None:
             deck["frames"] = actual["frames"]
             source_stream = next(s for s in probe(folder / "episode.mp4")["streams"] if s["codec_type"] == "video")
             fraction = int(source_stream["nb_frames"]) / deck["frames"]
-            assert fraction >= 0.6, f"Only {fraction:.0%} of the native timeline has changing frames"
+            if data.get("edition") != "focused-v2":
+                assert fraction >= 0.6, f"Only {fraction:.0%} of the native timeline has changing frames"
             timing = json.loads((folder / "animation-timing.json").read_text())
-            assert timing.get("edition") == "visual"
-            assert all(s["visual_fraction"] >= .65 for s in timing["sections"])
+            assert timing.get("edition") == data.get("edition", "visual")
+            assert all(s["visual_seconds"] > 0 for s in timing["sections"])
+            if data.get("edition") != "focused-v2":
+                assert all(s["visual_fraction"] >= .65 for s in timing["sections"])
             (folder / "motion-verification.json").write_text(json.dumps({
                 "native_changing_frame_fraction": round(fraction, 4),
                 "minimum_section_visual_fraction": min(s["visual_fraction"] for s in timing["sections"]),
@@ -315,12 +330,24 @@ def main() -> None:
             }, indent=2) + "\n")
             write_documents(folder, data, deck)
             (folder / "episode.html").unlink()  # The customized presentation.html is the entrypoint.
+        if args.exports_only:
+            source_stream = next(s for s in probe(folder / "episode.mp4")["streams"] if s["codec_type"] == "video")
+            if source_stream["avg_frame_rate"] != "30/1":
+                timing = json.loads((folder / "animation-timing.json").read_text())
+                (folder / "motion-verification.json").write_text(json.dumps({
+                    "native_changing_frame_fraction": round(int(source_stream["nb_frames"]) / deck["frames"], 4),
+                    "minimum_section_visual_fraction": min(s["visual_fraction"] for s in timing["sections"]),
+                    "longest_final_hold_seconds": max(s["section_seconds"] - s["visual_seconds"] - .4 for s in timing["sections"]),
+                }, indent=2) + "\n")
         normalize_video(folder, deck)
         if not args.no_clips:
-            print("  Exporting 24 frame-accurate section clips…", flush=True)
+            print(f"  Exporting {len(deck['sections'])} frame-accurate phase clips…", flush=True)
             export_clips(folder, deck)
+        write_documents(folder, data, deck)
         print("  " + json.dumps(verify(folder, data, deck, not args.no_clips)), flush=True)
-    write_index()
+        (folder / "episode.html").unlink(missing_ok=True)
+    if not args.no_index:
+        write_index()
 
 
 if __name__ == "__main__":

@@ -1,0 +1,551 @@
+1
+00:00:00,000 --> 00:00:04,905
+This thin strand carries light, yet an
+enormous number of conversations
+
+2
+00:00:04,905 --> 00:00:09,810
+can cross it together. How can the receiver
+tell them apart?
+
+3
+00:00:09,810 --> 00:00:14,714
+Imagine four senders all insisting on using
+the same fiber at
+
+4
+00:00:14,714 --> 00:00:19,619
+the same time. We could build four separate
+paths, but the
+
+5
+00:00:19,619 --> 00:00:24,524
+more interesting solution is to give each
+signal a property that
+
+6
+00:00:24,524 --> 00:00:29,429
+survives the journey. Today, that property is
+wavelength. Watch the four
+
+7
+00:00:29,429 --> 00:00:34,333
+colors; each represents a separate optical
+channel.
+
+8
+00:00:34,333 --> 00:00:39,362
+Each sender has its own changing stream of
+bits. For now,
+
+9
+00:00:39,362 --> 00:00:44,390
+we draw four separate paths so their
+identities are obvious. The
+
+10
+00:00:44,390 --> 00:00:49,419
+blue signal might carry one stream of data
+while the green
+
+11
+00:00:49,419 --> 00:00:54,448
+signal carries another. They needn't contain
+the same pattern, begin together,
+
+12
+00:00:54,448 --> 00:00:59,476
+or tell the same story. The problem is to
+combine them
+
+13
+00:00:59,476 --> 00:01:04,505
+physically while leaving the receiver enough
+information to reconstruct each stream.
+
+14
+00:01:04,505 --> 00:01:09,533
+Simply remembering that there were four
+senders isn't enough.
+
+15
+00:01:09,533 --> 00:01:14,371
+First look at a wave rather than its data.
+Wavelength is
+
+16
+00:01:14,371 --> 00:01:19,210
+the distance between repeating points, such as
+neighboring crests. Compress the
+
+17
+00:01:19,210 --> 00:01:24,048
+spacing and the wavelength gets shorter;
+spread the crests and it
+
+18
+00:01:24,048 --> 00:01:28,886
+gets longer. Our colors make that difference
+easy to follow. Real
+
+19
+00:01:28,886 --> 00:01:33,724
+communication systems commonly use infrared
+light, so these display colors are
+
+20
+00:01:33,724 --> 00:01:38,562
+labels for our eyes. They are not a promise
+that the
+
+21
+00:01:38,562 --> 00:01:43,400
+fiber contains these exact visible colors.
+
+22
+00:01:43,400 --> 00:01:48,114
+A channel needs to carry something more
+interesting than a perfectly
+
+23
+00:01:48,114 --> 00:01:52,829
+unchanging wave. A transmitter varies
+properties of its optical signal to
+
+24
+00:01:52,829 --> 00:01:57,543
+represent information. Here, brightness
+changes illustrate that idea: the pattern
+changes
+
+25
+00:01:57,543 --> 00:02:02,257
+while the channel keeps its wavelength
+identity. Real modulation can be
+
+26
+00:02:02,257 --> 00:02:06,971
+more sophisticated. Keep those two jobs
+separate in your mind: modulation
+
+27
+00:02:06,971 --> 00:02:11,686
+carries the information, while the wavelength
+helps identify which optical channel
+
+28
+00:02:11,686 --> 00:02:16,400
+we are looking at.
+
+29
+00:02:16,400 --> 00:02:21,305
+Suppose we deliberately remove the difference
+between the channels. Now the
+
+30
+00:02:21,305 --> 00:02:26,210
+receiver cannot separate them merely by
+choosing a wavelength, because they
+
+31
+00:02:26,210 --> 00:02:31,114
+occupy the same wavelength region. Combining
+signals only helps when there
+
+32
+00:02:31,114 --> 00:02:36,019
+is a usable separation rule. The problem isn't
+that two messages
+
+33
+00:02:36,019 --> 00:02:40,924
+dislike each other. The receiver has lost the
+clue that distinguished
+
+34
+00:02:40,924 --> 00:02:45,829
+them. Give the channels different wavelength
+allocations again, and that clue
+
+35
+00:02:45,829 --> 00:02:50,733
+returns without adding another strand of
+fiber.
+
+36
+00:02:50,733 --> 00:02:55,638
+Place the four channels at separate positions
+on this wavelength axis.
+
+37
+00:02:55,638 --> 00:03:00,543
+Each position stands for a narrow optical
+channel with room for
+
+38
+00:03:00,543 --> 00:03:05,448
+its modulated signal. The spaces between them
+matter: actual signals and
+
+39
+00:03:05,448 --> 00:03:10,352
+optical filters don't have infinitely sharp
+boundaries. If we pack channels
+
+40
+00:03:10,352 --> 00:03:15,257
+too closely for the equipment, separating them
+becomes harder. Wavelength division
+
+41
+00:03:15,257 --> 00:03:20,162
+is organized sharing of optical spectrum, not
+permission to place an
+
+42
+00:03:20,162 --> 00:03:25,067
+unlimited number of channels wherever we like.
+
+43
+00:03:25,067 --> 00:03:29,843
+Now watch the multiplexer. Separate optical
+inputs enter; a combined optical
+
+44
+00:03:29,843 --> 00:03:34,619
+signal leaves through one path. None of our
+four conversations has
+
+45
+00:03:34,619 --> 00:03:39,395
+been turned into the others. They coexist in
+the outgoing light
+
+46
+00:03:39,395 --> 00:03:44,171
+because they occupy different wavelength
+channels. This is the central move
+
+47
+00:03:44,171 --> 00:03:48,948
+in wavelength-division multiplexing, usually
+shortened to WDM. The name sounds elaborate,
+
+48
+00:03:48,948 --> 00:03:53,724
+but the drawing has already done most of the
+explaining: different
+
+49
+00:03:53,724 --> 00:03:58,500
+wavelengths, together in one fiber.
+
+50
+00:03:58,500 --> 00:04:03,338
+Inside the shared link, all four channels
+propagate together. Follow one
+
+51
+00:04:03,338 --> 00:04:08,176
+pulse from each input and notice that they can
+occupy the
+
+52
+00:04:08,176 --> 00:04:13,014
+fiber at the same time. They are not taking
+four long
+
+53
+00:04:13,014 --> 00:04:17,852
+turns. The colored paths are a visual aid
+showing channel identity,
+
+54
+00:04:17,852 --> 00:04:22,690
+rather than separate colored tubes hidden
+inside the strand. One physical
+
+55
+00:04:22,690 --> 00:04:27,529
+optical path is carrying several
+distinguishable optical channels, and each
+channel
+
+56
+00:04:27,529 --> 00:04:32,367
+can carry its own changing information.
+
+57
+00:04:32,367 --> 00:04:36,890
+At the far end, the demultiplexer reverses the
+arrangement. Optical components
+
+58
+00:04:36,890 --> 00:04:41,414
+direct different wavelength regions toward
+their corresponding receivers. Blue returns to
+
+59
+00:04:41,414 --> 00:04:45,938
+blue's output; green returns to green's
+output. The useful achievement is
+
+60
+00:04:45,938 --> 00:04:50,462
+not just that light reached the destination.
+The receiver recovered the
+
+61
+00:04:50,462 --> 00:04:54,986
+right stream at the right output. Keep an eye
+on the
+
+62
+00:04:54,986 --> 00:04:59,510
+pulse pattern: separation preserves the
+identity needed to interpret the original
+
+63
+00:04:59,510 --> 00:05:04,033
+data.
+
+64
+00:05:04,033 --> 00:05:08,681
+Cover three outputs and inspect the remaining
+one. Its receiver is
+
+65
+00:05:08,681 --> 00:05:13,329
+interested in the selected wavelength channel
+while the others continue through
+
+66
+00:05:13,329 --> 00:05:17,976
+their own outputs. This is why the wavelength
+allocation matters at
+
+67
+00:05:17,976 --> 00:05:22,624
+both ends. The transmitter alone can't invent
+a private rule and
+
+68
+00:05:22,624 --> 00:05:27,271
+hope the receiver guesses it. Multiplexing and
+demultiplexing form a coordinated
+
+69
+00:05:27,271 --> 00:05:31,919
+system: combine according to an agreed
+arrangement, then use that arrangement
+
+70
+00:05:31,919 --> 00:05:36,567
+to separate again.
+
+71
+00:05:36,567 --> 00:05:41,214
+Let's attach numbers to the picture. Suppose
+each of our four
+
+72
+00:05:41,214 --> 00:05:45,862
+channels carries one hundred gigabits per
+second. One channel contributes one
+
+73
+00:05:45,862 --> 00:05:50,510
+hundred; two contribute two hundred; four
+contribute four hundred gigabits per
+
+74
+00:05:50,510 --> 00:05:55,157
+second of combined raw rate. The sum comes
+from parallel channel
+
+75
+00:05:55,157 --> 00:05:59,805
+capacity. We haven't made each individual
+channel four times faster. We've
+
+76
+00:05:59,805 --> 00:06:04,452
+arranged four channels so their rates
+contribute to the total at
+
+77
+00:06:04,452 --> 00:06:09,100
+the same time.
+
+78
+00:06:09,100 --> 00:06:13,938
+Four hundred gigabits per second is not four
+hundred gigabytes per
+
+79
+00:06:13,938 --> 00:06:18,776
+second. Eight bits make a byte, so dividing by
+eight gives
+
+80
+00:06:18,776 --> 00:06:23,614
+fifty gigabytes per second as the
+corresponding raw byte rate. Even
+
+81
+00:06:23,614 --> 00:06:28,452
+that is not a promised file-download speed.
+Coding, framing, and other
+
+82
+00:06:28,452 --> 00:06:33,290
+overhead consume part of the transmitted
+information, and the rest of
+
+83
+00:06:33,290 --> 00:06:38,129
+the system may impose limits. The
+multiplication describes our optical channel
+
+84
+00:06:38,129 --> 00:06:42,967
+model, not every application's measured
+throughput.
+
+85
+00:06:42,967 --> 00:06:48,062
+It is tempting to keep adding channels and
+declare victory over
+
+86
+00:06:48,062 --> 00:06:53,157
+physics. But the available spectrum, channel
+spacing, amplification, noise, and receiver
+
+87
+00:06:53,157 --> 00:06:58,252
+equipment constrain the arrangement. In the
+picture, adding another channel means
+
+88
+00:06:58,252 --> 00:07:03,348
+finding a usable place for its signal and a
+way to
+
+89
+00:07:03,348 --> 00:07:08,443
+recover it. More wavelength channels can
+increase total capacity, but the
+
+90
+00:07:08,443 --> 00:07:13,538
+equipment must support the whole transmission.
+An extra colored line on
+
+91
+00:07:13,538 --> 00:07:18,633
+a diagram is much easier than a working
+optical link.
+
+92
+00:07:18,633 --> 00:07:23,471
+Our equal-rate example was convenient, not
+compulsory. Let two channels carry
+
+93
+00:07:23,471 --> 00:07:28,310
+one hundred gigabits per second each and two
+carry fifty each.
+
+94
+00:07:28,310 --> 00:07:33,148
+The combined raw rate is now three hundred
+gigabits per second.
+
+95
+00:07:33,148 --> 00:07:37,986
+Nothing about the word multiplexing requires
+equal contributions. This is the
+
+96
+00:07:37,986 --> 00:07:42,824
+same sum written more generally: add the
+individual channel rates. The
+
+97
+00:07:42,824 --> 00:07:47,662
+diagram changes one channel's contribution at
+a time, so the arithmetic
+
+98
+00:07:47,662 --> 00:07:52,500
+stays attached to the physical arrangement.
+
+99
+00:07:52,500 --> 00:07:57,405
+The scale becomes striking in real optical
+research. In June twenty
+
+100
+00:07:57,405 --> 00:08:02,310
+twenty-six, NICT reported a wideband
+transmission demonstration over installed
+fiber using
+
+101
+00:08:02,310 --> 00:08:07,214
+more than a thousand wavelength channels. That
+achievement also depended on
+
+102
+00:08:07,214 --> 00:08:12,119
+amplification, modulation, and receiver
+techniques; WDM did not produce the entire
+
+103
+00:08:12,119 --> 00:08:17,024
+result by itself. Our four-channel drawing
+isolates one essential idea inside
+
+104
+00:08:17,024 --> 00:08:21,929
+that much richer system. The same separation
+principle can operate at
+
+105
+00:08:21,929 --> 00:08:26,833
+a scale far beyond four colored inputs.
+
+106
+00:08:26,833 --> 00:08:31,800
+We began with four senders competing for one
+fiber. The solution
+
+107
+00:08:31,800 --> 00:08:36,767
+was to preserve a distinction the receiver
+could use: wavelength. Give
+
+108
+00:08:36,767 --> 00:08:41,733
+each channel a suitable optical allocation,
+combine them, carry them together,
+
+109
+00:08:41,733 --> 00:08:46,700
+and separate them again. The capacity
+arithmetic follows the picture because
+
+110
+00:08:46,700 --> 00:08:51,667
+several channels contribute simultaneously.
+One strand can support many conversations when
+
+111
+00:08:51,667 --> 00:08:56,633
+sharing does not destroy their identities.
+That is the useful idea
+
+112
+00:08:56,633 --> 00:09:01,600
+to keep when the long name fades away.

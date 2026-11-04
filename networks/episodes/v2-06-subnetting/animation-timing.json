@@ -1,0 +1,119 @@
+{
+  "fps": 30.0,
+  "sections": [
+    {
+      "name": "One block, four networks",
+      "animation_end_frame": 174,
+      "section_seconds": 33.433,
+      "visual_seconds": 5.4,
+      "visual_fraction": 0.162
+    },
+    {
+      "name": "Expose the thirty-two bits",
+      "animation_end_frame": 1090,
+      "section_seconds": 33.0,
+      "visual_seconds": 2.5,
+      "visual_fraction": 0.076
+    },
+    {
+      "name": "Fix the shared beginning",
+      "animation_end_frame": 2152,
+      "section_seconds": 33.0,
+      "visual_seconds": 4.9,
+      "visual_fraction": 0.148
+    },
+    {
+      "name": "Count the free combinations",
+      "animation_end_frame": 3256,
+      "section_seconds": 33.433,
+      "visual_seconds": 8.7,
+      "visual_fraction": 0.26
+    },
+    {
+      "name": "One new bit creates halves",
+      "animation_end_frame": 4139,
+      "section_seconds": 31.667,
+      "visual_seconds": 4.7,
+      "visual_fraction": 0.148
+    },
+    {
+      "name": "Two new bits create quarters",
+      "animation_end_frame": 5182,
+      "section_seconds": 33.0,
+      "visual_seconds": 7.8,
+      "visual_fraction": 0.236
+    },
+    {
+      "name": "Six bits remain inside each",
+      "animation_end_frame": 6034,
+      "section_seconds": 32.1,
+      "visual_seconds": 3.2,
+      "visual_fraction": 0.1
+    },
+    {
+      "name": "Read the four starts",
+      "animation_end_frame": 7138,
+      "section_seconds": 33.867,
+      "visual_seconds": 7.9,
+      "visual_fraction": 0.233
+    },
+    {
+      "name": "Turn the boundary into a mask",
+      "animation_end_frame": 8040,
+      "section_seconds": 32.1,
+      "visual_seconds": 4.1,
+      "visual_fraction": 0.128
+    },
+    {
+      "name": "Find where seventy belongs",
+      "animation_end_frame": 9084,
+      "section_seconds": 30.333,
+      "visual_seconds": 6.8,
+      "visual_fraction": 0.224
+    },
+    {
+      "name": "Give the endpoints their jobs",
+      "animation_end_frame": 9922,
+      "section_seconds": 35.2,
+      "visual_seconds": 4.4,
+      "visual_fraction": 0.125
+    },
+    {
+      "name": "Read the first two ranges",
+      "animation_end_frame": 10975,
+      "section_seconds": 32.1,
+      "visual_seconds": 4.3,
+      "visual_fraction": 0.134
+    },
+    {
+      "name": "Complete the remaining ranges",
+      "animation_end_frame": 11938,
+      "section_seconds": 34.333,
+      "visual_seconds": 4.3,
+      "visual_fraction": 0.125
+    },
+    {
+      "name": "Choose room for fifty hosts",
+      "animation_end_frame": 12971,
+      "section_seconds": 32.533,
+      "visual_seconds": 4.4,
+      "visual_fraction": 0.135
+    },
+    {
+      "name": "Check the boundary, not appearances",
+      "animation_end_frame": 14097,
+      "section_seconds": 32.533,
+      "visual_seconds": 9.4,
+      "visual_fraction": 0.289
+    },
+    {
+      "name": "Four networks from two bits",
+      "animation_end_frame": 14989,
+      "section_seconds": 32.533,
+      "visual_seconds": 6.6,
+      "visual_fraction": 0.203
+    }
+  ],
+  "duration": 525.1666666666666,
+  "edition": "focused-v2"
+}

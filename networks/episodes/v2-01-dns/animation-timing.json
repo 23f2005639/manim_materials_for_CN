@@ -1,0 +1,119 @@
+{
+  "fps": 30.0,
+  "sections": [
+    {
+      "name": "Connected, but not found",
+      "animation_end_frame": 354,
+      "section_seconds": 32.533,
+      "visual_seconds": 11.4,
+      "visual_fraction": 0.35
+    },
+    {
+      "name": "A name is not an address",
+      "animation_end_frame": 1276,
+      "section_seconds": 33.433,
+      "visual_seconds": 9.6,
+      "visual_fraction": 0.287
+    },
+    {
+      "name": "Read the name backward",
+      "animation_end_frame": 2222,
+      "section_seconds": 33.867,
+      "visual_seconds": 7.7,
+      "visual_fraction": 0.227
+    },
+    {
+      "name": "Meet the resolver",
+      "animation_end_frame": 3217,
+      "section_seconds": 33.433,
+      "visual_seconds": 7.0,
+      "visual_fraction": 0.209
+    },
+    {
+      "name": "The root gives a direction",
+      "animation_end_frame": 4284,
+      "section_seconds": 33.867,
+      "visual_seconds": 9.15,
+      "visual_fraction": 0.27
+    },
+    {
+      "name": "A smaller branch",
+      "animation_end_frame": 5300,
+      "section_seconds": 33.867,
+      "visual_seconds": 9.15,
+      "visual_fraction": 0.27
+    },
+    {
+      "name": "The authority answers",
+      "animation_end_frame": 6316,
+      "section_seconds": 34.333,
+      "visual_seconds": 9.15,
+      "visual_fraction": 0.267
+    },
+    {
+      "name": "Return the useful result",
+      "animation_end_frame": 7314,
+      "section_seconds": 33.867,
+      "visual_seconds": 8.05,
+      "visual_fraction": 0.238
+    },
+    {
+      "name": "Where the waiting comes from",
+      "animation_end_frame": 8589,
+      "section_seconds": 35.2,
+      "visual_seconds": 16.7,
+      "visual_fraction": 0.474
+    },
+    {
+      "name": "Repeat the same question",
+      "animation_end_frame": 9362,
+      "section_seconds": 34.333,
+      "visual_seconds": 7.25,
+      "visual_fraction": 0.211
+    },
+    {
+      "name": "Give the memory a lifetime",
+      "animation_end_frame": 10548,
+      "section_seconds": 34.333,
+      "visual_seconds": 12.45,
+      "visual_fraction": 0.363
+    },
+    {
+      "name": "Change the address",
+      "animation_end_frame": 11519,
+      "section_seconds": 34.767,
+      "visual_seconds": 10.5,
+      "visual_fraction": 0.302
+    },
+    {
+      "name": "Expiration causes new work",
+      "animation_end_frame": 12730,
+      "section_seconds": 35.2,
+      "visual_seconds": 16.1,
+      "visual_fraction": 0.457
+    },
+    {
+      "name": "Break only the naming step",
+      "animation_end_frame": 13566,
+      "section_seconds": 34.333,
+      "visual_seconds": 8.75,
+      "visual_fraction": 0.255
+    },
+    {
+      "name": "Responsibility, time, and memory",
+      "animation_end_frame": 14636,
+      "section_seconds": 34.767,
+      "visual_seconds": 10.1,
+      "visual_fraction": 0.291
+    },
+    {
+      "name": "Resolve the opening contradiction",
+      "animation_end_frame": 15604,
+      "section_seconds": 35.667,
+      "visual_seconds": 7.6,
+      "visual_fraction": 0.213
+    }
+  ],
+  "duration": 547.8,
+  "edition": "focused-v2"
+}
