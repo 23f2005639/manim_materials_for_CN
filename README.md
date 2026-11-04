@@ -3,6 +3,8 @@
 Eight original ManimGX explainers: DNS, bufferbloat, WDM, packet switching, Dijkstra,
 IPv4 subnetting, TCP slow start, and RSA. Each focuses on one story with visual intuition,
 mathematics, and a complete YouTube narration script for your own voice.
+The current edition starts from everyday examples and builds every topic from the basics.
+The fiber lesson includes a 3D strand and moving light pulse.
 
 See [TOPICS.md](TOPICS.md) for the full topic guide and scripts.
 

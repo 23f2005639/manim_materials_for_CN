@@ -65,8 +65,12 @@ def main():
     assert abs((4+3-1)*1500*8/10_000_000 - .0072) < 1e-10
     assert pow(7,3,55) == 13 and pow(13,27,55) == 7
     assert (3*27-1) % 40 == 0
+    assert all(pow(pow(message,3,55),27,55)==message for message in range(55))
+    assert pow(13,5,55)==43
+    assert [4*2**rounds for rounds in range(4)]==[4,8,16,32]
+    assert 16*1000*8/.1==1_280_000 and 16*1000*8/.2==640_000
     assert sum((2,20,30,40)) == 92 and 92/2 == 46
-    print(f"PASS:8 focused lessons,{sum(len(read(p)['sections']) for p in paths)}phases,{total_words}narration words; independent graph/subnet/queue/pipeline/RSA/DNS calculations pass")
+    print(f"PASS:8 focused lessons,{sum(len(read(p)['sections']) for p in paths)}phases,{total_words}narration words; independent graph/subnet/queue/pipeline/RSA/TCP/DNS calculations pass")
 
 
 if __name__ == "__main__":

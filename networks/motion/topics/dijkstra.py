@@ -115,7 +115,9 @@ class Director(VisualDirector):
             self.travel(BEST,GREEN,True)
             self.equation('2 + 1 + 5 + 2 + 3 = 13',GREEN)
         elif index in stages:
-            dist,settled=stages[index];self.graph(dist,settled)
+            dist,settled=stages[index]
+            if index==3:dist={n:0 if n=='A' else '?' for n in POSITIONS}
+            self.graph(dist,settled)
             if index==3:
                 for n in 'ABCDEF':self.change(n,0 if n=='A' else '?',BLUE)
                 self.equation('? means no route found yet',WHITE)

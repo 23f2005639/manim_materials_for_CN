@@ -27,7 +27,7 @@ ranges so phase jumps seek correctly. Media version URLs prevent stale renders.
 
 Read [all eight scripts](youtube-scripts.md) or each episode's `narration.md`. The scripts
 have 1,100–1,250 words per episode, aimed at a general YouTube audience. Their planned
-8–10 minute timings assume approximately 135 words/minute plus brief pauses. Record a
+9–10 minute timings assume approximately 135 words/minute plus brief pauses. Record a
 read-through in your own voice before final editing; your delivery determines final timing.
 There is no generated voiceover or background music.
 
@@ -40,6 +40,14 @@ Each topic has 16 meaningful phases; the engine supports differing phase counts.
 
 The previous mixed-topic series is preserved in [the legacy index](legacy-index.html)
 and [legacy scripts](legacy-scripts.md). Its original episode URLs still work.
+
+## Beginner progression
+
+Every lesson starts with familiar objects and introduces each new word alongside its visual meaning.
+The first four phases establish the building blocks before the central experiment and equations.
+The fiber lesson opens with a real ManimGX 3D cylinder, moving light pulse, and camera rotation,
+then returns to a flat view for readable diagrams. Other topics use 2D for addresses, graphs,
+queues and arithmetic. See [TOPICS.md](../TOPICS.md) for each lesson’s progression.
 
 ## Files and animation timing
 
@@ -89,6 +97,8 @@ children detached by animations. Only intentional state persists within a phase.
 
 ```sh
 python3 networks/tests/content_check.py
+python3 networks/tests/clip_refresh_check.py
+python3 networks/tests/script_check.py
 python3 networks/tests/motion_check.py
 python3 networks/tests/clip_alignment_check.py
 uv run --with playwright python networks/tests/http_check.py

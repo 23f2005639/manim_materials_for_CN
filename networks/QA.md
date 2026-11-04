@@ -1,21 +1,21 @@
 # Focused-series verification
 
-Eight standalone topics, each developed through a visual question and its mathematics. The active series is defined in `series.json`; the older lessons remain available through `legacy-index.html`.
+Eight standalone topics rebuilt from concrete beginner examples, through visual definitions and guided experiments, to simple mathematics. The active series is defined in `series.json`; the older lessons remain available through `legacy-index.html`.
 
 | Topic | Runtime | Phases | Spoken words | Verified clips |
 |---|---:|---:|---:|---:|
-| dns | 9:08 | 16 | 1165 | 16 |
-| bufferbloat | 9:39 | 16 | 1235 | 16 |
-| wdm | 9:02 | 16 | 1151 | 16 |
-| packet-switching | 9:45 | 16 | 1248 | 16 |
-| dijkstra | 9:26 | 16 | 1206 | 16 |
-| subnetting | 8:45 | 16 | 1114 | 16 |
-| tcp-slow-start | 9:45 | 16 | 1249 | 16 |
-| rsa | 9:23 | 16 | 1199 | 16 |
+| dns | 9:30 | 16 | 1214 | 16 |
+| bufferbloat | 9:43 | 16 | 1244 | 16 |
+| wdm | 9:33 | 16 | 1222 | 16 |
+| packet-switching | 9:42 | 16 | 1242 | 16 |
+| dijkstra | 9:34 | 16 | 1223 | 16 |
+| subnetting | 9:38 | 16 | 1234 | 16 |
+| tcp-slow-start | 9:45 | 16 | 1248 | 16 |
+| rsa | 9:45 | 16 | 1248 | 16 |
 
 ## Completed checks
 
-- All 128 phase-end layout samples passed ManimGX inspection. Representative mid-motion samples were checked across all eight topics. Moving-token and label collisions found during review were corrected before the accepted exports.
+- All 128 phase endpoints were generated with ManimGX inspection and reviewed. Automatic 2D layout checks passed for seven lessons; ManimGX skips those checks for the 3D fiber lesson, whose frames were visually reviewed. Opening motion samples were checked across all eight topics.
 - Source/editorial review checked all eight complete scripts for one-topic scope, narration/animation agreement, and misleading claims.
 - Independent numerical checks passed DNS timing, queue delay, packet-pipeline time, Dijkstra distances, subnet ranges and host counts, slow-start window/rate arithmetic, and RSA recovery.
 - All eight full videos and 128 clips are 1920×1080 H.264 at constant 30 fps, with matching frame counts and section durations.
@@ -23,6 +23,8 @@ Eight standalone topics, each developed through a visual question and its mathem
 - All eight players passed HTTP browser checks for video-only display, fullscreen, navigation, replay, pause/resume, 0.25×–4× speed, correct holds, and presenter scripts.
 - A separate real-HTTP test played the first five DNS phases naturally and checked exact hold times and backward replay. The server passed byte-range and unsatisfiable-range checks.
 - The legacy and focused object-cleanup regression checks passed, including groups split into detached child objects.
+- Renamed phase clips replace old generated filenames after successful export; the regression test also checks preservation on encoder failure.
+- All narration paragraphs agree across the storyboard, Markdown script, section data, and embedded presenter notes.
 
 ## Reports
 
