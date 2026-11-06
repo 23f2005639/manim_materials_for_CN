@@ -115,3 +115,20 @@ uv run --with playwright playwright install chromium
 Math checks independently verify DNS timing, queue delay, packet-pipeline time,
 shortest-path results, subnet ranges and the RSA toy example. See [QA.md](QA.md)
 for the completed release checks and their limits.
+
+## PDF companions for your own narration
+
+Open [the eight PDF guides](../output/pdf/index.html). Each 10-page guide has a complete
+16-clip timeline, frames decoded from the current video, plain-English explanations of
+what happens and why, delivery cues, and space for your phrasing. Times match the
+continuous MP4; a live explanation can take a different amount of time.
+
+Authored notes are in `presenter-guide-notes.txt`. To regenerate the PDFs after a video
+or note change, run:
+
+```sh
+uv run --with reportlab --with pypdf python networks/make_presenter_guides.py
+```
+
+The generator requires FFmpeg and DejaVu Sans fonts. Remove `tmp/pdfs/` to refresh
+cached frames after replacing a video. The PDFs link to the local player, clips and sources.

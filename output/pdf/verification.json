@@ -1,0 +1,98 @@
+[
+  {
+    "id": "01",
+    "topic": "dns",
+    "file": "01-dns-presenter-guide.pdf",
+    "pages": 10,
+    "clips": 16,
+    "timings": "current sections.json at 30fps",
+    "frames": "decoded current MP4",
+    "layout_review": "All10pages rendered; contact-sheet and representative full-page visual review passed",
+    "clip_notes_checked": 16,
+    "local_links": "HTTP HEAD200"
+  },
+  {
+    "id": "02",
+    "topic": "bufferbloat",
+    "file": "02-bufferbloat-presenter-guide.pdf",
+    "pages": 10,
+    "clips": 16,
+    "timings": "current sections.json at 30fps",
+    "frames": "decoded current MP4",
+    "layout_review": "All10pages rendered; contact-sheet and representative full-page visual review passed",
+    "clip_notes_checked": 16,
+    "local_links": "HTTP HEAD200"
+  },
+  {
+    "id": "03",
+    "topic": "wdm",
+    "file": "03-wdm-presenter-guide.pdf",
+    "pages": 10,
+    "clips": 16,
+    "timings": "current sections.json at 30fps",
+    "frames": "decoded current MP4",
+    "layout_review": "All10pages rendered; contact-sheet and representative full-page visual review passed",
+    "clip_notes_checked": 16,
+    "local_links": "HTTP HEAD200"
+  },
+  {
+    "id": "04",
+    "topic": "packet-switching",
+    "file": "04-packet-switching-presenter-guide.pdf",
+    "pages": 10,
+    "clips": 16,
+    "timings": "current sections.json at 30fps",
+    "frames": "decoded current MP4",
+    "layout_review": "All10pages rendered; contact-sheet and representative full-page visual review passed",
+    "clip_notes_checked": 16,
+    "local_links": "HTTP HEAD200"
+  },
+  {
+    "id": "05",
+    "topic": "dijkstra",
+    "file": "05-dijkstra-presenter-guide.pdf",
+    "pages": 10,
+    "clips": 16,
+    "timings": "current sections.json at 30fps",
+    "frames": "decoded current MP4",
+    "layout_review": "All10pages rendered; contact-sheet and representative full-page visual review passed",
+    "clip_notes_checked": 16,
+    "local_links": "HTTP HEAD200"
+  },
+  {
+    "id": "06",
+    "topic": "subnetting",
+    "file": "06-subnetting-presenter-guide.pdf",
+    "pages": 10,
+    "clips": 16,
+    "timings": "current sections.json at 30fps",
+    "frames": "decoded current MP4",
+    "layout_review": "All10pages rendered; contact-sheet and representative full-page visual review passed",
+    "clip_notes_checked": 16,
+    "local_links": "HTTP HEAD200"
+  },
+  {
+    "id": "07",
+    "topic": "tcp-slow-start",
+    "file": "07-tcp-slow-start-presenter-guide.pdf",
+    "pages": 10,
+    "clips": 16,
+    "timings": "current sections.json at 30fps",
+    "frames": "decoded current MP4",
+    "layout_review": "All10pages rendered; contact-sheet and representative full-page visual review passed",
+    "clip_notes_checked": 16,
+    "local_links": "HTTP HEAD200"
+  },
+  {
+    "id": "08",
+    "topic": "rsa",
+    "file": "08-rsa-presenter-guide.pdf",
+    "pages": 10,
+    "clips": 16,
+    "timings": "current sections.json at 30fps",
+    "frames": "decoded current MP4",
+    "layout_review": "All10pages rendered; contact-sheet and representative full-page visual review passed",
+    "clip_notes_checked": 16,
+    "local_links": "HTTP HEAD200"
+  }
+]

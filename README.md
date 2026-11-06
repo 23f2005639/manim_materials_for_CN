@@ -21,7 +21,7 @@ Use **→/←** for phases, **↑/↓** for speed, **P** to pause, and **R** to 
 **Shift+P** opens the current script in a separate window. Only the animation appears
 in the audience window. Finished videos are included; playback needs Python and a browser.
 
-[All scripts](networks/youtube-scripts.md) · [Rendering and recording](networks/README.md) ·
+[PDF speaking guides](output/pdf/index.html) · [All scripts](networks/youtube-scripts.md) · [Rendering and recording](networks/README.md) ·
 [Quality checks](networks/QA.md) · [Previous series](networks/legacy-index.html)
 
 ## Push to GitHub
