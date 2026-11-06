@@ -1,0 +1,294 @@
+{
+  "video_speed": 0.5,
+  "audio_speed": 1,
+  "clips_verified": 41,
+  "checks": [
+    {
+      "episode": "01-dns",
+      "clip": 1,
+      "source_audio_sha256": "102cfb85a53e38ef14e9044793bc5072ca0f56037f3c9f4fd549fbb4c004aca1",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0864
+    },
+    {
+      "episode": "01-dns",
+      "clip": 2,
+      "source_audio_sha256": "f15acde4c1f57b2f8e179ca0bb98396d030002723f4078b081c230eb42418bc0",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0687
+    },
+    {
+      "episode": "01-dns",
+      "clip": 3,
+      "source_audio_sha256": "26029200c9399ed0e4f37697de60c48e1523a7e65a965e9a81f20e92111422c9",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0769
+    },
+    {
+      "episode": "01-dns",
+      "clip": 4,
+      "source_audio_sha256": "f1db96c67e1bcf14fbbad7ab2f3dfb53fd5f2eb1da4e6298543b09e4014940df",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0673
+    },
+    {
+      "episode": "01-dns",
+      "clip": 5,
+      "source_audio_sha256": "e01fc1cb15ee341f5b9dfb21fa2db946cad1b0a455704f71ecda319c1cc13118",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0578
+    },
+    {
+      "episode": "01-dns",
+      "clip": 6,
+      "source_audio_sha256": "e917835e0f51d445d19eaacf8bac6bcc180460564d96c8cfe96e2e9fb2b968de",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0763
+    },
+    {
+      "episode": "01-dns",
+      "clip": 7,
+      "source_audio_sha256": "8f87a0ce8af4316ba9853a09cbbbcd60e793afe14f68fbdac11fc1fc31ec65d4",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0987
+    },
+    {
+      "episode": "01-dns",
+      "clip": 8,
+      "source_audio_sha256": "6659038d358d28e89e5944de72e1db5176ea12360000e767f043eb18e3dbc417",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.1036
+    },
+    {
+      "episode": "01-dns",
+      "clip": 9,
+      "source_audio_sha256": "2c19c5410f5337c41925f47d9a4adba9326f3da01acdf03963df433a9c1ce2c7",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0159
+    },
+    {
+      "episode": "01-dns",
+      "clip": 10,
+      "source_audio_sha256": "c725099230cf6f10292525718fbc1960c467df43e4ee77354293ac34dc3a8113",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0458
+    },
+    {
+      "episode": "01-dns",
+      "clip": 11,
+      "source_audio_sha256": "b3f23c70df9afc8ff2b42d892fca1abd794d3bb52708924e0cfaf4d996a31d5d",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0642
+    },
+    {
+      "episode": "01-dns",
+      "clip": 12,
+      "source_audio_sha256": "f5154eed045bd5ba6d096a46b69b84dec8b01ea2e664e4cd7794f53dfe633cae",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0599
+    },
+    {
+      "episode": "01-dns",
+      "clip": 13,
+      "source_audio_sha256": "a37de621cbfbbc93d5d1e0bbdba6af55416cd7c53fd3f46047dd36979912c12a",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0972
+    },
+    {
+      "episode": "01-dns",
+      "clip": 14,
+      "source_audio_sha256": "abcbd6e331edbc70f9608db2d87ea8127eae5c942c287a872f6bde368a47eaaf",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.1095
+    },
+    {
+      "episode": "01-dns",
+      "clip": 15,
+      "source_audio_sha256": "196b3b75e239ef87264df7b2e0bae8e3eda8100bfc1a4aa02134ead3f430a10f",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.037
+    },
+    {
+      "episode": "01-dns",
+      "clip": 16,
+      "source_audio_sha256": "8e4d23fbe87a41c788df1c704ac1e60ecc3f8431b78248eb7ecb66910062c9a8",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0544
+    },
+    {
+      "episode": "02-bufferbloat",
+      "clip": 1,
+      "source_audio_sha256": "aabd47b7c7ba197dddbdf7987debc45bf9ec55969be30c1055883bdc806947d7",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0615
+    },
+    {
+      "episode": "02-bufferbloat",
+      "clip": 2,
+      "source_audio_sha256": "07f1d19c74a5ca8385f5d66509322e94cfd00d2cb8eba2b4b18f8a0fed560335",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0664
+    },
+    {
+      "episode": "02-bufferbloat",
+      "clip": 3,
+      "source_audio_sha256": "622b70979b256947c52d21af905a1384c3d5c9ea4c798ca327bd070e29432e9e",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0287
+    },
+    {
+      "episode": "02-bufferbloat",
+      "clip": 4,
+      "source_audio_sha256": "6c300877a786f33cf157bbde8debe1c4f474a87936527bf33450137978bc78f3",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0355
+    },
+    {
+      "episode": "02-bufferbloat",
+      "clip": 5,
+      "source_audio_sha256": "e3f30a2e577c8129c2035ab589f3b61ed9d52073f98efc95740234922e03836c",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0338
+    },
+    {
+      "episode": "02-bufferbloat",
+      "clip": 6,
+      "source_audio_sha256": "3b3d287ca2ecfe01369c71b20473a3abf8df15e1856c37369d1367587dc7fda5",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0539
+    },
+    {
+      "episode": "02-bufferbloat",
+      "clip": 7,
+      "source_audio_sha256": "2fa2e18561e42da3ee1b78346cb10d8bad50eb9bd7bdbb2f5e98ad2aa40a092f",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.053
+    },
+    {
+      "episode": "02-bufferbloat",
+      "clip": 8,
+      "source_audio_sha256": "139085ffd18dd98f8071031d2b6b896c8942ea0622da3ceefef0bdf8e63899c4",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0349
+    },
+    {
+      "episode": "02-bufferbloat",
+      "clip": 9,
+      "source_audio_sha256": "c86b3601c62d60f3d055407daa182eb8a96704444e29c76794ab266c53f0ad05",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0793
+    },
+    {
+      "episode": "02-bufferbloat",
+      "clip": 10,
+      "source_audio_sha256": "4d186f232fe75551ada1ebc8049ec335249d6a59217ef1f3273c058f0a46c354",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0511
+    },
+    {
+      "episode": "02-bufferbloat",
+      "clip": 11,
+      "source_audio_sha256": "0e136769c6d83e96020d1210fd1c153bcbcec4ddf2444b81f09634750386be16",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0242
+    },
+    {
+      "episode": "02-bufferbloat",
+      "clip": 12,
+      "source_audio_sha256": "e74f033bd15aa5130924f16f7f54418205cc2252c5312c64cd6660060eb0f9c6",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0553
+    },
+    {
+      "episode": "02-bufferbloat",
+      "clip": 13,
+      "source_audio_sha256": "bbf604c326b21dc106028202748204c14396105005819db3b243443f6419d2f6",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0342
+    },
+    {
+      "episode": "02-bufferbloat",
+      "clip": 14,
+      "source_audio_sha256": "8148b9259619b397affd58f6a84b02ad4c6c55d2e2e2c3e3c5c23b0911091f33",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0586
+    },
+    {
+      "episode": "02-bufferbloat",
+      "clip": 15,
+      "source_audio_sha256": "c32cc1ac0be870d77608e3390565925ed9c7c25f3c3ffd0b782094f983055931",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0597
+    },
+    {
+      "episode": "02-bufferbloat",
+      "clip": 16,
+      "source_audio_sha256": "f663fe005acda6c21843726d79e9f4c361fc2834e8d545b9da4ad9853e7f4099",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0365
+    },
+    {
+      "episode": "03-wdm",
+      "clip": 1,
+      "source_audio_sha256": "1ed38546995e471c746144a72ee2c58fe2dda5fba687b6402ea215ffd0eefe1c",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0597
+    },
+    {
+      "episode": "03-wdm",
+      "clip": 2,
+      "source_audio_sha256": "fd482c00ece2c92b74e451e93c91e331c77cfdad07a742a711bce1b77f7c202a",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0429
+    },
+    {
+      "episode": "03-wdm",
+      "clip": 3,
+      "source_audio_sha256": "9806accd370a07d0675b3002feaa802d25ed392b5d7cdc324d5413e8a0e22e58",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0616
+    },
+    {
+      "episode": "03-wdm",
+      "clip": 4,
+      "source_audio_sha256": "fb404fbe4ce62445771952bca3df1659d8efdb33a7c6dfb5d37149347e197c36",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0626
+    },
+    {
+      "episode": "03-wdm",
+      "clip": 5,
+      "source_audio_sha256": "8d620f2ff83a9524efb8fe6aa6b449ccedee4dff68f122df65207eb00e7c418b",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0537
+    },
+    {
+      "episode": "03-wdm",
+      "clip": 6,
+      "source_audio_sha256": "8ac00897666534a561570bc17a6c649bf25f9c8ae2eec6bb9976e5dbc8cbd206",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0712
+    },
+    {
+      "episode": "03-wdm",
+      "clip": 7,
+      "source_audio_sha256": "763ec7ad46d947f7d640e2d8821f91fbb9c211a08f58a47445c783544c7a94b5",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0292
+    },
+    {
+      "episode": "03-wdm",
+      "clip": 8,
+      "source_audio_sha256": "ddc54563fc617784c8fc730126545f69bf99cbeb86ebbaa81539c5e5cb6a2c89",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.1224
+    },
+    {
+      "episode": "03-wdm",
+      "clip": 9,
+      "source_audio_sha256": "29dc335f4de723342bd3937e632bf6e19203ef9260fe0491c5f03cd18711ea39",
+      "normal_speed_audio_pcm": "identical to previous version",
+      "half_speed_frame_error": 0.0299
+    }
+  ]
+}

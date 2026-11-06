@@ -4,6 +4,8 @@
     "duration": 28.833333333333332,
     "frames": 865,
     "speech_seconds": 28.08,
+    "video_speed": 0.5,
+    "audio_speed": 1.0,
     "title": "A message needs a path",
     "text": "A strand of glass can carry a crowd of conversations. Before we ask how, let's follow just one change: a pulse of light, travelling from one end to the other. A cable carries that changing pattern between places. Some cables use electrical signals. This thin glass strand uses light. It is an optical fiber. Watch one light pulse travel through it. That is our starting point: something changes at one end, and the other end detects the change.",
     "file": "clips/01.mp4"
@@ -13,6 +15,8 @@
     "duration": 27.566666666666666,
     "frames": 827,
     "speech_seconds": 26.8,
+    "video_speed": 0.5,
+    "audio_speed": 1.0,
     "title": "Two choices can carry information",
     "text": "How can light stand for a photo? Start much smaller: a yes or a no. We can agree that a bright pulse means one and a dark time means zero. Each choice is called a bit. Put many bits together, and their pattern can represent text, sound, or a picture. Our blinking light is a simple teaching example. Real equipment can use more detailed patterns, but the basic job stays the same: carry information using changes.",
     "file": "clips/02.mp4"
@@ -22,6 +26,8 @@
     "duration": 24.6,
     "frames": 738,
     "speech_seconds": 23.84,
+    "video_speed": 0.5,
+    "audio_speed": 1.0,
     "title": "Meet the shape of light",
     "text": "Now look closer at the light itself. We draw it as a wave, with repeating peaks. This curve shows a repeating light property; the beam does not wiggle through the cable like a snake. The distance from one peak to the next is its wavelength. Wide spacing means a longer wavelength. Close spacing means a shorter one. That spacing gives us a way to tell different light signals apart, even when they share a path.",
     "file": "clips/03.mp4"
@@ -31,6 +37,8 @@
     "duration": 30.133333333333333,
     "frames": 904,
     "speech_seconds": 29.36,
+    "video_speed": 0.5,
+    "audio_speed": 1.0,
     "title": "Four senders want to talk",
     "text": "Bring in four senders. Each has its own bits to send: four different conversations. So far, our easiest drawing gives every conversation its own path. Blue can carry one pattern while green carries another. Neither needs to copy the other. We call each separately usable signal path a channel. Four channels, four independent messages. But building a separate long cable for every conversation sounds expensive. Can these four channels share just one glass strand?",
     "file": "clips/04.mp4"
@@ -40,6 +48,8 @@
     "duration": 27.733333333333334,
     "frames": 832,
     "speech_seconds": 26.96,
+    "video_speed": 0.5,
+    "audio_speed": 1.0,
     "title": "What if they look identical?",
     "text": "Before solving that, try a bad idea. Put two changing signals into the same wavelength region and ask the receiver to separate them using wavelength alone. There is no useful difference for that filter to select. Our colored boxes overlap to show the problem. Simply mixing more light is not enough. We need a recognizable difference that the receiving equipment can use. Think of labels on luggage: sharing a conveyor works better when the bags remain identifiable.",
     "file": "clips/05.mp4"
@@ -49,15 +59,19 @@
     "duration": 27.0,
     "frames": 810,
     "speech_seconds": 26.24,
+    "video_speed": 0.5,
+    "audio_speed": 1.0,
     "title": "Give each channel its own spacing",
     "text": "Here is the useful difference. Give each channel a different wavelength. Our four colors are labels for those different spacings. They do not mean four visible colored beams; communication fibers commonly carry infrared light that our eyes cannot see. Each channel also needs some space around its chosen wavelength because its information changes over time. Spread the channels apart, leaving suitable room for the signals and for equipment that will separate them later.",
     "file": "clips/06.mp4"
   },
   {
     "number": 7,
-    "duration": 27.1,
-    "frames": 813,
+    "duration": 38.96666666666667,
+    "frames": 1169,
     "speech_seconds": 26.32,
+    "video_speed": 0.5,
+    "audio_speed": 1.0,
     "title": "Combine the light",
     "text": "At the sending end, an optical device brings the separate channels onto one shared path. It is called a multiplexer. The name is longer than the idea: many inputs, one shared output. Follow blue into the box, then green, yellow, and purple. Each still carries its own changing information. The device combines their light for the journey. It does not merge the four messages into a new sentence or make their bit patterns identical.",
     "file": "clips/07.mp4"
@@ -67,15 +81,19 @@
     "duration": 25.633333333333333,
     "frames": 769,
     "speech_seconds": 24.88,
+    "video_speed": 0.5,
+    "audio_speed": 1.0,
     "title": "Travel together through one fiber",
     "text": "Now watch the middle of the link. The four wavelength channels travel through the same fiber at the same time. Our small vertical gaps are only there so you can follow the colors on screen; there are no four little pipes inside the glass. This sharing method is wavelength division multiplexing, or WDM. The words now describe something we have already seen: divide the available wavelengths into channels, then let those channels share a fiber.",
     "file": "clips/08.mp4"
   },
   {
     "number": 9,
-    "duration": 29.966666666666665,
-    "frames": 899,
+    "duration": 38.96666666666667,
+    "frames": 1169,
     "speech_seconds": 29.2,
+    "video_speed": 0.5,
+    "audio_speed": 1.0,
     "title": "Sort the light at the end",
     "text": "Sharing only helps if we can recover the separate information. At the far end, another optical device sorts different wavelength regions toward different outputs. It is called a demultiplexer: the separating partner of the combining box. Follow blue to its matching output. Green goes to another. The receivers can now detect changes in their selected channels. Four messages entered the system, traveled together, and came out as four separately readable streams. The wavelength difference survived the journey.",
     "file": "clips/09.mp4"
