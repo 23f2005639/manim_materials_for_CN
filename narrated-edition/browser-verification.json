@@ -1,0 +1,18 @@
+[
+  {
+    "episode": "01-dns",
+    "keyboard_fullscreen_speed_pause_replay": "passed",
+    "unmuted_audio": "passed",
+    "hold_after_narration": "passed",
+    "no_visible_toolbar": "passed",
+    "all16speech_durations_fit": true
+  },
+  {
+    "episode": "02-bufferbloat",
+    "keyboard_fullscreen_speed_pause_replay": "passed",
+    "unmuted_audio": "passed",
+    "hold_after_narration": "passed",
+    "no_visible_toolbar": "passed",
+    "all16speech_durations_fit": true
+  }
+]

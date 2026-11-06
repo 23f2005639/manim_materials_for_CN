@@ -1,0 +1,576 @@
+[
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 1,
+    "take": 1,
+    "generation_id": "TryowkIZjfkcdajjmgBo"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 1,
+    "take": 2,
+    "generation_id": "QfKsg0fFk2BKDugg9HiL"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 2,
+    "take": 1,
+    "generation_id": "cgGpiVHT44jRAX41mrP9"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 2,
+    "take": 2,
+    "generation_id": "qeap2R7FAUBW5Rh3vc22"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 3,
+    "take": 1,
+    "generation_id": "00URrafJ7ZXQrzw0qZNm"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 3,
+    "take": 2,
+    "generation_id": "Hi0IU3RZOeQdpigmCTUX"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 4,
+    "take": 1,
+    "generation_id": "gH3TNQPYMQle25JEXEYI"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 4,
+    "take": 2,
+    "generation_id": "rAQxwBLUo6iTJTjOZPsp"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 5,
+    "take": 1,
+    "generation_id": "7Ck2k7acDfelNh2RVMxH"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 5,
+    "take": 2,
+    "generation_id": "CDxy7NBuZbCCN5G7Xpc4"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 6,
+    "take": 1,
+    "generation_id": "Y5vO7DCwcl6Zc04TfUrx"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 6,
+    "take": 2,
+    "generation_id": "TSpQ4ArQ6y8J1xIWnulQ"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 7,
+    "take": 1,
+    "generation_id": "DNUZu5agihVCmE6Md0VF"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 7,
+    "take": 2,
+    "generation_id": "Vhl0rM0Vo7ia0IxUfocD"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 8,
+    "take": 1,
+    "generation_id": "KPJI289toFHWSP4ZLvLG"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 8,
+    "take": 2,
+    "generation_id": "GQ5kAICTe3ICSTGG0nKC"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 9,
+    "take": 1,
+    "generation_id": "oZDC8QdaTOOGpkdjsSwy"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 9,
+    "take": 2,
+    "generation_id": "5ctAZIttdm2FDkoDcDPw"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 10,
+    "take": 1,
+    "generation_id": "AuFsdukk13U6Fs8S0TSN"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 10,
+    "take": 2,
+    "generation_id": "9VReEBP3YW2gpACxeV5T"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 11,
+    "take": 1,
+    "generation_id": "sLDgy0PRClSjVX5BTSmx"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 11,
+    "take": 2,
+    "generation_id": "hcQ6Oz5nyUVfUamiREeq"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 12,
+    "take": 1,
+    "generation_id": "pai7EQU6vWHx3j8HvUyV"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 12,
+    "take": 2,
+    "generation_id": "LotztY6zwin0651o5thi"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 13,
+    "take": 1,
+    "generation_id": "7EUsdqYby5qgwiiNXWfI"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 13,
+    "take": 2,
+    "generation_id": "dhqNOYFJMylkhUIMjvxj"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 14,
+    "take": 1,
+    "generation_id": "S7ihKxomwo7cGiMqkLp6"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 14,
+    "take": 2,
+    "generation_id": "gdrHtHilAVJ3p11YrgoI"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 15,
+    "take": 1,
+    "generation_id": "dgU4kkZkOKZjdzamQSSi"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 15,
+    "take": 2,
+    "generation_id": "YbRLJ8VeYCx4J3YUw2dZ"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 16,
+    "take": 1,
+    "generation_id": "8I0Gth3c01XDlDdk9whB"
+  },
+  {
+    "episode": "01",
+    "topic": "dns",
+    "phase": 16,
+    "take": 2,
+    "generation_id": "iOzy0Bv7mDZztJ9mAGh0"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 1,
+    "take": 1,
+    "generation_id": "L9fURiviLUdorVig4vDv"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 1,
+    "take": 2,
+    "generation_id": "BbgN4AjsrXYNweNar0yS"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 2,
+    "take": 1,
+    "generation_id": "C3IDRr4BJBJLWGOq9yrN"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 2,
+    "take": 2,
+    "generation_id": "rYpbVY8mhXny8GyAQF41"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 3,
+    "take": 1,
+    "generation_id": "VUQpVLhl2Z0nEiOMRxbk"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 3,
+    "take": 2,
+    "generation_id": "oVbFg2I02XTkHknQlZEj"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 4,
+    "take": 1,
+    "generation_id": "PgXXKyAhCiQhejPtCa34"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 4,
+    "take": 2,
+    "generation_id": "2O2ZfwN3POlJqFnG4zRs"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 5,
+    "take": 1,
+    "generation_id": "VFyBd79DQuTHQptZmXQE"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 5,
+    "take": 2,
+    "generation_id": "VoYQuYYh5GYs2zChm6ob"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 6,
+    "take": 1,
+    "generation_id": "su2OA7ucQ3hYCCUJeiuk"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 6,
+    "take": 2,
+    "generation_id": "buQwPkqHmSOHJMzFC4xG"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 7,
+    "take": 1,
+    "generation_id": "fPexvR7TXhe7FqenqKcS"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 7,
+    "take": 2,
+    "generation_id": "C39r0R8FzH7Q38t1UGg6"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 8,
+    "take": 1,
+    "generation_id": "vpi0LONFYUJszX2AitK2"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 8,
+    "take": 2,
+    "generation_id": "1HqJtTBBQI395OJeVh6n"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 9,
+    "take": 1,
+    "generation_id": "14ZTbrwz2acJTQAhFedD"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 9,
+    "take": 2,
+    "generation_id": "PU9t7LRzkQdUx7nMe3hc"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 10,
+    "take": 1,
+    "generation_id": "GUcdXNALnUff4X1MFGUh"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 10,
+    "take": 2,
+    "generation_id": "v82LSEMXNQrCTzZvLgmg"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 11,
+    "take": 1,
+    "generation_id": "AgUNLgSHL4aPFRJHTouH"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 11,
+    "take": 2,
+    "generation_id": "BqctIeOudCuYMYFMAAUe"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 12,
+    "take": 1,
+    "generation_id": "Eivb9IApVvUbjbRj5Qpi"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 12,
+    "take": 2,
+    "generation_id": "IWgPl2LpwzX1p0RiFpOv"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 13,
+    "take": 1,
+    "generation_id": "FQGobjaPIen4vySPOvnW"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 13,
+    "take": 2,
+    "generation_id": "ZQ6BtLkmHTkGHyotiYf1"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 14,
+    "take": 1,
+    "generation_id": "flHedDsMjM3ZdJw8hNPe"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 14,
+    "take": 2,
+    "generation_id": "4J4aLJ6a5ZuVWo8pXa5U"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 15,
+    "take": 1,
+    "generation_id": "Ebnawep4HXnWFaG524Nj"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 15,
+    "take": 2,
+    "generation_id": "3gJuJ4MrR9coh13Ka5xL"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 16,
+    "take": 1,
+    "generation_id": "xCi2cgjRofGxiZyXH9rH"
+  },
+  {
+    "episode": "02",
+    "topic": "bufferbloat",
+    "phase": 16,
+    "take": 2,
+    "generation_id": "q4GWEmlapnjrug0yQW9r"
+  },
+  {
+    "episode": "03",
+    "topic": "wdm",
+    "phase": 1,
+    "take": 1,
+    "generation_id": "Qpvac7CyLJgnZSwM4M3l"
+  },
+  {
+    "episode": "03",
+    "topic": "wdm",
+    "phase": 1,
+    "take": 2,
+    "generation_id": "eOYImCEnMdnaqzRjDWuz"
+  },
+  {
+    "episode": "03",
+    "topic": "wdm",
+    "phase": 2,
+    "take": 1,
+    "generation_id": "niFNnO6jd5E7HHHCTXMp"
+  },
+  {
+    "episode": "03",
+    "topic": "wdm",
+    "phase": 2,
+    "take": 2,
+    "generation_id": "phLC49OeE2eoEX6RNdy9"
+  },
+  {
+    "episode": "03",
+    "topic": "wdm",
+    "phase": 3,
+    "take": 1,
+    "generation_id": "s6AEKbVWpnYnsm9aUU5Q"
+  },
+  {
+    "episode": "03",
+    "topic": "wdm",
+    "phase": 3,
+    "take": 2,
+    "generation_id": "mZ2JeTOfatsuixu7jL9A"
+  },
+  {
+    "episode": "03",
+    "topic": "wdm",
+    "phase": 4,
+    "take": 1,
+    "generation_id": "BuLfZRY9s9UagBvgddMs"
+  },
+  {
+    "episode": "03",
+    "topic": "wdm",
+    "phase": 4,
+    "take": 2,
+    "generation_id": "igbVsRIOtWzzJ6ms5x3G"
+  },
+  {
+    "episode": "03",
+    "topic": "wdm",
+    "phase": 5,
+    "take": 1,
+    "generation_id": "9EOaTbhGPRShqm1U52yx"
+  },
+  {
+    "episode": "03",
+    "topic": "wdm",
+    "phase": 5,
+    "take": 2,
+    "generation_id": "H7Bh3O16GZ19GDls25Xn"
+  },
+  {
+    "episode": "03",
+    "topic": "wdm",
+    "phase": 6,
+    "take": 1,
+    "generation_id": "7qpmo4PvPjeefNTH2o6N"
+  },
+  {
+    "episode": "03",
+    "topic": "wdm",
+    "phase": 6,
+    "take": 2,
+    "generation_id": "M6tbhujOuOsksLwufKvW"
+  },
+  {
+    "episode": "03",
+    "topic": "wdm",
+    "phase": 7,
+    "take": 1,
+    "generation_id": "lEGnT0JUHMbQ3ryFaXob"
+  },
+  {
+    "episode": "03",
+    "topic": "wdm",
+    "phase": 7,
+    "take": 2,
+    "generation_id": "13Y5O5ms24SsFrY88HKh"
+  },
+  {
+    "episode": "03",
+    "topic": "wdm",
+    "phase": 8,
+    "take": 1,
+    "generation_id": "r48UB04LxW7A9ihLG4c9"
+  },
+  {
+    "episode": "03",
+    "topic": "wdm",
+    "phase": 8,
+    "take": 2,
+    "generation_id": "UtyrLq1tP5Kji5wsuP9l"
+  },
+  {
+    "episode": "03",
+    "topic": "wdm",
+    "phase": 9,
+    "take": 1,
+    "generation_id": "QYktoK7IruRXGzx18wl7"
+  },
+  {
+    "episode": "03",
+    "topic": "wdm",
+    "phase": 9,
+    "take": 2,
+    "generation_id": "8MipIxYla5I99kYlCYDi"
+  }
+]

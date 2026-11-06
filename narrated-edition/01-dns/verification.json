@@ -1,0 +1,13 @@
+{
+  "episode": "01",
+  "phases": 16,
+  "resolution": "1920x1080",
+  "fps": 30,
+  "video_codec": "h264",
+  "audio_codec": "aac",
+  "duration_seconds": 452.850771,
+  "audio_present": true,
+  "narration_fit": "Per clip;0.3s lead plus room for full speech; animations keep original speed",
+  "caption_timing": "Guide timings proportional to text; not forced word alignment",
+  "source_files_preserved": true
+}

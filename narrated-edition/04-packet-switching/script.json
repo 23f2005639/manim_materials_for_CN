@@ -1,0 +1,152 @@
+{
+  "id": "04",
+  "topic": "packet-switching",
+  "title": "Why the Internet Breaks Everything Into Pieces",
+  "phases": [
+    {
+      "number": 1,
+      "id": "04-01",
+      "title": "Send one picture",
+      "text": "A picture looks like one object on your screen. Should the network give that whole picture one enormous turn? Let's see what changes when we break the work into pieces. Here are two computers and a connection between them. Connected devices that exchange information form a network. We call a connection along the way a link. The computers send data: information represented electronically. Our blue rectangle stands for the picture's data. How should it take its turn on that link?",
+      "prompt": "[curious] A picture looks like one object on your screen. Should the network give that whole picture one enormous turn? [short pause] [warmly] Let's see what changes when we break the work into pieces. Here are two computers and a connection between them. Connected devices that exchange information form a network. We call a connection along the way a link. The computers send data: information represented electronically. Our blue rectangle stands for the picture's data. How should it take its turn on that link?",
+      "source_clip": "networks/episodes/v2-04-packet-switching/clips/01-begin-with-a-picture-to-send.mp4",
+      "motion_seconds": 7.5
+    },
+    {
+      "number": 2,
+      "id": "04-02",
+      "title": "Meet a packet",
+      "text": "Instead of sending that whole blue rectangle as one uninterrupted unit, divide its data into smaller pieces. Add a little handling information to each, including where it needs to go. That unit is called a packet. Think of several labeled parcels instead of one enormous delivery. The numbers in our drawing help us follow the pieces; they are not a claim that every network packet has a sequence number.",
+      "prompt": "[warmly] Instead of sending that whole blue rectangle as one uninterrupted unit, divide its data into smaller pieces. Add a little handling information to each, including where it needs to go. That unit is called a packet. Think of several labeled parcels instead of one enormous delivery. The numbers in our drawing help us follow the pieces; they are not a claim that every network packet has a sequence number.",
+      "source_clip": "networks/episodes/v2-04-packet-switching/clips/02-cut-the-data-into-manageable-pieces.mp4",
+      "motion_seconds": 7.9
+    },
+    {
+      "number": 3,
+      "id": "04-03",
+      "title": "Share between packets",
+      "text": "Now your friend sends a tiny green message while the blue picture is being sent. If the entire picture took one uninterrupted turn, green would wait for the whole thing. With packets, there is a choice between pieces. Send one blue packet, then green, then more blue. The link still sends one stream of data, but several conversations can share it. Dividing data creates chances to share; it does not guarantee every message an immediate turn.",
+      "prompt": "[curious] Now your friend sends a tiny green message while the blue picture is being sent. If the entire picture took one uninterrupted turn, green would wait for the whole thing. With packets, there is a choice between pieces. Send one blue packet, then green, then more blue. The link still sends one stream of data, but several conversations can share it. Dividing data creates chances to share; it does not guarantee every message an immediate turn.",
+      "source_clip": "networks/episodes/v2-04-packet-switching/clips/03-give-a-second-message-a-turn.mp4",
+      "motion_seconds": 14.4
+    },
+    {
+      "number": 4,
+      "id": "04-04",
+      "title": "Bits take time to send",
+      "text": "Zoom inside one packet. Computers represent information using zeros and ones, called bits. Those bits take time to enter a link. A link's bit rate is how many it can send each second. So two things affect a turn: how many bits the packet contains, and how many bits the link sends per second. More bits mean a longer turn. A higher rate means a shorter one.",
+      "prompt": "[warmly] Zoom inside one packet. Computers represent information using zeros and ones, called bits. Those bits take time to enter a link. A link's bit rate is how many it can send each second. So two things affect a turn: how many bits the packet contains, and how many bits the link sends per second. More bits mean a longer turn. A higher rate means a shorter one.",
+      "source_clip": "networks/episodes/v2-04-packet-switching/clips/04-zoom-into-the-data-being-sent.mp4",
+      "motion_seconds": 9.7
+    },
+    {
+      "number": 5,
+      "id": "04-05",
+      "title": "Amount divided by rate",
+      "text": "A byte contains eight bits. Our example packet has fifteen hundred bytes, so multiply by eight to get twelve thousand bits. The link sends ten million bits each second. Divide twelve thousand by ten million and we get zero point zero zero one two seconds: one point two milliseconds. A millisecond is one thousandth of a second. The shorthand is L divided by R: length in bits divided by rate. This measures putting data onto the link; signal travel time is extra.",
+      "prompt": "[warmly] A byte contains eight bits. [short pause] Our example packet has fifteen hundred bytes, so multiply by eight to get twelve thousand bits. The link sends ten million bits each second. Divide twelve thousand by ten million and we get zero point zero zero one two seconds: one point two milliseconds. A millisecond is one thousandth of a second. The shorthand is L divided by R: length in bits divided by rate. This measures putting data onto the link; signal travel time is extra.",
+      "source_clip": "networks/episodes/v2-04-packet-switching/clips/05-calculate-the-time-for-one-packet.mp4",
+      "motion_seconds": 6.5
+    },
+    {
+      "number": 6,
+      "id": "04-06",
+      "title": "Receive, then send onward",
+      "text": "Real journeys can pass through devices between the two computers. Add two forwarding devices, labeled switches, that pass data to the next link. In our model, each waits until a whole packet arrives before sending that packet onward. We call this store-and-forward. The name describes the action: receive it, then pass it on. Watch packet one finish the first step before starting the second. We will keep this path and rule for our experiment.",
+      "prompt": "[curious] Real journeys can pass through devices between the two computers. Add two forwarding devices, labeled switches, that pass data to the next link. In our model, each waits until a whole packet arrives before sending that packet onward. We call this store-and-forward. The name describes the action: receive it, then pass it on. Watch packet one finish the first step before starting the second. We will keep this path and rule for our experiment.",
+      "source_clip": "networks/episodes/v2-04-packet-switching/clips/06-add-a-device-along-the-way.mp4",
+      "motion_seconds": 12.4
+    },
+    {
+      "number": 7,
+      "id": "04-07",
+      "title": "Three links, three turns",
+      "text": "Our path now has three links of equal rate. One packet spends one point two milliseconds being sent on the first, then the second, then the third. Add those three turns: three point six milliseconds. For this little experiment, we ignore travel time, device processing, and any other traffic. Those things matter in real life, but hiding them briefly lets us see the pattern. With only one packet, the steps happen in order. What happens if we have several packets ready?",
+      "prompt": "[warmly] Our path now has three links of equal rate. One packet spends one point two milliseconds being sent on the first, then the second, then the third. Add those three turns: three point six milliseconds. For this little experiment, we ignore travel time, device processing, and any other traffic. Those things matter in real life, but hiding them briefly lets us see the pattern. With only one packet, the steps happen in order. What happens if we have several packets ready? [short pause] [warmly]",
+      "source_clip": "networks/episodes/v2-04-packet-switching/clips/07-follow-one-packet-across-three-links.mp4",
+      "motion_seconds": 6.233
+    },
+    {
+      "number": 8,
+      "id": "04-08",
+      "title": "The next packet can follow",
+      "text": "Packet one has reached the first switch. It is now being sent on link two. Look back at link one: it is free. Why leave it doing nothing? Send packet two there. A moment later, packet one uses link three, packet two uses link two, and packet three can use link one. Different parts of the path work at once. This is called a pipeline, like several parcels moving through different stations. Each parcel still visits every station in the proper order.",
+      "prompt": "[warmly] Packet one has reached the first switch. It is now being sent on link two. Look back at link one: it is free. Why leave it doing nothing? [short pause] [warmly] Send packet two there. A moment later, packet one uses link three, packet two uses link two, and packet three can use link one. Different parts of the path work at once. This is called a pipeline, like several parcels moving through different stations. Each parcel still visits every station in the proper order.",
+      "source_clip": "networks/episodes/v2-04-packet-switching/clips/08-let-the-first-link-work-again.mp4",
+      "motion_seconds": 11.633
+    },
+    {
+      "number": 9,
+      "id": "04-09",
+      "title": "Watch the overlap grow",
+      "text": "Let's draw that motion as a timetable. Each row is one link. Each column is one turn of one point two milliseconds. A colored box shows which packet uses that link during that turn. First, only the top row works. Next, two rows work. Then all three do. Follow one color diagonally: that is one packet moving through its three steps. Follow one column downward: those are different packets moving at the same time.",
+      "prompt": "[warmly] Let's draw that motion as a timetable. [short pause] Each row is one link. Each column is one turn of one point two milliseconds. A colored box shows which packet uses that link during that turn. First, only the top row works. Next, two rows work. Then all three do. Follow one color diagonally: that is one packet moving through its three steps. Follow one column downward: those are different packets moving at the same time.",
+      "source_clip": "networks/episodes/v2-04-packet-switching/clips/09-read-the-moving-picture-as-a-timetable.mp4",
+      "motion_seconds": 7.9
+    },
+    {
+      "number": 10,
+      "id": "04-10",
+      "title": "Six turns for four packets",
+      "text": "Continue until all four packets arrive. The first packet takes three turns to reach the end. After that, another packet finishes each turn. There are three more packets, so add three more turns: six in total. Six times one point two milliseconds gives seven point two milliseconds. If we waited for each packet's whole journey before starting the next, we would need twelve turns. We simply let separate links do useful work at the same time.",
+      "prompt": "[warmly] Continue until all four packets arrive. [short pause] The first packet takes three turns to reach the end. After that, another packet finishes each turn. There are three more packets, so add three more turns: six in total. Six times one point two milliseconds gives seven point two milliseconds. If we waited for each packet's whole journey before starting the next, we would need twelve turns. We simply let separate links do useful work at the same time.",
+      "source_clip": "networks/episodes/v2-04-packet-switching/clips/10-count-the-turns-for-four-packets.mp4",
+      "motion_seconds": 11.5
+    },
+    {
+      "number": 11,
+      "id": "04-11",
+      "title": "Count first, write second",
+      "text": "Now the formula is just a short version of our counting. Call the number of links H and the number of packets N. The first packet needs H turns. The remaining N minus one packets each add a turn. Together, that is H plus N minus one. Multiply by the time for one turn, L divided by R. That gives our total. It works for this clean model with equal packets and equal-rate links, without extra travel, processing, or traffic delays.",
+      "prompt": "[warmly] Now the formula is just a short version of our counting. Call the number of links H and the number of packets N. The first packet needs H turns. The remaining N minus one packets each add a turn. Together, that is H plus N minus one. Multiply by the time for one turn, L divided by R. That gives our total. It works for this clean model with equal packets and equal-rate links, without extra travel, processing, or traffic delays.",
+      "source_clip": "networks/episodes/v2-04-packet-switching/clips/11-give-the-pattern-a-short-formula.mp4",
+      "motion_seconds": 5.2
+    },
+    {
+      "number": 12,
+      "id": "04-12",
+      "title": "Conversations come and go",
+      "text": "Bring back the green message. Real conversations are uneven. Someone sends a picture, another person pauses, then a new message arrives. Packet switching means the network handles and forwards individual packets, allowing shared links to serve different conversations. A quiet sender need not keep occupying a turn. A ready packet can use the next available opportunity when selected. Two useful effects: different conversations can share one link, and different links can work on different pieces together.",
+      "prompt": "[curious] Bring back the green message. Real conversations are uneven. Someone sends a picture, another person pauses, then a new message arrives. Packet switching means the network handles and forwards individual packets, allowing shared links to serve different conversations. A quiet sender need not keep occupying a turn. A ready packet can use the next available opportunity when selected. Two useful effects: different conversations can share one link, and different links can work on different pieces together.",
+      "source_clip": "networks/episodes/v2-04-packet-switching/clips/12-share-a-link-when-messages-are-ready.mp4",
+      "motion_seconds": 11.933
+    },
+    {
+      "number": 13,
+      "id": "04-13",
+      "title": "Packets can still wait",
+      "text": "There is a limit. If packets arrive at a device faster than its outgoing link can send them, they form a waiting line, called a queue. Green can still get stuck behind blue. Splitting the picture does not create an endlessly fast connection or a perfectly fair order. If the waiting space fills, a packet may even be discarded. So our claim is modest and useful: packet boundaries give the network manageable turns to share, while actual capacity and queue choices still matter.",
+      "prompt": "[warmly] There is a limit. If packets arrive at a device faster than its outgoing link can send them, they form a waiting line, called a queue. Green can still get stuck behind blue. Splitting the picture does not create an endlessly fast connection or a perfectly fair order. If the waiting space fills, a packet may even be discarded. So our claim is modest and useful: packet boundaries give the network manageable turns to share, while actual capacity and queue choices still matter.",
+      "source_clip": "networks/episodes/v2-04-packet-switching/clips/13-keep-the-doorway-limited.mp4",
+      "motion_seconds": 7.2
+    },
+    {
+      "number": 14,
+      "id": "04-14",
+      "title": "More pieces need more labels",
+      "text": "Why not make every piece tiny? Short turns sound wonderful. But remember the handling information added to each packet. That information uses space too. Blue is useful picture data; yellow is the extra label, called a header. Divide the same blue data into more pieces and count the yellow labels. There are more of them. Devices also have more individual packets to handle. Smaller pieces can help sharing, but they are not free. We must balance shorter turns against this extra work.",
+      "prompt": "[curious] Why not make every piece tiny? [short pause] [warmly] Short turns sound wonderful. But remember the handling information added to each packet. That information uses space too. Blue is useful picture data; yellow is the extra label, called a header. Divide the same blue data into more pieces and count the yellow labels. There are more of them. Devices also have more individual packets to handle. Smaller pieces can help sharing, but they are not free. We must balance shorter turns against this extra work.",
+      "source_clip": "networks/episodes/v2-04-packet-switching/clips/14-notice-the-extra-labels.mp4",
+      "motion_seconds": 5.2
+    },
+    {
+      "number": 15,
+      "id": "04-15",
+      "title": "The picture comes back together",
+      "text": "At the destination, the blue pieces belong to the picture and green belongs to the little message. The receiving computer uses the arriving data to recover the content the application needs. Keeping things complete and in order involves other parts of the communication system; packet switching alone does not promise that. Here, all our pieces arrive successfully. Notice the useful trick: the network could move each piece along without giving the entire picture one enormous turn from beginning to end.",
+      "prompt": "[warmly] At the destination, the blue pieces belong to the picture and green belongs to the little message. [short pause] The receiving computer uses the arriving data to recover the content the application needs. Keeping things complete and in order involves other parts of the communication system; packet switching alone does not promise that. Here, all our pieces arrive successfully. Notice the useful trick: the network could move each piece along without giving the entire picture one enormous turn from beginning to end.",
+      "source_clip": "networks/episodes/v2-04-packet-switching/clips/15-meet-the-pieces-at-the-other-end.mp4",
+      "motion_seconds": 15.433
+    },
+    {
+      "number": 16,
+      "id": "04-16",
+      "title": "Small pieces, useful possibilities",
+      "text": "We began with one picture on a screen. Breaking its data into packets gave us shorter turns on a shared link. Those pieces also let several links work at once, just like the stations in our parcel line. We still pay for headers, we can still wait in queues, and every link has a limit. But now a big picture and a tiny message can use the same network in manageable pieces. The Internet's useful trick starts with something simple: divide the work.",
+      "prompt": "[warmly] We began with one picture on a screen. Breaking its data into packets gave us shorter turns on a shared link. Those pieces also let several links work at once, just like the stations in our parcel line. We still pay for headers, we can still wait in queues, and every link has a limit. But now a big picture and a tiny message can use the same network in manageable pieces. The Internet's useful trick starts with something simple: divide the work.",
+      "source_clip": "networks/episodes/v2-04-packet-switching/clips/16-return-to-the-picture-we-sent.mp4",
+      "motion_seconds": 7.933
+    }
+  ],
+  "source_folder": "networks/episodes/v2-04-packet-switching"
+}

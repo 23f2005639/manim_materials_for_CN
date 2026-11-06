@@ -1,0 +1,1 @@
+[curious] Now watch the door. It cannot send all the waiting data at once. Computers represent data using zeros and ones. Each zero or one is a bit. A link's rate tells us how many bits it can send each second. More bits per second means more data gets through. Think of counting people leaving a cinema. It does not yet tell us how long one person waited before reaching it.

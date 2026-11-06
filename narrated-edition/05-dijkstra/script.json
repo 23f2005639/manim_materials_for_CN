@@ -1,0 +1,152 @@
+{
+  "id": "05",
+  "topic": "dijkstra",
+  "title": "The Shortest Route Can Have More Steps",
+  "phases": [
+    {
+      "number": 1,
+      "id": "05-01",
+      "title": "First, send one message",
+      "text": "Imagine a map where the route with more steps is actually cheaper. That sounds odd, until you notice what each step costs. First, let's build the smallest possible network. The photo travels through connected machines. We draw each machine as a dot and each connection as a line. A small piece of the photo, called a packet, moves along those lines. Some machines pass it onward; these are routers. For now, forget the big internet. We only need a starting dot, an ending dot, and a path between them.",
+      "prompt": "[curious] Imagine a map where the route with more steps is actually cheaper. That sounds odd, until you notice what each step costs. First, let's build the smallest possible network. The photo travels through connected machines. We draw each machine as a dot and each connection as a line. A small piece of the photo, called a packet, moves along those lines. Some machines pass it onward; these are routers. For now, forget the big internet. We only need a starting dot, an ending dot, and a path between them.",
+      "source_clip": "networks/episodes/v2-05-dijkstra/clips/01-first-send-one-message.mp4",
+      "motion_seconds": 9.2
+    },
+    {
+      "number": 2,
+      "id": "05-02",
+      "title": "Give each step a price",
+      "text": "Now give each connection a price. These numbers are made-up points, so a four costs twice as much as a two. Going straight from A to B costs four. But watch the other way: A to C costs two, then C to B costs one. Two plus one is three. Taking two steps was cheaper than taking one! That is our whole puzzle: find the route with the smallest total, rather than the fewest lines.",
+      "prompt": "[warmly] Now give each connection a price. These numbers are made-up points, so a four costs twice as much as a two. Going straight from A to B costs four. But watch the other way: A to C costs two, then C to B costs one. Two plus one is three. Taking two steps was cheaper than taking one! That is our whole puzzle: find the route with the smallest total, rather than the fewest lines.",
+      "source_clip": "networks/episodes/v2-05-dijkstra/clips/02-give-each-step-a-price.mp4",
+      "motion_seconds": 11.2
+    },
+    {
+      "number": 3,
+      "id": "05-03",
+      "title": "Grow a small map",
+      "text": "Let's add a few more machines. Our starting point is still A, but now we want to reach F. The red route costs four, then five, then six: fifteen altogether. The green route takes more steps, yet its prices add to thirteen. You can compare these two by eye. On a huge map, guessing every route would get messy. We need a repeatable recipe. That recipe has a name: Dijkstra's shortest-path algorithm.",
+      "prompt": "[curious] Let's add a few more machines. Our starting point is still A, but now we want to reach F. The red route costs four, then five, then six: fifteen altogether. The green route takes more steps, yet its prices add to thirteen. You can compare these two by eye. On a huge map, guessing every route would get messy. We need a repeatable recipe. That recipe has a name: Dijkstra's shortest-path algorithm.",
+      "source_clip": "networks/episodes/v2-05-dijkstra/clips/03-grow-a-small-map.mp4",
+      "motion_seconds": 24.067
+    },
+    {
+      "number": 4,
+      "id": "05-04",
+      "title": "Keep a little scorecard",
+      "text": "Start with a fresh scorecard beside our map. Each score means the cheapest total we have found so far from A. A starts at zero because we are already there. Everywhere else gets a question mark: we have not found a route yet. Books often use this sideways eight, called infinity, for those unknown scores. It does not mean the machines are impossibly far away. It means we still need to discover how to reach them.",
+      "prompt": "[warmly] Start with a fresh scorecard beside our map. Each score means the cheapest total we have found so far from A. A starts at zero because we are already there. Everywhere else gets a question mark: we have not found a route yet. Books often use this sideways eight, called infinity, for those unknown scores. It does not mean the machines are impossibly far away. It means we still need to discover how to reach them.",
+      "source_clip": "networks/episodes/v2-05-dijkstra/clips/04-keep-a-little-scorecard.mp4",
+      "motion_seconds": 12.8
+    },
+    {
+      "number": 5,
+      "id": "05-05",
+      "title": "Look one step from home",
+      "text": "Look at the lines leaving A. We can reach B for four points, so write four beside B. We can reach C for two points, so write two beside C. Which unfinished score is smaller? C, with two. That is where we look next. We always choose the smallest unfinished score, then check its neighboring dots. Green will mean a score is finished. Yellow will mean we have found an improvement worth writing down.",
+      "prompt": "[warmly] Look at the lines leaving A. We can reach B for four points, so write four beside B. We can reach C for two points, so write two beside C. Which unfinished score is smaller? [short pause] [warmly] C, with two. That is where we look next. We always choose the smallest unfinished score, then check its neighboring dots. Green will mean a score is finished. Yellow will mean we have found an improvement worth writing down.",
+      "source_clip": "networks/episodes/v2-05-dijkstra/clips/05-look-one-step-from-home.mp4",
+      "motion_seconds": 10.9
+    },
+    {
+      "number": 6,
+      "id": "05-06",
+      "title": "A better way to B",
+      "text": "We have reached C for two points. From here, B costs only one more. Add them: two plus one makes three. Our old score for B was four, so replace it with three. We just found the little shortcut from earlier! Also check C's other connections. D would cost two plus eight, or ten. E would cost two plus ten, or twelve. Write those down as possible routes. A score can improve before it becomes final.",
+      "prompt": "[curious] We have reached C for two points. From here, B costs only one more. Add them: two plus one makes three. Our old score for B was four, so replace it with three. We just found the little shortcut from earlier! Also check C's other connections. D would cost two plus eight, or ten. E would cost two plus ten, or twelve. Write those down as possible routes. A score can improve before it becomes final.",
+      "source_clip": "networks/episodes/v2-05-dijkstra/clips/06-a-better-way-to-b.mp4",
+      "motion_seconds": 14.0
+    },
+    {
+      "number": 7,
+      "id": "05-07",
+      "title": "Choose the cheapest unfinished dot",
+      "text": "Our unfinished scores are now three at B, ten at D, and twelve at E. Choose B because three is the smallest. From B, the connection to D costs five. We have already spent three getting to B, so the whole journey to D costs eight. Eight beats the old ten. Cross out ten and write eight. Notice that we are adding to the journey so far, not choosing a connection only because its own price looks small.",
+      "prompt": "[warmly] Our unfinished scores are now three at B, ten at D, and twelve at E. Choose B because three is the smallest. From B, the connection to D costs five. We have already spent three getting to B, so the whole journey to D costs eight. Eight beats the old ten. Cross out ten and write eight. Notice that we are adding to the journey so far, not choosing a connection only because its own price looks small.",
+      "source_clip": "networks/episodes/v2-05-dijkstra/clips/07-choose-the-cheapest-unfinished-dot.mp4",
+      "motion_seconds": 7.1
+    },
+    {
+      "number": 8,
+      "id": "05-08",
+      "title": "Find a first route to F",
+      "text": "D now has the smallest unfinished score: eight. Finish D and look outward. Reaching E through D costs eight plus two, which is ten. That improves E's old twelve. Reaching F through D costs eight plus six, which is fourteen. At last, we have found a route to our destination! But wait before celebrating. Fourteen is the best answer we have found so far. Another unfinished dot might still lead us to a cheaper route.",
+      "prompt": "[warmly] D now has the smallest unfinished score: eight. Finish D and look outward. Reaching E through D costs eight plus two, which is ten. That improves E's old twelve. Reaching F through D costs eight plus six, which is fourteen. At last, we have found a route to our destination! But wait before celebrating. Fourteen is the best answer we have found so far. Another unfinished dot might still lead us to a cheaper route.",
+      "source_clip": "networks/episodes/v2-05-dijkstra/clips/08-find-a-first-route-to-f.mp4",
+      "motion_seconds": 10.9
+    },
+    {
+      "number": 9,
+      "id": "05-09",
+      "title": "One last improvement",
+      "text": "The next smallest unfinished score is E at ten. Its connection to F costs three. Ten plus three is thirteen, beating the fourteen we just wrote down. Replace it. This is why finding the destination once was not enough. The first route we noticed was useful, but it was not the winner. Our rule stayed exactly the same: choose the smallest unfinished score, add the next connection's price, and keep the result only when it improves something.",
+      "prompt": "[warmly] The next smallest unfinished score is E at ten. [short pause] Its connection to F costs three. Ten plus three is thirteen, beating the fourteen we just wrote down. Replace it. This is why finding the destination once was not enough. The first route we noticed was useful, but it was not the winner. Our rule stayed exactly the same: choose the smallest unfinished score, add the next connection's price, and keep the result only when it improves something.",
+      "source_clip": "networks/episodes/v2-05-dijkstra/clips/09-one-last-improvement.mp4",
+      "motion_seconds": 6.4
+    },
+    {
+      "number": 10,
+      "id": "05-10",
+      "title": "Know when the answer is ready",
+      "text": "F now has the smallest unfinished score, thirteen. When we choose it, that score becomes final. We can stop if F was our only destination. If we wanted answers for every machine, we would keep following the same rule until all reachable dots were finished. The changing numbers were not random guesses. Each one described a real route we had found, and each replacement made that route cheaper. Green marks the point where we know it cannot improve.",
+      "prompt": "[warmly] F now has the smallest unfinished score, thirteen. [short pause] When we choose it, that score becomes final. We can stop if F was our only destination. If we wanted answers for every machine, we would keep following the same rule until all reachable dots were finished. The changing numbers were not random guesses. Each one described a real route we had found, and each replacement made that route cheaper. Green marks the point where we know it cannot improve.",
+      "source_clip": "networks/episodes/v2-05-dijkstra/clips/10-know-when-the-answer-is-ready.mp4",
+      "motion_seconds": 11.4
+    },
+    {
+      "number": 11,
+      "id": "05-11",
+      "title": "Why the rule works",
+      "text": "Why trust the smallest unfinished score? Every connection in our picture adds a positive cost. Suppose the cheapest unfinished dot costs eight. A route that first goes through an unfinished dot costing ten cannot come back and beat eight; adding more positive prices only makes ten larger. That is the key idea behind the recipe. Zero-cost connections also work. Negative prices would break this reasoning, so this version of the algorithm requires costs that never go below zero.",
+      "prompt": "[warmly] Why trust the smallest unfinished score? [short pause] [warmly] Every connection in our picture adds a positive cost. Suppose the cheapest unfinished dot costs eight. A route that first goes through an unfinished dot costing ten cannot come back and beat eight; adding more positive prices only makes ten larger. That is the key idea behind the recipe. Zero-cost connections also work. Negative prices would break this reasoning, so this version of the algorithm requires costs that never go below zero.",
+      "source_clip": "networks/episodes/v2-05-dijkstra/clips/11-why-the-rule-works.mp4",
+      "motion_seconds": 4.4
+    },
+    {
+      "number": 12,
+      "id": "05-12",
+      "title": "Remember the way back",
+      "text": "A score tells us the price, but how do we recover the actual route? Whenever a score improves, remember which dot supplied that improvement. F remembers E. E remembers D. D remembers B. B remembers C, and C remembers A. Follow those reminders backward and you arrive home. Now reverse the list to get the travel directions. There is no need to try all the routes again. We saved just enough information while improving the numbers.",
+      "prompt": "[curious] A score tells us the price, but how do we recover the actual route? [short pause] [warmly] Whenever a score improves, remember which dot supplied that improvement. F remembers E. E remembers D. D remembers B. B remembers C, and C remembers A. Follow those reminders backward and you arrive home. Now reverse the list to get the travel directions. There is no need to try all the routes again. We saved just enough information while improving the numbers.",
+      "source_clip": "networks/episodes/v2-05-dijkstra/clips/12-remember-the-way-back.mp4",
+      "motion_seconds": 9.9
+    },
+    {
+      "number": 13,
+      "id": "05-13",
+      "title": "Walk the winning route",
+      "text": "Let's take the journey ourselves: A to C, C to B, B to D, D to E, and E to F. The connection prices are two, one, five, two, and three. Keep a running total as the packet moves: two, three, eight, ten, thirteen. Five steps beat the three-step route that cost fifteen. A drawing can make one line look short and another look long. The numbers, rather than the shape of our drawing, decide the winner.",
+      "prompt": "[warmly] Let's take the journey ourselves: A to C, C to B, B to D, D to E, and E to F. The connection prices are two, one, five, two, and three. Keep a running total as the packet moves: two, three, eight, ten, thirteen. Five steps beat the three-step route that cost fifteen. A drawing can make one line look short and another look long. The numbers, rather than the shape of our drawing, decide the winner.",
+      "source_clip": "networks/episodes/v2-05-dijkstra/clips/13-walk-the-winning-route.mp4",
+      "motion_seconds": 12.7
+    },
+    {
+      "number": 14,
+      "id": "05-14",
+      "title": "What if a connection breaks?",
+      "text": "Now remove the connection between D and E. The old winning route runs straight into a missing line. We cannot repair it simply by pretending the old answer is still true. Update the map and run the same recipe again. Some scores may stay the same, because their routes never needed that connection. Others will change. This is a useful networking lesson: a good set of directions depends on an accurate picture of which connections are available.",
+      "prompt": "[curious] Now remove the connection between D and E. The old winning route runs straight into a missing line. We cannot repair it simply by pretending the old answer is still true. Update the map and run the same recipe again. Some scores may stay the same, because their routes never needed that connection. Others will change. This is a useful networking lesson: a good set of directions depends on an accurate picture of which connections are available.",
+      "source_clip": "networks/episodes/v2-05-dijkstra/clips/14-what-if-a-connection-breaks.mp4",
+      "motion_seconds": 8.2
+    },
+    {
+      "number": 15,
+      "id": "05-15",
+      "title": "Find the new winner",
+      "text": "With that line gone, try A to C to B to D to F. Its prices add to two plus one plus five plus six: fourteen. The route through C and E costs two plus ten plus three: fifteen. Fourteen wins. The updated calculation gives E a score of twelve and F a score of fourteen. We did not invent a special rule for broken connections. We changed the map, then let the same small comparisons find the new answer.",
+      "prompt": "[warmly] With that line gone, try A to C to B to D to F. [short pause] Its prices add to two plus one plus five plus six: fourteen. The route through C and E costs two plus ten plus three: fifteen. Fourteen wins. The updated calculation gives E a score of twelve and F a score of fourteen. We did not invent a special rule for broken connections. We changed the map, then let the same small comparisons find the new answer.",
+      "source_clip": "networks/episodes/v2-05-dijkstra/clips/15-find-the-new-winner.mp4",
+      "motion_seconds": 15.7
+    },
+    {
+      "number": 16,
+      "id": "05-16",
+      "title": "A big answer from small steps",
+      "text": "We began with one message and a few connected dots. A line had a price, a route added those prices, and a score remembered the best total found so far. Dijkstra's method chose the cheapest unfinished score and improved its neighbors, one step at a time. That simple routine revealed a whole route. So next time a winding path beats a tidy shortcut, it will not feel mysterious. More steps can cost less when the steps themselves are cheaper.",
+      "prompt": "[warmly] We began with one message and a few connected dots. A line had a price, a route added those prices, and a score remembered the best total found so far. Dijkstra's method chose the cheapest unfinished score and improved its neighbors, one step at a time. That simple routine revealed a whole route. So next time a winding path beats a tidy shortcut, it will not feel mysterious. More steps can cost less when the steps themselves are cheaper.",
+      "source_clip": "networks/episodes/v2-05-dijkstra/clips/16-a-big-answer-from-small-steps.mp4",
+      "motion_seconds": 10.5
+    }
+  ],
+  "source_folder": "networks/episodes/v2-05-dijkstra"
+}

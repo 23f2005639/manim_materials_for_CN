@@ -1,0 +1,1 @@
+[warmly] Zoom inside one packet. Computers represent information using zeros and ones, called bits. Those bits take time to enter a link. A link's bit rate is how many it can send each second. So two things affect a turn: how many bits the packet contains, and how many bits the link sends per second. More bits mean a longer turn. A higher rate means a shorter one.

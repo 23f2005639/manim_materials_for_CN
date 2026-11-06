@@ -1,0 +1,22 @@
+{
+  "state": "blocked_by_elevenlabs_quota",
+  "message": "ElevenLabs reported a40000credit quota with307credits left; requests requiring505credits failed. No more generations submitted.",
+  "complete": [
+    "01-dns",
+    "02-bufferbloat"
+  ],
+  "partial": {
+    "03-wdm": 9
+  },
+  "pending": [
+    "04-packet-switching",
+    "05-dijkstra",
+    "06-subnetting",
+    "07-tcp-slow-start",
+    "08-rsa"
+  ],
+  "resume": "Add credits or raise the account quota, then resume from saved job and audio records. Never regenerate completed clips.",
+  "remaining_script_characters": 41433,
+  "estimated_additional_credits_at_two_takes": 82866,
+  "note": "Estimate excludes failed-job adjustments, any future revisions and account pricing differences."
+}

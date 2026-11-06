@@ -1,0 +1,1 @@
+[warmly] Between our two computers sits a router: a device that passes packets toward the next part of their journey. Several packets may need the same outgoing connection, or link. Picture a doorway that serves one packet after another. Arrive while it is busy, and you wait. The router has memory for that waiting data. That space is called a buffer; the waiting line is a queue.

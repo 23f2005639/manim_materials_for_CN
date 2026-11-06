@@ -1,0 +1,152 @@
+{
+  "id": "01",
+  "topic": "dns",
+  "title": "DNS: How a Website Name Finds Its Address",
+  "phases": [
+    {
+      "number": 1,
+      "id": "01-01",
+      "title": "A photo lives somewhere",
+      "text": "You type a website name, and a photo appears. But where did that photo come from? Let's slow that tiny moment down. Your computer does not already have the photo. Another computer stores it and can send it back. A computer doing that job is called a server. The line between them represents a way to exchange messages. But there are countless possible destinations. Before asking for the photo, your computer needs to know which address to contact. How does it find that?",
+      "prompt": "[curious] You type a website name, and a photo appears. But where did that photo come from? [short pause] [warmly] Let's slow that tiny moment down. Your computer does not already have the photo. Another computer stores it and can send it back. A computer doing that job is called a server. The line between them represents a way to exchange messages. But there are countless possible destinations. Before asking for the photo, your computer needs to know which address to contact. How does it find that?",
+      "source_clip": "networks/episodes/v2-01-dns/clips/01-a-photo-lives-somewhere.mp4",
+      "motion_seconds": 7.2
+    },
+    {
+      "number": 2,
+      "id": "01-02",
+      "title": "Names are easier to remember",
+      "text": "Think about calling a friend. You remember their name; your phone uses a number. Websites have a similar split. We type a name, while the network uses a number called an IP address to help deliver messages. Watch the name turn into an address. DNS, short for Domain Name System, helps make that lookup. Our pretend website is photos.orbit.example. The address is made up for teaching too. You don't need to memorize either one.",
+      "prompt": "[warmly] Think about calling a friend. You remember their name; your phone uses a number. Websites have a similar split. We type a name, while the network uses a number called an IP address to help deliver messages. Watch the name turn into an address. DNS, short for Domain Name System, helps make that lookup. Our pretend website is photos.orbit.example. The address is made up for teaching too. You don't need to memorize either one.",
+      "source_clip": "networks/episodes/v2-01-dns/clips/02-names-are-easier-to-remember.mp4",
+      "motion_seconds": 7.8
+    },
+    {
+      "number": 3,
+      "id": "01-03",
+      "title": "Ask a helper",
+      "text": "Your computer could ask, where is this website? But who should answer? Meet one helper, shown in green. Its job is to find the address and bring it back. The technical name for this helper is a resolver. That's all the word means here: it resolves our question. Start with just these two characters, your computer and its helper. Assume the helper hasn't saved an answer yet. We are going to follow its search together.",
+      "prompt": "[curious] Your computer could ask, where is this website? [short pause] [warmly] But who should answer? Meet one helper, shown in green. Its job is to find the address and bring it back. The technical name for this helper is a resolver. That's all the word means here: it resolves our question. Start with just these two characters, your computer and its helper. Assume the helper hasn't saved an answer yet. We are going to follow its search together.",
+      "source_clip": "networks/episodes/v2-01-dns/clips/03-ask-a-helper.mp4",
+      "motion_seconds": 6.833
+    },
+    {
+      "number": 4,
+      "id": "01-04",
+      "title": "A name has smaller parts",
+      "text": "A single helper cannot keep a fresh list of every website. Instead, responsibility is split into smaller parts. Look at the dots in photos.orbit.example. Read from the right: example, then orbit.example, then the full name. It's like opening a large folder, then a smaller folder inside it. This nested arrangement is called a hierarchy. The dots tell the helper how to narrow its search. No address yet; first we are learning where to ask.",
+      "prompt": "[warmly] A single helper cannot keep a fresh list of every website. Instead, responsibility is split into smaller parts. Look at the dots in photos.orbit.example. Read from the right: example, then orbit.example, then the full name. It's like opening a large folder, then a smaller folder inside it. This nested arrangement is called a hierarchy. The dots tell the helper how to narrow its search. No address yet; first we are learning where to ask.",
+      "source_clip": "networks/episodes/v2-01-dns/clips/04-a-name-has-smaller-parts.mp4",
+      "motion_seconds": 8.167
+    },
+    {
+      "number": 5,
+      "id": "01-05",
+      "title": "Start at the directory",
+      "text": "The helper begins at a starting directory called the root. Imagine a reception desk that says, for names ending in example, ask over there. It gives a useful direction, not the website's final address. That direction is called a referral. Follow the question going out and the clue coming back. The helper now knows its next stop. In this drawing, each circle is a job performed by DNS servers, not one unique machine for the whole world.",
+      "prompt": "[warmly] The helper begins at a starting directory called the root. [short pause] Imagine a reception desk that says, for names ending in example, ask over there. It gives a useful direction, not the website's final address. That direction is called a referral. Follow the question going out and the clue coming back. The helper now knows its next stop. In this drawing, each circle is a job performed by DNS servers, not one unique machine for the whole world.",
+      "source_clip": "networks/episodes/v2-01-dns/clips/05-start-at-the-directory.mp4",
+      "motion_seconds": 9.533
+    },
+    {
+      "number": 6,
+      "id": "01-06",
+      "title": "Follow one useful clue",
+      "text": "The next directory handles the last part of our name: example. That part is called a top-level domain, or TLD. You have seen real ones such as com and org. Our teaching name uses example. This directory points toward the people responsible for orbit.example. Notice the pattern: ask a broad directory, receive a narrower direction, ask again. The helper is doing this work for us. Your browser doesn't need you to visit these directories yourself.",
+      "prompt": "[curious] The next directory handles the last part of our name: example. That part is called a top-level domain, or TLD. You have seen real ones such as com and org. Our teaching name uses example. This directory points toward the people responsible for orbit.example. Notice the pattern: ask a broad directory, receive a narrower direction, ask again. The helper is doing this work for us. Your browser doesn't need you to visit these directories yourself.",
+      "source_clip": "networks/episodes/v2-01-dns/clips/06-follow-one-useful-clue.mp4",
+      "motion_seconds": 9.567
+    },
+    {
+      "number": 7,
+      "id": "01-07",
+      "title": "Find the address keeper",
+      "text": "Now we reach the keeper of the website's DNS information. This is called an authoritative server because it holds the relevant official record. In our example, that record pairs the photo website's name with 192.0.2.10. Finally, a number! The earlier stops were useful even though they didn't know it. They guided our helper here. Watch the green answer travel back. We found the address by following responsibility from a broad directory to a specific record.",
+      "prompt": "[warmly] Now we reach the keeper of the website's DNS information. This is called an authoritative server because it holds the relevant official record. In our example, that record pairs the photo website's name with 192.0.2.10. Finally, a number! The earlier stops were useful even though they didn't know it. They guided our helper here. Watch the green answer travel back. We found the address by following responsibility from a broad directory to a specific record.",
+      "source_clip": "networks/episodes/v2-01-dns/clips/07-find-the-address-keeper.mp4",
+      "motion_seconds": 9.567
+    },
+    {
+      "number": 8,
+      "id": "01-08",
+      "title": "Bring the answer home",
+      "text": "The helper gives that address to your computer. Now your computer can try to contact the photo server. The name lookup has finished; asking for the actual photo is a separate step. Think of finding a friend's phone number: you still have to make the call. DNS hasn't delivered the picture itself, and an address doesn't promise the server will answer. It has solved one smaller problem: turning the name you recognize into useful contact information.",
+      "prompt": "[warmly] The helper gives that address to your computer. Now your computer can try to contact the photo server. The name lookup has finished; asking for the actual photo is a separate step. Think of finding a friend's phone number: you still have to make the call. DNS hasn't delivered the picture itself, and an address doesn't promise the server will answer. It has solved one smaller problem: turning the name you recognize into useful contact information.",
+      "source_clip": "networks/episodes/v2-01-dns/clips/08-bring-the-answer-home.mp4",
+      "motion_seconds": 8.433
+    },
+    {
+      "number": 9,
+      "id": "01-09",
+      "title": "Put a clock on it",
+      "text": "How long did that search take? A millisecond is one thousandth of a second. Let's give our example four small waits: two milliseconds for the helper exchange, then twenty, thirty, and forty for its three directory exchanges. Watch each colored piece extend the time bar. Add them: two plus twenty plus thirty plus forty makes ninety-two milliseconds. These are chosen numbers, not promised Internet timings. We add because each step needs the previous step's answer.",
+      "prompt": "[warmly] How long did that search take? [short pause] [warmly] A millisecond is one thousandth of a second. Let's give our example four small waits: two milliseconds for the helper exchange, then twenty, thirty, and forty for its three directory exchanges. Watch each colored piece extend the time bar. Add them: two plus twenty plus thirty plus forty makes ninety-two milliseconds. These are chosen numbers, not promised Internet timings. We add because each step needs the previous step's answer.",
+      "source_clip": "networks/episodes/v2-01-dns/clips/09-put-a-clock-on-it.mp4",
+      "motion_seconds": 17.1
+    },
+    {
+      "number": 10,
+      "id": "01-10",
+      "title": "Remember the answer",
+      "text": "What happens when someone asks the same question again? The helper can keep a temporary copy of the answer. That saved copy is called a cache. Now the long trip disappears: in our example the reply needs only two milliseconds. Ninety-two divided by two is forty-six, so this lookup is forty-six times quicker. Only the lookup! We haven't made the photo download forty-six times faster. Saving a useful answer simply avoids repeating work we already did.",
+      "prompt": "[warmly] What happens when someone asks the same question again? [short pause] [warmly] The helper can keep a temporary copy of the answer. That saved copy is called a cache. Now the long trip disappears: in our example the reply needs only two milliseconds. Ninety-two divided by two is forty-six, so this lookup is forty-six times quicker. Only the lookup! We haven't made the photo download forty-six times faster. Saving a useful answer simply avoids repeating work we already did.",
+      "source_clip": "networks/episodes/v2-01-dns/clips/10-remember-the-answer.mp4",
+      "motion_seconds": 7.633
+    },
+    {
+      "number": 11,
+      "id": "01-11",
+      "title": "Memory needs an expiry date",
+      "text": "But websites can move. If our helper remembers an address forever, it might keep sending people to an old place. So the saved answer comes with a time limit. Here it is sixty seconds. Its name is time to live, or TTL. Watch the timer count down. Reading the saved answer does not restart that timer. Think of a note with an expiry time printed on it: using the note doesn't make the information new again.",
+      "prompt": "[warmly] But websites can move. If our helper remembers an address forever, it might keep sending people to an old place. So the saved answer comes with a time limit. Here it is sixty seconds. Its name is time to live, or TTL. Watch the timer count down. Reading the saved answer does not restart that timer. Think of a note with an expiry time printed on it: using the note doesn't make the information new again.",
+      "source_clip": "networks/episodes/v2-01-dns/clips/11-memory-needs-an-expiry-date.mp4",
+      "motion_seconds": 12.833
+    },
+    {
+      "number": 12,
+      "id": "01-12",
+      "title": "What if the address changes?",
+      "text": "Let's move the website while the timer still has thirty seconds left. The official record changes to a new address, 203.0.113.20. Does our helper magically know? No. It still has the old saved copy and may reply with that address until its allowed time runs out. The two boxes now show different numbers. This explains why changing a website's DNS record can take time to be noticed everywhere. Copies don't all update at the same instant.",
+      "prompt": "[curious] Let's move the website while the timer still has thirty seconds left. The official record changes to a new address, 203.0.113.20. Does our helper magically know? [short pause] [warmly] No. It still has the old saved copy and may reply with that address until its allowed time runs out. The two boxes now show different numbers. This explains why changing a website's DNS record can take time to be noticed everywhere. Copies don't all update at the same instant.",
+      "source_clip": "networks/episodes/v2-01-dns/clips/12-what-if-the-address-changes.mp4",
+      "motion_seconds": 10.9
+    },
+    {
+      "number": 13,
+      "id": "01-13",
+      "title": "Look again when time runs out",
+      "text": "The countdown reaches zero. For this example, the next request makes the helper look again. This time it finds the new address and replaces its old copy. We show the directory trip again so the refresh is easy to follow; real helpers may remember some directions and skip steps. Our useful rule is simple: reuse an answer for a while, then check again. A temporary memory gives us speed without pretending that yesterday's information must stay true forever.",
+      "prompt": "[warmly] The countdown reaches zero. For this example, the next request makes the helper look again. This time it finds the new address and replaces its old copy. We show the directory trip again so the refresh is easy to follow; real helpers may remember some directions and skip steps. Our useful rule is simple: reuse an answer for a while, then check again. A temporary memory gives us speed without pretending that yesterday's information must stay true forever.",
+      "source_clip": "networks/episodes/v2-01-dns/clips/13-look-again-when-time-runs-out.mp4",
+      "motion_seconds": 16.5
+    },
+    {
+      "number": 14,
+      "id": "01-14",
+      "title": "Connected, but missing directions",
+      "text": "Now we can try a little mystery. Leave the network connection working, but stop our helper from finding the address. An app may fail before it knows where to send its request. Meanwhile, another task that already knows its destination can keep going. So online does not always mean every website name can be found. We have broken only the naming step in this experiment. Real failures can have other causes, but this picture explains one possible reason.",
+      "prompt": "[curious] Now we can try a little mystery. Leave the network connection working, but stop our helper from finding the address. An app may fail before it knows where to send its request. Meanwhile, another task that already knows its destination can keep going. So online does not always mean every website name can be found. We have broken only the naming step in this experiment. Real failures can have other causes, but this picture explains one possible reason.",
+      "source_clip": "networks/episodes/v2-01-dns/clips/14-connected-but-missing-directions.mp4",
+      "motion_seconds": 9.167
+    },
+    {
+      "number": 15,
+      "id": "01-15",
+      "title": "Three jobs, one simple search",
+      "text": "Let's shrink the whole journey into three pictures. First, split the directory into smaller branches. Second, follow directions until the right record answers. Third, remember that answer briefly. The formal words are hierarchy, referrals, and caching. You already know what those words describe because you've watched them happen. The countdown adds one more detail: remembered answers need a time limit. These jobs work together so no single directory has to hold every fresh answer to every question.",
+      "prompt": "[warmly] Let's shrink the whole journey into three pictures. [short pause] First, split the directory into smaller branches. Second, follow directions until the right record answers. Third, remember that answer briefly. The formal words are hierarchy, referrals, and caching. You already know what those words describe because you've watched them happen. The countdown adds one more detail: remembered answers need a time limit. These jobs work together so no single directory has to hold every fresh answer to every question.",
+      "source_clip": "networks/episodes/v2-01-dns/clips/15-three-jobs-one-simple-search.mp4",
+      "motion_seconds": 10.5
+    },
+    {
+      "number": 16,
+      "id": "01-16",
+      "title": "From a name to an address",
+      "text": "Return to the photo. A name you can remember becomes an address the network can use. A helper finds it, directories guide the helper, and temporary memory saves repeat trips. That's the core of DNS. Next time you type a website name, imagine that small search taking place before the page begins to arrive. It may finish almost instantly because somebody remembered the answer. The website name looked like a destination; first, it was a question.",
+      "prompt": "[warmly] Return to the photo. A name you can remember becomes an address the network can use. A helper finds it, directories guide the helper, and temporary memory saves repeat trips. That's the core of DNS. Next time you type a website name, imagine that small search taking place before the page begins to arrive. It may finish almost instantly because somebody remembered the answer. The website name looked like a destination; first, it was a question.",
+      "source_clip": "networks/episodes/v2-01-dns/clips/16-from-a-name-to-an-address.mp4",
+      "motion_seconds": 8.0
+    }
+  ],
+  "source_folder": "networks/episodes/v2-01-dns"
+}

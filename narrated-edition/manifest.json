@@ -1,0 +1,60 @@
+{
+  "edition": "narrated",
+  "voice": {
+    "voice_id": "x8EpqJ1pKzP4vo35tTCm",
+    "name": "David - Clear, Friendly Explainer",
+    "model": "eleven_v4",
+    "delivery": "Warm, conversational male English teacher; clear reasoning, concrete examples, prediction questions, measured emphasis. Original teaching voice; no institutional endorsement or imitation.",
+    "takes_per_clip": 2
+  },
+  "episodes": [
+    {
+      "id": "01",
+      "topic": "dns",
+      "folder": "01-dns",
+      "phases": 16
+    },
+    {
+      "id": "02",
+      "topic": "bufferbloat",
+      "folder": "02-bufferbloat",
+      "phases": 16
+    },
+    {
+      "id": "03",
+      "topic": "wdm",
+      "folder": "03-wdm",
+      "phases": 16
+    },
+    {
+      "id": "04",
+      "topic": "packet-switching",
+      "folder": "04-packet-switching",
+      "phases": 16
+    },
+    {
+      "id": "05",
+      "topic": "dijkstra",
+      "folder": "05-dijkstra",
+      "phases": 16
+    },
+    {
+      "id": "06",
+      "topic": "subnetting",
+      "folder": "06-subnetting",
+      "phases": 16
+    },
+    {
+      "id": "07",
+      "topic": "tcp-slow-start",
+      "folder": "07-tcp-slow-start",
+      "phases": 16
+    },
+    {
+      "id": "08",
+      "topic": "rsa",
+      "folder": "08-rsa",
+      "phases": 16
+    }
+  ]
+}
