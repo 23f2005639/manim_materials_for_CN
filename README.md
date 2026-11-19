@@ -47,31 +47,3 @@ git push
 Finished media, scripts, source, and verification records are tracked. Caches, local
 environments, secret environment files, and render logs are ignored. The old episode
 URLs and their existing assets remain available alongside the new active series.
-
-## Earlier project: 3D solar system — ManimGX
-
-`SolarSystem.mp4` is a 30-second H.264 video at 1920×1080, 30 fps.
-The scene includes eight textured planets, Earth's Moon, Saturn's rings,
-an asteroid belt, and a moving 3D camera. The textures are generated locally.
-Sizes, distances, orbital speeds, and circular paths are illustrative.
-
-Created with ManimGX 0.1.1, following https://manimgx.academa.ai/llms.txt.
-
-## Render and open again
-
-```sh
-./render_solar_system.sh
-```
-
-Or run each step:
-
-```sh
-uv tool install --python 3.14 manimgx
-manimgx inspect solar_system.py -t 4,10,20,29,end
-manimgx render solar_system.py -r 1920x1080 --fps 30 --crf 20
-xdg-open SolarSystem.mp4
-```
-
-`SolarSystem.storyboard.png` contains rendered frames for visual review.
-ManimGX skips automatic 2D layout checks for 3D scenes; the storyboard was
-visually inspected before rendering.
