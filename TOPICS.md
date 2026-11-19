@@ -89,4 +89,4 @@ Run `python3 networks/serve.py` from the project folder, then open <http://127.0
 
 ## Earlier material
 
-The original series remains available in [the legacy index](networks/legacy-index.html), its [topic guide](TOPICS-legacy.md), and its [scripts](networks/legacy-scripts.md). The previous focused edition is preserved in Git commit `1608d6f`. The [solar-system animation](SolarSystem.mp4) is a separate 30-second demonstration.
+The original series remains available in [the legacy index](networks/legacy-index.html), its [topic guide](TOPICS-legacy.md), and its [scripts](networks/legacy-scripts.md). The previous focused edition is preserved in Git commit `1608d6f`.

@@ -145,7 +145,3 @@ python3 networks/serve.py
 ```
 
 Then open <http://127.0.0.1:8765/networks/>. Use →/← for scenes, ↑/↓ for speed, and Shift+P for the current script in a separate presenter window.
-
-## Additional animation in this repository
-
-[The earlier solar-system animation](SolarSystem.mp4) is a separate 30-second 3D demonstration covering eight planets, Earth's Moon, Saturn's rings, and an asteroid belt. Its sizes, distances, and orbital speeds are illustrative. It is not part of the eight networking videos.
